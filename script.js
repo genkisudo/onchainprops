@@ -151,9 +151,16 @@ class FaqAccordion extends HTMLElement {
     }
 
     connectedCallback() {
-        // Set up accessibility and DOM
-        this.btn.setAttribute('aria-controls', `content-${this.faqId}`);
-        this.content.setAttribute('id', `content-${this.faqId}`);
+        // Build strictly unique ARIA mappings preventing screen-reader flattening errors
+        const btnId = `btn-${this.faqId}`;
+        const contentId = `content-${this.faqId}`;
+
+        this.btn.setAttribute('id', btnId);
+        this.btn.setAttribute('aria-controls', contentId);
+        
+        this.content.setAttribute('id', contentId);
+        this.content.setAttribute('aria-labelledby', btnId);
+        
         this.questionText.textContent = this.getAttribute('question');
         
         // Event Listeners
@@ -244,10 +251,12 @@ const setupEventDelegation = () => {
     const body = document.body;
     
     body.addEventListener('click', (/** @type {MouseEvent} */ event) => {
-        /** @type {HTMLElement|null} */
-        const target = event.target;
+        if (!(event.target instanceof HTMLElement)) return;
+
+        /** @type {HTMLAnchorElement|null} */
+        const target = event.target.closest('a');
         
-        if (target?.tagName === 'A' && target.getAttribute('href')?.startsWith('#')) {
+        if (target && target.getAttribute('href')?.startsWith('#')) {
             const anchor = target.getAttribute('href');
             if (anchor === '#') return;
 
