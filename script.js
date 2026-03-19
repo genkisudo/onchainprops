@@ -25,8 +25,8 @@ class PubSub {
     }
 
     /**
-     * @param {string} eventName 
-     * @param {any} [data] 
+     * @param {string} eventName
+     * @param {any} [data]
      */
     publish(eventName, data) {
         if (!this.events[eventName]) return;
@@ -37,6 +37,15 @@ class PubSub {
                 console.error(`PubSub Error [${eventName}]:`, error);
             }
         });
+    }
+
+    /**
+     * @param {string} eventName
+     * @param {Function} callback
+     */
+    unsubscribe(eventName, callback) {
+        if (!this.events[eventName]) return;
+        this.events[eventName] = this.events[eventName].filter(cb => cb !== callback);
     }
 }
 
@@ -144,7 +153,7 @@ class FaqAccordion extends HTMLElement {
         this.content = this.shadowRoot.getElementById('accordion-content');
         this.questionText = this.shadowRoot.getElementById('question-text');
         
-        this.faqId = `faq-${Math.random().toString(36).substr(2, 9)}`;
+        this.faqId = `faq-${Math.random().toString(36).substring(2, 11)}`;
         this.isOpen = false;
         
         this.toggle = this.toggle.bind(this);
@@ -157,25 +166,29 @@ class FaqAccordion extends HTMLElement {
 
         this.btn.setAttribute('id', btnId);
         this.btn.setAttribute('aria-controls', contentId);
-        
+
         this.content.setAttribute('id', contentId);
         this.content.setAttribute('aria-labelledby', btnId);
-        
+
         this.questionText.textContent = this.getAttribute('question');
-        
-        // Event Listeners
-        this.btn.addEventListener('click', this.toggle);
-        
-        // Subscribe to global FAQ state changes
-        Store.subscribe('FAQ_TOGGLED', (/** @type {string|null} */ activeId) => {
+
+        // Bound handler stored for unsubscription
+        this._onFaqToggled = (/** @type {string|null} */ activeId) => {
             if (activeId !== this.faqId && this.isOpen) {
                 this.close();
             }
-        });
+        };
+
+        // Event Listeners
+        this.btn.addEventListener('click', this.toggle);
+
+        // Subscribe to global FAQ state changes
+        Store.subscribe('FAQ_TOGGLED', this._onFaqToggled);
     }
 
     disconnectedCallback() {
         this.btn.removeEventListener('click', this.toggle);
+        Store.unsubscribe('FAQ_TOGGLED', this._onFaqToggled);
     }
 
     toggle() {
@@ -225,18 +238,44 @@ const renderPropFirmsTable = () => {
 
     AppState.propFirms.forEach(firm => {
         const row = document.createElement('tr');
-        
-        row.innerHTML = `
-            <td>
-                <div class="firm-name">${firm.name}</div>
-                <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">${firm.chain}</div>
-            </td>
-            <td class="val-highlight">${firm.split}</td>
-            <td class="val-highlight">${firm.maxAccount}</td>
-            <td><a href="${firm.website}" target="_blank" rel="noopener noreferrer" aria-label="Visit ${firm.name}">Visit Site ↗</a></td>
-            <td><a href="${firm.website}" aria-label="More details about ${firm.name}" class="btn btn-primary" style="font-size: 0.875rem; padding: 0.5rem 1rem;">More Details</a></td>
-        `;
-        
+
+        // Build cells via DOM API to prevent XSS injection
+        const nameCell = document.createElement('td');
+        const nameDiv = document.createElement('div');
+        nameDiv.className = 'firm-name';
+        nameDiv.textContent = firm.name;
+        const chainDiv = document.createElement('div');
+        chainDiv.style.cssText = 'font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;';
+        chainDiv.textContent = firm.chain;
+        nameCell.append(nameDiv, chainDiv);
+
+        const splitCell = document.createElement('td');
+        splitCell.className = 'val-highlight';
+        splitCell.textContent = firm.split;
+
+        const accountCell = document.createElement('td');
+        accountCell.className = 'val-highlight';
+        accountCell.textContent = firm.maxAccount;
+
+        const visitCell = document.createElement('td');
+        const visitLink = document.createElement('a');
+        visitLink.href = firm.website;
+        visitLink.target = '_blank';
+        visitLink.rel = 'noopener noreferrer';
+        visitLink.setAttribute('aria-label', `Visit ${firm.name}`);
+        visitLink.textContent = 'Visit Site ↗';
+        visitCell.appendChild(visitLink);
+
+        const detailsCell = document.createElement('td');
+        const detailsLink = document.createElement('a');
+        detailsLink.href = firm.website;
+        detailsLink.setAttribute('aria-label', `More details about ${firm.name}`);
+        detailsLink.className = 'btn btn-primary';
+        detailsLink.style.cssText = 'font-size: 0.875rem; padding: 0.5rem 1rem;';
+        detailsLink.textContent = 'More Details';
+        detailsCell.appendChild(detailsLink);
+
+        row.append(nameCell, splitCell, accountCell, visitCell, detailsCell);
         fragment.appendChild(row);
     });
 
@@ -245,7 +284,22 @@ const renderPropFirmsTable = () => {
 };
 
 // -----------------------------------------
-// 5. Event Delegation for smooth scroll
+// 5. Mobile Navigation
+// -----------------------------------------
+const setupMobileNav = () => {
+    const btn = document.getElementById('hamburger-btn');
+    const nav = document.getElementById('mobile-nav');
+    if (!btn || !nav) return;
+
+    btn.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', String(isOpen));
+        nav.setAttribute('aria-hidden', String(!isOpen));
+    });
+};
+
+// -----------------------------------------
+// 6. Event Delegation for smooth scroll
 // -----------------------------------------
 const setupEventDelegation = () => {
     const body = document.body;
@@ -263,6 +317,14 @@ const setupEventDelegation = () => {
             const targetElement = document.querySelector(anchor);
             if (targetElement) {
                 event.preventDefault();
+                // Close mobile nav on link click
+                const mobileNav = document.getElementById('mobile-nav');
+                const hamburgerBtn = document.getElementById('hamburger-btn');
+                if (mobileNav?.classList.contains('is-open')) {
+                    mobileNav.classList.remove('is-open');
+                    mobileNav.setAttribute('aria-hidden', 'true');
+                    hamburgerBtn?.setAttribute('aria-expanded', 'false');
+                }
                 targetElement.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
@@ -278,6 +340,7 @@ const setupEventDelegation = () => {
 document.addEventListener('DOMContentLoaded', () => {
     try {
         renderPropFirmsTable();
+        setupMobileNav();
         setupEventDelegation();
     } catch (e) {
         console.error("Initialization failure", e);
