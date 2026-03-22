@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PubSub Tests</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            max-width: 720px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        h1 { color: #6ee7b7; margin-bottom: 0.25rem; }
+        .subtitle { color: #64748b; margin-bottom: 1.5rem; font-size: 0.9rem; }
+        .summary {
+            font-size: 1.05rem;
+            font-weight: 600;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        .all-pass { background: rgba(110,231,183,0.08); color: #6ee7b7; border: 1px solid rgba(110,231,183,0.25); }
+        .has-fail  { background: rgba(248,113,113,0.08); color: #f87171; border: 1px solid rgba(248,113,113,0.25); }
+        .test-row {
+            padding: 0.55rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.35rem;
+            border-left: 3px solid transparent;
+        }
+        .test-row.pass { border-left-color: #6ee7b7; }
+        .test-row.fail { border-left-color: #f87171; background: rgba(248,113,113,0.05); }
+        .test-row-header { display: flex; align-items: center; gap: 0.6rem; }
+        .pass .status { color: #6ee7b7; }
+        .fail .status { color: #f87171; }
+        .error {
+            margin: 0.4rem 0 0 1.6rem;
+            font-size: 0.8rem;
+            color: #f87171;
+            background: rgba(248,113,113,0.08);
+            padding: 0.4rem 0.6rem;
+            border-radius: 4px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>PubSub Unit Tests</h1>
+    <p class="subtitle">Run via: <code>python3 -m http.server 8000</code> then open <code>http://localhost:8000/tests.html</code></p>
+    <div id="results"></div>
+    <script src="tests.js"></script>
+</body>
+</html>
