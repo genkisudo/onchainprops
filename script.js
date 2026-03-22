@@ -60,17 +60,17 @@ const Store = new PubSub();
  * @property {string} split
  * @property {string} maxAccount
  * @property {string} website
+ * @property {string} twitter
  * @property {string} chain
  */
 
 const AppState = {
     /** @type {PropFirm[]} */
     propFirms: [
-        { name: "HyperProp", split: "90%", maxAccount: "$500,000", website: "https://example.com/hyperprop", chain: "Arbitrum/Hyperliquid" },
-        { name: "DeFi Fund", split: "85%", maxAccount: "$250,000", website: "https://example.com/defifund", chain: "Solana" },
-        { name: "ChainTraders", split: "80%", maxAccount: "$1,000,000", website: "https://example.com/chaintraders", chain: "Ethereum L2s" },
-        { name: "Apex Onchain", split: "95%", maxAccount: "$300,000", website: "https://example.com/apex", chain: "Base" },
-        { name: "Quantum Capital", split: "85%", maxAccount: "$100,000", website: "https://example.com/quantum", chain: "Optimism" }
+        { name: "Solana Funded", split: "88%", maxAccount: "$250,000", website: "https://solanafunded.com/", twitter: "https://x.com/solanafunded", chain: "Solana" },
+        { name: "Carrot Funding", split: "85%", maxAccount: "$500,000", website: "https://carrotfunding.io/", twitter: "https://x.com/carrotfunding", chain: "Solana/Hyperliquid" },
+        { name: "ProprXYZ", split: "90%", maxAccount: "$1,000,000", website: "https://www.propr.xyz/", twitter: "https://x.com/ProprXYZ", chain: "Hyperliquid" },
+        { name: "GT Funded", split: "92%", maxAccount: "$300,000", website: "https://gtfunded.xyz/", twitter: "https://x.com/gtfundedxyz", chain: "Hyperliquid/Arbitrum" }
     ],
     /** @type {string|null} */
     activeFaqId: null
@@ -258,13 +258,27 @@ const renderPropFirmsTable = () => {
         accountCell.textContent = firm.maxAccount;
 
         const visitCell = document.createElement('td');
+        const linksDiv = document.createElement('div');
+        linksDiv.style.cssText = 'display: flex; gap: 0.75rem; align-items: center;';
+
         const visitLink = document.createElement('a');
         visitLink.href = firm.website;
         visitLink.target = '_blank';
         visitLink.rel = 'noopener noreferrer';
-        visitLink.setAttribute('aria-label', `Visit ${firm.name}`);
-        visitLink.textContent = 'Visit Site ↗';
-        visitCell.appendChild(visitLink);
+        visitLink.setAttribute('aria-label', `Visit ${firm.name} website`);
+        visitLink.textContent = 'Website ↗';
+        visitLink.style.cssText = 'color: var(--accent); text-decoration: none; font-size: 0.9rem;';
+
+        const twitterLink = document.createElement('a');
+        twitterLink.href = firm.twitter;
+        twitterLink.target = '_blank';
+        twitterLink.rel = 'noopener noreferrer';
+        twitterLink.setAttribute('aria-label', `Follow ${firm.name} on X/Twitter`);
+        twitterLink.textContent = 'X ↗';
+        twitterLink.style.cssText = 'color: var(--accent); text-decoration: none; font-size: 0.9rem;';
+
+        linksDiv.append(visitLink, twitterLink);
+        visitCell.appendChild(linksDiv);
 
         const detailsCell = document.createElement('td');
         const detailsLink = document.createElement('a');
