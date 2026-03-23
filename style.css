@@ -82,6 +82,36 @@ h1, h2, h3, h4 {
     margin: 0 auto;
 }
 
+/* Update Badge — Timestamp for freshness signal */
+.update-badge {
+    display: inline-block;
+    background: rgba(110, 231, 183, 0.1);
+    border: 1px solid rgba(110, 231, 183, 0.3);
+    color: var(--accent);
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-pill);
+    margin-bottom: 1rem;
+}
+
+/* Quick Answer Block — AI-extractable summary (40-60 words) */
+.quick-answer {
+    background: rgba(110, 231, 183, 0.05);
+    border-left: 4px solid var(--accent);
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    margin: 1.5rem auto;
+    max-width: 600px;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--text-primary);
+}
+
+.quick-answer strong {
+    color: var(--accent);
+}
+
 /* Layout */
 .pillar-section {
     padding: 6rem 0;
