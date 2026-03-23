@@ -549,6 +549,23 @@ footer {
     color: var(--text-primary);
 }
 
+.footer-socials {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.footer-socials a {
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.footer-socials a:hover {
+    color: var(--accent);
+    text-shadow: 0 0 12px var(--accent-glow);
+}
+
 .footer-bottom {
     border-top: 1px solid var(--border-color);
     padding-top: 2.5rem;
