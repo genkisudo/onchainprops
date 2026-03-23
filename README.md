@@ -49,7 +49,5 @@ Simply fork the repository, make your changes, and create a pull request. All co
 
 ### 🚀 From the trenches with ❤️
 
-*Built by traders, for traders. Pure performance. No compromise.*
-
 </div>
 
