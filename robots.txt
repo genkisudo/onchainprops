@@ -1,5 +1,5 @@
-# OnchainProps robots.txt
-# Welcomes all crawlers, including AI/LLM bots for visibility
+# OnchainProp robots.txt
+# Welcomes all crawlers, including AI/LLM bots for maximum visibility
 
 User-agent: *
 Allow: /
@@ -39,9 +39,14 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-# Prevent indexing of common non-content paths
+User-agent: Gemini-Crawl
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+# Prevent indexing of non-content paths
 Disallow: /admin/
-Disallow: /*.json$
 Disallow: /api/
 
 # Sitemap
