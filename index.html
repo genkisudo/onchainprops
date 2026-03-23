@@ -32,6 +32,52 @@
     <meta name="twitter:description" content="Compare onchain prop firms: ProprXYZ 90% up to $1M · GT Funded 92% up to $300K · Carrot Funding 85% up to $500K · Solana Funded 88% up to $250K.">
     <meta name="twitter:image" content="https://onchainprop.wtf/og-image.png">
 
+    <!-- ============================================================
+         SECURITY HEADERS
+         frame-ancestors / X-Frame-Options / HSTS / Permissions-Policy
+         require HTTP response headers — use Cloudflare for those.
+         The directives below work in all modern browsers as meta tags.
+         ============================================================ -->
+
+    <!-- Content Security Policy
+         Breakdown:
+           default-src 'none'       — deny everything not explicitly listed
+           script-src 'self'        — only script.js (same origin); JSON-LD <script type="application/ld+json"> is exempt (data, not JS)
+           style-src 'self' 'unsafe-inline' fonts.googleapis.com
+                                    — style.css + Google Fonts CSS + Shadow DOM <style> in FaqAccordion Web Component
+           font-src fonts.gstatic.com — Google Fonts woff2 files
+           img-src 'self' data:     — favicons, apple-touch-icon; data: for any base64 images
+           manifest-src 'self'      — site.webmanifest
+           connect-src 'none'       — no XHR/fetch calls made by this site
+           frame-src 'none'         — no iframes
+           object-src 'none'        — no Flash/plugins
+           base-uri 'self'          — prevent <base> tag injection hijacking relative URLs
+           form-action 'none'       — no forms on this site
+           upgrade-insecure-requests — force HTTP sub-resources to HTTPS
+    -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'none';
+        script-src 'self';
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        font-src https://fonts.gstatic.com;
+        img-src 'self' data:;
+        manifest-src 'self';
+        connect-src 'none';
+        frame-src 'none';
+        object-src 'none';
+        base-uri 'self';
+        form-action 'none';
+        upgrade-insecure-requests;
+    ">
+
+    <!-- Referrer Policy
+         strict-origin-when-cross-origin: sends full referrer for same-origin
+         requests; only the origin (no path/query) for cross-origin HTTPS;
+         nothing for cross-origin HTTP. Prevents leaking URL structure to
+         external sites (e.g. the prop firm affiliate links).
+    -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
     <!-- Additional Meta -->
     <meta name="author" content="OnchainProp">
     <meta name="language" content="English">
