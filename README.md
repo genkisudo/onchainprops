@@ -28,5 +28,17 @@ Then navigate to `http://localhost:8000` to review the site layout.
 ## Project Structure
 
 * **`index.html`**: The semantic shell, defining SEO meta configuration. It consumes standard semantic containers and `<faq-accordion>` custom DOM abstractions. Embedded with explicitly defined JSON-LD Schema implementations for programmatic indexing.
-* **`style.css`**: Defines dynamic CSS Custom Property tokens (`:root`) encompassing the modern dark-mode implementation (glassmorphism via `backdrop-filter`, radial gradients, precise grid architectures). 
+* **`style.css`**: Defines dynamic CSS Custom Property tokens (`:root`) encompassing the modern dark-mode implementation (glassmorphism via `backdrop-filter`, radial gradients, precise grid architectures).
 * **`script.js`**: Houses the `PubSub` data store, rendering engine for dynamic nodes (`DocumentFragment`), the `FaqAccordion` Web Component extension, and unified event delegates handling smooth-scrolling routines gracefully.
+
+## Open Source & Contributing
+
+This is an **open source project**. We welcome contributions from the community!
+
+You can help by:
+- **Adding a new prop trading firm**: Submit a PR to add a new firm to the directory
+- **Adding an onchain tool**: Contribute additional tools and resources to the ecosystem
+- **Improving documentation**: Help clarify or expand our guides
+- **Bug fixes & features**: Submit PRs for any improvements or fixes you discover
+
+Simply fork the repository, make your changes, and create a pull request. All contributions are appreciated!
