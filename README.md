@@ -42,3 +42,14 @@ You can help by:
 - **Bug fixes & features**: Submit PRs for any improvements or fixes you discover
 
 Simply fork the repository, make your changes, and create a pull request. All contributions are appreciated!
+
+---
+
+<div align="center">
+
+### 🚀 From the trenches with ❤️
+
+*Built by traders, for traders. Pure performance. No compromise.*
+
+</div>
+
