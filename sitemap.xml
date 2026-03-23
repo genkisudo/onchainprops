@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Main homepage -->
+
+  <!-- Main page — single-page app, all content lives here -->
   <url>
     <loc>https://onchainprop.wtf/</loc>
     <lastmod>2026-03-23</lastmod>
@@ -8,51 +9,12 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- Onchain Prop Firms Section -->
+  <!-- llms.txt — for AI crawler discovery -->
   <url>
-    <loc>https://onchainprop.wtf/#firms</loc>
-    <lastmod>2026-03-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Onchain Data Tools Section -->
-  <url>
-    <loc>https://onchainprop.wtf/#data-tools</loc>
-    <lastmod>2026-03-23</lastmod>
-    <changefreq>biweekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Hyperliquid Section -->
-  <url>
-    <loc>https://onchainprop.wtf/#hyperliquid</loc>
+    <loc>https://onchainprop.wtf/llms.txt</loc>
     <lastmod>2026-03-23</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.5</priority>
   </url>
 
-  <!-- AI Agents & Prediction Markets Section -->
-  <url>
-    <loc>https://onchainprop.wtf/#ai-agents</loc>
-    <lastmod>2026-03-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Learning Resources Section -->
-  <url>
-    <loc>https://onchainprop.wtf/#learning</loc>
-    <lastmod>2026-03-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- FAQ Section -->
-  <url>
-    <loc>https://onchainprop.wtf/#faq</loc>
-    <lastmod>2026-03-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
 </urlset>
