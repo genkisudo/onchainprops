@@ -56,7 +56,6 @@ The site is entirely static and renders immediately—no build step required.
 - **`index.html`** – Semantic shell with navigation, hero, sections, FAQ scaffolding, and JSON-LD schema markup
 - **`style.css`** – Global styles, CSS custom properties, dark-mode theming (glassmorphism, gradients), responsive grid
 - **`script.js`** – PubSub Store, AppState, FaqAccordion Web Component, table rendering, event delegation, smooth scroll
-- **`GEMINI.md`** – Detailed architectural rules and coding standards for the project (reference for major design decisions)
 - **`README.md`** – User-facing overview of the project and its design principles
 
 ## Development Guidelines
@@ -127,4 +126,4 @@ The site is static and ready for direct deployment to any static host (GitHub Pa
 
 ---
 
-**See also:** `GEMINI.md` for detailed architectural rules and design philosophy.
+**See also:** `README.md` for an overview of the project and its capabilities.

@@ -5,7 +5,7 @@ Built strictly with Vanilla JavaScript in adherence to the latest ES2022 standar
 
 ## Architectural Principles
 
-This application adopts the structured paradigms laid out in `GEMINI.md`:
+This application adopts the strict architectural paradigms outlined in our documentation (such as `CLAUDE.md`):
 
 1. **Zero External Dependencies**: Pure native API implementation. No external layout libraries or Javascript frameworks were introduced. State updates strictly map to raw JS primitives.
 2. **Reactive Architecture**: A lightweight `PubSub` mechanism serves as the single-source-of-truth. Dispatches update elements via `Store.publish(event)`, eliminating brittle DOM-scraping state retrieval.
