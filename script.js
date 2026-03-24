@@ -283,16 +283,7 @@ const renderPropFirmsTable = () => {
         linksDiv.append(visitLink, twitterLink);
         visitCell.appendChild(linksDiv);
 
-        const detailsCell = document.createElement('td');
-        const detailsLink = document.createElement('a');
-        detailsLink.href = firm.website;
-        detailsLink.setAttribute('aria-label', `More details about ${firm.name}`);
-        detailsLink.className = 'btn btn-primary';
-        detailsLink.style.cssText = 'font-size: 0.875rem; padding: 0.5rem 1rem;';
-        detailsLink.textContent = 'More Details';
-        detailsCell.appendChild(detailsLink);
-
-        row.append(nameCell, splitCell, accountCell, visitCell, detailsCell);
+        row.append(nameCell, splitCell, accountCell, visitCell);
         fragment.appendChild(row);
     });
 
