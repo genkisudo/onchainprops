@@ -72,7 +72,8 @@ const AppState = {
         { name: "ProprXYZ", split: "90%", maxAccount: "$1,000,000", website: "https://www.propr.xyz/", twitter: "https://x.com/ProprXYZ", chain: "Hyperliquid" },
         { name: "GT Funded", split: "92%", maxAccount: "$300,000", website: "https://gtfunded.xyz/", twitter: "https://x.com/gtfundedxyz", chain: "Hyperliquid/Arbitrum" },
         { name: "Foxify", split: "80%", maxAccount: "$10,000", website: "https://www.foxify.trade/", twitter: "https://x.com/foxifytrade", chain: "Multi-chain (Hyperliquid, dYdX)" },
-        { name: "Xybit", split: "80%", maxAccount: "$100,000", website: "https://www.xybitfunds.com/", twitter: "https://x.com/xybitfunds", chain: "Hyperliquid" }
+        { name: "Xybit", split: "80%", maxAccount: "$100,000", website: "https://www.xybitfunds.com/", twitter: "https://x.com/xybitfunds", chain: "Hyperliquid" },
+        { name: "Vanta Trading", split: "100%", maxAccount: "$100,000", website: "https://vantatrading.io/?ref=kamil", twitter: "https://x.com/VantaTrading", chain: "Hyperliquid" }
     ],
     /** @type {string|null} */
     activeFaqId: null
