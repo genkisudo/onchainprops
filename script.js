@@ -60,19 +60,18 @@ const Store = new PubSub();
  * @property {string} split
  * @property {string} maxAccount
  * @property {string} website
- * @property {string} twitter
  * @property {string} chain
  */
 
 const AppState = {
     /** @type {PropFirm[]} */
     propFirms: [
-        { name: "Carrot Funding", split: "85%", maxAccount: "$500,000", website: "https://carrotfunding.io/", twitter: "https://x.com/carrotfunding", chain: "Solana/Hyperliquid" },
-        { name: "ProprXYZ", split: "90%", maxAccount: "$1,000,000", website: "https://www.propr.xyz/", twitter: "https://x.com/ProprXYZ", chain: "Hyperliquid" },
-        { name: "GT Funded", split: "92%", maxAccount: "$300,000", website: "https://gtfunded.xyz/", twitter: "https://x.com/gtfundedxyz", chain: "Hyperliquid/Arbitrum" },
-        { name: "Foxify", split: "80%", maxAccount: "$10,000", website: "https://www.foxify.trade/", twitter: "https://x.com/foxifytrade", chain: "Multi-chain (Hyperliquid, dYdX)" },
-        { name: "Xybit", split: "80%", maxAccount: "$100,000", website: "https://www.xybitfunds.com/", twitter: "https://x.com/xybitfunds", chain: "Hyperliquid" },
-        { name: "Vanta Trading", split: "100%", maxAccount: "$100,000", website: "https://vantatrading.io/?ref=kamil", twitter: "https://x.com/VantaTrading", chain: "Hyperliquid" }
+        { name: "Carrot Funding", split: "85%", maxAccount: "$500,000", website: "https://carrotfunding.io/", chain: "Solana/Hyperliquid" },
+        { name: "ProprXYZ", split: "90%", maxAccount: "$1,000,000", website: "https://www.propr.xyz/", chain: "Hyperliquid" },
+        { name: "GT Funded", split: "92%", maxAccount: "$300,000", website: "https://gtfunded.xyz/", chain: "Hyperliquid/Arbitrum" },
+        { name: "Foxify", split: "80%", maxAccount: "$10,000", website: "https://www.foxify.trade/", chain: "Multi-chain (Hyperliquid, dYdX)" },
+        { name: "Xybit", split: "80%", maxAccount: "$100,000", website: "https://www.xybitfunds.com/", chain: "Hyperliquid" },
+        { name: "Vanta Trading", split: "100%", maxAccount: "$100,000", website: "https://vantatrading.io/?ref=kamil", chain: "Hyperliquid" }
     ],
     /** @type {string|null} */
     activeFaqId: null
@@ -271,15 +270,7 @@ const renderPropFirmsTable = () => {
         visitLink.textContent = 'Website ↗';
         visitLink.style.cssText = 'color: var(--accent); text-decoration: none; font-size: 0.9rem;';
 
-        const twitterLink = document.createElement('a');
-        twitterLink.href = firm.twitter;
-        twitterLink.target = '_blank';
-        twitterLink.rel = 'noopener noreferrer';
-        twitterLink.setAttribute('aria-label', `Follow ${firm.name} on X/Twitter`);
-        twitterLink.textContent = 'X ↗';
-        twitterLink.style.cssText = 'color: var(--accent); text-decoration: none; font-size: 0.9rem;';
-
-        linksDiv.append(visitLink, twitterLink);
+        linksDiv.append(visitLink);
         visitCell.appendChild(linksDiv);
 
         row.append(nameCell, splitCell, accountCell, visitCell);
