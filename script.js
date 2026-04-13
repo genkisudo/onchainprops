@@ -66,6 +66,7 @@ const Store = new PubSub();
 const AppState = {
     /** @type {PropFirm[]} */
     propFirms: [
+        { name: "hyperpnl", split: "80%", maxAccount: "Unlimited", website: "https://app.hyperpnl.com/trade", chain: "Hyperliquid" },
         { name: "Carrot Funding", split: "85%", maxAccount: "$500,000", website: "https://carrotfunding.io/", chain: "Solana/Hyperliquid" },
         { name: "ProprXYZ", split: "90%", maxAccount: "$1,000,000", website: "https://www.propr.xyz/", chain: "Hyperliquid" },
         { name: "GT Funded", split: "92%", maxAccount: "$300,000", website: "https://gtfunded.xyz/", chain: "Hyperliquid/Arbitrum" },
