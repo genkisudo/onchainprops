@@ -1,0 +1,24 @@
+# macOS
+.DS_Store
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Editor state
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Dependencies (if ever added)
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Wrangler / Cloudflare
+wrangler.toml
+.wrangler/

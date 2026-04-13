@@ -45,10 +45,6 @@ Allow: /
 User-agent: meta-externalagent
 Allow: /
 
-# Prevent indexing of non-content paths
-Disallow: /admin/
-Disallow: /api/
-
 # Sitemap
 Sitemap: https://onchainprop.wtf/sitemap.xml
 

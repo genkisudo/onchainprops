@@ -264,7 +264,15 @@ const renderPropFirmsTable = () => {
         linksDiv.style.cssText = 'display: flex; gap: 0.75rem; align-items: center;';
 
         const visitLink = document.createElement('a');
-        visitLink.href = firm.website;
+        // Validate protocol to prevent javascript: URI injection if data source ever changes
+        try {
+            const parsed = new URL(firm.website);
+            visitLink.href = (parsed.protocol === 'https:' || parsed.protocol === 'http:')
+                ? firm.website
+                : '#';
+        } catch (_) {
+            visitLink.href = '#';
+        }
         visitLink.target = '_blank';
         visitLink.rel = 'noopener noreferrer';
         visitLink.setAttribute('aria-label', `Visit ${firm.name} website`);
@@ -313,7 +321,13 @@ const setupEventDelegation = () => {
             const anchor = target.getAttribute('href');
             if (anchor === '#') return;
 
-            const targetElement = document.querySelector(anchor);
+            let targetElement = null;
+            try {
+                targetElement = document.querySelector(anchor);
+            } catch (_) {
+                return; // invalid CSS selector — do nothing
+            }
+
             if (targetElement) {
                 event.preventDefault();
                 // Close mobile nav on link click
