@@ -67,11 +67,11 @@
         font-src https://fonts.gstatic.com;
         img-src 'self' data:;
         manifest-src 'self';
-        connect-src 'none';
+        connect-src https://formspree.io;
         frame-src 'none';
         object-src 'none';
         base-uri 'self';
-        form-action 'none';
+        form-action https://formspree.io;
         upgrade-insecure-requests;
     ">
 
@@ -610,6 +610,9 @@
             </div>
         </div>
     </footer>
+
+    <!-- Feedback Box Component -->
+    <feedback-box></feedback-box>
 
     <!-- Scripts -->
     <script src="script.js"></script>
