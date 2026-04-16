@@ -504,59 +504,44 @@ class FeedbackBox extends HTMLElement {
 
         if (!message) return;
 
-        // Disable submit button during processing
-        const submitBtn = this.form.querySelector('button[type="submit"]');
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
+        // Rate limit: prevent spam (30 seconds between submissions)
+        const lastSubmitTime = localStorage.getItem('feedback_last_submit');
+        const now = Date.now();
+        const minInterval = 30000; // 30 seconds
 
-        // Prepare form data
-        const formData = new FormData();
-        formData.append('message', message);
-        if (email) formData.append('email', email);
-
-        // Send to Formspree endpoint
-        fetch('https://formspree.io/f/mlgajeer', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => {
-            if (response.ok) {
-                // Show success message
-                this.statusEl.textContent = '✓ Thank you for your feedback!';
-                this.statusEl.classList.add('success');
-                this.textarea.value = '';
-                this.form.querySelector('input[name="email"]').value = '';
-
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Send Feedback';
-
-                // Auto-close after 2 seconds
-                setTimeout(() => {
-                    this.close();
-                    this.statusEl.classList.remove('success');
-                }, 2000);
-            } else {
-                throw new Error('Failed to submit feedback');
+        if (lastSubmitTime) {
+            const timeSinceLastSubmit = now - parseInt(lastSubmitTime);
+            if (timeSinceLastSubmit < minInterval) {
+                const secondsLeft = Math.ceil((minInterval - timeSinceLastSubmit) / 1000);
+                this.statusEl.textContent = `⏳ Please wait ${secondsLeft}s before submitting again`;
+                this.statusEl.style.background = 'rgba(94, 109, 126, 0.1)';
+                this.statusEl.style.borderColor = 'rgba(94, 109, 126, 0.3)';
+                this.statusEl.style.color = '#5e6d7e';
+                this.statusEl.style.display = 'block';
+                return;
             }
-        })
-        .catch(error => {
-            console.error('Feedback submission error:', error);
-            this.statusEl.textContent = '✗ Failed to send. Please try again.';
-            this.statusEl.style.background = 'rgba(239, 68, 68, 0.1)';
-            this.statusEl.style.borderColor = 'rgba(239, 68, 68, 0.3)';
-            this.statusEl.style.color = '#ef4444';
-            this.statusEl.style.display = 'block';
+        }
 
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Send Feedback';
+        // Store submission time
+        localStorage.setItem('feedback_last_submit', now.toString());
 
-            setTimeout(() => {
-                this.statusEl.style.display = 'none';
-                this.statusEl.style.background = '';
-                this.statusEl.style.borderColor = '';
-                this.statusEl.style.color = '';
-            }, 3000);
-        });
+        // Open Telegram with pre-filled message
+        const telegramMessage = encodeURIComponent(`Feedback: ${message}${email ? `\n\nEmail: ${email}` : ''}`);
+        const telegramUrl = `https://t.me/genki132?start=${telegramMessage}`;
+        window.open(telegramUrl, '_blank');
+
+        // Show success message
+        this.statusEl.textContent = '✓ Opening Telegram. Send your feedback there!';
+        this.statusEl.classList.add('success');
+        this.statusEl.style.display = 'block';
+        this.textarea.value = '';
+        this.form.querySelector('input[name="email"]').value = '';
+
+        // Auto-close modal after 2 seconds
+        setTimeout(() => {
+            this.close();
+            this.statusEl.classList.remove('success');
+        }, 2000);
     }
 
     open() {
