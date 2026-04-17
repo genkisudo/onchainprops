@@ -15,7 +15,7 @@ The following table lists all tracked onchain prop firms, ranked by profit split
 | GT Funded     | 92%         | $300,000     | Hyperliquid, Arbitrum      | https://gtfunded.xyz/         |
 | ProprXYZ      | 90%         | $1,000,000   | Hyperliquid                | https://www.propr.xyz/        |
 | Solana Funded | 88%         | $250,000     | Solana                     | https://solanafunded.com/     |
-| Carrot Funding| 85%         | $500,000     | Solana, Hyperliquid        | https://carrotfunding.io/     |
+| Carrot Funding| 80%         | $500,000     | gTrade, Hyperliquid (soon) | https://carrotfunding.io/     |
 | Xybit         | 80%         | $100,000     | Hyperliquid                | https://www.xybitfunds.com/   |
 | Foxify        | 80%         | $10,000      | Hyperliquid, dYdX          | https://www.foxify.trade/     |
 
