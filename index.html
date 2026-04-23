@@ -53,7 +53,7 @@
            font-src fonts.gstatic.com — Google Fonts woff2 files
            img-src 'self' data:     — favicons, apple-touch-icon; data: for any base64 images
            manifest-src 'self'      — site.webmanifest
-           connect-src 'none'       — no XHR/fetch calls made by this site
+           connect-src              — Formspree (feedback form) + Amplitude API endpoints
            frame-src 'none'         — no iframes
            object-src 'none'        — no Flash/plugins
            base-uri 'self'          — prevent <base> tag injection hijacking relative URLs
@@ -67,7 +67,7 @@
         font-src https://fonts.gstatic.com;
         img-src 'self' data:;
         manifest-src 'self';
-        connect-src https://formspree.io;
+        connect-src https://formspree.io https://api.amplitude.com https://api2.amplitude.com https://analytics.eu.amplitude.com;
         frame-src 'none';
         object-src 'none';
         base-uri 'self';
@@ -601,6 +601,7 @@
     <feedback-box></feedback-box>
 
     <!-- Scripts -->
+    <script src="amplitude.min.js"></script>
     <script src="script.js"></script>
 </body>
 
