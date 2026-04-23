@@ -130,6 +130,16 @@ faqTemplate.innerHTML = `
             text-align: left;
             cursor: pointer;
             transition: all 0.3s ease;
+            min-height: 44px;
+        }
+        @media (max-width: 640px) {
+            button {
+                padding: 1.25rem;
+                font-size: 1rem;
+            }
+            .content-inner {
+                padding: 0 1.25rem 1.25rem;
+            }
         }
         button:hover {
             color: var(--accent, #6ee7b7);
@@ -425,14 +435,17 @@ feedbackTemplate.innerHTML = `
             .feedback-button {
                 bottom: var(--feedback-mobile-bottom);
                 right: var(--feedback-mobile-right);
-                width: 45px;
-                height: 45px;
+                width: 48px;
+                height: 48px;
+                font-size: 1.3rem;
             }
 
             .feedback-modal {
-                bottom: 60px;
+                bottom: 65px;
                 right: var(--feedback-mobile-right);
-                width: 300px;
+                left: 1rem;
+                width: auto;
+                max-width: 100%;
                 padding: 1.25rem;
             }
         }
@@ -619,13 +632,16 @@ const renderPropFirmsTable = () => {
 
         const splitCell = document.createElement('td');
         splitCell.className = 'val-highlight';
+        splitCell.dataset.label = 'Profit Split';
         splitCell.textContent = firm.split;
 
         const accountCell = document.createElement('td');
         accountCell.className = 'val-highlight';
+        accountCell.dataset.label = 'Max Account';
         accountCell.textContent = firm.maxAccount;
 
         const visitCell = document.createElement('td');
+        visitCell.dataset.label = 'Website';
         const linksDiv = document.createElement('div');
         linksDiv.style.cssText = 'display: flex; gap: 0.75rem; align-items: center;';
 
