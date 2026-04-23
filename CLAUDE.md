@@ -120,10 +120,6 @@ Update CSS custom properties in `:root` in `style.css`:
 4. Subscribe to relevant `Store` events
 5. Register with `customElements.define('tag-name', ClassName)`
 
-## Deployment
-
-The site is static and ready for direct deployment to any static host (GitHub Pages, Vercel, Netlify, etc.). No build or CI/CD required—just serve the files as-is.
-
 ---
 
 **See also:** `README.md` for an overview of the project and its capabilities.
