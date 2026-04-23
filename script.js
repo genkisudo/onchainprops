@@ -1,8 +1,10 @@
 /**
  * @file script.js
- * @description State-driven application logic implementing Reactive PubSub, 
+ * @description State-driven application logic implementing Reactive PubSub,
  * Web Components, and performant DocumentFragment manipulations.
  */
+
+import * as amplitude from '@amplitude/unified';
 
 // -----------------------------------------
 // 1. Reactive Architecture (PubSub)
@@ -196,9 +198,11 @@ class FaqAccordion extends HTMLElement {
         if (this.isOpen) {
             Store.publish('FAQ_TOGGLED', null); // Setting global state to null closes all
             this.close();
+            amplitude.track('FAQ Collapsed', { question: this.getAttribute('question') });
         } else {
             Store.publish('FAQ_TOGGLED', this.faqId);
             this.open();
+            amplitude.track('FAQ Expanded', { question: this.getAttribute('question') });
         }
     }
 
@@ -488,7 +492,12 @@ class FeedbackBox extends HTMLElement {
     }
 
     handleToggle() {
-        this.isOpen ? this.close() : this.open();
+        if (this.isOpen) {
+            this.close();
+        } else {
+            this.open();
+            amplitude.track('Feedback Opened');
+        }
     }
 
     handleClose(e) {
@@ -530,6 +539,11 @@ class FeedbackBox extends HTMLElement {
         window.open(telegramUrl, '_blank');
 
         // Show success message
+        amplitude.track('Feedback Submitted', {
+            hasEmail: !!email,
+            messageLength: message.length
+        });
+
         this.statusEl.textContent = '✓ Opening Telegram. Send your feedback there!';
         this.statusEl.classList.add('success');
         this.statusEl.style.display = 'block';
@@ -681,6 +695,13 @@ const setupEventDelegation = () => {
                 });
             }
         }
+
+        if (target && target.getAttribute('aria-label')?.includes('Visit') && target.href) {
+            const firmName = AppState.propFirms.find(f => target.href.includes(f.website))?.name;
+            if (firmName) {
+                amplitude.track('Website Clicked', { firm: firmName });
+            }
+        }
     });
 };
 
@@ -689,6 +710,11 @@ const setupEventDelegation = () => {
 // -----------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
     try {
+        amplitude.initAll('488e252410ff9dc7ba7cfd5efac999f1', {
+            "analytics": { "autocapture": true },
+            "sessionReplay": { "sampleRate": 1 }
+        });
+
         renderPropFirmsTable();
         setupMobileNav();
         setupEventDelegation();
