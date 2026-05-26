@@ -67,7 +67,7 @@
         font-src https://fonts.gstatic.com;
         img-src 'self' data:;
         manifest-src 'self';
-        connect-src https://formspree.io https://api.amplitude.com https://api2.amplitude.com https://analytics.eu.amplitude.com https://faro-collector-prod-eu-central-0.grafana.net;
+        connect-src https://formspree.io https://api.amplitude.com https://api2.amplitude.com https://analytics.eu.amplitude.com;
         frame-src 'none';
         object-src 'none';
         base-uri 'self';
@@ -617,9 +617,6 @@
 
     <!-- Scripts -->
     <script src="amplitude.min.js"></script>
-    <!-- Grafana Faro — self-hosted IIFE bundles, loaded before script.js so window.faro is ready -->
-    <script src="faro-web-sdk.iife.js"></script>
-    <script src="faro-web-tracing.iife.js"></script>
     <script src="script.js"></script>
 </body>
 
