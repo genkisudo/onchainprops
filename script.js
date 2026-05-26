@@ -5,6 +5,10 @@
  *
  * Amplitude Analytics is loaded as a UMD global via amplitude.min.js,
  * which sets window.amplitude before this script runs.
+ *
+ * Grafana Faro RUM is loaded via self-hosted IIFE bundles (faro-web-sdk.iife.js,
+ * faro-web-tracing.iife.js), exposing GrafanaFaroWebSdk and GrafanaFaroWebTracing
+ * globals before this script runs.
  */
 
 // -----------------------------------------
@@ -855,6 +859,43 @@ const setupEventDelegation = () => {
         }
     });
 };
+
+// -----------------------------------------
+// 8. Grafana Faro — Real User Monitoring
+// -----------------------------------------
+/**
+ * Initializes Grafana Faro RUM using the self-hosted IIFE bundles.
+ * Called synchronously at module evaluation so spans capture the full page load.
+ * Safe to call before DOMContentLoaded — Faro queues signals internally.
+ *
+ * Globals required (set by script tags before this file):
+ *   - window.GrafanaFaroWebSdk  (faro-web-sdk.iife.js)
+ *   - window.GrafanaFaroWebTracing (faro-web-tracing.iife.js)
+ */
+const initFaro = () => {
+    try {
+        const { initializeFaro, getWebInstrumentations } = GrafanaFaroWebSdk;
+        const { TracingInstrumentation } = GrafanaFaroWebTracing;
+
+        window.faro = initializeFaro({
+            url: 'https://faro-collector-prod-eu-central-0.grafana.net/collect/11f0c470bc5baa819b87dd3f880c5452',
+            app: {
+                name: 'props',
+                version: '1.0.0',
+                environment: 'production'
+            },
+            instrumentations: [
+                ...getWebInstrumentations(),
+                new TracingInstrumentation(),
+            ],
+        });
+    } catch (e) {
+        // Faro failure is non-fatal — monitoring degrades gracefully
+        console.warn('Faro init failure:', e);
+    }
+};
+
+initFaro();
 
 // -----------------------------------------
 // Initialization
