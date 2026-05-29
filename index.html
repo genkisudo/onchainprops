@@ -47,28 +47,31 @@
     <!-- Content Security Policy
          Breakdown:
            default-src 'none'       — deny everything not explicitly listed
-           script-src 'self'        — only script.js (same origin); JSON-LD <script type="application/ld+json"> is exempt (data, not JS)
-           style-src 'self' 'unsafe-inline' fonts.googleapis.com
-                                    — style.css + Google Fonts CSS + Shadow DOM <style> in FaqAccordion Web Component
+           script-src 'self' agents.dante-ai.com
+                                    — script.js + Dante AI chat widget; JSON-LD <script type="application/ld+json"> is exempt (data, not JS)
+           style-src 'self' 'unsafe-inline' fonts.googleapis.com agents.dante-ai.com
+                                    — style.css + Google Fonts CSS + Shadow DOM <style> in FaqAccordion + Dante widget.css
            font-src fonts.gstatic.com — Google Fonts woff2 files
-           img-src 'self' data:     — favicons, apple-touch-icon; data: for any base64 images
+           img-src 'self' data: agents.dante-ai.com
+                                    — favicons, apple-touch-icon; data: for base64 images; Dante launcher icons
            manifest-src 'self'      — site.webmanifest
-           connect-src              — Formspree (feedback form) + Amplitude API endpoints
-           frame-src 'none'         — no iframes
+           connect-src              — Formspree (feedback form) + Amplitude API + Dante AI config/API
+           frame-src agents.dante-ai.com
+                                    — Dante AI chat panel iframe
            object-src 'none'        — no Flash/plugins
            base-uri 'self'          — prevent <base> tag injection hijacking relative URLs
-           form-action 'none'       — no forms on this site
+           form-action              — Formspree feedback form submission
            upgrade-insecure-requests — force HTTP sub-resources to HTTPS
     -->
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'none';
-        script-src 'self';
-        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        script-src 'self' https://agents.dante-ai.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://agents.dante-ai.com;
         font-src https://fonts.gstatic.com;
-        img-src 'self' data:;
+        img-src 'self' data: https://agents.dante-ai.com;
         manifest-src 'self';
-        connect-src https://formspree.io https://api.amplitude.com https://api2.amplitude.com https://analytics.eu.amplitude.com;
-        frame-src 'none';
+        connect-src https://formspree.io https://api.amplitude.com https://api2.amplitude.com https://analytics.eu.amplitude.com https://agents.dante-ai.com;
+        frame-src https://agents.dante-ai.com;
         object-src 'none';
         base-uri 'self';
         form-action https://formspree.io;
@@ -618,6 +621,20 @@
     <!-- Scripts -->
     <script src="amplitude.min.js"></script>
     <script src="script.js"></script>
+
+    <!-- Dante AI Chatbot Widget — floating chat bubble trained on the FAQ.
+         data-widget-key is a public, client-side embed key (it ships to every
+         visitor by design), not a secret. Lock usage to this domain in the
+         Dante dashboard (Allowed Domains → onchainprop.wtf) to prevent the key
+         being reused on other sites against the free-tier message quota.
+         Loads only from https://agents.dante-ai.com (see CSP above). -->
+    <script
+        src="https://agents.dante-ai.com/embed.js"
+        data-agent-id="9faaaeb8-0c93-4420-b124-c3b492f51d07"
+        data-widget-key="wk_GOp-URDnnABK7UgHX5qRMCF-DZjKTnTO"
+        crossorigin="anonymous"
+        async>
+    </script>
 </body>
 
 </html>
