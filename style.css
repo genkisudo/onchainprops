@@ -23,7 +23,6 @@
     --accent-ink: #08110e;       /* text on accent fills */
     --accent-soft: rgba(103, 210, 180, 0.12);
     --accent-line: rgba(103, 210, 180, 0.30);
-    --accent-glow: rgba(103, 210, 180, 0.18);
 
     /* Text */
     --text-primary: #e9ebef;
