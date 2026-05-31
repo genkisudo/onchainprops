@@ -74,8 +74,6 @@ const AppState = {
         { name: "hyperpnl", split: "80%", maxAccount: "Unlimited", website: "https://app.hyperpnl.com/trade", chain: "Hyperliquid", isAffiliate: false },
         { name: "Carrot Funding", split: "80%", maxAccount: "$500,000", website: "https://app.carrotfunding.io/join/2VSSOTXBQZ", chain: "gTrade, Hyperliquid (soon)", isAffiliate: true },
         { name: "ProprXYZ", split: "80%", maxAccount: "$1,000,000", website: "https://www.propr.xyz/", chain: "Hyperliquid", isAffiliate: false },
-        { name: "GT Funded", split: "92%", maxAccount: "$300,000", website: "https://gtfunded.xyz/", chain: "Hyperliquid/Arbitrum", isAffiliate: false },
-        { name: "Foxify", split: "80%", maxAccount: "$10,000", website: "https://www.foxify.trade/", chain: "Multi-chain (Hyperliquid, dYdX)", isAffiliate: false },
         { name: "Vanta Trading", split: "100%", maxAccount: "$100,000", website: "https://vantatrading.io/?ref=kamil", chain: "Hyperliquid", isAffiliate: true }
     ],
     /** @type {string|null} */
