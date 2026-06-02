@@ -574,6 +574,17 @@ footer {
     font-size: 0.83rem;
 }
 
+.footer-disclaimer {
+    margin-top: 0.75rem;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--text-faint);
+    opacity: 0.85;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .section-header {
