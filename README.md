@@ -1,4 +1,4 @@
-# Onchain Prop Firm Directory
+# Onchain Data and Prop Trading Firm Directory
 
 A modern, high-performance static directory comparing the top Onchain Prop Trading firms. 
 Built strictly with Vanilla JavaScript in adherence to the latest ES2022 standards. Designed specifically without heavy frameworks (React, Vue, etc.) to minimize overhead while retaining dynamic state reactivity, modern encapsulation, and maximum SEO visibility.
