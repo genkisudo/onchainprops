@@ -9,6 +9,14 @@
     <priority>1.0</priority>
   </url>
 
+  <!-- Compare Firms — long-form comparison article -->
+  <url>
+    <loc>https://onchainprop.wtf/compare.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- llms.txt — for AI crawler discovery -->
   <url>
     <loc>https://onchainprop.wtf/llms.txt</loc>

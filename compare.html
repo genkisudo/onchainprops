@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparing Onchain Prop Firms: The Full Guide | OnchainProps</title>
+    <meta name="description"
+        content="A deep-dive comparison of the best onchain prop trading firms. Profit splits, rules, account sizes, chains, and who each firm is best for.">
+    <link rel="canonical" href="https://onchainprop.wtf/compare.html">
+    <meta name="robots" content="index, follow">
+
+    <!-- Content Security Policy — mirrors index.html. All JS is external
+         (compare.js) so script-src stays 'self' with no 'unsafe-inline'.
+         'unsafe-inline' on style-src covers the in-page <style> block and
+         Google Fonts CSS only. -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'none';
+        script-src 'self';
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        font-src https://fonts.gstatic.com;
+        img-src 'self' data:;
+        manifest-src 'self';
+        base-uri 'self';
+        upgrade-insecure-requests;
+    ">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://onchainprop.wtf/compare.html">
+    <meta property="og:title" content="Comparing Onchain Prop Firms: The Full Guide">
+    <meta property="og:description"
+        content="A deep-dive comparison of the best onchain prop trading firms. Profit splits, rules, account sizes, and who each is best for.">
+    <meta property="og:image" content="https://onchainprop.wtf/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Comparing Onchain Prop Firms: The Full Guide">
+    <meta name="theme-color" content="#14161b">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://onchainprop.wtf/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Compare Firms",
+          "item": "https://onchainprop.wtf/compare.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           CSS Variables — mirrors style.css "Slate Calm" theme
+           ============================================================ */
+        :root {
+            --bg-primary:   #14161b;
+            --bg-elev:      #191c22;
+            --bg-elev-2:    #1e222a;
+            --bg-card:      #191c22;
+            --bg-card-hover:#1e222a;
+
+            --border-color: rgba(255,255,255,0.07);
+            --border-strong:rgba(255,255,255,0.12);
+
+            --accent:       #67d2b4;
+            --accent-ink:   #08110e;
+            --accent-soft:  rgba(103,210,180,0.12);
+            --accent-line:  rgba(103,210,180,0.30);
+
+            --text-primary:   #e9ebef;
+            --text-secondary: #9aa1ad;
+            --text-faint:     #6b7280;
+
+            --radius-sm:   10px;
+            --radius-md:   14px;
+            --radius-lg:   18px;
+            --radius-pill: 9999px;
+
+            --shadow-soft: 0 12px 40px rgba(0,0,0,0.28);
+            --transition:  all 0.22s cubic-bezier(0.4,0,0.2,1);
+            --nav-height:  73px;
+            --maxw:        1120px;
+        }
+
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: calc(var(--nav-height) + 24px);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: clip;
+        }
+
+        a { color: var(--accent); text-decoration: none; transition: var(--transition); }
+        a:hover { opacity: 0.85; }
+
+        .container {
+            width: 100%;
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: 0 clamp(1.1rem, 4vw, 1.75rem);
+        }
+
+        h1,h2,h3,h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            line-height: 1.15;
+            letter-spacing: -0.025em;
+        }
+
+        .accent-text { color: var(--accent); }
+
+        /* ── Buttons ─────────────────────────────── */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.7rem 1.4rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid transparent;
+            font-family: inherit;
+        }
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--accent-ink);
+        }
+        .btn-primary:hover {
+            background-color: #7adcc1;
+            transform: translateY(-1px);
+            opacity: 1;
+        }
+        .btn-secondary {
+            background: var(--bg-elev-2);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+        .btn-secondary:hover {
+            border-color: var(--border-strong);
+            transform: translateY(-1px);
+            opacity: 1;
+        }
+        .btn-large { padding: 0.9rem 1.9rem; font-size: 1.05rem; }
+        .btn-nav   { padding: 0.6rem 1.15rem; font-size: 0.9rem; }
+
+        /* ── Navbar ──────────────────────────────── */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg-primary);
+            padding: 0.85rem 0 0.5rem;
+        }
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-elev);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 0.7rem 0.8rem 0.7rem 1.25rem;
+        }
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            display: inline-flex;
+            align-items: center;
+            color: var(--text-primary);
+        }
+        .logo::before {
+            content: '';
+            width: 9px; height: 9px;
+            border-radius: 50%;
+            background: var(--accent);
+            margin-right: 0.6rem;
+        }
+        .nav-links {
+            display: flex;
+            gap: 1.85rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            font-weight: 500;
+        }
+        .nav-links a:hover { color: var(--text-primary); opacity: 1; }
+
+        /* ── Hamburger (mobile) ──────────────────── */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            min-width: 44px;
+            min-height: 44px;
+            align-items: center;
+        }
+        .hamburger span {
+            display: block;
+            width: 22px; height: 2px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+        .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+        .hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .mobile-nav {
+            display: none;
+            position: sticky;
+            top: var(--nav-height);
+            z-index: 99;
+            background: rgba(20,22,27,0.97);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 1.5rem 1.4rem;
+        }
+        .mobile-nav.is-open { display: block; }
+        .mobile-nav ul { list-style: none; display: flex; flex-direction: column; }
+        .mobile-nav li a {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 1.02rem;
+            font-weight: 500;
+            padding: 0.85rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .mobile-nav li:last-child a { border-bottom: none; }
+        .mobile-nav-cta {
+            display: inline-block;
+            margin-top: 1.1rem;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* ── Scroll progress bar ─────────────────── */
+        #scroll-progress {
+            position: fixed;
+            top: 0; left: 0;
+            height: 3px;
+            width: 0%;
+            background: var(--accent);
+            z-index: 9999;
+            transition: width 0.1s linear;
+            border-radius: 0 2px 2px 0;
+        }
+
+        /* ── Article layout ──────────────────────── */
+        .ca-wrap {
+            padding: clamp(2.5rem, 5vw, 4rem) 0 5rem;
+        }
+
+        /* Desktop: article body + sticky ToC side by side */
+        .ca-layout {
+            display: grid;
+            grid-template-columns: 1fr 260px;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        /* ── Breadcrumb ──────────────────────────── */
+        .ca-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.83rem;
+            color: var(--text-faint);
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .ca-breadcrumb a { color: var(--text-faint); }
+        .ca-breadcrumb a:hover { color: var(--text-secondary); opacity: 1; }
+        .ca-breadcrumb .sep { color: var(--border-strong); }
+
+        /* ── Hero block ──────────────────────────── */
+        .ca-hero { margin-bottom: 2.5rem; }
+
+        .ca-hero h1 {
+            font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+            line-height: 1.1;
+            margin-bottom: 0.9rem;
+        }
+
+        .ca-subtitle {
+            font-size: 1.12rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            max-width: 660px;
+            margin-bottom: 1.4rem;
+        }
+
+        /* Meta row — pill badges like .update-badge */
+        .ca-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+            align-items: center;
+        }
+        .ca-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            border: 1px solid var(--border-color);
+            color: var(--text-faint);
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            padding: 0.35rem 0.8rem;
+            border-radius: var(--radius-pill);
+        }
+        .ca-pill.live::before {
+            content: '';
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            flex-shrink: 0;
+        }
+
+        /* ── ToC sidebar ─────────────────────────── */
+        .ca-toc {
+            position: sticky;
+            top: calc(var(--nav-height) + 1.5rem);
+            background: var(--bg-elev);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.3rem 1.4rem;
+        }
+        .ca-toc-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-faint);
+            margin-bottom: 1rem;
+        }
+        .ca-toc ol {
+            list-style: none;
+            counter-reset: toc-counter;
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+        .ca-toc li { counter-increment: toc-counter; }
+        .ca-toc a {
+            display: flex;
+            align-items: baseline;
+            gap: 0.6rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            padding: 0.45rem 0.5rem;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+        .ca-toc a::before {
+            content: counter(toc-counter, decimal-leading-zero);
+            font-size: 0.72rem;
+            color: var(--text-faint);
+            font-variant-numeric: tabular-nums;
+            flex-shrink: 0;
+        }
+        .ca-toc a:hover {
+            color: var(--text-primary);
+            background: var(--accent-soft);
+            opacity: 1;
+        }
+        .ca-toc a.active {
+            color: var(--accent);
+            background: var(--accent-soft);
+        }
+        .ca-toc a.active::before { color: var(--accent); }
+
+        /* Mobile ToC — <details> element */
+        .ca-toc-mobile {
+            display: none;
+            margin-bottom: 2rem;
+            background: var(--bg-elev);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+        .ca-toc-mobile summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            list-style: none;
+            user-select: none;
+        }
+        .ca-toc-mobile summary::-webkit-details-marker { display: none; }
+        .ca-toc-mobile summary .toc-chevron {
+            width: 16px; height: 16px;
+            transition: transform 0.2s ease;
+            color: var(--text-faint);
+        }
+        .ca-toc-mobile[open] summary .toc-chevron { transform: rotate(180deg); }
+        .ca-toc-mobile ol {
+            list-style: none;
+            counter-reset: toc-m;
+            padding: 0 1.25rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.05rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .ca-toc-mobile li { counter-increment: toc-m; }
+        .ca-toc-mobile a {
+            display: flex;
+            align-items: baseline;
+            gap: 0.55rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .ca-toc-mobile li:last-child a { border-bottom: none; }
+        .ca-toc-mobile a::before {
+            content: counter(toc-m, decimal-leading-zero);
+            font-size: 0.72rem;
+            color: var(--text-faint);
+        }
+
+        /* ── Article prose ───────────────────────── */
+        .ca-body {
+            font-size: 1.05rem;
+            line-height: 1.82;
+            color: var(--text-primary);
+        }
+
+        .ca-body section {
+            margin-bottom: 3.2rem;
+            padding-bottom: 3.2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .ca-body section:last-of-type {
+            border-bottom: none;
+        }
+
+        .ca-body h2 {
+            font-size: clamp(1.3rem, 3vw, 1.7rem);
+            margin-bottom: 1.1rem;
+            scroll-margin-top: calc(var(--nav-height) + 24px);
+        }
+
+        .ca-body h3 {
+            font-size: 1.15rem;
+            margin: 1.8rem 0 0.7rem;
+            color: var(--text-primary);
+        }
+
+        .ca-body p { margin-bottom: 1.1rem; }
+        .ca-body p:last-child { margin-bottom: 0; }
+
+        .ca-body ul, .ca-body ol {
+            margin: 0.8rem 0 1.1rem 1.4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+        .ca-body li { color: var(--text-secondary); }
+        .ca-body li strong { color: var(--text-primary); }
+
+        /* Blockquote */
+        .ca-body blockquote {
+            background: var(--accent-soft);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            padding: 1rem 1.35rem;
+            margin: 1.5rem 0;
+            color: var(--text-secondary);
+            font-style: italic;
+            font-size: 1rem;
+        }
+        .ca-body blockquote strong { color: var(--text-primary); font-style: normal; }
+
+        /* Inline highlight pill */
+        .ca-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.2rem 0.6rem;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid var(--accent-line);
+            border-radius: var(--radius-pill);
+            font-size: 0.82rem;
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        /* Firm card inside article */
+        .ca-firm-card {
+            background: var(--bg-elev);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.5rem 1.6rem;
+            margin: 1.6rem 0;
+        }
+        .ca-firm-card:hover {
+            border-color: var(--border-strong);
+        }
+        .ca-firm-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.85rem;
+        }
+        .ca-firm-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+        .ca-firm-stats {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .ca-stat-badge {
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 0.3rem 0.65rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            background: var(--bg-elev-2);
+        }
+        .ca-stat-badge.highlight {
+            background: var(--accent-soft);
+            border-color: var(--accent-line);
+            color: var(--accent);
+        }
+        .ca-firm-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
+
+        /* ── CTA card ────────────────────────────── */
+        .ca-cta-card {
+            background: var(--bg-elev);
+            border: 1px solid var(--border-strong);
+            border-radius: var(--radius-lg);
+            padding: clamp(2rem, 4vw, 2.8rem);
+            text-align: center;
+            margin-top: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .ca-cta-card::before {
+            content: '';
+            position: absolute;
+            top: -60px; left: 50%;
+            transform: translateX(-50%);
+            width: 300px; height: 150px;
+            background: radial-gradient(ellipse, rgba(103,210,180,0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .ca-cta-card h2 {
+            font-size: clamp(1.4rem, 3vw, 1.9rem);
+            margin-bottom: 0.7rem;
+        }
+        .ca-cta-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.6rem;
+            max-width: 460px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .ca-cta-card .btn-large { gap: 0.5rem; }
+
+        /* ── Footer ──────────────────────────────── */
+        footer {
+            border-top: 1px solid var(--border-color);
+            margin-top: 5rem;
+        }
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2rem;
+            padding: 2.5rem 0 1.5rem;
+            flex-wrap: wrap;
+        }
+        .footer-brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .footer-brand p {
+            color: var(--text-faint);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 400;
+            margin-top: 0.4rem;
+            max-width: 240px;
+        }
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .footer-links a {
+            color: var(--text-faint);
+            font-size: 0.9rem;
+        }
+        .footer-links a:hover { color: var(--text-secondary); opacity: 1; }
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding: 1.1rem 0;
+        }
+        .footer-bottom p { color: var(--text-faint); font-size: 0.85rem; }
+
+        /* ── Responsive ──────────────────────────── */
+        @media (max-width: 900px) {
+            .ca-layout { grid-template-columns: 1fr; }
+            .ca-toc { display: none; }
+            .ca-toc-mobile { display: block; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .ca-firm-header { flex-direction: column; align-items: flex-start; }
+        }
+
+        @media (max-width: 480px) {
+            .ca-hero h1 { font-size: 1.7rem; }
+            .ca-cta-card { text-align: left; }
+            .ca-cta-card p { margin-left: 0; margin-right: 0; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Scroll progress bar -->
+    <div id="scroll-progress" aria-hidden="true"></div>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="./index.html" class="logo" aria-label="OnchainProps home">
+                <span class="accent-text">Onchain</span>Props
+            </a>
+            <nav aria-label="Main navigation">
+                <ul class="nav-links">
+                    <li><a href="./index.html#firms">Prop Firms</a></li>
+                    <li><a href="./index.html#data-tools">Data Tools</a></li>
+                    <li><a href="./index.html#hyperliquid">Hyperliquid</a></li>
+                    <li><a href="./index.html#faq">FAQ</a></li>
+                </ul>
+            </nav>
+            <a href="./index.html" class="btn btn-primary btn-nav">← Home</a>
+            <button class="hamburger" id="hamburger-btn" aria-label="Open navigation menu"
+                aria-expanded="false" aria-controls="mobile-nav">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+        <ul>
+            <li><a href="./index.html#firms">Prop Firms</a></li>
+            <li><a href="./index.html#data-tools">Data Tools</a></li>
+            <li><a href="./index.html#hyperliquid">Hyperliquid</a></li>
+            <li><a href="./index.html#faq">FAQ</a></li>
+        </ul>
+        <a href="./index.html" class="mobile-nav-cta">← Back to Home</a>
+    </nav>
+
+    <main>
+        <div class="ca-wrap">
+            <div class="container">
+
+                <!-- Breadcrumb -->
+                <nav class="ca-breadcrumb" aria-label="Breadcrumb">
+                    <a href="./index.html">Home</a>
+                    <span class="sep" aria-hidden="true">/</span>
+                    <span aria-current="page">Compare Firms</span>
+                </nav>
+
+                <!-- Mobile ToC (visible below 900px) -->
+                <details class="ca-toc-mobile">
+                    <summary>
+                        Table of Contents
+                        <svg class="toc-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="4 6 8 10 12 6"/>
+                        </svg>
+                    </summary>
+                    <ol>
+                        <li><a href="#introduction">Introduction</a></li>
+                        <li><a href="#what-to-look-for">What to Look For</a></li>
+                        <li><a href="#firm-breakdown">Firm-by-Firm Breakdown</a></li>
+                        <li><a href="#final-verdict">Final Verdict</a></li>
+                    </ol>
+                </details>
+
+                <!-- Two-column layout: article + sticky ToC -->
+                <div class="ca-layout">
+
+                    <!-- ── Article ─────────────────────────── -->
+                    <article class="compare-article">
+
+                        <!-- Hero -->
+                        <header class="ca-hero">
+                            <!-- CONTENT: Replace h1 with your article title -->
+                            <h1>Comparing Onchain Prop Firms: The Full Guide</h1>
+
+                            <!-- CONTENT: Replace with your subtitle / intro sentence -->
+                            <p class="ca-subtitle">
+                                Everything you need to know before picking a funded trading account —
+                                profit splits, rules, account sizes, chains, and who each firm actually suits.
+                            </p>
+
+                            <div class="ca-meta">
+                                <!-- CONTENT: Update date, reading time, author as needed -->
+                                <span class="ca-pill live">Updated June 2026</span>
+                                <span class="ca-pill">10 min read</span>
+                                <span class="ca-pill">By OnchainProps</span>
+                            </div>
+                        </header>
+
+                        <!-- Article body -->
+                        <div class="ca-body">
+
+                            <!-- ── Section 1 ── -->
+                            <section id="introduction">
+                                <h2>Introduction</h2>
+
+                                <!-- CONTENT: Replace all placeholder paragraphs below with your real article copy -->
+                                <p>
+                                    Placeholder — paste your introduction here. This section should explain what onchain prop trading is,
+                                    why it differs from traditional funded trading, and what the reader will gain from this guide.
+                                </p>
+                                <p>
+                                    Placeholder — continue your introduction. Consider covering: the rise of Hyperliquid as the dominant
+                                    venue, why on-chain verification matters, and how quickly the space has matured since 2024.
+                                </p>
+
+                                <blockquote>
+                                    <!-- CONTENT: Replace with a pull quote or key insight -->
+                                    <strong>"Placeholder pull quote."</strong> Replace this with a memorable line from your article —
+                                    a key insight, a striking statistic, or a concise summary of your thesis.
+                                </blockquote>
+
+                                <p>
+                                    Placeholder — wrap up the intro by setting expectations for the rest of the guide. Tell the reader
+                                    what they will find in each section.
+                                </p>
+                            </section>
+
+                            <!-- ── Section 2 ── -->
+                            <section id="what-to-look-for">
+                                <h2>What to Look For</h2>
+
+                                <!-- CONTENT: Replace paragraphs and list items with your real copy -->
+                                <p>
+                                    Placeholder — introduce the key criteria a trader should evaluate when choosing an onchain prop firm.
+                                    Frame this as an objective checklist, not a sales pitch.
+                                </p>
+
+                                <h3>Profit Split</h3>
+                                <p>
+                                    Placeholder — explain profit split percentages, what is market-standard (currently 80–90%),
+                                    and what red flags to watch for (e.g. hidden fees that erode the stated split).
+                                </p>
+
+                                <h3>Max Account Size</h3>
+                                <p>
+                                    Placeholder — discuss how account ceilings affect scaling potential. Note that some firms start
+                                    at $10K while others go up to $1M, and how that changes the risk/reward calculus.
+                                </p>
+
+                                <h3>Rules &amp; Drawdown Limits</h3>
+                                <p>
+                                    Placeholder — cover daily drawdown, max drawdown, consistency rules, and any time-based
+                                    requirements (minimum trading days, inactivity limits). This is often where traders get caught out.
+                                </p>
+
+                                <h3>Chain &amp; Settlement</h3>
+                                <p>
+                                    Placeholder — explain why the underlying chain matters: settlement speed, gas costs, counterparty
+                                    risk, and whether payouts are on-chain or off-chain. Most firms currently run on Hyperliquid.
+                                </p>
+
+                                <ul>
+                                    <!-- CONTENT: Replace list items with your real criteria summary -->
+                                    <li><strong>Profit split %</strong> — placeholder criterion description</li>
+                                    <li><strong>Max account size</strong> — placeholder criterion description</li>
+                                    <li><strong>Drawdown rules</strong> — placeholder criterion description</li>
+                                    <li><strong>Chain / settlement</strong> — placeholder criterion description</li>
+                                    <li><strong>Payout frequency</strong> — placeholder criterion description</li>
+                                    <li><strong>Token / rewards program</strong> — placeholder criterion description</li>
+                                </ul>
+                            </section>
+
+                            <!-- ── Section 3 ── -->
+                            <section id="firm-breakdown">
+                                <h2>Firm-by-Firm Breakdown</h2>
+
+                                <!-- CONTENT: Replace all firm card content with your real analysis -->
+                                <p>
+                                    Placeholder — introduce this section. Explain your review methodology: what data you collected,
+                                    how you tested each platform, and any caveats (e.g. rules change frequently, always verify on the firm's own site).
+                                </p>
+
+                                <!-- Firm card: Hypernova -->
+                                <div class="ca-firm-card">
+                                    <div class="ca-firm-header">
+                                        <span class="ca-firm-name">Hypernova</span>
+                                        <div class="ca-firm-stats">
+                                            <span class="ca-stat-badge highlight">90% split</span>
+                                            <span class="ca-stat-badge">Up to $200K</span>
+                                            <span class="ca-stat-badge">Hyperliquid</span>
+                                        </div>
+                                    </div>
+                                    <!-- CONTENT: Replace with your real Hypernova analysis -->
+                                    <p class="ca-firm-desc">
+                                        Placeholder — write your analysis of Hypernova here. Cover: who it suits, standout features,
+                                        any weaknesses, and your overall verdict. Link to the firm if relevant.
+                                    </p>
+                                </div>
+
+                                <!-- Firm card: ProprXYZ -->
+                                <div class="ca-firm-card">
+                                    <div class="ca-firm-header">
+                                        <span class="ca-firm-name">ProprXYZ</span>
+                                        <div class="ca-firm-stats">
+                                            <span class="ca-stat-badge highlight">80% split</span>
+                                            <span class="ca-stat-badge">Up to $1M</span>
+                                            <span class="ca-stat-badge">Hyperliquid</span>
+                                        </div>
+                                    </div>
+                                    <!-- CONTENT: Replace with your real ProprXYZ analysis -->
+                                    <p class="ca-firm-desc">
+                                        Placeholder — write your analysis of ProprXYZ here. Note the $1M ceiling which is the
+                                        highest in the space. Cover scalability, evaluation structure, and who benefits most.
+                                    </p>
+                                </div>
+
+                                <!-- Firm card: Carrot Funding -->
+                                <div class="ca-firm-card">
+                                    <div class="ca-firm-header">
+                                        <span class="ca-firm-name">Carrot Funding</span>
+                                        <div class="ca-firm-stats">
+                                            <span class="ca-stat-badge highlight">80% split</span>
+                                            <span class="ca-stat-badge">Up to $50K</span>
+                                            <span class="ca-stat-badge">gTrade</span>
+                                        </div>
+                                    </div>
+                                    <!-- CONTENT: Replace with your real Carrot Funding analysis -->
+                                    <p class="ca-firm-desc">
+                                        Placeholder — write your analysis of Carrot Funding here. It's the main non-Hyperliquid
+                                        option on the list. Cover how gTrade differs, who prefers it, and upcoming Hyperliquid support.
+                                    </p>
+                                </div>
+
+                                <!-- Firm card: Vanta Trading -->
+                                <div class="ca-firm-card">
+                                    <div class="ca-firm-header">
+                                        <span class="ca-firm-name">Vanta Trading</span>
+                                        <div class="ca-firm-stats">
+                                            <span class="ca-stat-badge">Split TBC</span>
+                                            <span class="ca-stat-badge">Up to $100K</span>
+                                            <span class="ca-stat-badge">Hyperliquid</span>
+                                        </div>
+                                    </div>
+                                    <!-- CONTENT: Replace with your real Vanta analysis -->
+                                    <p class="ca-firm-desc">
+                                        Placeholder — write your analysis of Vanta Trading. Note the split is TBC — is that a
+                                        concern or does the firm compensate with other advantages? Discuss.
+                                    </p>
+                                </div>
+
+                                <!-- Firm card: hyperpnl -->
+                                <div class="ca-firm-card">
+                                    <div class="ca-firm-header">
+                                        <span class="ca-firm-name">hyperpnl</span>
+                                        <div class="ca-firm-stats">
+                                            <span class="ca-stat-badge highlight">80% split</span>
+                                            <span class="ca-stat-badge">Hyperliquid</span>
+                                            <span class="ca-stat-badge highlight">Token: Yes</span>
+                                        </div>
+                                    </div>
+                                    <!-- CONTENT: Replace with your real hyperpnl analysis -->
+                                    <p class="ca-firm-desc">
+                                        Placeholder — write your analysis of hyperpnl. The token rewards program is a differentiator
+                                        worth exploring. How does it affect the effective yield for traders?
+                                    </p>
+                                </div>
+
+                                <!-- Firm card: FoxyFi -->
+                                <div class="ca-firm-card">
+                                    <div class="ca-firm-header">
+                                        <span class="ca-firm-name">FoxyFi</span>
+                                        <div class="ca-firm-stats">
+                                            <span class="ca-stat-badge highlight">80% split</span>
+                                            <span class="ca-stat-badge">Up to $10K</span>
+                                            <span class="ca-stat-badge">Hyperliquid (soon)</span>
+                                            <span class="ca-stat-badge highlight">Token: Yes</span>
+                                        </div>
+                                    </div>
+                                    <!-- CONTENT: Replace with your real FoxyFi analysis -->
+                                    <p class="ca-firm-desc">
+                                        Placeholder — write your analysis of FoxyFi. The $10K ceiling is the lowest here —
+                                        discuss who this suits (newer traders?) and what the Hyperliquid launch timeline looks like.
+                                    </p>
+                                </div>
+                            </section>
+
+                            <!-- ── Section 4 ── -->
+                            <section id="final-verdict">
+                                <h2>Final Verdict</h2>
+
+                                <!-- CONTENT: Replace with your real conclusion and recommendations -->
+                                <p>
+                                    Placeholder — summarise the key takeaways from your comparison. Which firm wins on profit split?
+                                    Which has the best rules? Which suits which trader profile?
+                                </p>
+                                <p>
+                                    Placeholder — give concrete recommendations. For example: "If you want the highest ceiling, go
+                                    ProprXYZ. If you want the best split and are fine with a $200K cap, Hypernova wins."
+                                </p>
+
+                                <blockquote>
+                                    <!-- CONTENT: Replace with a closing insight -->
+                                    <strong>Placeholder closing thought.</strong> End with something the reader will remember —
+                                    a framework for their decision, or a perspective on where the space is heading.
+                                </blockquote>
+
+                                <p>
+                                    Placeholder — add any final caveats: terms change, always read the rules on the firm's own site,
+                                    and consider starting with a smaller account to validate fit before scaling.
+                                </p>
+                            </section>
+
+                        </div><!-- /.ca-body -->
+
+                        <!-- CTA card -->
+                        <div class="ca-cta-card">
+                            <h2>Ready to compare side by side?</h2>
+                            <p>See all firms in one table — profit splits, account sizes, chains, and token programs at a glance.</p>
+                            <a href="./index.html#firms" class="btn btn-primary btn-large">
+                                View Comparison Table →
+                            </a>
+                        </div>
+
+                    </article>
+
+                    <!-- ── Sticky ToC sidebar (desktop only) ── -->
+                    <aside>
+                        <nav class="ca-toc" aria-label="Article sections">
+                            <p class="ca-toc-title">Contents</p>
+                            <ol>
+                                <li><a href="#introduction">Introduction</a></li>
+                                <li><a href="#what-to-look-for">What to Look For</a></li>
+                                <li><a href="#firm-breakdown">Firm-by-Firm Breakdown</a></li>
+                                <li><a href="#final-verdict">Final Verdict</a></li>
+                            </ol>
+                        </nav>
+                    </aside>
+
+                </div><!-- /.ca-layout -->
+            </div><!-- /.container -->
+        </div><!-- /.ca-wrap -->
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <span class="accent-text">Onchain</span>Props
+                <p>The premier directory for decentralized capital and trading tools.</p>
+            </div>
+            <div class="footer-links">
+                <a href="./index.html#firms">Prop Firms</a>
+                <a href="./index.html#data-tools">Data Tools</a>
+                <a href="./index.html#faq">FAQ</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 OnchainProps. From trenches with ❤️</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="compare.js"></script>
+</body>
+
+</html>
