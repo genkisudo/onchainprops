@@ -65,16 +65,17 @@ const Store = new PubSub();
  * @property {string} website
  * @property {string} chain
  * @property {boolean} isAffiliate
+ * @property {string} token
  */
 
 const AppState = {
     /** @type {PropFirm[]} */
     propFirms: [
-        { name: "Hypernova", split: "90%", maxAccount: "$200,000", website: "https://hypernova.xyz/", chain: "Hyperliquid", isAffiliate: false },
-        { name: "hyperpnl", split: "80%", maxAccount: "TBC", website: "https://app.hyperpnl.com/trade", chain: "Hyperliquid", isAffiliate: false },
-        { name: "Carrot Funding", split: "80%", maxAccount: "$50,000", website: "https://app.carrotfunding.io/join/2VSSOTXBQZ", chain: "gTrade, Hyperliquid (soon)", isAffiliate: true },
-        { name: "ProprXYZ", split: "80%", maxAccount: "$1,000,000", website: "https://app.propr.xyz/r/nCnJ5uZ9", chain: "Hyperliquid", isAffiliate: true },
-        { name: "Vanta Trading", split: "TBC", maxAccount: "$100,000", website: "https://vantatrading.io/?ref=kamil", chain: "Hyperliquid", isAffiliate: true }
+        { name: "Hypernova", split: "90%", maxAccount: "$200,000", website: "https://hypernova.xyz/", chain: "Hyperliquid", isAffiliate: false, token: "No" },
+        { name: "hyperpnl", split: "80%", maxAccount: "TBC", website: "https://app.hyperpnl.com/trade", chain: "Hyperliquid", isAffiliate: false, token: "No" },
+        { name: "Carrot Funding", split: "80%", maxAccount: "$50,000", website: "https://app.carrotfunding.io/join/2VSSOTXBQZ", chain: "gTrade, Hyperliquid (soon)", isAffiliate: true, token: "Yes" },
+        { name: "ProprXYZ", split: "80%", maxAccount: "$1,000,000", website: "https://app.propr.xyz/r/nCnJ5uZ9", chain: "Hyperliquid", isAffiliate: true, token: "Yes" },
+        { name: "Vanta Trading", split: "TBC", maxAccount: "$100,000", website: "https://vantatrading.io/?ref=kamil", chain: "Hyperliquid", isAffiliate: true, token: "No" }
     ],
     /** @type {string|null} */
     activeFaqId: null
@@ -639,6 +640,11 @@ const renderPropFirmsTable = () => {
         accountCell.dataset.label = 'Max Account';
         accountCell.textContent = firm.maxAccount;
 
+        const tokenCell = document.createElement('td');
+        tokenCell.className = 'val-highlight';
+        tokenCell.dataset.label = 'Token';
+        tokenCell.textContent = firm.token;
+
         const visitCell = document.createElement('td');
         visitCell.dataset.label = 'Website';
         const linksDiv = document.createElement('div');
@@ -663,7 +669,7 @@ const renderPropFirmsTable = () => {
         linksDiv.append(visitLink);
         visitCell.appendChild(linksDiv);
 
-        row.append(nameCell, splitCell, accountCell, visitCell);
+        row.append(nameCell, splitCell, accountCell, tokenCell, visitCell);
         fragment.appendChild(row);
     });
 
