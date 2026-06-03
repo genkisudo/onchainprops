@@ -71,12 +71,12 @@ const Store = new PubSub();
 const AppState = {
     /** @type {PropFirm[]} */
     propFirms: [
-        { name: "Hypernova", split: "90%", maxAccount: "$200,000", website: "https://hypernova.xyz/", chain: "Hyperliquid", isAffiliate: false, token: "No" },
-        { name: "hyperpnl", split: "80%", maxAccount: "TBC", website: "https://app.hyperpnl.com/trade", chain: "Hyperliquid", isAffiliate: false, token: "No" },
-        { name: "Carrot Funding", split: "80%", maxAccount: "$50,000", website: "https://app.carrotfunding.io/join/2VSSOTXBQZ", chain: "gTrade, Hyperliquid (soon)", isAffiliate: true, token: "Yes" },
-        { name: "ProprXYZ", split: "80%", maxAccount: "$1,000,000", website: "https://app.propr.xyz/r/nCnJ5uZ9", chain: "Hyperliquid", isAffiliate: true, token: "Yes" },
-        { name: "Vanta Trading", split: "TBC", maxAccount: "$100,000", website: "https://vantatrading.io/?ref=kamil", chain: "Hyperliquid", isAffiliate: true, token: "No" },
-        { name: "FoxyFi", split: "80%", maxAccount: "$10,000", website: "https://www.foxify.trade/", chain: "Hyperliquid (soon)", isAffiliate: false, token: "Yes" }
+        { name: "Hypernova", split: "90%", maxAccount: "$200,000", website: "https://hypernova.xyz/", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", price: "" },
+        { name: "hyperpnl", split: "80%", maxAccount: "TBC", website: "https://app.hyperpnl.com/trade", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", price: "" },
+        { name: "Carrot Funding", split: "80%", maxAccount: "$50,000", website: "https://app.carrotfunding.io/join/2VSSOTXBQZ", chain: "gTrade, Hyperliquid (soon)", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", price: "" },
+        { name: "ProprXYZ", split: "80%", maxAccount: "$1,000,000", website: "https://app.propr.xyz/r/nCnJ5uZ9", chain: "Hyperliquid", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", price: "" },
+        { name: "Vanta Trading", split: "TBC", maxAccount: "$100,000", website: "https://vantatrading.io/?ref=kamil", chain: "Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "Soon", price: "" },
+        { name: "FoxyFi", split: "80%", maxAccount: "$10,000", website: "https://www.foxify.trade/", chain: "Hyperliquid (soon)", isAffiliate: false, token: "Yes", payoutSpeed: "Soon", price: "" }
     ],
     /** @type {string|null} */
     activeFaqId: null
@@ -646,6 +646,16 @@ const renderPropFirmsTable = () => {
         tokenCell.dataset.label = 'Token';
         tokenCell.textContent = firm.token;
 
+        const payoutCell = document.createElement('td');
+        payoutCell.className = 'val-highlight';
+        payoutCell.dataset.label = 'Payout Speed';
+        payoutCell.textContent = firm.payoutSpeed;
+
+        const priceCell = document.createElement('td');
+        priceCell.className = 'val-highlight';
+        priceCell.dataset.label = 'Price';
+        priceCell.textContent = firm.price;
+
         const visitCell = document.createElement('td');
         visitCell.dataset.label = 'Website';
         const linksDiv = document.createElement('div');
@@ -670,7 +680,7 @@ const renderPropFirmsTable = () => {
         linksDiv.append(visitLink);
         visitCell.appendChild(linksDiv);
 
-        row.append(nameCell, splitCell, accountCell, tokenCell, visitCell);
+        row.append(nameCell, splitCell, accountCell, tokenCell, payoutCell, priceCell, visitCell);
         fragment.appendChild(row);
     });
 
