@@ -646,11 +646,6 @@ const renderPropFirmsTable = () => {
         tokenCell.dataset.label = 'Token';
         tokenCell.textContent = firm.token;
 
-        const payoutCell = document.createElement('td');
-        payoutCell.className = 'val-highlight';
-        payoutCell.dataset.label = 'Payout Speed';
-        payoutCell.textContent = firm.payoutSpeed;
-
         const rulesCell = document.createElement('td');
         rulesCell.className = 'val-highlight';
         rulesCell.dataset.label = 'Rules Verified Onchain';
@@ -680,7 +675,7 @@ const renderPropFirmsTable = () => {
         linksDiv.append(visitLink);
         visitCell.appendChild(linksDiv);
 
-        row.append(nameCell, splitCell, accountCell, tokenCell, payoutCell, rulesCell, visitCell);
+        row.append(nameCell, splitCell, accountCell, tokenCell, rulesCell, visitCell);
         fragment.appendChild(row);
     });
 
