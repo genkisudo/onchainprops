@@ -72,11 +72,11 @@
         font-src https://fonts.gstatic.com;
         img-src 'self' data: https://agents.dante-ai.com;
         manifest-src 'self';
-        connect-src https://formspree.io https://api.amplitude.com https://api2.amplitude.com https://analytics.eu.amplitude.com https://agents.dante-ai.com;
+        connect-src https://api.amplitude.com https://api2.amplitude.com https://analytics.eu.amplitude.com https://agents.dante-ai.com;
         frame-src https://agents.dante-ai.com;
         object-src 'none';
         base-uri 'self';
-        form-action https://formspree.io;
+        form-action 'none';
         upgrade-insecure-requests;
     ">
 
@@ -121,14 +121,8 @@
       "description": "Premier directory for onchain proprietary trading firms and DeFi trading tools",
       "sameAs": [
         "https://github.com/kamikagome/onchainprops",
-        "https://t.me/wtfonchain",
         "https://onchainprops.com"
-      ],
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "customer support",
-        "url": "https://t.me/wtfonchain"
-      }
+      ]
     }
     </script>
 
@@ -289,10 +283,7 @@
             <nav>
                 <ul class="nav-links">
                     <li><a href="#firms">Prop Firms</a></li>
-                    <li><a href="#data-tools">Data Tools</a></li>
-                    <li><a href="#hyperliquid">Hyperliquid</a></li>
-                    <li><a href="#ai-agents">AI & Markets</a></li>
-                    <li><a href="#learning">Learning</a></li>
+                    <li><a href="#resources">Resources</a></li>
                     <li><a href="#faq">FAQ</a></li>
                 </ul>
             </nav>
@@ -306,10 +297,7 @@
     <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
         <ul>
             <li><a href="#firms">Prop Firms</a></li>
-            <li><a href="#data-tools">Data Tools</a></li>
-            <li><a href="#hyperliquid">Hyperliquid</a></li>
-            <li><a href="#ai-agents">AI & Markets</a></li>
-            <li><a href="#learning">Learning</a></li>
+            <li><a href="#resources">Resources</a></li>
             <li><a href="#faq">FAQ</a></li>
         </ul>
         <a href="compare.html" class="mobile-nav-cta">Compare Firms →</a>
@@ -412,137 +400,81 @@
 
         </section>
 
-        <!-- Pillar 2: Onchain Data Tools -->
-        <section id="data-tools" class="pillar-section container">
+        <!-- Resources Hub -->
+        <section id="resources" class="pillar-section container">
             <div class="section-header">
-                <div class="update-badge">updated in June 2026</div>
-                <h2>Onchain Data Tools</h2>
-
-                <!-- Quick Answer Block -->
-                <div class="quick-answer">
-                    <strong>Quick Answer:</strong> Top onchain data platforms—Hydromancer, Allium, and HypurrScan, real-time wallet
-                    tracking, fund flows, and whale monitoring. Allium dominates for SQL-based custom queries (40% of pro
-                    traders); Hydromancer leads in wallet intelligence with 95% accuracy on fund movements. Costs range from
-                    free ($0) to premium ($500+/month).
-                </div>
-
-                <p>The edge is in the data. Leverage analytics platforms to track flows, whale wallets, and smart money.
-                </p>
+                <h2>Resources</h2>
+                <p>Curated tools and guides for onchain trading.</p>
             </div>
-            <div class="cards-grid">
-                <a href="https://loris.tools/waitlist?ref=REFN3ZGAS39" class="article-card" target="_blank" rel="noopener noreferrer">
-                    <div class="card-tag">Overview</div>
-                    <h3>Loris trade: free data for perps, funding rate arbitrage</h3>
-                    <p>A comprehensive ranking of the top analytics tools for active traders in 2026.</p>
+            <div class="resource-list">
+                <a href="https://loris.tools/waitlist?ref=REFN3ZGAS39" class="resource-item" target="_blank" rel="noopener noreferrer">
+                    <span class="resource-tag">Data</span>
+                    <span class="resource-body">
+                        <span class="resource-title">Loris Trade</span>
+                        <span class="resource-desc">Free data for perps and funding rate arbitrage</span>
+                    </span>
+                    <span class="resource-arrow">↗</span>
                 </a>
-                <a href="https://www.hypurr.co/ecosystem-projects" class="article-card" target="_blank" rel="noopener noreferrer">
-                    <div class="card-tag">Review</div>
-                    <h3>Hyperliquid Ecosystem</h3>
-                    <p>Which platform is right for your trading style? Comparing cost, features, and steepness of
-                        learning curve.</p>
+                <a href="https://www.hypurr.co/ecosystem-projects" class="resource-item" target="_blank" rel="noopener noreferrer">
+                    <span class="resource-tag">Ecosystem</span>
+                    <span class="resource-body">
+                        <span class="resource-title">Hyperliquid Ecosystem</span>
+                        <span class="resource-desc">Browse ecosystem projects on Hypurr</span>
+                    </span>
+                    <span class="resource-arrow">↗</span>
                 </a>
-                <a href="https://onchaindivers.com/" class="article-card" target="_blank" rel="noopener noreferrer">
-                    <div class="card-tag">Data</div>
-                    <h3>Onchain Divers</h3>
-                    <p>Onchain data for ML and backtesting</p>
+                <a href="https://onchaindivers.com/" class="resource-item" target="_blank" rel="noopener noreferrer">
+                    <span class="resource-tag">Data</span>
+                    <span class="resource-body">
+                        <span class="resource-title">Onchain Divers</span>
+                        <span class="resource-desc">Onchain data for ML and backtesting</span>
+                    </span>
+                    <span class="resource-arrow">↗</span>
+                </a>
+                <a href="https://github.com/lawmaster10/howcryptoworksbook/blob/master/Chapters/_preface.md" class="resource-item" target="_blank" rel="noopener noreferrer">
+                    <span class="resource-tag">Guide</span>
+                    <span class="resource-body">
+                        <span class="resource-title">How Crypto Works</span>
+                        <span class="resource-desc">Comprehensive guide to DeFi, perpetuals, MEV, and HLP</span>
+                    </span>
+                    <span class="resource-arrow">↗</span>
+                </a>
+                <a href="https://www.vertoxquant.com/p/quantitative-finance-how-to-start" class="resource-item" target="_blank" rel="noopener noreferrer">
+                    <span class="resource-tag">Guide</span>
+                    <span class="resource-body">
+                        <span class="resource-title">Intro to Quant Finance</span>
+                        <span class="resource-desc">Statistical arbitrage and funding rate strategies</span>
+                    </span>
+                    <span class="resource-arrow">↗</span>
+                </a>
+                <a href="https://stalequant.com/essays/index.html#bots" class="resource-item" target="_blank" rel="noopener noreferrer">
+                    <span class="resource-tag">Dev</span>
+                    <span class="resource-body">
+                        <span class="resource-title">Build a Bot on Hyperliquid</span>
+                        <span class="resource-desc">Automating trades with quantitative models</span>
+                    </span>
+                    <span class="resource-arrow">↗</span>
+                </a>
+                <a href="https://www.quicknode.com/guides/defi/polymarket-copy-trading-bot" class="resource-item" target="_blank" rel="noopener noreferrer">
+                    <span class="resource-tag">Dev</span>
+                    <span class="resource-body">
+                        <span class="resource-title">Polymarket Copy Trading Bot</span>
+                        <span class="resource-desc">Step-by-step Python trading agent guide</span>
+                    </span>
+                    <span class="resource-arrow">↗</span>
+                </a>
+                <a href="https://blog.onchaindivers.com/" class="resource-item" target="_blank" rel="noopener noreferrer">
+                    <span class="resource-tag">Research</span>
+                    <span class="resource-body">
+                        <span class="resource-title">Onchain Divers Research</span>
+                        <span class="resource-desc">Data-driven blockchain trading insights</span>
+                    </span>
+                    <span class="resource-arrow">↗</span>
                 </a>
             </div>
         </section>
 
-        <!-- Pillar 3: Hyperliquid -->
-        <section id="hyperliquid" class="pillar-section container">
-            <div class="section-header">
-                <div class="update-badge">updated in June 2026</div>
-                <h2>Hyperliquid</h2>
-
-                <!-- Quick Answer Block -->
-                <div class="quick-answer">
-                    <strong>Quick Answer:</strong> Hyperliquid is a high-performance L1 blockchain optimized for
-                    decentralized perpetuals trading. It handles 100,000+ TPS with sub-100ms latency, enabling onchain
-                    prop trading without centralized custody risk. HLP (Hyperliquid Liquidity Pools) offer 25-50% APY.
-                    Over $8B in daily volume as of Q1 2026.
-                </div>
-
-                <p>The premier L1 for decentralized perpetuals. Understand the ecosystem and how to trade it.</p>
-            </div>
-            <div class="cards-grid">
-                <a href="https://github.com/lawmaster10/howcryptoworksbook/blob/master/Chapters/ch10_hyperliquid.md"
-                    class="article-card" target="_blank" rel="noopener noreferrer">
-                    <div class="card-tag">Starter</div>
-                    <h3>Beginner's guide</h3>
-                    <p>Setting up your wallet, bridging assets, and executing your first trade on Hyperliquid.</p>
-                </a>
-                <a href="https://github.com/lawmaster10/howcryptoworksbook/blob/master/Chapters/ch10_hyperliquid.md"
-                    class="article-card" target="_blank" rel="noopener noreferrer">
-                    <div class="card-tag">DeFi</div>
-                    <h3>How HLP works</h3>
-                    <p>Understanding the Hyperliquid Liquidity Provider vault, risks, and historical APR mechanics.</p>
-                </a>
-                <a href="https://www.vertoxquant.com/p/quantitative-finance-how-to-start" class="article-card" target="_blank" rel="noopener noreferrer">
-                    <div class="card-tag">Alpha</div>
-                    <h3>Intro to quant finance</h3>
-                    <p>Statistical arbitrage and funding rate capture strategies optimized for Hyperliquid.</p>
-                </a>
-            </div>
-        </section>
-
-        <!-- Pillar 4: AI Agents + Prediction Markets -->
-        <section id="ai-agents" class="pillar-section container">
-            <div class="section-header">
-                <div class="update-badge">updated in June 2026</div>
-                <h2>AI Agents & Prediction Markets</h2>
-
-                <!-- Quick Answer Block -->
-                <div class="quick-answer">
-                    <strong>Quick Answer:</strong> AI agents now autonomously trade Polymarket prediction markets with
-                    60-70% win rates on election, crypto, and global event outcomes. GPT-4 and Claude models integrated
-                    with onchain APIs enable automated decision-making. Polymarket volume exceeded $2B in March 2026,
-                    with agent-driven volume estimated at 35-40%.
-                </div>
-
-                <p>The convergence of artificial intelligence and onchain truth via prediction markets.</p>
-            </div>
-            <div class="cards-grid two-cols">
-                <a href="https://stalequant.com/essays/index.html#bots" class="article-card" target="_blank" rel="noopener noreferrer">
-                    <div class="card-tag">Polymarket</div>
-                    <h3>Build a bot on Hyperliquid</h3>
-                    <p>How quantitative models and LLM agents are parsing news to execute profitable trades on global
-                        events.</p>
-                </a>
-                <a href="https://www.quicknode.com/guides/defi/polymarket-copy-trading-bot" class="article-card" target="_blank" rel="noopener noreferrer">
-                    <div class="card-tag">Development</div>
-                    <h3>Polymarket: How to build a simple agent</h3>
-                    <p>A step-by-step developer tutorial on creating a Python bot that interacts with the Polymarket
-                        API.</p>
-                </a>
-            </div>
-        </section>
-
-        <!-- Pillar 5: Learning Resources -->
-        <section id="learning" class="pillar-section container">
-            <div class="section-header">
-                <div class="update-badge">updated in June 2026</div>
-                <h2>Learning Resources</h2>
-                <p>Master the fundamentals of crypto, DeFi, and onchain trading to trade smarter.</p>
-            </div>
-            <div class="cards-grid">
-                <a href="https://github.com/lawmaster10/howcryptoworksbook/blob/master/Chapters/_preface.md"
-                    class="article-card" target="_blank" rel="noopener noreferrer">
-                    <div class="card-tag">Fundamentals</div>
-                    <h3>How Crypto Works Book</h3>
-                    <p>Comprehensive guide covering onchain trading, MEV, perpetuals, DeFi, and all essential crypto
-                        concepts for traders.</p>
-                </a>
-                <a href="https://blog.onchaindivers.com/"
-                    class="article-card" target="_blank" rel="noopener noreferrer">
-                    <div class="card-tag">Research</div>
-                    <h3>Onchain Divers Research</h3>
-                    <p>Data-driven insights into blockchain trading and market dynamics.</p>
-                </a>
-            </div>
-        </section>
-
-        <!-- Pillar 6: FAQ -->
+        <!-- FAQ -->
         <section id="faq" class="pillar-section container">
             <div class="section-header">
                 <h2>Frequently Asked Questions</h2>
@@ -591,15 +523,13 @@
             </div>
             <div class="footer-links">
                 <a href="#firms">Prop Firms</a>
-                <a href="#data-tools">Data Tools</a>
+                <a href="#resources">Resources</a>
                 <a href="#faq">FAQ</a>
                 <a href="#">Privacy Policy</a>
             </div>
             <div class="footer-socials">
                 <a href="https://github.com/kamikagome/onchainprops" target="_blank" rel="noopener noreferrer"
                     aria-label="GitHub">GitHub</a>
-                <a href="https://t.me/wtfonchain" target="_blank" rel="noopener noreferrer"
-                    aria-label="Telegram">Telegram</a>
             </div>
         </div>
         <div class="footer-bottom">
@@ -609,9 +539,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Feedback Box Component -->
-    <feedback-box></feedback-box>
 
     <!-- Scripts -->
     <script src="amplitude.min.js"></script>

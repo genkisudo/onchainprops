@@ -87,16 +87,13 @@ const toFirmId = (name) => name.toLowerCase().replace(/\s+/g, '_').replace(/[^a-
 
 /** Metadata for each page section — used for consistent event properties */
 const SECTION_META = {
-    'firms':       { name: 'Onchain Prop Firms',             position: 1 },
-    'data-tools':  { name: 'Onchain Data Tools',             position: 2 },
-    'hyperliquid': { name: 'Hyperliquid',                    position: 3 },
-    'ai-agents':   { name: 'AI Agents & Prediction Markets', position: 4 },
-    'learning':    { name: 'Learning Resources',             position: 5 },
-    'faq':         { name: 'FAQ',                            position: 6 }
+    'firms':     { name: 'Onchain Prop Firms', position: 1 },
+    'resources': { name: 'Resources',          position: 2 },
+    'faq':       { name: 'FAQ',                position: 3 }
 };
 
-/** Section IDs whose outbound article-card links fire Resource Link Opened */
-const RESOURCE_SECTION_IDS = new Set(['data-tools', 'hyperliquid', 'ai-agents', 'learning']);
+/** Section IDs whose outbound resource-item links fire Resource Link Opened */
+const RESOURCE_SECTION_IDS = new Set(['resources']);
 
 // -----------------------------------------
 // 3. Web Components (Native Encapsulation)
@@ -253,356 +250,7 @@ class FaqAccordion extends HTMLElement {
 customElements.define('faq-accordion', FaqAccordion);
 
 // -----------------------------------------
-// 3b. Feedback Box Web Component
-// -----------------------------------------
-const feedbackTemplate = document.createElement('template');
-feedbackTemplate.innerHTML = `
-    <style>
-        :host {
-            --feedback-bottom: 2rem;
-            --feedback-right: 2rem;
-            --feedback-mobile-bottom: 1rem;
-            --feedback-mobile-right: 1rem;
-        }
-
-        .feedback-button {
-            position: fixed;
-            bottom: var(--feedback-bottom);
-            right: var(--feedback-right);
-            width: 50px;
-            height: 50px;
-            background: var(--accent, #67d2b4);
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 20px rgba(103, 210, 180, 0.3);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 50;
-            color: #020617;
-        }
-
-        .feedback-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 30px rgba(103, 210, 180, 0.5);
-        }
-
-        .feedback-modal {
-            position: fixed;
-            bottom: 70px;
-            right: var(--feedback-right);
-            width: 360px;
-            background: var(--bg-card, rgba(255, 255, 255, 0.03));
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));
-            border-radius: var(--radius-lg, 18px);
-            padding: 1.5rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-            opacity: 0;
-            transform: translateY(20px) scale(0.95);
-            pointer-events: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 50;
-        }
-
-        .feedback-modal.open {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            pointer-events: auto;
-        }
-
-        .feedback-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .feedback-header h3 {
-            margin: 0;
-            color: var(--text-primary, #f8f8f8);
-            font-size: 1.1rem;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            color: var(--text-secondary, #94a3b8);
-            cursor: pointer;
-            font-size: 1.5rem;
-            padding: 0;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: color 0.3s;
-        }
-
-        .close-btn:hover {
-            color: var(--text-primary, #f8f8f8);
-        }
-
-        .feedback-form {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        input[type="email"],
-        textarea {
-            width: 100%;
-            padding: 0.75rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));
-            border-radius: var(--radius-sm, 10px);
-            color: var(--text-primary, #f8f8f8);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-        }
-
-        input[type="email"]::placeholder,
-        textarea::placeholder {
-            color: var(--text-secondary, #94a3b8);
-        }
-
-        textarea {
-            min-height: 100px;
-            resize: none;
-        }
-
-        input[type="email"]:focus,
-        textarea:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(103, 210, 180, 0.3);
-            box-shadow: 0 0 12px rgba(103, 210, 180, 0.1);
-        }
-
-        .feedback-submit {
-            padding: 0.75rem 1rem;
-            background: var(--accent, #67d2b4);
-            color: #020617;
-            border: none;
-            border-radius: var(--radius-pill, 9999px);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .feedback-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(103, 210, 180, 0.3);
-        }
-
-        .feedback-submit:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .feedback-status {
-            text-align: center;
-            padding: 1rem;
-            border-radius: var(--radius-sm, 10px);
-            font-size: 0.9rem;
-            display: none;
-        }
-
-        .feedback-status.success {
-            display: block;
-            background: rgba(103, 210, 180, 0.1);
-            border: 1px solid rgba(103, 210, 180, 0.3);
-            color: var(--accent, #67d2b4);
-            animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 640px) {
-            .feedback-button {
-                bottom: var(--feedback-mobile-bottom);
-                right: var(--feedback-mobile-right);
-                width: 48px;
-                height: 48px;
-                font-size: 1.3rem;
-            }
-
-            .feedback-modal {
-                bottom: 65px;
-                right: var(--feedback-mobile-right);
-                left: 1rem;
-                width: auto;
-                max-width: 100%;
-                padding: 1.25rem;
-            }
-        }
-    </style>
-
-    <button class="feedback-button" aria-label="Send feedback" aria-expanded="false" title="Send feedback">💬</button>
-
-    <div class="feedback-modal">
-        <div class="feedback-header">
-            <h3>Share Feedback</h3>
-            <button class="close-btn" aria-label="Close feedback">✕</button>
-        </div>
-        <form class="feedback-form">
-            <input
-                type="email"
-                name="email"
-                placeholder="Your email (optional)"
-            />
-            <textarea
-                name="message"
-                placeholder="Tell us what you think... (max 500 characters)"
-                maxlength="500"
-                required
-            ></textarea>
-            <button type="submit" class="feedback-submit">Send Feedback</button>
-        </form>
-        <div class="feedback-status"></div>
-    </div>
-`;
-
-class FeedbackBox extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-        this.shadowRoot.appendChild(feedbackTemplate.content.cloneNode(true));
-
-        this.btn = this.shadowRoot.querySelector('.feedback-button');
-        this.modal = this.shadowRoot.querySelector('.feedback-modal');
-        this.closeBtn = this.shadowRoot.querySelector('.close-btn');
-        this.form = this.shadowRoot.querySelector('.feedback-form');
-        this.textarea = this.shadowRoot.querySelector('textarea[name="message"]');
-        this.emailInput = this.shadowRoot.querySelector('input[name="email"]');
-        this.statusEl = this.shadowRoot.querySelector('.feedback-status');
-
-        this.isOpen = false;
-        this.handleToggle = this.handleToggle.bind(this);
-        this.handleClose = this.handleClose.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    connectedCallback() {
-        this.btn.addEventListener('click', this.handleToggle);
-        this.closeBtn.addEventListener('click', this.handleClose);
-        this.form.addEventListener('submit', this.handleSubmit);
-
-        // Close modal when clicking outside
-        this._handleOutsideClick = (e) => {
-            if (this.isOpen && !this.contains(e.target) && e.target !== this.btn) {
-                this.close();
-            }
-        };
-        document.addEventListener('click', this._handleOutsideClick);
-    }
-
-    disconnectedCallback() {
-        this.btn.removeEventListener('click', this.handleToggle);
-        this.closeBtn.removeEventListener('click', this.handleClose);
-        this.form.removeEventListener('submit', this.handleSubmit);
-        document.removeEventListener('click', this._handleOutsideClick);
-    }
-
-    handleToggle() {
-        if (this.isOpen) {
-            this.close();
-        } else {
-            this.open();
-            amplitude.track('Feedback Opened');
-        }
-    }
-
-    handleClose(e) {
-        e.preventDefault();
-        this.close();
-    }
-
-    handleSubmit(e) {
-        e.preventDefault();
-        const message = this.textarea.value.trim();
-        const email = this.form.querySelector('input[name="email"]').value.trim();
-
-        if (!message) return;
-
-        // Rate limit: prevent spam (30 seconds between submissions)
-        const lastSubmitTime = localStorage.getItem('feedback_last_submit');
-        const now = Date.now();
-        const minInterval = 30000;
-
-        if (lastSubmitTime) {
-            const timeSinceLastSubmit = now - parseInt(lastSubmitTime);
-            if (timeSinceLastSubmit < minInterval) {
-                const secondsLeft = Math.ceil((minInterval - timeSinceLastSubmit) / 1000);
-                this.statusEl.textContent = `⏳ Please wait ${secondsLeft}s before submitting again`;
-                this.statusEl.style.background = 'rgba(94, 109, 126, 0.1)';
-                this.statusEl.style.borderColor = 'rgba(94, 109, 126, 0.3)';
-                this.statusEl.style.color = '#5e6d7e';
-                this.statusEl.style.display = 'block';
-                return;
-            }
-        }
-
-        localStorage.setItem('feedback_last_submit', now.toString());
-
-        // Open Telegram with pre-filled message
-        const telegramMessage = encodeURIComponent(`Feedback: ${message}${email ? `\n\nEmail: ${email}` : ''}`);
-        const telegramUrl = `https://t.me/genki132?start=${telegramMessage}`;
-        window.open(telegramUrl, '_blank');
-
-        amplitude.track('Feedback Submitted', {
-            hasEmail: !!email,
-            messageLength: message.length
-        });
-
-        this.statusEl.textContent = '✓ Opening Telegram. Send your feedback there!';
-        this.statusEl.classList.add('success');
-        this.statusEl.style.display = 'block';
-        this.textarea.value = '';
-        this.form.querySelector('input[name="email"]').value = '';
-
-        // Auto-close modal after 2 seconds
-        setTimeout(() => {
-            this.close();
-            this.statusEl.classList.remove('success');
-        }, 2000);
-    }
-
-    open() {
-        this.isOpen = true;
-        this.modal.classList.add('open');
-        this.textarea.focus();
-        this.btn.setAttribute('aria-expanded', 'true');
-    }
-
-    close() {
-        this.isOpen = false;
-        this.modal.classList.remove('open');
-        this.btn.setAttribute('aria-expanded', 'false');
-        this.statusEl.classList.remove('success');
-        // Reset any inline error styles set during failed submissions
-        this.statusEl.removeAttribute('style');
-    }
-}
-
-customElements.define('feedback-box', FeedbackBox);
-
-// -----------------------------------------
-// 4. Performant DOM Rendering
+// 3b. Performant DOM Rendering
 // -----------------------------------------
 /**
  * Renders the table using a DocumentFragment to minimize repaints.
@@ -691,7 +339,7 @@ const renderPropFirmsTable = () => {
 // -----------------------------------------
 /**
  * Fires Firm List Viewed when the firms section enters the viewport,
- * and Tool Section Viewed when the data-tools section enters the viewport.
+ * and Resources Section Viewed when the resources section enters the viewport.
  * Each observer fires once then disconnects.
  */
 const setupSectionObservers = () => {
@@ -712,19 +360,19 @@ const setupSectionObservers = () => {
         firmsObserver.observe(firmsSection);
     }
 
-    const toolsSection = document.getElementById('data-tools');
-    if (toolsSection) {
-        const toolsObserver = new IntersectionObserver((entries) => {
+    const resourcesSection = document.getElementById('resources');
+    if (resourcesSection) {
+        const resourcesObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (!entry.isIntersecting) return;
-                amplitude.track('Tool Section Viewed', {
-                    'section name': SECTION_META['data-tools'].name,
-                    'section position': SECTION_META['data-tools'].position
+                amplitude.track('Resources Section Viewed', {
+                    'section name': SECTION_META['resources'].name,
+                    'section position': SECTION_META['resources'].position
                 });
-                toolsObserver.unobserve(entry.target);
+                resourcesObserver.unobserve(entry.target);
             });
         }, opts);
-        toolsObserver.observe(toolsSection);
+        resourcesObserver.observe(resourcesSection);
     }
 };
 
@@ -845,13 +493,13 @@ const setupEventDelegation = () => {
             return;
         }
 
-        // Resource Link Opened — outbound links inside article cards in content sections
+        // Resource Link Opened — outbound links inside the resources section
         if (anchor && anchor.href) {
             const section = anchor.closest('section');
-            const card = anchor.closest('.article-card');
+            const card = anchor.closest('.resource-item');
             if (section && card && RESOURCE_SECTION_IDS.has(section.id)) {
-                const title = card.querySelector('h3')?.textContent?.trim() ?? '';
-                const type = card.querySelector('.card-tag')?.textContent?.trim()?.toLowerCase() ?? '';
+                const title = card.querySelector('.resource-title')?.textContent?.trim() ?? '';
+                const type = card.querySelector('.resource-tag')?.textContent?.trim()?.toLowerCase() ?? '';
                 let hostname = '';
                 try { hostname = new URL(anchor.href).hostname; } catch (_) {}
 
