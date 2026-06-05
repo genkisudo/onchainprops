@@ -592,6 +592,47 @@ h1, h2, h3, h4 {
     }
 }
 
+/* Resource detail page */
+.back-link {
+    display: inline-block;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+.back-link:hover {
+    color: var(--accent);
+}
+
+.resource-detail {
+    max-width: 720px;
+}
+
+.resource-detail .resource-tag {
+    margin-bottom: 1rem;
+}
+
+.resource-detail h2 {
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    margin-bottom: 1.25rem;
+}
+
+.resource-detail-content {
+    margin-bottom: 2rem;
+}
+
+.resource-detail-content p {
+    color: var(--text-secondary);
+    line-height: 1.75;
+    font-size: 1.02rem;
+    margin-bottom: 0.85rem;
+}
+
+.resource-detail-content p:last-child {
+    margin-bottom: 0;
+}
+
 /* FAQ */
 .faq-container {
     max-width: 760px;
