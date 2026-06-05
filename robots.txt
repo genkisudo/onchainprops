@@ -46,7 +46,7 @@ User-agent: meta-externalagent
 Allow: /
 
 # Sitemap
-Sitemap: https://onchainprop.wtf/sitemap.xml
+Sitemap: https://onchainprops.xyz/sitemap.xml
 
 # Crawl delay (0 = no delay)
 Crawl-delay: 0

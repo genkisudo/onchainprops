@@ -3,11 +3,11 @@
  *
  * Deployment (Cloudflare dashboard):
  *   1. Workers & Pages → Create Worker → paste this file → Deploy
- *   2. Add a Worker Route for your zone: onchainprop.wtf/* → this worker
+ *   2. Add a Worker Route for your zone: onchainprops.xyz/* → this worker
  *
  * Or via Wrangler CLI:
  *   npx wrangler deploy cloudflare-worker.js --name onchainprop-security
- *   Then add a route in the Cloudflare dashboard for onchainprop.wtf/*
+ *   Then add a route in the Cloudflare dashboard for onchainprops.xyz/*
  *
  * What this adds (all require HTTP headers — cannot be set via <meta> tags):
  *   - X-Frame-Options: DENY                → clickjacking prevention

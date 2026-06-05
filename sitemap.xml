@@ -3,7 +3,7 @@
 
   <!-- Main page — single-page app, all content lives here -->
   <url>
-    <loc>https://onchainprop.wtf/</loc>
+    <loc>https://onchainprops.xyz/</loc>
     <lastmod>2026-03-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -11,7 +11,7 @@
 
   <!-- Compare Firms — long-form comparison article -->
   <url>
-    <loc>https://onchainprop.wtf/compare.html</loc>
+    <loc>https://onchainprops.xyz/compare.html</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -19,7 +19,7 @@
 
   <!-- llms.txt — for AI crawler discovery -->
   <url>
-    <loc>https://onchainprop.wtf/llms.txt</loc>
+    <loc>https://onchainprops.xyz/llms.txt</loc>
     <lastmod>2026-03-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
