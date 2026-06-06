@@ -271,14 +271,18 @@ const renderPropFirmsTable = () => {
         row.dataset.firmRank = String(rank);
 
         // Build cells via DOM API to prevent XSS injection
+        const firmSlug = firm.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+        const firmPageUrl = `firms/${firmSlug}.html`;
+
         const nameCell = document.createElement('td');
-        const nameDiv = document.createElement('div');
-        nameDiv.className = 'firm-name';
-        nameDiv.textContent = firm.name;
+        const nameLink = document.createElement('a');
+        nameLink.href = firmPageUrl;
+        nameLink.className = 'firm-name firm-name-link';
+        nameLink.textContent = firm.name;
         const chainDiv = document.createElement('div');
         chainDiv.style.cssText = 'font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;';
         chainDiv.textContent = firm.chain;
-        nameCell.append(nameDiv, chainDiv);
+        nameCell.append(nameLink, chainDiv);
 
         const splitCell = document.createElement('td');
         splitCell.className = 'val-highlight';
@@ -301,27 +305,17 @@ const renderPropFirmsTable = () => {
         rulesCell.textContent = firm.rulesOnchain;
 
         const visitCell = document.createElement('td');
-        visitCell.dataset.label = 'Website';
+        visitCell.dataset.label = 'Firm';
         const linksDiv = document.createElement('div');
         linksDiv.style.cssText = 'display: flex; gap: 0.75rem; align-items: center;';
 
-        const visitLink = document.createElement('a');
-        // Validate protocol to prevent javascript: URI injection if data source ever changes
-        try {
-            const parsed = new URL(firm.website);
-            visitLink.href = (parsed.protocol === 'https:' || parsed.protocol === 'http:')
-                ? firm.website
-                : '#';
-        } catch (_) {
-            visitLink.href = '#';
-        }
-        visitLink.target = '_blank';
-        visitLink.rel = 'noopener noreferrer';
-        visitLink.setAttribute('aria-label', `Visit ${firm.name} website`);
-        visitLink.textContent = 'Website ↗';
-        visitLink.style.cssText = 'color: var(--accent); text-decoration: none; font-size: 0.9rem;';
+        const firmLink = document.createElement('a');
+        firmLink.href = firmPageUrl;
+        firmLink.setAttribute('aria-label', `View ${firm.name} details`);
+        firmLink.textContent = 'Firm →';
+        firmLink.style.cssText = 'color: var(--accent); text-decoration: none; font-size: 0.9rem;';
 
-        linksDiv.append(visitLink);
+        linksDiv.append(firmLink);
         visitCell.appendChild(linksDiv);
 
         row.append(nameCell, splitCell, accountCell, tokenCell, rulesCell, visitCell);
@@ -456,7 +450,7 @@ const setupEventDelegation = () => {
             return;
         }
 
-        // Firm Selected + Firm Website Opened — website links inside the firms table
+        // Firm Selected — links inside the firms table (firm page or name click)
         if (anchor && anchor.href && anchor.closest('#firm-table-body')) {
             const row = anchor.closest('tr');
             const firmName = row?.dataset.firmName ?? '';
@@ -465,31 +459,13 @@ const setupEventDelegation = () => {
 
             if (firm) {
                 const firmId = toFirmId(firm.name);
-                let hostname = '';
-                try { hostname = new URL(firm.website).hostname; } catch (_) {}
 
                 amplitude.track('Firm Selected', {
                     'firm id': firmId,
                     'firm name': firm.name,
-                    'selection source': 'website_link',
+                    'selection source': anchor.classList.contains('firm-name-link') ? 'name_click' : 'firm_link',
                     'list position': firmRank
                 });
-
-                amplitude.track('Firm Website Opened', {
-                    'firm id': firmId,
-                    'firm name': firm.name,
-                    'destination domain': hostname,
-                    'is affiliate link': firm.isAffiliate,
-                    'clickout placement': 'comparison_table'
-                });
-
-                // Set Activation Status user property on first firm clickout (once per browser)
-                if (!localStorage.getItem('amp_activated')) {
-                    localStorage.setItem('amp_activated', '1');
-                    const identifyObj = new amplitude.Identify();
-                    identifyObj.set('Activation Status', 'activated');
-                    amplitude.identify(identifyObj);
-                }
             }
             return;
         }

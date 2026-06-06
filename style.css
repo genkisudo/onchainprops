@@ -448,6 +448,71 @@ h1, h2, h3, h4 {
     letter-spacing: -0.01em;
 }
 
+.firm-name-link {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.firm-name-link:hover {
+    color: var(--accent);
+}
+
+/* Firm detail page */
+.firm-detail {
+    max-width: 720px;
+}
+
+.firm-detail .firm-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+}
+
+.firm-detail .firm-meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.85rem;
+    background: var(--bg-elev);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-pill);
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+}
+
+.firm-detail .firm-meta-item strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.firm-detail-content {
+    margin-bottom: 2rem;
+}
+
+.firm-detail-content p {
+    color: var(--text-secondary);
+    line-height: 1.75;
+    font-size: 1.02rem;
+    margin-bottom: 0.85rem;
+}
+
+.firm-detail-content p:last-child {
+    margin-bottom: 0;
+}
+
+.firm-detail-content h3 {
+    color: var(--text-primary);
+    font-size: 1.15rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.firm-detail-content h3:first-child {
+    margin-top: 0;
+}
+
 .val-highlight {
     color: var(--text-primary);
     font-weight: 600;
