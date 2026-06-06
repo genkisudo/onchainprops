@@ -513,6 +513,14 @@ h1, h2, h3, h4 {
     margin-top: 0;
 }
 
+.firm-detail-content .prop-table {
+    font-size: 0.92rem;
+}
+
+.firm-detail-content .prop-table td {
+    color: var(--text-primary);
+}
+
 .val-highlight {
     color: var(--text-primary);
     font-weight: 600;
