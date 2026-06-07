@@ -54,6 +54,12 @@ class PubSub {
 
 const Store = new PubSub();
 
+/** Safe analytics wrapper — no-ops when amplitude.min.js is blocked or fails to load */
+const analytics = {
+    track: (...args) => { try { amplitude.track(...args); } catch (_) {} },
+    initAll: (...args) => { try { amplitude.initAll(...args); } catch (_) {} }
+};
+
 // -----------------------------------------
 // 2. Application State (Single Source of Truth)
 // -----------------------------------------
@@ -223,11 +229,11 @@ class FaqAccordion extends HTMLElement {
         if (this.isOpen) {
             Store.publish('FAQ_TOGGLED', null);
             this.close();
-            amplitude.track('FAQ Collapsed', { question: this.getAttribute('question') });
+            analytics.track('FAQ Collapsed', { question: this.getAttribute('question') });
         } else {
             Store.publish('FAQ_TOGGLED', this.faqId);
             this.open();
-            amplitude.track('FAQ Expanded', { question: this.getAttribute('question') });
+            analytics.track('FAQ Expanded', { question: this.getAttribute('question') });
         }
     }
 
@@ -346,7 +352,7 @@ const setupSectionObservers = () => {
         const firmsObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (!entry.isIntersecting) return;
-                amplitude.track('Firm List Viewed', {
+                analytics.track('Firm List Viewed', {
                     'list name': SECTION_META['firms'].name,
                     'list position': SECTION_META['firms'].position
                 });
@@ -361,7 +367,7 @@ const setupSectionObservers = () => {
         const resourcesObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (!entry.isIntersecting) return;
-                amplitude.track('Resources Section Viewed', {
+                analytics.track('Resources Section Viewed', {
                     'section name': SECTION_META['resources'].name,
                     'section position': SECTION_META['resources'].position
                 });
@@ -386,7 +392,7 @@ const setupFirmCardObservers = () => {
             const row = entry.target;
             const firmName = row.dataset.firmName ?? '';
             const firmRank = parseInt(row.dataset.firmRank ?? '0', 10);
-            amplitude.track('Firm Card Viewed', {
+            analytics.track('Firm Card Viewed', {
                 'firm id': toFirmId(firmName),
                 'firm name': firmName,
                 'firm rank': firmRank,
@@ -461,7 +467,7 @@ const setupEventDelegation = () => {
             if (firm) {
                 const firmId = toFirmId(firm.name);
 
-                amplitude.track('Firm Selected', {
+                analytics.track('Firm Selected', {
                     'firm id': firmId,
                     'firm name': firm.name,
                     'selection source': anchor.classList.contains('firm-name-link') ? 'name_click' : 'firm_link',
@@ -481,7 +487,7 @@ const setupEventDelegation = () => {
                 let hostname = '';
                 try { hostname = new URL(anchor.href).hostname; } catch (_) {}
 
-                amplitude.track('Resource Link Opened', {
+                analytics.track('Resource Link Opened', {
                     'resource title': title,
                     'resource type': type,
                     'destination domain': hostname,
@@ -497,14 +503,10 @@ const setupEventDelegation = () => {
 // -----------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize Amplitude — must run before any tracking calls
-    try {
-        amplitude.initAll('488e252410ff9dc7ba7cfd5efac999f1', {
-            "analytics": { "autocapture": true },
-            "sessionReplay": { "sampleRate": 1 }
-        });
-    } catch (e) {
-        console.error("Amplitude init failure:", e);
-    }
+    analytics.initAll('488e252410ff9dc7ba7cfd5efac999f1', {
+        "analytics": { "autocapture": true },
+        "sessionReplay": { "sampleRate": 1 }
+    });
 
     // Initialize UI — errors here are reported to Amplitude
     try {
@@ -514,14 +516,12 @@ document.addEventListener('DOMContentLoaded', () => {
         setupEventDelegation();
     } catch (e) {
         console.error("App initialization failure:", e);
-        try {
-            amplitude.track('Error Encountered', {
-                'error category': 'initialization',
-                'error message': e?.message ?? 'Unknown error',
-                'error context': 'DOMContentLoaded setup',
-                'error code': null,
-                'http status code': null
-            });
-        } catch (_) {}
+        analytics.track('Error Encountered', {
+            'error category': 'initialization',
+            'error message': e?.message ?? 'Unknown error',
+            'error context': 'DOMContentLoaded setup',
+            'error code': null,
+            'http status code': null
+        });
     }
 });
