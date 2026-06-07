@@ -290,6 +290,30 @@
             "@type": "Answer",
             "text": "Most onchain prop firms listed here use Hyperliquid. Hypernova, ProprXYZ, Vanta Trading, and hyperpnl all operate on Hyperliquid. Carrot Funding operates on gTrade with Hyperliquid coming soon. FoxyFi is launching on Hyperliquid soon."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "What is A-booking?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A-booking means your orders are routed to the real exchange — for example, Hyperliquid's live order books. The firm does not take the other side of your trade; your profits and losses come entirely from live market conditions. The firm earns revenue through fees and spread rather than from trader losses. A-booking is typically reserved for traders who have demonstrated a statistically validated edge."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is B-booking?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "B-booking means your orders are executed against a simulated environment that mirrors real market prices. The firm acts as the counterparty — taking the other side of every trade. Because most traders lose money, the firm retains those losses as revenue. The experience looks identical to live trading since prices replicate the real exchange, but no orders actually touch the market. B-booking is used for traders without a proven edge or sufficient trading history."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why are some traders A-booked and some B-booked?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Prop firms use a graduated booking model rather than a hard binary switch. Each trader receives a composite score based on their trading history and demonstrated edge. Traders with lower scores are fully B-booked (simulated), while those with higher scores are progressively routed to live markets — for example, a score of ~70 might route roughly 50% of orders live, while a score of 90+ means fully live execution. This lets firms manage risk accurately: capturing losses from unprofitable traders through B-booking, while A-booking genuinely skilled traders where the firm earns fees instead. All traders typically start on B-book until the algorithm has enough data to assess their edge."
+          }
         }
       ]
     }
@@ -550,6 +574,19 @@
                 <faq-accordion question="What chains do onchain prop firms use?">
                     <p>Most onchain prop firms listed here operate on <strong>Hyperliquid</strong>. Hypernova, ProprXYZ, Vanta Trading, and hyperpnl all use Hyperliquid. Carrot Funding operates on gTrade with Hyperliquid support coming soon. FoxyFi is also launching on Hyperliquid soon.
                     </p>
+                </faq-accordion>
+
+                <faq-accordion question="What is A-booking?">
+                    <p>A-booking means your orders are routed to the <strong>real exchange</strong> — for example, Hyperliquid's live order books. The firm does not take the other side of your trade; your profits and losses come entirely from live market conditions. The firm earns revenue through fees and spread rather than from trader losses. A-booking is typically reserved for traders who have demonstrated a statistically validated edge.</p>
+                </faq-accordion>
+
+                <faq-accordion question="What is B-booking?">
+                    <p>B-booking means your orders are executed against a <strong>simulated environment</strong> that mirrors real market prices. The firm acts as the counterparty — taking the other side of every trade. Because most traders lose money, the firm retains those losses as revenue. The experience looks identical to live trading since prices replicate the real exchange, but no orders actually touch the market. B-booking is used for traders without a proven edge or sufficient trading history.</p>
+                </faq-accordion>
+
+                <faq-accordion question="Why are some traders A-booked and some B-booked?">
+                    <p>Prop firms use a <strong>graduated booking model</strong> rather than a hard binary switch. Each trader receives a composite score based on their trading history and demonstrated edge. Traders with lower scores are fully B-booked (simulated), while those with higher scores are progressively routed to live markets — for example, a score of ~70 might route roughly 50% of orders live, while a score of 90+ means fully live execution.</p>
+                    <p>This lets firms manage risk accurately: capturing losses from unprofitable traders through B-booking, while A-booking genuinely skilled traders where the firm earns fees instead of absorbing losses. All traders typically start on B-book until the algorithm has enough data to assess their edge.</p>
                 </faq-accordion>
             </div>
         </section>

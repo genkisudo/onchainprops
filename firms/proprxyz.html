@@ -91,6 +91,14 @@
                     "@type": "Answer",
                     "text": "Propr is open to traders worldwide with limited exceptions: United States, United Kingdom, and Russia are restricted. OFAC-sanctioned countries are also excluded."
                 }
+            },
+            {
+                "@type": "Question",
+                "name": "How does ProprXYZ decide who gets A-booked?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "ProprXYZ uses an open-source algorithm published under XBorgLabs/ab-booking on GitHub. Every trader starts on B-book. The algorithm scores each trader on five dimensions — edge (Sharpe, profit factor, expectancy), behavior (sizing consistency, session regularity), risk (drawdown, tail risk), sample confidence (trade count, time in market), and market-relative returns. These combine into a composite score from 0 to 100. Routing is graduated: a score of ~70 sends roughly 50% of order flow live; 90 or above means 100% A-book. Red flags such as martingale patterns or a challenge passed in under 5 days can suppress A-booking independent of the score."
+                }
             }
         ]
     }
@@ -201,6 +209,53 @@
                     <p>All A-booked trades executed on ProprXYZ accounts are routed through Hyperliquid and are verifiable onchain. This means:</p>
                     <p>Every A-booked trade, including entries, exits, and liquidations, is recorded on Hyperliquid's blockchain. Traders can independently verify A-booked trade history onchain. Propr's aggregate payout history will be published onchain.</p>
                     <p>B-booked trades (internal book entries) are not routed to Hyperliquid and are therefore not visible onchain. The P&amp;L outcome is identical regardless of execution method. Every trade on your Propr dashboard is labeled as A-booked or B-booked, so you always have full visibility into how each trade was executed.</p>
+
+                    <h2>How ProprXYZ Decides Who Gets A-Booked: The Open-Source Algorithm</h2>
+                    <p>The A/B booking decision is made by an <strong>open-source algorithm</strong> published under <code>XBorgLabs/ab-booking</code> on GitHub (<code>@xborglabs/ab-booking</code> on npm). The source code is public — anyone can inspect exactly how Propr classifies traders.</p>
+                    <p>Every trader starts on B-book. The algorithm runs continuously against your accumulated trade history and produces a <strong>composite score from 0 to 100</strong>. Routing is graduated — there is no hard switch. A score of ~70 routes roughly 50% of your order flow live. A score of 90 or above means 100% live A-book routing.</p>
+
+                    <h3>Five Scoring Dimensions</h3>
+                    <table class="prop-table" style="margin-bottom: 1rem;">
+                        <thead>
+                            <tr>
+                                <th scope="col">Dimension</th>
+                                <th scope="col">Weight</th>
+                                <th scope="col">What It Measures</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Edge</strong></td>
+                                <td>30–40%</td>
+                                <td>Sharpe ratio, profit factor, and expectancy — adjusted for statistical confidence. A high Sharpe on only 15 trades is heavily discounted.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Behavior</strong></td>
+                                <td>25–30%</td>
+                                <td>Position sizing consistency, session regularity, and avoidance of high-volatility windows like US/London opens and funding rate resets.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Risk</strong></td>
+                                <td>20%</td>
+                                <td>Max drawdown relative to your challenge limit, recovery factor, and tail risk (CVaR, skewness).</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sample Confidence</strong></td>
+                                <td>Multiplicative gate</td>
+                                <td>Trade count, time in market, and asset diversity. This multiplier gates the entire score — thin data keeps all scores low regardless of results.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Market-Relative</strong></td>
+                                <td>15–20%</td>
+                                <td>Whether returns are genuine alpha or just riding market direction. Checks for directional imbalance and profit concentration in a single trade.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Red and Green Flags</h3>
+                    <p>Independent of the composite score, the algorithm raises flags that can influence the final routing decision. A flagged account may be held on B-book for manual review even if the composite score is high enough for A-book classification.</p>
+                    <p><strong>Red flags (B-book indicators):</strong> high win rate with poor risk:reward ratio (martingale pattern), challenge completed in under 5 days, equity curve with no discernible trend, and drawdown close to the challenge limit.</p>
+                    <p><strong>Green flags (A-book support):</strong> Sharpe above 1.5 over 50+ trades, consistent performance across multiple challenge phases, drawdown well below limit, and profitable on 3 or more distinct assets.</p>
 
                     <h2>ProprXYZ Country Availability</h2>
                     <p>Propr is open to traders worldwide with limited exceptions: United States, United Kingdom, and Russia are restricted. OFAC-sanctioned countries are also excluded: Afghanistan, Belarus, Burma (Myanmar), Central African Republic, Cuba, DR Congo, Ethiopia, Eritrea, Haiti, Iran, Iraq, Lebanon, Libya, Nicaragua, North Korea, Somalia, South Sudan, Sudan, Syria, Venezuela, and Zimbabwe. Ukraine regions Crimea, Donetsk, and Luhansk are restricted. Traders from restricted countries will not pass KYC regardless of documentation.</p>
