@@ -86,6 +86,10 @@ const AppState = {
         { name: "DojiFunded", split: "Up to 90%", maxAccount: "$100,000", website: "https://waitlist.dojifunded.com", chain: "Arbitrum", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "No" },
         { name: "Solana Funded", split: "Up to 90%", maxAccount: "$100,000", website: "https://solanafunded.com/", chain: "Solana", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "No" }
     ],
+    /** @type {PropFirm[]} */
+    predictionMarketFirms: [
+        { name: "Funding Predicts", split: "Up to 80%", maxAccount: "$100,000", website: "https://fundingpredicts.com/", chain: "Polymarket", isAffiliate: false, token: "No", payoutSpeed: "Bi-weekly", rulesOnchain: "TBC" }
+    ],
     /** @type {string|null} */
     activeFaqId: null
 };
@@ -261,6 +265,68 @@ customElements.define('faq-accordion', FaqAccordion);
 // 3b. Performant DOM Rendering
 // -----------------------------------------
 /**
+ * Builds a single firm table row via the DOM API (prevents XSS injection).
+ * @param {PropFirm} firm
+ * @param {number} rank 1-based position within its table
+ * @returns {HTMLTableRowElement}
+ */
+const buildFirmRow = (firm, rank) => {
+    const row = document.createElement('tr');
+    row.dataset.firmName = firm.name;
+    row.dataset.firmRank = String(rank);
+
+    const firmSlug = firm.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    const firmPageUrl = `firms/${firmSlug}.html`;
+
+    const nameCell = document.createElement('td');
+    const nameLink = document.createElement('a');
+    nameLink.href = firmPageUrl;
+    nameLink.className = 'firm-name firm-name-link';
+    nameLink.textContent = firm.name;
+    const chainDiv = document.createElement('div');
+    chainDiv.style.cssText = 'font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;';
+    chainDiv.textContent = firm.chain;
+    nameCell.append(nameLink, chainDiv);
+
+    const splitCell = document.createElement('td');
+    splitCell.className = 'val-highlight';
+    splitCell.dataset.label = 'Profit Split';
+    splitCell.textContent = firm.split;
+
+    const accountCell = document.createElement('td');
+    accountCell.className = 'val-highlight';
+    accountCell.dataset.label = 'Max Account';
+    accountCell.textContent = firm.maxAccount;
+
+    const tokenCell = document.createElement('td');
+    tokenCell.className = 'val-highlight';
+    tokenCell.dataset.label = 'Token';
+    tokenCell.textContent = firm.token;
+
+    const rulesCell = document.createElement('td');
+    rulesCell.className = 'val-highlight';
+    rulesCell.dataset.label = 'Rules Verified Onchain';
+    rulesCell.textContent = firm.rulesOnchain;
+
+    const visitCell = document.createElement('td');
+    visitCell.dataset.label = 'Firm';
+    const linksDiv = document.createElement('div');
+    linksDiv.style.cssText = 'display: flex; gap: 0.75rem; align-items: center;';
+
+    const firmLink = document.createElement('a');
+    firmLink.href = firmPageUrl;
+    firmLink.setAttribute('aria-label', `View ${firm.name} details`);
+    firmLink.textContent = 'Firm →';
+    firmLink.style.cssText = 'color: var(--accent); text-decoration: none; font-size: 0.9rem;';
+
+    linksDiv.append(firmLink);
+    visitCell.appendChild(linksDiv);
+
+    row.append(nameCell, splitCell, accountCell, tokenCell, rulesCell, visitCell);
+    return row;
+};
+
+/**
  * Renders the table using a DocumentFragment to minimize repaints.
  * Attaches data attributes to each row for IntersectionObserver lookups.
  */
@@ -270,63 +336,8 @@ const renderPropFirmsTable = () => {
 
     // Use DocumentFragment for batch insertions
     const fragment = document.createDocumentFragment();
-
     AppState.propFirms.forEach((firm, index) => {
-        const rank = index + 1;
-        const row = document.createElement('tr');
-        row.dataset.firmName = firm.name;
-        row.dataset.firmRank = String(rank);
-
-        // Build cells via DOM API to prevent XSS injection
-        const firmSlug = firm.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-        const firmPageUrl = `firms/${firmSlug}.html`;
-
-        const nameCell = document.createElement('td');
-        const nameLink = document.createElement('a');
-        nameLink.href = firmPageUrl;
-        nameLink.className = 'firm-name firm-name-link';
-        nameLink.textContent = firm.name;
-        const chainDiv = document.createElement('div');
-        chainDiv.style.cssText = 'font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;';
-        chainDiv.textContent = firm.chain;
-        nameCell.append(nameLink, chainDiv);
-
-        const splitCell = document.createElement('td');
-        splitCell.className = 'val-highlight';
-        splitCell.dataset.label = 'Profit Split';
-        splitCell.textContent = firm.split;
-
-        const accountCell = document.createElement('td');
-        accountCell.className = 'val-highlight';
-        accountCell.dataset.label = 'Max Account';
-        accountCell.textContent = firm.maxAccount;
-
-        const tokenCell = document.createElement('td');
-        tokenCell.className = 'val-highlight';
-        tokenCell.dataset.label = 'Token';
-        tokenCell.textContent = firm.token;
-
-        const rulesCell = document.createElement('td');
-        rulesCell.className = 'val-highlight';
-        rulesCell.dataset.label = 'Rules Verified Onchain';
-        rulesCell.textContent = firm.rulesOnchain;
-
-        const visitCell = document.createElement('td');
-        visitCell.dataset.label = 'Firm';
-        const linksDiv = document.createElement('div');
-        linksDiv.style.cssText = 'display: flex; gap: 0.75rem; align-items: center;';
-
-        const firmLink = document.createElement('a');
-        firmLink.href = firmPageUrl;
-        firmLink.setAttribute('aria-label', `View ${firm.name} details`);
-        firmLink.textContent = 'Firm →';
-        firmLink.style.cssText = 'color: var(--accent); text-decoration: none; font-size: 0.9rem;';
-
-        linksDiv.append(firmLink);
-        visitCell.appendChild(linksDiv);
-
-        row.append(nameCell, splitCell, accountCell, tokenCell, rulesCell, visitCell);
-        fragment.appendChild(row);
+        fragment.appendChild(buildFirmRow(firm, index + 1));
     });
 
     // Single DOM insertion
@@ -334,6 +345,21 @@ const renderPropFirmsTable = () => {
 
     // Observe each row for Firm Card Viewed once rows are in the DOM
     setupFirmCardObservers();
+};
+
+/**
+ * Renders the Prediction Markets prop firms table, mirroring the main table layout.
+ */
+const renderPredictionMarketsTable = () => {
+    const tableBody = document.getElementById('prediction-markets-table-body');
+    if (!tableBody) return;
+
+    const fragment = document.createDocumentFragment();
+    AppState.predictionMarketFirms.forEach((firm, index) => {
+        fragment.appendChild(buildFirmRow(firm, index + 1));
+    });
+
+    tableBody.appendChild(fragment);
 };
 
 // -----------------------------------------
@@ -511,6 +537,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize UI — errors here are reported to Amplitude
     try {
         renderPropFirmsTable();
+        renderPredictionMarketsTable();
         setupSectionObservers();
         setupMobileNav();
         setupEventDelegation();
