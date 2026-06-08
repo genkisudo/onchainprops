@@ -315,9 +315,9 @@ const buildFirmRow = (firm, rank) => {
 
     const firmLink = document.createElement('a');
     firmLink.href = firmPageUrl;
+    firmLink.className = 'btn btn-secondary firm-view-btn';
     firmLink.setAttribute('aria-label', `View ${firm.name} details`);
-    firmLink.textContent = 'Firm →';
-    firmLink.style.cssText = 'color: var(--accent); text-decoration: none; font-size: 0.9rem;';
+    firmLink.textContent = 'View →';
 
     linksDiv.append(firmLink);
     visitCell.appendChild(linksDiv);
