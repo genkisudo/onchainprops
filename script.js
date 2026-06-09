@@ -66,6 +66,7 @@ const analytics = {
 /**
  * @typedef {Object} PropFirm
  * @property {string} name
+ * @property {string} country
  * @property {string} split
  * @property {string} maxAccount
  * @property {string} website
@@ -77,18 +78,18 @@ const analytics = {
 const AppState = {
     /** @type {PropFirm[]} */
     propFirms: [
-        { name: "Hypernova", split: "80%", maxAccount: "$200,000", website: "https://hypernova.xyz/", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "Yes" },
-        { name: "ProprXYZ", split: "80%", maxAccount: "$200,000", website: "https://app.propr.xyz/r/nCnJ5uZ9", chain: "Hyperliquid", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No" },
-        { name: "hyperpnl", split: "80%", maxAccount: "TBC", website: "https://app.hyperpnl.com/trade", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "No" },
-        { name: "Carrot Funding", split: "80%", maxAccount: "$50,000", website: "https://app.carrotfunding.io/join/2VSSOTXBQZ", chain: "gTrade, Hyperliquid (soon)", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No" },
-        { name: "Vanta Trading", split: "TBC", maxAccount: "$100,000", website: "https://vantatrading.io/?ref=kamil", chain: "Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "Soon", rulesOnchain: "No" },
-        { name: "FoxyFi", split: "80%", maxAccount: "$10,000", website: "https://www.foxify.trade/", chain: "Hyperliquid (soon)", isAffiliate: false, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No" },
-        { name: "DojiFunded", split: "Up to 90%", maxAccount: "$100,000", website: "https://waitlist.dojifunded.com", chain: "Arbitrum", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "No" },
-        { name: "Solana Funded", split: "Up to 90%", maxAccount: "$100,000", website: "https://solanafunded.com/", chain: "Solana", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "No" }
+        { name: "Hypernova", country: "UK", split: "80%", maxAccount: "$200,000", website: "https://hypernova.xyz/", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "Yes" },
+        { name: "ProprXYZ", country: "UAE", split: "80%", maxAccount: "$200,000", website: "https://app.propr.xyz/r/nCnJ5uZ9", chain: "Hyperliquid", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No" },
+        { name: "hyperpnl", country: "Cayman Islands", split: "80%", maxAccount: "TBC", website: "https://app.hyperpnl.com/trade", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "No" },
+        { name: "Carrot Funding", country: "TBC", split: "80%", maxAccount: "$50,000", website: "https://app.carrotfunding.io/join/2VSSOTXBQZ", chain: "gTrade, Hyperliquid (soon)", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No" },
+        { name: "Vanta Trading", country: "Cayman Islands", split: "TBC", maxAccount: "$100,000", website: "https://vantatrading.io/?ref=kamil", chain: "Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "Soon", rulesOnchain: "No" },
+        { name: "FoxyFi", country: "BVI", split: "80%", maxAccount: "$10,000", website: "https://www.foxify.trade/", chain: "Hyperliquid (soon)", isAffiliate: false, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No" },
+        { name: "DojiFunded", country: "Hong Kong", split: "Up to 90%", maxAccount: "$100,000", website: "https://waitlist.dojifunded.com", chain: "Arbitrum", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "No" },
+        { name: "Solana Funded", country: "UAE", split: "Up to 90%", maxAccount: "$100,000", website: "https://solanafunded.com/", chain: "Solana", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "No" }
     ],
     /** @type {PropFirm[]} */
     predictionMarketFirms: [
-        { name: "Funding Predicts", split: "Up to 80%", maxAccount: "$100,000", website: "https://fundingpredicts.com/", chain: "Polymarket", isAffiliate: false, token: "No", payoutSpeed: "Bi-weekly", rulesOnchain: "TBC" }
+        { name: "Funding Predicts", country: "TBC", split: "Up to 80%", maxAccount: "$100,000", website: "https://fundingpredicts.com/", chain: "Polymarket", isAffiliate: false, token: "No", payoutSpeed: "Bi-weekly", rulesOnchain: "TBC" }
     ],
     /** @type {string|null} */
     activeFaqId: null
@@ -288,6 +289,10 @@ const buildFirmRow = (firm, rank) => {
     chainDiv.textContent = firm.chain;
     nameCell.append(nameLink, chainDiv);
 
+    const countryCell = document.createElement('td');
+    countryCell.dataset.label = 'Country';
+    countryCell.textContent = firm.country ?? 'TBC';
+
     const splitCell = document.createElement('td');
     splitCell.className = 'val-highlight';
     splitCell.dataset.label = 'Profit Split';
@@ -303,11 +308,6 @@ const buildFirmRow = (firm, rank) => {
     tokenCell.dataset.label = 'Token';
     tokenCell.textContent = firm.token;
 
-    const rulesCell = document.createElement('td');
-    rulesCell.className = 'val-highlight';
-    rulesCell.dataset.label = 'Rules Verified Onchain';
-    rulesCell.textContent = firm.rulesOnchain;
-
     const visitCell = document.createElement('td');
     visitCell.dataset.label = 'Firm';
     const linksDiv = document.createElement('div');
@@ -322,7 +322,7 @@ const buildFirmRow = (firm, rank) => {
     linksDiv.append(firmLink);
     visitCell.appendChild(linksDiv);
 
-    row.append(nameCell, splitCell, accountCell, tokenCell, rulesCell, visitCell);
+    row.append(nameCell, countryCell, splitCell, accountCell, tokenCell, visitCell);
     return row;
 };
 
