@@ -1072,6 +1072,40 @@ footer {
     }
 }
 
+/* ── Trust chip — "Rules onchain" payout-safety signal ── */
+.trust-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-left: 0.55rem;
+    padding: 0.14rem 0.55rem;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-line);
+    border-radius: var(--radius-pill);
+    color: var(--accent);
+    font-size: 0.67rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    vertical-align: 2px;
+    cursor: help;
+}
+
+.trust-chip::before {
+    content: '✓';
+    font-size: 0.72rem;
+    line-height: 1;
+}
+
+@media (max-width: 640px) {
+    /* name cell becomes flex-column at this width; chip drops below the name */
+    .trust-chip {
+        margin-left: 0;
+        margin-top: 0.15rem;
+    }
+}
+
 /* ── Suggest a Firm form ─────────────────────────────── */
 .suggest-wrap {
     max-width: 680px;

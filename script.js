@@ -291,6 +291,15 @@ const buildFirmRow = (firm, rank) => {
     chainDiv.textContent = firm.chain;
     nameCell.append(nameLink, chainDiv);
 
+    // Payout-trust signal: rules enforced by smart contracts, verifiable onchain
+    if (firm.rulesOnchain === 'Yes') {
+        const trustChip = document.createElement('span');
+        trustChip.className = 'trust-chip';
+        trustChip.textContent = 'Rules onchain';
+        trustChip.title = 'Evaluation rules are enforced by smart contracts — verifiable on the blockchain';
+        nameLink.after(trustChip);
+    }
+
     const countryCell = document.createElement('td');
     countryCell.dataset.label = 'Country';
     countryCell.textContent = firm.country ?? 'TBC';
