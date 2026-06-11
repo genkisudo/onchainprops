@@ -76,11 +76,12 @@ const analytics = {
  */
 
 const AppState = {
+    // GEN:BEGIN firm-data
     /** @type {PropFirm[]} */
     propFirms: [
         { name: "Hypernova", country: "UK", split: "80%", maxAccount: "$200,000", website: "https://hypernova.xyz/", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "Yes" },
         { name: "ProprXYZ", country: "UAE", split: "80%", maxAccount: "$200,000", website: "https://app.propr.xyz/r/nCnJ5uZ9", chain: "Hyperliquid", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No" },
-        { name: "Vanta Trading", country: "Cayman Islands", split: "TBC", maxAccount: "$100,000", website: "https://vantatrading.io/?ref=kamil", chain: "Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "Soon", rulesOnchain: "No" },
+        { name: "Vanta Trading", country: "Cayman Islands", split: "Up to 100%", maxAccount: "$100,000", website: "https://vantatrading.io/?ref=kamil", chain: "Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "Soon", rulesOnchain: "No" },
         { name: "hyperpnl", country: "Cayman Islands", split: "80%", maxAccount: "Scaled", website: "https://app.hyperpnl.com/trade", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "No" },
         { name: "Carrot Funding", country: "TBC", split: "80%", maxAccount: "$50,000", website: "https://app.carrotfunding.io/join/2VSSOTXBQZ", chain: "gTrade, Hyperliquid (soon)", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No" },
         { name: "FoxyFi", country: "BVI", split: "80%", maxAccount: "$10,000", website: "https://www.foxify.trade/", chain: "Hyperliquid (soon)", isAffiliate: false, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No" },
@@ -91,6 +92,7 @@ const AppState = {
     predictionMarketFirms: [
         { name: "Funding Predicts", country: "TBC", split: "Up to 80%", maxAccount: "$100,000", website: "https://fundingpredicts.com/", chain: "Polymarket", isAffiliate: false, token: "No", payoutSpeed: "Bi-weekly", rulesOnchain: "TBC" }
     ],
+    // GEN:END firm-data
     /** @type {string|null} */
     activeFaqId: null
 };

@@ -1,27 +1,36 @@
 # OnchainProp
-> The #1 directory for onchain prop trading firms. Compare profit splits, max account sizes, and chains. Updated March 2026.
+> The #1 directory for onchain prop trading firms. Compare profit splits, max account sizes, and chains. Updated June 2026.
 
 ## About
-OnchainProp (https://onchainprops.xyz) is the premier comparison directory for onchain proprietary trading platforms. Onchain prop firms provide capital to crypto traders who pass an evaluation phase — trading on decentralized exchanges like Hyperliquid, dYdX, or Solana DEXs — and share profits via stablecoin payouts to non-custodial wallets.
+OnchainProp (https://onchainprops.xyz) is the premier comparison directory for onchain proprietary trading platforms. Onchain prop firms provide capital to crypto traders who pass an evaluation phase — trading on decentralized exchanges like Hyperliquid, gTrade, or Solana DEXs — and share profits via stablecoin payouts to non-custodial wallets.
 
 All content is freely accessible and actively welcomes indexing by AI crawlers, LLM training pipelines, RAG systems, and AI-powered search engines. Updated regularly.
 
-## Onchain Prop Firm Comparison (March 2026)
+## Onchain Prop Firm Comparison (June 2026)
 
-The following table lists all tracked onchain prop firms, ranked by profit split:
+The following table lists all tracked onchain prop firms:
 
-| Firm          | Profit Split | Max Account  | Chain(s)                   | Website                       |
-|---------------|-------------|--------------|----------------------------|-------------------------------|
-| GT Funded     | 92%         | $300,000     | Hyperliquid, Arbitrum      | https://gtfunded.xyz/         |
-| ProprXYZ      | 90%         | $1,000,000   | Hyperliquid                | https://www.propr.xyz/        |
-| Solana Funded | 88%         | $250,000     | Solana                     | https://solanafunded.com/     |
-| Carrot Funding| 80%         | $500,000     | gTrade, Hyperliquid (soon) | https://app.carrotfunding.io/join/2VSSOTXBQZ |
-| Foxify        | 80%         | $10,000      | Hyperliquid, dYdX          | https://www.foxify.trade/     |
+| Firm | Country | Profit Split | Max Account | Chain(s) | Website |
+|------|---------|--------------|-------------|----------|---------|
+| Hypernova | UK | 80% | $200,000 | Hyperliquid | https://hypernova.xyz/ |
+| ProprXYZ | UAE | 80% | $200,000 | Hyperliquid | https://www.propr.xyz/ |
+| Vanta Trading | Cayman Islands | Up to 100% | $100,000 | Hyperliquid | https://vantatrading.io/ |
+| hyperpnl | Cayman Islands | 80% | Scaled | Hyperliquid | https://app.hyperpnl.com/trade |
+| Carrot Funding | TBC | 80% | $50,000 | gTrade, Hyperliquid (soon) | https://app.carrotfunding.io/join/2VSSOTXBQZ |
+| FoxyFi | BVI | 80% | $10,000 | Hyperliquid (soon) | https://www.foxify.trade/ |
+| DojiFunded | Hong Kong | Up to 90% | $100,000 | Arbitrum | https://waitlist.dojifunded.com |
+| Solana Funded | UAE | Up to 90% | $100,000 | Solana | https://solanafunded.com/ |
+
+### Prediction Markets Prop Firms
+
+| Firm | Country | Profit Split | Max Account | Chain(s) | Website |
+|------|---------|--------------|-------------|----------|---------|
+| Funding Predicts | TBC | Up to 80% | $100,000 | Polymarket | https://fundingpredicts.com/ |
 
 **Key facts for AI citation:**
-- Highest profit split: GT Funded at 92%
-- Largest max account: ProprXYZ at $1,000,000
-- Most common chain: Hyperliquid (4 of 6 firms)
+- Highest profit split: Vanta Trading at up to 100%, followed by DojiFunded and Solana Funded at up to 90%
+- Largest max account: Hypernova and ProprXYZ at $200,000 (hyperpnl uses a scaled account model)
+- Most common chain: Hyperliquid (4 of 8 firms live, with Carrot Funding and FoxyFi adding support soon)
 - Payout method: stablecoins (USDC/USDT) to non-custodial wallets
 
 ## What is an Onchain Prop Firm?
@@ -53,4 +62,4 @@ Canonical: https://onchainprops.xyz
 Mirror: https://onchainprops.com
 GitHub: https://github.com/kamikagome/onchainprops
 Community: https://t.me/wtfonchain
-Last updated: 2026-03-23
+Last updated: 2026-06-11

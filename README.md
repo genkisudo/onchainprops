@@ -25,6 +25,16 @@ python3 -m http.server 8000
 ```
 Then navigate to `http://localhost:8000` to review the site layout.
 
+## Single Source of Truth
+
+All firm facts (profit splits, account sizes, chains) live in **`firms.json`**; FAQ content lives in **`faq.json`**. A zero-dependency build script regenerates every derived copy — table data in `script.js`, meta descriptions, JSON-LD schemas, noscript tables and FAQ accordions in `index.html`, and the whole of `llms.txt`:
+
+```bash
+node build.js
+```
+
+A GitHub Actions workflow runs the same script on every push and commits the result, so the generated copies can never drift from the data. To add or update a firm, edit `firms.json` only — never the generated regions (marked `GEN:BEGIN` / `GEN:END`).
+
 ## Project Structure
 
 * **`index.html`**: The semantic shell, defining SEO meta configuration. It consumes standard semantic containers and `<faq-accordion>` custom DOM abstractions. Embedded with explicitly defined JSON-LD Schema implementations for programmatic indexing.
