@@ -527,6 +527,78 @@ const setupEventDelegation = () => {
 };
 
 // -----------------------------------------
+// Suggest-a-Firm form
+// Replace YOUR_FORM_ID with a Formspree form ID from https://formspree.io/
+// -----------------------------------------
+const SUGGEST_FORM_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+
+/**
+ * Submits the suggest-a-firm form via fetch to Formspree and shows
+ * a success card or error message in response.
+ */
+function setupSuggestForm() {
+    const form = document.getElementById('suggest-form');
+    const submitBtn = document.getElementById('suggest-submit');
+    const errorMsg = document.getElementById('suggest-error');
+    const successCard = document.getElementById('suggest-success');
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errorMsg.classList.remove('is-visible');
+
+        const name = form.querySelector('#sf-name').value.trim();
+        const url  = form.querySelector('#sf-url').value.trim();
+        if (!name || !url) {
+            form.querySelector(!name ? '#sf-name' : '#sf-url').focus();
+            return;
+        }
+
+        submitBtn.setAttribute('aria-busy', 'true');
+        submitBtn.textContent = 'Submitting…';
+
+        const payload = {
+            firm_name:    name,
+            website:      url,
+            chain:        form.querySelector('#sf-chain').value.trim(),
+            profit_split: form.querySelector('#sf-split').value.trim(),
+            max_account:  form.querySelector('#sf-account').value.trim(),
+            has_token:    form.querySelector('#sf-token').value,
+            notes:        form.querySelector('#sf-notes').value.trim(),
+            contact:      form.querySelector('#sf-contact').value.trim(),
+        };
+
+        try {
+            const res = await fetch(SUGGEST_FORM_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            });
+
+            if (res.ok) {
+                form.style.display = 'none';
+                successCard.classList.add('is-visible');
+                analytics.track('Firm Suggested', { 'firm name': name });
+            } else {
+                throw new Error(`HTTP ${res.status}`);
+            }
+        } catch (err) {
+            errorMsg.classList.add('is-visible');
+            analytics.track('Error Encountered', {
+                'error category': 'suggest form',
+                'error message': err?.message ?? 'Unknown',
+                'error context': 'suggest-a-firm submission',
+                'error code': null,
+                'http status code': null,
+            });
+        } finally {
+            submitBtn.removeAttribute('aria-busy');
+            submitBtn.textContent = 'Submit Firm';
+        }
+    });
+}
+
+// -----------------------------------------
 // Initialization
 // -----------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
@@ -543,6 +615,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setupSectionObservers();
         setupMobileNav();
         setupEventDelegation();
+        setupSuggestForm();
     } catch (e) {
         console.error("App initialization failure:", e);
         analytics.track('Error Encountered', {
