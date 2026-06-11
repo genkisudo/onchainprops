@@ -68,6 +68,18 @@ a {
     transition: var(--transition);
 }
 
+::selection {
+    background: rgba(103, 210, 180, 0.25);
+    color: var(--text-primary);
+}
+
+/* Visible keyboard focus everywhere, without flashing on mouse clicks */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
 .container {
     width: 100%;
     max-width: var(--maxw);
@@ -189,6 +201,11 @@ h1, h2, h3, h4 {
     transform: translateY(-1px);
 }
 
+.btn:active {
+    transform: translateY(0) scale(0.985);
+    transition-duration: 0.08s;
+}
+
 .btn-large {
     padding: 0.9rem 1.9rem;
     font-size: 1.05rem;
@@ -241,10 +258,30 @@ h1, h2, h3, h4 {
     color: var(--text-secondary);
     font-size: 0.92rem;
     font-weight: 500;
+    position: relative;
+    padding-bottom: 2px;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 1.5px;
+    border-radius: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-links a:hover {
     color: var(--text-primary);
+}
+
+.nav-links a:hover::after {
+    transform: scaleX(1);
 }
 
 .btn-nav {
@@ -374,11 +411,41 @@ h1, h2, h3, h4 {
     z-index: 0;
 }
 
+/* Faint dot grid — quiet texture behind the hero, fades out downward */
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+    background-size: 26px 26px;
+    -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.9), transparent 85%);
+    mask-image: linear-gradient(180deg, rgba(0,0,0,0.9), transparent 85%);
+    pointer-events: none;
+    z-index: 0;
+}
+
 .hero-content {
     max-width: 760px;
     margin: 0;
     position: relative;
     z-index: 1;
+}
+
+/* Staggered hero reveal — one orchestrated entrance on load */
+.hero .pill-badge,
+.hero h1,
+.hero .subtitle,
+.hero .hero-actions {
+    animation: heroRise 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero h1            { animation-delay: 0.08s; }
+.hero .subtitle     { animation-delay: 0.16s; }
+.hero .hero-actions { animation-delay: 0.24s; }
+
+@keyframes heroRise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 .pill-badge {
@@ -445,6 +512,7 @@ h1, h2, h3, h4 {
     padding: 1.25rem 1.6rem;
     border-bottom: 1px solid var(--border-color);
     vertical-align: middle;
+    font-variant-numeric: tabular-nums;
 }
 
 .prop-table tr:last-child td {
@@ -1297,5 +1365,17 @@ footer {
     }
     .form-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Respect users who opt out of motion */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }
