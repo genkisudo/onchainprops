@@ -543,8 +543,11 @@ function setupSuggestForm() {
     const successCard = document.getElementById('suggest-success');
     if (!form) return;
 
+    let isSubmitting = false;
+
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
+        if (isSubmitting) return;
         errorMsg.classList.remove('is-visible');
 
         const name = form.querySelector('#sf-name').value.trim();
@@ -554,6 +557,7 @@ function setupSuggestForm() {
             return;
         }
 
+        isSubmitting = true;
         submitBtn.setAttribute('aria-busy', 'true');
         submitBtn.textContent = 'Submitting…';
 
@@ -578,6 +582,7 @@ function setupSuggestForm() {
             if (res.ok) {
                 form.style.display = 'none';
                 successCard.classList.add('is-visible');
+                successCard.focus();   // move focus off the now-hidden form for a11y
                 analytics.track('Firm Suggested', { 'firm name': name });
             } else {
                 throw new Error(`HTTP ${res.status}`);
@@ -592,6 +597,7 @@ function setupSuggestForm() {
                 'http status code': null,
             });
         } finally {
+            isSubmitting = false;
             submitBtn.removeAttribute('aria-busy');
             submitBtn.textContent = 'Submit Firm';
         }
