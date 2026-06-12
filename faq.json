@@ -50,12 +50,5 @@
     "answerHtml": [
       "B-booking means your orders are executed against a <strong>simulated environment</strong> that mirrors real market prices. The firm acts as the counterparty — taking the other side of every trade. Because most traders lose money, the firm retains those losses as revenue. The experience looks identical to live trading since prices replicate the real exchange, but no orders actually touch the market. B-booking is used for traders without a proven edge or sufficient trading history."
     ]
-  },
-  {
-    "question": "Why are some traders A-booked and some B-booked?",
-    "answerHtml": [
-      "Prop firms use a <strong>graduated booking model</strong> rather than a hard binary switch. Each trader receives a composite score based on their trading history and demonstrated edge. Traders with lower scores are fully B-booked (simulated), while those with higher scores are progressively routed to live markets — for example, a score of ~70 might route roughly 50% of orders live, while a score of 90+ means fully live execution.",
-      "This lets firms manage risk accurately: capturing losses from unprofitable traders through B-booking, while A-booking genuinely skilled traders where the firm earns fees instead of absorbing losses. All traders typically start on B-book until the algorithm has enough data to assess their edge."
-    ]
   }
 ]
