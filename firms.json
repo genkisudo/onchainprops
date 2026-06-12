@@ -47,15 +47,14 @@
       "name": "hyperpnl",
       "country": "Cayman Islands",
       "split": "80%",
-      "maxAccount": "Scaled",
+      "maxAccount": "$25k ($200k soon)",
       "website": "https://app.hyperpnl.com/trade",
       "chain": "Hyperliquid",
       "chainPhrase": "the Hyperliquid chain",
       "isAffiliate": false,
       "token": "No",
       "payoutSpeed": "Soon",
-      "rulesOnchain": "No",
-      "scaledCapital": "Yes"
+      "rulesOnchain": "No"
     },
     {
       "name": "Carrot Funding",
@@ -100,7 +99,7 @@
   "predictionMarketFirms": [
     {
       "name": "Funding Predicts",
-      "country": "TBC",
+      "country": "USA",
       "split": "Up to 80%",
       "maxAccount": "$100,000",
       "website": "https://fundingpredicts.com/",
