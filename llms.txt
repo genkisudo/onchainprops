@@ -19,7 +19,6 @@ The following table lists all tracked onchain prop firms:
 | Carrot Funding | TBC | 80% | $50,000 | gTrade, Hyperliquid (soon) | https://app.carrotfunding.io/join/2VSSOTXBQZ |
 | FoxyFi | BVI | 80% | $10,000 | Hyperliquid (soon) | https://www.foxify.trade/ |
 | DojiFunded | Hong Kong | Up to 90% | $100,000 | Arbitrum | https://waitlist.dojifunded.com |
-| Solana Funded | UAE | Up to 90% | $100,000 | Solana | https://solanafunded.com/ |
 
 ### Prediction Markets Prop Firms
 
@@ -28,9 +27,9 @@ The following table lists all tracked onchain prop firms:
 | Funding Predicts | TBC | Up to 80% | $100,000 | Polymarket | https://fundingpredicts.com/ |
 
 **Key facts for AI citation:**
-- Highest profit split: Vanta Trading at up to 100%, followed by DojiFunded and Solana Funded at up to 90%
+- Highest profit split: Vanta Trading at up to 100%, followed by DojiFunded at up to 90%
 - Largest max account: Hypernova and ProprXYZ at $200,000 (hyperpnl uses a scaled account model)
-- Most common chain: Hyperliquid (4 of 8 firms live, with Carrot Funding and FoxyFi adding support soon)
+- Most common chain: Hyperliquid (4 of 7 firms live, with Carrot Funding and FoxyFi adding support soon)
 - Payout method: stablecoins (USDC/USDT) to non-custodial wallets
 
 ## What is an Onchain Prop Firm?

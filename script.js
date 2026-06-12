@@ -85,8 +85,7 @@ const AppState = {
         { name: "hyperpnl", country: "Cayman Islands", split: "80%", maxAccount: "Scaled", website: "https://app.hyperpnl.com/trade", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: "Yes" },
         { name: "Carrot Funding", country: "TBC", split: "80%", maxAccount: "$50,000", website: "https://app.carrotfunding.io/join/2VSSOTXBQZ", chain: "gTrade, Hyperliquid (soon)", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
         { name: "FoxyFi", country: "BVI", split: "80%", maxAccount: "$10,000", website: "https://www.foxify.trade/", chain: "Hyperliquid (soon)", isAffiliate: false, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
-        { name: "DojiFunded", country: "Hong Kong", split: "Up to 90%", maxAccount: "$100,000", website: "https://waitlist.dojifunded.com", chain: "Arbitrum", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
-        { name: "Solana Funded", country: "UAE", split: "Up to 90%", maxAccount: "$100,000", website: "https://solanafunded.com/", chain: "Solana", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined }
+        { name: "DojiFunded", country: "Hong Kong", split: "Up to 90%", maxAccount: "$100,000", website: "https://waitlist.dojifunded.com", chain: "Arbitrum", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined }
     ],
     /** @type {PropFirm[]} */
     predictionMarketFirms: [

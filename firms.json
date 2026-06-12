@@ -95,19 +95,6 @@
       "token": "No",
       "payoutSpeed": "TBC",
       "rulesOnchain": "No"
-    },
-    {
-      "name": "Solana Funded",
-      "country": "UAE",
-      "split": "Up to 90%",
-      "maxAccount": "$100,000",
-      "website": "https://solanafunded.com/",
-      "chain": "Solana",
-      "chainPhrase": "the Solana blockchain",
-      "isAffiliate": false,
-      "token": "No",
-      "payoutSpeed": "TBC",
-      "rulesOnchain": "No"
     }
   ],
   "predictionMarketFirms": [
