@@ -26,7 +26,8 @@
       "isAffiliate": true,
       "token": "Yes",
       "payoutSpeed": "Soon",
-      "rulesOnchain": "No"
+      "rulesOnchain": "No",
+      "aiAgents": "Yes"
     },
     {
       "name": "Vanta Trading",
@@ -53,7 +54,8 @@
       "isAffiliate": false,
       "token": "No",
       "payoutSpeed": "Soon",
-      "rulesOnchain": "No"
+      "rulesOnchain": "No",
+      "scaledCapital": "Yes"
     },
     {
       "name": "Carrot Funding",

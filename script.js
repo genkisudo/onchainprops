@@ -79,18 +79,18 @@ const AppState = {
     // GEN:BEGIN firm-data
     /** @type {PropFirm[]} */
     propFirms: [
-        { name: "Hypernova", country: "UK", split: "80%", maxAccount: "$200,000", website: "https://hypernova.xyz/", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "Yes" },
-        { name: "ProprXYZ", country: "UAE", split: "80%", maxAccount: "$200,000", website: "https://app.propr.xyz/r/nCnJ5uZ9", chain: "Hyperliquid", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No" },
-        { name: "Vanta Trading", country: "Cayman Islands", split: "Up to 100%", maxAccount: "$100,000", website: "https://vantatrading.io/?ref=kamil", chain: "Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "Soon", rulesOnchain: "No" },
-        { name: "hyperpnl", country: "Cayman Islands", split: "80%", maxAccount: "Scaled", website: "https://app.hyperpnl.com/trade", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "No" },
-        { name: "Carrot Funding", country: "TBC", split: "80%", maxAccount: "$50,000", website: "https://app.carrotfunding.io/join/2VSSOTXBQZ", chain: "gTrade, Hyperliquid (soon)", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No" },
-        { name: "FoxyFi", country: "BVI", split: "80%", maxAccount: "$10,000", website: "https://www.foxify.trade/", chain: "Hyperliquid (soon)", isAffiliate: false, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No" },
-        { name: "DojiFunded", country: "Hong Kong", split: "Up to 90%", maxAccount: "$100,000", website: "https://waitlist.dojifunded.com", chain: "Arbitrum", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "No" },
-        { name: "Solana Funded", country: "UAE", split: "Up to 90%", maxAccount: "$100,000", website: "https://solanafunded.com/", chain: "Solana", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "No" }
+        { name: "Hypernova", country: "UK", split: "80%", maxAccount: "$200,000", website: "https://hypernova.xyz/", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "Yes", aiAgents: undefined, scaledCapital: undefined },
+        { name: "ProprXYZ", country: "UAE", split: "80%", maxAccount: "$200,000", website: "https://app.propr.xyz/r/nCnJ5uZ9", chain: "Hyperliquid", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: "Yes", scaledCapital: undefined },
+        { name: "Vanta Trading", country: "Cayman Islands", split: "Up to 100%", maxAccount: "$100,000", website: "https://vantatrading.io/?ref=kamil", chain: "Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
+        { name: "hyperpnl", country: "Cayman Islands", split: "80%", maxAccount: "Scaled", website: "https://app.hyperpnl.com/trade", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: "Yes" },
+        { name: "Carrot Funding", country: "TBC", split: "80%", maxAccount: "$50,000", website: "https://app.carrotfunding.io/join/2VSSOTXBQZ", chain: "gTrade, Hyperliquid (soon)", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
+        { name: "FoxyFi", country: "BVI", split: "80%", maxAccount: "$10,000", website: "https://www.foxify.trade/", chain: "Hyperliquid (soon)", isAffiliate: false, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
+        { name: "DojiFunded", country: "Hong Kong", split: "Up to 90%", maxAccount: "$100,000", website: "https://waitlist.dojifunded.com", chain: "Arbitrum", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
+        { name: "Solana Funded", country: "UAE", split: "Up to 90%", maxAccount: "$100,000", website: "https://solanafunded.com/", chain: "Solana", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined }
     ],
     /** @type {PropFirm[]} */
     predictionMarketFirms: [
-        { name: "Funding Predicts", country: "TBC", split: "Up to 80%", maxAccount: "$100,000", website: "https://fundingpredicts.com/", chain: "Polymarket", isAffiliate: false, token: "No", payoutSpeed: "Bi-weekly", rulesOnchain: "TBC" }
+        { name: "Funding Predicts", country: "TBC", split: "Up to 80%", maxAccount: "$100,000", website: "https://fundingpredicts.com/", chain: "Polymarket", isAffiliate: false, token: "No", payoutSpeed: "Bi-weekly", rulesOnchain: "TBC", aiAgents: undefined, scaledCapital: undefined }
     ],
     // GEN:END firm-data
     /** @type {string|null} */
@@ -298,6 +298,24 @@ const buildFirmRow = (firm, rank) => {
         trustChip.textContent = 'Rules onchain';
         trustChip.title = 'Evaluation rules are enforced by smart contracts — verifiable on the blockchain';
         nameLink.after(trustChip);
+    }
+
+    // Capability signal: firm supports trading by autonomous AI agents
+    if (firm.aiAgents === 'Yes') {
+        const aiChip = document.createElement('span');
+        aiChip.className = 'trust-chip trust-chip--ai';
+        aiChip.textContent = 'AI agents trading';
+        aiChip.title = 'Supports automated trading by AI agents';
+        nameLink.after(aiChip);
+    }
+
+    // Capability signal: account capital scales up as the trader performs
+    if (firm.scaledCapital === 'Yes') {
+        const scaleChip = document.createElement('span');
+        scaleChip.className = 'trust-chip trust-chip--capital';
+        scaleChip.textContent = 'Scaled capital';
+        scaleChip.title = 'Account size scales up as you hit profit targets';
+        nameLink.after(scaleChip);
     }
 
     const countryCell = document.createElement('td');
@@ -536,84 +554,6 @@ const setupEventDelegation = () => {
 };
 
 // -----------------------------------------
-// Suggest-a-Firm form
-// Replace YOUR_FORM_ID with a Formspree form ID from https://formspree.io/
-// -----------------------------------------
-const SUGGEST_FORM_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
-
-/**
- * Submits the suggest-a-firm form via fetch to Formspree and shows
- * a success card or error message in response.
- */
-function setupSuggestForm() {
-    const form = document.getElementById('suggest-form');
-    const submitBtn = document.getElementById('suggest-submit');
-    const errorMsg = document.getElementById('suggest-error');
-    const successCard = document.getElementById('suggest-success');
-    if (!form) return;
-
-    let isSubmitting = false;
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        if (isSubmitting) return;
-        errorMsg.classList.remove('is-visible');
-
-        const name = form.querySelector('#sf-name').value.trim();
-        const url  = form.querySelector('#sf-url').value.trim();
-        if (!name || !url) {
-            form.querySelector(!name ? '#sf-name' : '#sf-url').focus();
-            return;
-        }
-
-        isSubmitting = true;
-        submitBtn.setAttribute('aria-busy', 'true');
-        submitBtn.textContent = 'Submitting…';
-
-        const payload = {
-            firm_name:    name,
-            website:      url,
-            chain:        form.querySelector('#sf-chain').value.trim(),
-            profit_split: form.querySelector('#sf-split').value.trim(),
-            max_account:  form.querySelector('#sf-account').value.trim(),
-            has_token:    form.querySelector('#sf-token').value,
-            notes:        form.querySelector('#sf-notes').value.trim(),
-            contact:      form.querySelector('#sf-contact').value.trim(),
-        };
-
-        try {
-            const res = await fetch(SUGGEST_FORM_ENDPOINT, {
-                method: 'POST',
-                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload),
-            });
-
-            if (res.ok) {
-                form.style.display = 'none';
-                successCard.classList.add('is-visible');
-                successCard.focus();   // move focus off the now-hidden form for a11y
-                analytics.track('Firm Suggested', { 'firm name': name });
-            } else {
-                throw new Error(`HTTP ${res.status}`);
-            }
-        } catch (err) {
-            errorMsg.classList.add('is-visible');
-            analytics.track('Error Encountered', {
-                'error category': 'suggest form',
-                'error message': err?.message ?? 'Unknown',
-                'error context': 'suggest-a-firm submission',
-                'error code': null,
-                'http status code': null,
-            });
-        } finally {
-            isSubmitting = false;
-            submitBtn.removeAttribute('aria-busy');
-            submitBtn.textContent = 'Submit Firm';
-        }
-    });
-}
-
-// -----------------------------------------
 // Initialization
 // -----------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
@@ -630,7 +570,6 @@ document.addEventListener('DOMContentLoaded', () => {
         setupSectionObservers();
         setupMobileNav();
         setupEventDelegation();
-        setupSuggestForm();
     } catch (e) {
         console.error("App initialization failure:", e);
         analytics.track('Error Encountered', {

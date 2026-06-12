@@ -351,7 +351,6 @@
                     <li><a href="#firms">Prop Firms</a></li>
                     <li><a href="#resources">Resources</a></li>
                     <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#suggest">Suggest a Firm</a></li>
                 </ul>
             </nav>
             <a href="compare.html" class="btn btn-primary btn-nav" aria-label="Compare Firms">Compare Firms</a>
@@ -366,7 +365,6 @@
             <li><a href="#firms">Prop Firms</a></li>
             <li><a href="#resources">Resources</a></li>
             <li><a href="#faq">FAQ</a></li>
-            <li><a href="#suggest">Suggest a Firm</a></li>
         </ul>
         <a href="compare.html" class="mobile-nav-cta">Compare Firms →</a>
     </nav>
@@ -699,69 +697,6 @@
             </div>
         </section>
 
-        <!-- Suggest a Firm -->
-        <section class="pillar-section" id="suggest" aria-labelledby="suggest-heading">
-            <div class="container">
-                <div class="section-header">
-                    <span class="pill-badge">Community</span>
-                    <h2 id="suggest-heading">Know a firm <span class="accent-text">we're missing?</span></h2>
-                    <p>Submit an onchain prop firm and we'll review it for inclusion in the directory.</p>
-                </div>
-                <div class="suggest-wrap">
-                    <form id="suggest-form" class="suggest-form" novalidate aria-label="Suggest a prop firm">
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="sf-name" class="form-label">Firm Name <span class="req" aria-hidden="true">*</span></label>
-                                <input id="sf-name" name="firm_name" type="text" class="form-input" placeholder="e.g. HyperFund" required autocomplete="off">
-                            </div>
-                            <div class="form-group">
-                                <label for="sf-url" class="form-label">Website URL <span class="req" aria-hidden="true">*</span></label>
-                                <input id="sf-url" name="website" type="url" class="form-input" placeholder="https://..." required>
-                            </div>
-                            <div class="form-group">
-                                <label for="sf-chain" class="form-label">Chain / Protocol</label>
-                                <input id="sf-chain" name="chain" type="text" class="form-input" placeholder="e.g. Hyperliquid, Solana">
-                            </div>
-                            <div class="form-group">
-                                <label for="sf-split" class="form-label">Profit Split</label>
-                                <input id="sf-split" name="profit_split" type="text" class="form-input" placeholder="e.g. 80% or Up to 90%">
-                            </div>
-                            <div class="form-group">
-                                <label for="sf-account" class="form-label">Max Account Size</label>
-                                <input id="sf-account" name="max_account" type="text" class="form-input" placeholder="e.g. $100,000">
-                            </div>
-                            <div class="form-group">
-                                <label for="sf-token" class="form-label">Has Firm Token?</label>
-                                <select id="sf-token" name="has_token" class="form-select">
-                                    <option value="">— unknown —</option>
-                                    <option value="yes">Yes</option>
-                                    <option value="no">No</option>
-                                </select>
-                            </div>
-                            <div class="form-group full">
-                                <label for="sf-notes" class="form-label">Additional Notes</label>
-                                <textarea id="sf-notes" name="notes" class="form-textarea" placeholder="Evaluation structure, unique features, payout history, referral program…"></textarea>
-                            </div>
-                            <div class="form-group full">
-                                <label for="sf-contact" class="form-label">Your Contact <span class="form-hint" style="font-size:inherit;text-transform:none;font-weight:400;">(optional)</span></label>
-                                <input id="sf-contact" name="contact" type="text" class="form-input" placeholder="email or X / Twitter handle">
-                                <span class="form-hint">Only used if we need to follow up with you.</span>
-                            </div>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" class="btn btn-primary" id="suggest-submit">Submit Firm</button>
-                            <p class="form-note">We review all submissions and aim to add verified firms within a week.</p>
-                        </div>
-                        <p class="form-error-msg" id="suggest-error" role="alert">Something went wrong — please try again or <a href="mailto:usmanov.kamil.pt@gmail.com">email us directly</a>.</p>
-                    </form>
-                    <div class="suggest-success" id="suggest-success" role="status" aria-live="polite" aria-atomic="true" tabindex="-1">
-                        <div class="success-icon" aria-hidden="true">✓</div>
-                        <h3>Thanks for the tip!</h3>
-                        <p>We'll review the firm and add it to the directory if it checks out. Stay tuned.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer>
