@@ -18,7 +18,7 @@ The following table lists all tracked onchain prop firms:
 | hyperpnl | Cayman Islands | 80% | $25k ($200k soon) | Hyperliquid | https://app.hyperpnl.com/trade |
 | Carrot Funding | TBC | 80% | $50,000 | gTrade, Hyperliquid (soon) | https://app.carrotfunding.io/join/2VSSOTXBQZ |
 | FoxyFi | BVI | 80% | $10,000 | Hyperliquid (soon) | https://www.foxify.trade/ |
-| DojiFunded | Hong Kong | Up to 90% | $100,000 | Arbitrum | https://waitlist.dojifunded.com |
+| DojiFunded | Hong Kong | Up to 90% | $100,000 | Arbitrum | https://app.dojifunded.com/?ref=05E1DA3A |
 
 ### Prediction Markets Prop Firms
 
