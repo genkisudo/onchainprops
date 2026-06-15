@@ -79,7 +79,7 @@ const AppState = {
     // GEN:BEGIN firm-data
     /** @type {PropFirm[]} */
     propFirms: [
-        { name: "Hypernova", country: "UK", split: "80%", maxAccount: "$200,000", website: "https://hypernova.xyz/", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "Yes", aiAgents: undefined, scaledCapital: undefined },
+        { name: "Hypernova", country: "Cayman Islands", split: "80%", maxAccount: "$200,000", website: "https://hypernova.xyz/", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "Yes", aiAgents: undefined, scaledCapital: undefined },
         { name: "ProprXYZ", country: "UAE", split: "80%", maxAccount: "$200,000", website: "https://app.propr.xyz/r/nCnJ5uZ9", chain: "Hyperliquid", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: "Yes", scaledCapital: undefined },
         { name: "Vanta Trading", country: "Cayman Islands", split: "Up to 100%", maxAccount: "$100,000", website: "https://vantatrading.io/?ref=kamil", chain: "Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
         { name: "hyperpnl", country: "Cayman Islands", split: "80%", maxAccount: "$25k ($200k soon)", website: "https://app.hyperpnl.com/trade", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
