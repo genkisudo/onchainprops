@@ -210,6 +210,9 @@
                     <p>Every A-booked trade, including entries, exits, and liquidations, is recorded on Hyperliquid's blockchain. Traders can independently verify A-booked trade history onchain. Propr's aggregate payout history will be published onchain.</p>
                     <p>B-booked trades (internal book entries) are not routed to Hyperliquid and are therefore not visible onchain. The P&amp;L outcome is identical regardless of execution method. Every trade on your Propr dashboard is labeled as A-booked or B-booked, so you always have full visibility into how each trade was executed.</p>
 
+                    <h2>ProprXYZ Dune Analytics Dashboard</h2>
+                    <p>We independently track ProprXYZ's financials on a public <a href="https://dune.com/genkisudo123/propr-prop" target="_blank" rel="noopener noreferrer">Dune Analytics dashboard</a>. The dashboard monitors revenue data from Propr's API and tracks payout data for traders and referrals from onchain wallets — giving anyone an independent, verifiable view of how the firm is performing.</p>
+
                     <h2>How ProprXYZ Decides Who Gets A-Booked: The Open-Source Algorithm</h2>
                     <p>The A/B booking decision is made by an <strong>open-source algorithm</strong> published under <code>XBorgLabs/ab-booking</code> on GitHub (<code>@xborglabs/ab-booking</code> on npm). The source code is public — anyone can inspect exactly how Propr classifies traders.</p>
                     <p>Every trader starts on B-book. The algorithm runs continuously against your accumulated trade history and produces a <strong>composite score from 0 to 100</strong>. Routing is graduated — there is no hard switch. A score of ~70 routes roughly 50% of your order flow live. A score of 90 or above means 100% live A-book routing.</p>
