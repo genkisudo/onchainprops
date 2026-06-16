@@ -486,6 +486,19 @@ const setupMobileNav = () => {
     });
 };
 
+/**
+ * Resolves which AppState firms array a table row belongs to, based on its
+ * containing tbody — so click tracking works for both the main prop firms
+ * table and the prediction markets table.
+ * @param {Element} row
+ * @returns {PropFirm[] | null}
+ */
+const firmsArrayForRow = (row) => {
+    if (row.closest('#firm-table-body')) return AppState.propFirms;
+    if (row.closest('#prediction-markets-table-body')) return AppState.predictionMarketFirms;
+    return null;
+};
+
 // -----------------------------------------
 // 7. Event Delegation — smooth scroll + analytics
 // -----------------------------------------
@@ -507,16 +520,14 @@ const setupEventDelegation = () => {
                 const firmName = row.dataset.firmName ?? '';
                 const firmRank = parseInt(row.dataset.firmRank ?? '0', 10);
 
-                if (row.closest('#firm-table-body')) {
-                    const firm = AppState.propFirms.find(f => f.name === firmName);
-                    if (firm) {
-                        analytics.track('Firm Selected', {
-                            'firm id': toFirmId(firm.name),
-                            'firm name': firm.name,
-                            'selection source': 'row_click',
-                            'list position': firmRank
-                        });
-                    }
+                const firm = firmsArrayForRow(row)?.find(f => f.name === firmName);
+                if (firm) {
+                    analytics.track('Firm Selected', {
+                        'firm id': toFirmId(firm.name),
+                        'firm name': firm.name,
+                        'selection source': 'row_click',
+                        'list position': firmRank
+                    });
                 }
 
                 if (event.ctrlKey || event.metaKey) {
@@ -555,12 +566,13 @@ const setupEventDelegation = () => {
             return;
         }
 
-        // Firm Selected — links inside the firms table (firm page or name click)
-        if (anchor && anchor.href && anchor.closest('#firm-table-body')) {
-            const row = anchor.closest('tr');
-            const firmName = row?.dataset.firmName ?? '';
-            const firmRank = parseInt(row?.dataset.firmRank ?? '0', 10);
-            const firm = AppState.propFirms.find(f => f.name === firmName);
+        // Firm Selected — links inside either firm table (firm page or name click)
+        const anchorRow = anchor?.closest('tr[data-firm-url]');
+        const anchorFirms = anchorRow ? firmsArrayForRow(anchorRow) : null;
+        if (anchor && anchor.href && anchorFirms) {
+            const firmName = anchorRow.dataset.firmName ?? '';
+            const firmRank = parseInt(anchorRow.dataset.firmRank ?? '0', 10);
+            const firm = anchorFirms.find(f => f.name === firmName);
 
             if (firm) {
                 const firmId = toFirmId(firm.name);
