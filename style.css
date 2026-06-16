@@ -102,7 +102,7 @@ h1, h2, h3, h4 {
 /* Section header — left aligned, quiet */
 .section-header {
     text-align: left;
-    margin-bottom: 2.75rem;
+    margin-bottom: 1.75rem;
     max-width: 720px;
 }
 
@@ -162,7 +162,7 @@ h1, h2, h3, h4 {
 
 /* Layout */
 .pillar-section {
-    padding: clamp(3rem, 6vw, 5.5rem) 0;
+    padding: clamp(2.2rem, 4vw, 3.5rem) 0;
     border-top: 1px solid var(--border-color);
 }
 
@@ -388,9 +388,11 @@ h1, h2, h3, h4 {
     }
 }
 
-/* Hero — left aligned, calm */
+/* Hero — left aligned, calm.
+   Compact vertical rhythm so the first firm row peeks above the fold
+   on most viewports — reduces the step-1→2 drop-off in Amplitude. */
 .hero {
-    padding: clamp(3.5rem, 8vw, 6.5rem) 0 clamp(3rem, 6vw, 5rem);
+    padding: clamp(2.2rem, 5vw, 3.5rem) 0 clamp(1.4rem, 3vw, 2rem);
     text-align: left;
     position: relative;
 }
@@ -470,7 +472,7 @@ h1, h2, h3, h4 {
 .hero .subtitle {
     font-size: clamp(1.02rem, 2vw, 1.2rem);
     color: var(--text-secondary);
-    margin-bottom: 2.2rem;
+    margin-bottom: 1.4rem;
     font-weight: 400;
     max-width: 580px;
 }
@@ -1036,7 +1038,7 @@ footer {
 /* Responsive */
 @media (max-width: 768px) {
     .section-header {
-        margin-bottom: 2rem;
+        margin-bottom: 1.25rem;
     }
     .article-card {
         padding: 1.5rem;

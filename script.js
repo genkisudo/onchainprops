@@ -466,7 +466,34 @@ const setupFirmCardObservers = () => {
             });
             cardObserver.unobserve(row);
         });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.25 });
+
+    rows.forEach(row => cardObserver.observe(row));
+};
+
+/**
+ * Same card-viewed tracking for the prediction-markets table.
+ * Called after renderPredictionMarketsTable.
+ */
+const setupPredictionCardObservers = () => {
+    const rows = document.querySelectorAll('#prediction-markets-table-body tr');
+    if (!rows.length) return;
+
+    const cardObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const row = entry.target;
+            const firmName = row.dataset.firmName ?? '';
+            const firmRank = parseInt(row.dataset.firmRank ?? '0', 10);
+            analytics.track('Firm Card Viewed', {
+                'firm id': toFirmId(firmName),
+                'firm name': firmName,
+                'firm rank': firmRank,
+                'list position': firmRank
+            });
+            cardObserver.unobserve(row);
+        });
+    }, { threshold: 0.25 });
 
     rows.forEach(row => cardObserver.observe(row));
 };
@@ -628,6 +655,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
         renderPropFirmsTable();
         renderPredictionMarketsTable();
+        setupPredictionCardObservers();
         setupSectionObservers();
         setupMobileNav();
         setupEventDelegation();
