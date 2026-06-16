@@ -7,6 +7,14 @@
  * which sets window.amplitude before this script runs.
  */
 
+// Collapse /index.html to / before Amplitude initializes below, so
+// onchainprops.xyz/ and onchainprops.xyz/index.html aren't tracked as
+// separate pages. Runs here (not an inline <script> in <head>) because
+// the page's CSP script-src is locked to 'self' with no 'unsafe-inline'.
+if (location.pathname.endsWith('/index.html')) {
+    history.replaceState(null, '', location.pathname.slice(0, -10) + location.search + location.hash);
+}
+
 // -----------------------------------------
 // 1. Reactive Architecture (PubSub)
 // -----------------------------------------
@@ -279,6 +287,10 @@ const buildFirmRow = (firm, rank) => {
 
     const firmSlug = firm.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
     const firmPageUrl = `firms/${firmSlug}.html`;
+    // The whole row hover-highlights like a card (see .prop-table tbody tr:hover),
+    // so make the rest of it navigate too — otherwise clicks on the split/account/
+    // token cells or trust chips land on plain text and register as dead clicks.
+    row.dataset.firmUrl = firmPageUrl;
 
     const nameCell = document.createElement('td');
     const nameLink = document.createElement('a');
@@ -484,6 +496,38 @@ const setupEventDelegation = () => {
         /** @type {HTMLAnchorElement|null} */
         const anchor = event.target.closest('a');
 
+        // Row-click fallback for the firm tables: the row already hover-highlights
+        // like a card, so clicking anywhere in it (not just the name/View link)
+        // should navigate too, instead of registering as a dead click.
+        if (!anchor) {
+            const row = event.target.closest('tr[data-firm-url]');
+            const hasSelection = (window.getSelection?.()?.toString() ?? '') !== '';
+            if (row && !hasSelection) {
+                const firmUrl = row.dataset.firmUrl;
+                const firmName = row.dataset.firmName ?? '';
+                const firmRank = parseInt(row.dataset.firmRank ?? '0', 10);
+
+                if (row.closest('#firm-table-body')) {
+                    const firm = AppState.propFirms.find(f => f.name === firmName);
+                    if (firm) {
+                        analytics.track('Firm Selected', {
+                            'firm id': toFirmId(firm.name),
+                            'firm name': firm.name,
+                            'selection source': 'row_click',
+                            'list position': firmRank
+                        });
+                    }
+                }
+
+                if (event.ctrlKey || event.metaKey) {
+                    window.open(firmUrl, '_blank', 'noopener');
+                } else {
+                    window.location.href = firmUrl;
+                }
+            }
+            return;
+        }
+
         // Smooth scroll for in-page hash links
         if (anchor && anchor.getAttribute('href')?.startsWith('#')) {
             const hash = anchor.getAttribute('href');
@@ -558,7 +602,13 @@ const setupEventDelegation = () => {
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize Amplitude — must run before any tracking calls
     analytics.initAll('488e252410ff9dc7ba7cfd5efac999f1', {
-        "analytics": { "autocapture": true },
+        "analytics": {
+            // Hash-only navigation (#firms, #resources, #faq) scrolls within
+            // this single page — it isn't a real route change, so don't let
+            // it fire a duplicate Page View. Other autocapture categories
+            // (attribution, sessions, clicks, etc.) stay on by default.
+            "autocapture": { "pageViews": { "trackHistoryChanges": "pathOnly" } }
+        },
         "sessionReplay": { "sampleRate": 1 }
     });
 
