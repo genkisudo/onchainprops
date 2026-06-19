@@ -32,6 +32,34 @@
       "aiAgents": "Yes"
     },
     {
+      "name": "hyperpnl",
+      "country": "Cayman Islands",
+      "split": "80%",
+      "maxAccount": "$25k ($200k soon)",
+      "profitTarget": "10%",
+      "website": "https://app.hyperpnl.com/trade",
+      "chain": "Hyperliquid",
+      "chainPhrase": "the Hyperliquid chain",
+      "isAffiliate": false,
+      "token": "No",
+      "payoutSpeed": "Soon",
+      "rulesOnchain": "No"
+    },
+    {
+      "name": "DojiFunded",
+      "country": "Hong Kong",
+      "split": "Up to 90%",
+      "maxAccount": "$100,000",
+      "profitTarget": "10%",
+      "website": "https://app.dojifunded.com/?ref=05E1DA3A",
+      "chain": "Arbitrum",
+      "chainPhrase": "the Arbitrum chain",
+      "isAffiliate": false,
+      "token": "No",
+      "payoutSpeed": "TBC",
+      "rulesOnchain": "No"
+    },
+    {
       "name": "Vanta Trading",
       "country": "Cayman Islands",
       "split": "Up to 100%",
@@ -42,20 +70,6 @@
       "chain": "Bittensor / Hyperliquid",
       "chainPhrase": "Bittensor Subnet 8 (Hyperliquid-native optional)",
       "isAffiliate": true,
-      "token": "No",
-      "payoutSpeed": "Soon",
-      "rulesOnchain": "No"
-    },
-    {
-      "name": "hyperpnl",
-      "country": "Cayman Islands",
-      "split": "80%",
-      "maxAccount": "$25k ($200k soon)",
-      "profitTarget": "10%",
-      "website": "https://app.hyperpnl.com/trade",
-      "chain": "Hyperliquid",
-      "chainPhrase": "the Hyperliquid chain",
-      "isAffiliate": false,
       "token": "No",
       "payoutSpeed": "Soon",
       "rulesOnchain": "No"
@@ -86,20 +100,6 @@
       "isAffiliate": false,
       "token": "Yes",
       "payoutSpeed": "Soon",
-      "rulesOnchain": "No"
-    },
-    {
-      "name": "DojiFunded",
-      "country": "Hong Kong",
-      "split": "Up to 90%",
-      "maxAccount": "$100,000",
-      "profitTarget": "10%",
-      "website": "https://app.dojifunded.com/?ref=05E1DA3A",
-      "chain": "Arbitrum",
-      "chainPhrase": "the Arbitrum chain",
-      "isAffiliate": false,
-      "token": "No",
-      "payoutSpeed": "TBC",
       "rulesOnchain": "No"
     }
   ],
