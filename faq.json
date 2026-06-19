@@ -22,7 +22,8 @@
   {
     "question": "How do crypto payouts work?",
     "answerHtml": [
-      "Crypto payouts are usually processed directly to your non-custodial wallet via stablecoins (like USDC or USDT) on networks such as Arbitrum, Optimism, or Solana. This offers fast, transparent settlement without traditional bank delays or arbitrary holds — and because each payout is a public onchain transaction, you and anyone else can verify it happened."
+      "Most onchain prop firms pay directly to your non-custodial wallet via stablecoins (like USDC or USDT) on networks such as Arbitrum, Optimism, or Solana — offering fast, transparent settlement without traditional bank delays, and a public onchain record you can verify yourself.",
+      "A minority of firms pay differently: Vanta Trading, for example, processes payouts in <strong>USD via Stripe</strong> rather than stablecoins. Always check a firm's payout method before signing up if self-custody settlement matters to you."
     ]
   },
   {

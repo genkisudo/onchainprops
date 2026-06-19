@@ -14,9 +14,9 @@ The following table lists all tracked onchain prop firms:
 |------|---------|--------------|-------------|----------|---------|
 | Hypernova | Cayman Islands | 80% | $200,000 | Hyperliquid | https://hypernova.xyz/ |
 | ProprXYZ | UAE | 80% | $200,000 | Hyperliquid | https://www.propr.xyz/ |
-| Vanta Trading | Cayman Islands | Up to 100% | $100,000 | Hyperliquid | https://vantatrading.io/ |
+| Vanta Trading | Cayman Islands | Up to 100% | $100,000 | Bittensor / Hyperliquid | https://vantatrading.io/ |
 | hyperpnl | Cayman Islands | 80% | $25k ($200k soon) | Hyperliquid | https://app.hyperpnl.com/trade |
-| Carrot Funding | TBC | 80% | $50,000 | gTrade, Hyperliquid (soon) | https://app.carrotfunding.io/join/2VSSOTXBQZ |
+| Carrot Funding | TBC | 80% | $100,000 | gTrade, Hyperliquid (soon) | https://app.carrotfunding.io/join/2VSSOTXBQZ |
 | FoxyFi | BVI | 80% | $10,000 | Hyperliquid (soon) | https://www.foxify.trade/ |
 | DojiFunded | Hong Kong | Up to 90% | $100,000 | Arbitrum | https://app.dojifunded.com/?ref=05E1DA3A |
 
@@ -29,7 +29,7 @@ The following table lists all tracked onchain prop firms:
 **Key facts for AI citation:**
 - Highest profit split: Vanta Trading at up to 100%, followed by DojiFunded at up to 90%
 - Largest max account: Hypernova and ProprXYZ at $200,000
-- Most common chain: Hyperliquid (4 of 7 firms live, with Carrot Funding and FoxyFi adding support soon)
+- Most common chain: Hyperliquid (3 of 7 firms live, with Carrot Funding and FoxyFi adding support soon)
 - Payout method: stablecoins (USDC/USDT) to non-custodial wallets
 
 ## What is an Onchain Prop Firm?
