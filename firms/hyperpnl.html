@@ -4,17 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hyperpnl — Onchain Prop Firm Review | OnchainProps</title>
+    <title>HyperPNL Review 2026 — Evaluation Rules, Payouts & Drawdown | OnchainProps</title>
     <meta name="description"
-        content="hyperpnl review: 80% profit split on Hyperliquid. Scaled account sizes.">
+        content="HyperPNL review: 80% profit split on Hyperliquid, 9% static max drawdown, instant onchain payouts. Full breakdown of Phase 1 & 2 evaluation rules, daily drawdown, and profitable-day requirements.">
     <link rel="canonical" href="https://onchainprops.xyz/firms/hyperpnl">
 
     <meta name="robots" content="index, follow">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://onchainprops.xyz/firms/hyperpnl">
-    <meta property="og:title" content="hyperpnl — Onchain Prop Firm Review | OnchainProps">
+    <meta property="og:title" content="HyperPNL Review 2026 — Evaluation Rules, Payouts & Drawdown | OnchainProps">
     <meta property="og:description"
-        content="hyperpnl review: 80% profit split on Hyperliquid.">
+        content="HyperPNL review: 80% profit split on Hyperliquid, 9% static max drawdown, instant onchain payouts. Full breakdown of Phase 1 & 2 evaluation rules.">
     <meta property="og:image" content="https://onchainprops.xyz/og-image.png">
 
     <meta http-equiv="Content-Security-Policy" content="
@@ -46,6 +46,46 @@
         rel="stylesheet">
 
     <link rel="stylesheet" href="../style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does the daily drawdown work on HyperPNL?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The 5% daily drawdown limit resets each day at 00:00 UTC and is calculated from your equity at that time. If your equity grew during the day, the next day's floor moves up with it. The limit does not change intraday — only at the daily reset."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many profitable days do I need to pass the HyperPNL challenge?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Phase 1 requires 2 profitable days; Phase 2 requires 3. Each profitable day must show at least 0.5% PnL (realized + unrealized) of the initial balance at some point during that calendar day. Unrealized profits that are not closed do not count toward a different day."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do HyperPNL payouts work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "HyperPNL's documentation states that once your funded account is at least 1% in profit and within all drawdown limits, the system processes the payout automatically with no manual review step. We're building onchain analytics to independently verify this and will post our findings soon."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does HyperPNL have a consistency rule?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. HyperPNL explicitly states there are no consistency rules and no maximum risk per trade. Only the published profit targets, drawdown limits, and minimum profitable day requirements apply."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 
 <body>
@@ -83,8 +123,8 @@
         <section class="hero container">
             <div class="hero-content">
                 <a href="../index.html#firms" class="back-link">← Back to Directory</a>
-                <h1>hyperpnl</h1>
-                <p class="subtitle">Onchain prop firm on Hyperliquid with 80% profit split.</p>
+                <h1>HyperPNL</h1>
+                <p class="subtitle">Onchain prop firm on Hyperliquid — 80% profit split, 9% max drawdown, and a transparent rule-based payout model.</p>
             </div>
         </section>
 
@@ -92,16 +132,63 @@
             <div class="firm-detail">
                 <div class="firm-meta">
                     <span class="firm-meta-item">Split: <strong>80%</strong></span>
-                    <span class="firm-meta-item">Max Account: <strong>Scaled</strong></span>
+                    <span class="firm-meta-item">Max Account: <strong>$25k ($200k soon)</strong></span>
                     <span class="firm-meta-item">Chain: <strong>Hyperliquid</strong></span>
                     <span class="firm-meta-item">Token: <strong>No</strong></span>
                 </div>
                 <div class="firm-detail-content">
-                    <p>hyperpnl is an onchain prop firm operating on Hyperliquid with an 80% profit split. Account sizes follow a scaled model rather than a fixed cap.</p>
-                    <p>Details on account types, evaluation rules, and payout structure coming soon.</p>
+                    <p>HyperPNL is an onchain prop firm built on Hyperliquid. Traders pass a two-phase evaluation to earn a funded account and keep 80% of profits. Account sizes scale based on performance rather than being fixed at a hard cap.</p>
+                    <p>All rules are published and rule-based — no discretionary conditions, no hidden requirements. If a rule isn't written, it isn't enforced.</p>
+
+                    <h2>Evaluation Rules</h2>
+                    <p>The evaluation is split into two phases. Both balance and equity are tracked — a breach of any limit on either ends the challenge automatically.</p>
+
+                    <h3>Profit Target</h3>
+                    <p>Phase 1 requires a <strong>10% profit target</strong>; Phase 2 requires <strong>5%</strong>. When equity hits the target, all open positions are closed automatically and you advance to the next phase — no manual action needed.</p>
+
+                    <h3>Max Drawdown — 9% (Static)</h3>
+                    <p>The overall loss limit is a <strong>9% static drawdown</strong> from the initial account balance. This applies to both balance and equity at all times and does not reset or trail upward.</p>
+
+                    <h3>Max Daily Drawdown — 5% (Dynamic)</h3>
+                    <p>The daily drawdown limit is <strong>5%</strong> and recalculates each day at <strong>00:00 UTC</strong> based on your equity at that moment. This means a profitable day raises the next day's floor — the limit scales with your account as you grow.</p>
+
+                    <h3>Minimum Profitable Days</h3>
+                    <p>Phase 1 requires at least <strong>2 profitable days</strong>; Phase 2 requires <strong>3 profitable days</strong>. A day counts as profitable when your total PnL (realized + unrealized) reaches at least <strong>0.5% of the initial account balance</strong> at any point during that day. Unrealized PnL counts in real time toward the current day's total — but if left open at day end, it does not retroactively qualify a previous day; it carries into the next day's tracking instead. Realized PnL is credited on the day the trade is closed, regardless of when it was opened.</p>
+
+                    <h3>Phase Duration — 30 Days</h3>
+                    <p>Each evaluation phase must be completed within <strong>30 days</strong>. There is no time limit once you become a funded trader.</p>
+
+                    <h3>What's Not Enforced</h3>
+                    <p>HyperPNL keeps the ruleset minimal. There are <strong>no consistency rules</strong>, <strong>no maximum risk per trade</strong>, and no hidden or discretionary conditions. Multiple accounts and copy trading are not allowed — those are the only restrictions beyond the drawdown and profit target rules.</p>
+
+                    <h2>Payouts</h2>
+                    <p>Funded traders keep <strong>80%</strong> of profits. To request a payout, your account must be at least <strong>1% in profit</strong> with all drawdown limits intact. According to HyperPNL's documentation, payouts are processed automatically by the system with no manual reviews or approval queues, following transparent rule-based logic.</p>
+                    <p><em>We're currently building onchain analytics to independently verify HyperPNL's payout activity — we'll post our findings here soon.</em></p>
+
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h3>How does the daily drawdown work on HyperPNL?</h3>
+                        <p>The 5% daily drawdown limit resets each day at 00:00 UTC and is calculated from your equity at that time. If your equity grew during the day, the next day's floor moves up with it. The limit does not change intraday — only at the daily reset.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>How many profitable days do I need to pass the HyperPNL challenge?</h3>
+                        <p>Phase 1 requires 2 profitable days; Phase 2 requires 3. Each profitable day must show at least 0.5% PnL (realized + unrealized) of the initial balance at some point during that calendar day. Unrealized profits that are not closed do not count toward a different day.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>How do HyperPNL payouts work?</h3>
+                        <p>HyperPNL's documentation states that once your funded account is at least 1% in profit and within all drawdown limits, the system processes the payout automatically with no manual review step. We're building onchain analytics to independently verify this and will post our findings soon.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>Does HyperPNL have a consistency rule?</h3>
+                        <p>No. HyperPNL explicitly states there are no consistency rules and no maximum risk per trade. Only the published profit targets, drawdown limits, and minimum profitable day requirements apply.</p>
+                    </div>
                 </div>
                 <a href="https://hyperpnl.gitbook.io/docs" class="btn btn-primary" target="_blank"
-                    rel="noopener noreferrer">Visit hyperpnl ↗</a>
+                    rel="noopener noreferrer">Visit HyperPNL ↗</a>
             </div>
         </section>
     </main>
