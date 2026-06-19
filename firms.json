@@ -100,8 +100,8 @@
     {
       "name": "Funding Predicts",
       "country": "USA",
-      "split": "Up to 80%",
-      "maxAccount": "$100,000",
+      "split": "Up to 90%",
+      "maxAccount": "$150,000",
       "website": "https://fundingpredicts.com/",
       "chain": "Polymarket",
       "chainPhrase": "Polymarket",

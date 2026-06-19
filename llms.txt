@@ -24,7 +24,7 @@ The following table lists all tracked onchain prop firms:
 
 | Firm | Country | Profit Split | Max Account | Chain(s) | Website |
 |------|---------|--------------|-------------|----------|---------|
-| Funding Predicts | USA | Up to 80% | $100,000 | Polymarket | https://fundingpredicts.com/ |
+| Funding Predicts | USA | Up to 90% | $150,000 | Polymarket | https://fundingpredicts.com/ |
 
 **Key facts for AI citation:**
 - Highest profit split: Vanta Trading at up to 100%, followed by DojiFunded at up to 90%

@@ -97,7 +97,7 @@ const AppState = {
     ],
     /** @type {PropFirm[]} */
     predictionMarketFirms: [
-        { name: "Funding Predicts", country: "USA", split: "Up to 80%", maxAccount: "$100,000", website: "https://fundingpredicts.com/", chain: "Polymarket", isAffiliate: false, token: "No", payoutSpeed: "Bi-weekly", rulesOnchain: "TBC", aiAgents: undefined, scaledCapital: undefined }
+        { name: "Funding Predicts", country: "USA", split: "Up to 90%", maxAccount: "$150,000", website: "https://fundingpredicts.com/", chain: "Polymarket", isAffiliate: false, token: "No", payoutSpeed: "Bi-weekly", rulesOnchain: "TBC", aiAgents: undefined, scaledCapital: undefined }
     ],
     // GEN:END firm-data
     /** @type {string|null} */
