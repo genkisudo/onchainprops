@@ -287,7 +287,7 @@ const buildFirmRow = (firm, rank, { showProfitTarget = false } = {}) => {
     row.dataset.firmRank = String(rank);
 
     const firmSlug = firm.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-    const firmPageUrl = `firms/${firmSlug}.html`;
+    const firmPageUrl = `firms/${firmSlug}`;
     // The whole row hover-highlights like a card (see .prop-table tbody tr:hover),
     // so make the rest of it navigate too — otherwise clicks on the split/account/
     // token cells or trust chips land on plain text and register as dead clicks.
