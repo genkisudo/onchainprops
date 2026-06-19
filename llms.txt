@@ -13,7 +13,7 @@ The following table lists all tracked onchain prop firms:
 | Firm | Country | Profit Split | Max Account | Chain(s) | Website |
 |------|---------|--------------|-------------|----------|---------|
 | Hypernova | Cayman Islands | 80% | $200,000 | Hyperliquid | https://hypernova.xyz/ |
-| ProprXYZ | UAE | 80% | $200,000 | Hyperliquid | https://www.propr.xyz/ |
+| ProprXYZ | BVI | 80% | $200,000 | Hyperliquid | https://www.propr.xyz/ |
 | hyperpnl | Cayman Islands | 80% | $25k ($200k soon) | Hyperliquid | https://app.hyperpnl.com/trade |
 | DojiFunded | Hong Kong | Up to 90% | $100,000 | Arbitrum | https://app.dojifunded.com/?ref=05E1DA3A |
 | Vanta Trading | Cayman Islands | Up to 100% | $100,000 | Bittensor / Hyperliquid | https://vantatrading.io/ |
