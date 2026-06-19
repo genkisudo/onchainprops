@@ -87,17 +87,17 @@ const AppState = {
     // GEN:BEGIN firm-data
     /** @type {PropFirm[]} */
     propFirms: [
-        { name: "Hypernova", country: "Cayman Islands", split: "80%", maxAccount: "$200,000", website: "https://hypernova.xyz/", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "Yes", aiAgents: undefined, scaledCapital: undefined },
-        { name: "ProprXYZ", country: "UAE", split: "80%", maxAccount: "$200,000", website: "https://app.propr.xyz/r/nCnJ5uZ9", chain: "Hyperliquid", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: "Yes", scaledCapital: undefined },
-        { name: "Vanta Trading", country: "Cayman Islands", split: "Up to 100%", maxAccount: "$100,000", website: "https://vantatrading.io/?ref=kamil", chain: "Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
-        { name: "hyperpnl", country: "Cayman Islands", split: "80%", maxAccount: "$25k ($200k soon)", website: "https://app.hyperpnl.com/trade", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
-        { name: "Carrot Funding", country: "TBC", split: "80%", maxAccount: "$50,000", website: "https://app.carrotfunding.io/join/2VSSOTXBQZ", chain: "gTrade, Hyperliquid (soon)", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
-        { name: "FoxyFi", country: "BVI", split: "80%", maxAccount: "$10,000", website: "https://www.foxify.trade/", chain: "Hyperliquid (soon)", isAffiliate: false, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
-        { name: "DojiFunded", country: "Hong Kong", split: "Up to 90%", maxAccount: "$100,000", website: "https://app.dojifunded.com/?ref=05E1DA3A", chain: "Arbitrum", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined }
+        { name: "Hypernova", country: "Cayman Islands", split: "80%", maxAccount: "$200,000", profitTarget: "10%", website: "https://hypernova.xyz/", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "Yes", aiAgents: undefined, scaledCapital: undefined },
+        { name: "ProprXYZ", country: "UAE", split: "80%", maxAccount: "$200,000", profitTarget: "10%", website: "https://app.propr.xyz/r/nCnJ5uZ9", chain: "Hyperliquid", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: "Yes", scaledCapital: undefined },
+        { name: "Vanta Trading", country: "Cayman Islands", split: "Up to 100%", maxAccount: "$100,000", profitTarget: "10%", website: "https://vantatrading.io/?ref=kamil", chain: "Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
+        { name: "hyperpnl", country: "Cayman Islands", split: "80%", maxAccount: "$25k ($200k soon)", profitTarget: "10%", website: "https://app.hyperpnl.com/trade", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
+        { name: "Carrot Funding", country: "TBC", split: "80%", maxAccount: "$50,000", profitTarget: "10%", website: "https://app.carrotfunding.io/join/2VSSOTXBQZ", chain: "gTrade, Hyperliquid (soon)", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
+        { name: "FoxyFi", country: "BVI", split: "80%", maxAccount: "$10,000", profitTarget: "TBC", website: "https://www.foxify.trade/", chain: "Hyperliquid (soon)", isAffiliate: false, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
+        { name: "DojiFunded", country: "Hong Kong", split: "Up to 90%", maxAccount: "$100,000", profitTarget: "10%", website: "https://app.dojifunded.com/?ref=05E1DA3A", chain: "Arbitrum", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined }
     ],
     /** @type {PropFirm[]} */
     predictionMarketFirms: [
-        { name: "Funding Predicts", country: "USA", split: "Up to 90%", maxAccount: "$150,000", website: "https://fundingpredicts.com/", chain: "Polymarket", isAffiliate: false, token: "No", payoutSpeed: "Bi-weekly", rulesOnchain: "TBC", aiAgents: undefined, scaledCapital: undefined }
+        { name: "Funding Predicts", country: "USA", split: "Up to 90%", maxAccount: "$150,000", profitTarget: undefined, website: "https://fundingpredicts.com/", chain: "Polymarket", isAffiliate: false, token: "No", payoutSpeed: "Bi-weekly", rulesOnchain: "TBC", aiAgents: undefined, scaledCapital: undefined }
     ],
     // GEN:END firm-data
     /** @type {string|null} */
@@ -278,9 +278,10 @@ customElements.define('faq-accordion', FaqAccordion);
  * Builds a single firm table row via the DOM API (prevents XSS injection).
  * @param {PropFirm} firm
  * @param {number} rank 1-based position within its table
+ * @param {{ showProfitTarget?: boolean }} [opts]
  * @returns {HTMLTableRowElement}
  */
-const buildFirmRow = (firm, rank) => {
+const buildFirmRow = (firm, rank, { showProfitTarget = false } = {}) => {
     const row = document.createElement('tr');
     row.dataset.firmName = firm.name;
     row.dataset.firmRank = String(rank);
@@ -343,6 +344,10 @@ const buildFirmRow = (firm, rank) => {
     accountCell.dataset.label = 'Max Account';
     accountCell.textContent = firm.maxAccount;
 
+    const profitTargetCell = document.createElement('td');
+    profitTargetCell.dataset.label = 'Profit Target';
+    profitTargetCell.textContent = firm.profitTarget ?? 'TBC';
+
     const tokenCell = document.createElement('td');
     tokenCell.className = 'val-highlight';
     tokenCell.dataset.label = 'Token';
@@ -362,7 +367,11 @@ const buildFirmRow = (firm, rank) => {
     linksDiv.append(firmLink);
     visitCell.appendChild(linksDiv);
 
-    row.append(nameCell, countryCell, splitCell, accountCell, tokenCell, visitCell);
+    if (showProfitTarget) {
+        row.append(nameCell, countryCell, splitCell, accountCell, profitTargetCell, tokenCell, visitCell);
+    } else {
+        row.append(nameCell, countryCell, splitCell, accountCell, tokenCell, visitCell);
+    }
     return row;
 };
 
@@ -377,7 +386,7 @@ const renderPropFirmsTable = () => {
     // Use DocumentFragment for batch insertions
     const fragment = document.createDocumentFragment();
     AppState.propFirms.forEach((firm, index) => {
-        fragment.appendChild(buildFirmRow(firm, index + 1));
+        fragment.appendChild(buildFirmRow(firm, index + 1, { showProfitTarget: true }));
     });
 
     // Single DOM insertion

@@ -252,12 +252,12 @@ const faqAccordions = () =>
         `\n</faq-accordion>`
     ).join('\n\n');
 
-const noscriptTable = (firms, label) => {
+const noscriptTable = (firms, label, { showProfitTarget = false } = {}) => {
     const rows = firms.map((f) => `        <tr>
             <td>${f.name}</td>
             <td>${f.chain}</td>
             <td>${f.split}</td>
-            <td>${f.maxAccount}</td>
+            <td>${f.maxAccount}</td>${showProfitTarget ? `\n            <td>${f.profitTarget ?? 'TBC'}</td>` : ''}
             <td>${f.token}</td>
             <td><a href="${publicUrl(f)}" rel="noopener noreferrer">${displayDomain(f)}</a></td>
         </tr>`).join('\n');
@@ -268,7 +268,7 @@ const noscriptTable = (firms, label) => {
                 <th>Firm</th>
                 <th>Chain</th>
                 <th>Profit Split</th>
-                <th>Max Account</th>
+                <th>Max Account</th>${showProfitTarget ? '\n                <th>Profit Target</th>' : ''}
                 <th>Token</th>
                 <th>Website</th>
             </tr>
@@ -284,7 +284,7 @@ ${rows}
 // script.js block
 // -----------------------------------------
 const firmLiteral = (f) => {
-    const keys = ['name', 'country', 'split', 'maxAccount', 'website', 'chain', 'isAffiliate', 'token', 'payoutSpeed', 'rulesOnchain', 'aiAgents', 'scaledCapital'];
+    const keys = ['name', 'country', 'split', 'maxAccount', 'profitTarget', 'website', 'chain', 'isAffiliate', 'token', 'payoutSpeed', 'rulesOnchain', 'aiAgents', 'scaledCapital'];
     return '    { ' + keys.map((k) => `${k}: ${JSON.stringify(f[k])}`).join(', ') + ' }';
 };
 
@@ -439,7 +439,7 @@ html = inject(html, 'faq-schema',
 html = inject(html, 'update-badge',
     `<div class="update-badge">updated in ${monthYear}</div>`);
 html = inject(html, 'noscript-firms',
-    noscriptTable(propFirms, 'Onchain Prop Firm Comparison (static)'));
+    noscriptTable(propFirms, 'Onchain Prop Firm Comparison (static)', { showProfitTarget: true }));
 html = inject(html, 'noscript-prediction',
     noscriptTable(predictionMarketFirms, 'Prediction Markets Prop Firm Comparison (static)'));
 html = inject(html, 'faq-list', faqAccordions());
