@@ -87,7 +87,7 @@ const AppState = {
     // GEN:BEGIN firm-data
     /** @type {PropFirm[]} */
     propFirms: [
-        { name: "Hypernova", country: "Cayman Islands", split: "80%", maxAccount: "$200,000", profitTarget: "10%", website: "https://hypernova.xyz/", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "Yes", aiAgents: undefined, scaledCapital: undefined },
+        { name: "Hypernova", country: "Cayman Islands", split: "80%", maxAccount: "$200,000", profitTarget: "10%", website: "https://hypernova.xyz/", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "~5s", rulesOnchain: "Yes", aiAgents: undefined, scaledCapital: undefined },
         { name: "ProprXYZ", country: "BVI", split: "80%", maxAccount: "$200,000", profitTarget: "10%", website: "https://app.propr.xyz/r/nCnJ5uZ9", chain: "Hyperliquid", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: "Yes", scaledCapital: undefined },
         { name: "hyperpnl", country: "Cayman Islands", split: "80%", maxAccount: "$25k ($200k soon)", profitTarget: "10%", website: "https://app.hyperpnl.com/trade", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
         { name: "DojiFunded", country: "Hong Kong", split: "Up to 90%", maxAccount: "$100,000", profitTarget: "10% (1-Step)", website: "https://app.dojifunded.com/?ref=05E1DA3A", chain: "Arbitrum", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },

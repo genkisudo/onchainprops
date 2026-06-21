@@ -12,7 +12,7 @@
       "chainPhrase": "the Hyperliquid chain",
       "isAffiliate": false,
       "token": "No",
-      "payoutSpeed": "Soon",
+      "payoutSpeed": "~5s",
       "rulesOnchain": "Yes"
     },
     {
