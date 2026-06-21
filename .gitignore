@@ -12,8 +12,9 @@
 *.swp
 *.swo
 
-# Dependencies (if ever added)
+# Dependencies
 node_modules/
+.venv/
 
 # Logs
 *.log
@@ -22,3 +23,10 @@ npm-debug.log*
 # Wrangler / Cloudflare
 wrangler.toml
 .wrangler/
+
+# Local-only tooling, drafts, and artifacts (not for the static site)
+scripts/
+.github/workflows/doc_checker.yml
+campaign/
+test-results/
+video_production_kit.md
