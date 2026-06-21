@@ -77,15 +77,15 @@
     {
       "name": "Carrot Funding",
       "country": "TBC",
-      "split": "80%",
-      "maxAccount": "$100,000",
+      "split": "Up to 80%",
+      "maxAccount": "$50k ($100k soon)",
       "profitTarget": "8%",
       "website": "https://app.carrotfunding.io/join/2VSSOTXBQZ",
       "chain": "gTrade, Hyperliquid (soon)",
       "chainPhrase": "gTrade with Hyperliquid coming soon",
       "isAffiliate": true,
       "token": "Yes",
-      "payoutSpeed": "Soon",
+      "payoutSpeed": "Within 24h",
       "rulesOnchain": "No"
     },
     {

@@ -46,10 +46,14 @@ const parseSplit = (s) => {
     const m = /([\d.]+)\s*%/.exec(s);
     return m ? { max: Number(m[1]), upTo: /up to/i.test(s) } : null;
 };
-/** "$200,000" → 200000; "Scaled"/"TBC" → null */
+/** "$200,000" → 200000; "$50k" → 50000; "$2.5m" → 2500000; "Scaled"/"TBC" → null */
 const parseMoney = (s) => {
-    const m = /\$([\d,]+)/.exec(s);
-    return m ? Number(m[1].replace(/,/g, '')) : null;
+    const m = /\$([\d,.]+)\s*([kKmM]?)/.exec(s);
+    if (!m) return null;
+    const n = Number(m[1].replace(/,/g, ''));
+    if (Number.isNaN(n)) return null;
+    const mult = { k: 1e3, m: 1e6 }[m[2].toLowerCase()] ?? 1;
+    return n * mult;
 };
 const fmtMoney = (n) => '$' + n.toLocaleString('en-US');
 const shortMoney = (n) => (n >= 1000 ? `$${n / 1000}K` : `$${n}`);
@@ -183,7 +187,7 @@ const twitterDescription = () => {
 const itemDescription = (f) => {
     const split = parseSplit(f.split);
     const splitPart = split
-        ? (split.upTo ? `up to a ${split.max}% profit split` : `${an(split.max)} ${split.max}% profit split`)
+        ? (split.upTo ? `up to ${an(split.max)} ${split.max}% profit split` : `${an(split.max)} ${split.max}% profit split`)
         : null;
     const money = parseMoney(f.maxAccount);
     const moneyPart = money !== null
