@@ -163,11 +163,11 @@
                     <p>Funded traders keep 80% of all profits. The remaining 20% goes to Propr. The profit split applies to all funded accounts regardless of account size or evaluation type (1-Step or 2-Step). There are no tiered splits or conditions attached.</p>
 
                     <h2>ProprXYZ Payout Structure</h2>
-                    <p>Each payout sweeps all available profit. There are no partial withdrawals. You must close all open positions before requesting a payout. After payout, your account balance resets to the initial funded amount. There is no maximum payout amount and no cap on how many times you can request payouts. No payout fees.</p>
+                    <p>Each payout sweeps all available profit. There are no partial withdrawals. You must close all open positions before requesting a payout. After payout, your account balance resets to the initial funded amount. The minimum payout amount is $20. There is no maximum payout amount and no cap on how many times you can request payouts. No payout fees.</p>
 
                     <h2>ProprXYZ Trading Rules and Leverage</h2>
                     <p><strong>Risk limits:</strong> Max daily loss and max drawdown apply at all times on both evaluation and funded accounts.</p>
-                    <p><strong>Profit targets:</strong> Required to pass the evaluation phase(s). No profit target on funded accounts. 10% for Step 1, 5% for Step 2.</p>
+                    <p><strong>Profit targets:</strong> Required to pass the evaluation phase(s). No profit target on funded accounts. 5% for Step 1, 10% for Step 2.</p>
                     <p><strong>Leverage limits:</strong> Vary by asset class:</p>
                     <table class="prop-table" style="max-width: 420px; margin-bottom: 1rem;">
                         <thead>
@@ -183,7 +183,7 @@
                             <tr><td>Commodities Perpetuals</td><td>4x</td></tr>
                         </tbody>
                     </table>
-                    <p><strong>Permitted strategies:</strong> No restrictions on scalping, news trading, overnight holding, bots, AI agents, or copy trading from external sources. ProprXYZ fully supports automated trading — you can connect trading bots and AI agents to execute strategies on your behalf.</p>
+                    <p><strong>Permitted strategies:</strong> No restrictions on scalping, news trading, overnight holding, bots, AI agents, or copy trading (including between your own Propr accounts). ProprXYZ fully supports automated trading — you can connect trading bots and AI agents to execute strategies on your behalf.</p>
                     <p><strong>Prohibited conduct:</strong> Hedging across accounts, account cycling, coordinated trading, wash trading, and identity fraud are all banned.</p>
 
                     <h2>ProprXYZ Fee Structure</h2>
@@ -204,6 +204,8 @@
                     <p>The maximum drawdown sets an absolute floor for the account: the lowest your equity can ever go. The calculation differs between 1-Step and 2-Step accounts.</p>
                     <p><strong>1-Step accounts (static drawdown):</strong> Max Drawdown Equity Limit = Starting Balance × (1 − 0.06). This limit is set once at account creation and never changes, regardless of how high the account grows.</p>
                     <p>Example: you have a $50,000 1-Step account. The max drawdown equity limit is $47,000. You trade profitably and grow the account to $60,000. Your max drawdown limit is still $47,000 — it does not trail upward. If your equity drops to $47,000 at any point, even intraday on an open position, the account is breached.</p>
+                    <p><strong>2-Step accounts (trailing drawdown):</strong> 8% trailing drawdown based on your account's High Water Mark (equity-based). The limit trails up as your equity reaches new highs, locking in gains, and stops trailing once it caps at your starting balance.</p>
+                    <p>Example: you have a $50,000 2-Step account, so the initial floor is $46,000 (8% below). As your equity climbs the floor trails 8% behind each new high, until the floor reaches your $50,000 starting balance — from that point it is fixed at $50,000 and no longer trails upward.</p>
 
                     <h2>Onchain Trade Verification and Transparency (coming soon)</h2>
                     <p>All A-booked trades executed on ProprXYZ accounts are routed through Hyperliquid and are verifiable onchain. This means:</p>
