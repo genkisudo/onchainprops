@@ -183,16 +183,18 @@
                     <p>No profit target. 5% trailing drawdown, no daily drawdown. First withdrawal after 5% profit.</p>
 
                     <h3>1-Step Evaluation Challenge</h3>
-                    <p>Single evaluation. 10% profit target. 6% static drawdown, 3% daily drawdown.</p>
+                    <p>Single evaluation. 10% profit target. 6% smart drawdown, 3% daily drawdown.</p>
 
                     <h3>2-Step Elite Evaluation Challenge</h3>
-                    <p>Two-phase: 5% target in step 1, 10% in step 2. 6% static drawdown, 3% daily drawdown.</p>
+                    <p>Two-phase: 10% in step 1, 5% in step 2. 6% static drawdown, 3% daily drawdown.</p>
 
                     <h3>2-Step Classic Evaluation Challenge</h3>
-                    <p>Two-phase: 5% target in step 1, 10% in step 2. 8% static drawdown, 5% daily drawdown.</p>
+                    <p>Two-phase: 10% in step 1, 5% in step 2. 8% static drawdown, 5% daily drawdown.</p>
 
                     <h3>Trading Rules for All DojiFunded Accounts</h3>
-                    <p>Leverage up to 5x on all asset classes — stocks, crypto, commodities, forex, ETFs, and indices. No risk-per-trade limit. Minimum trade duration: 60 seconds. At least 1 trade every 30 days to keep the account active. News trading is allowed, and weekend holding is allowed. No time limit, no consistency rule, no minimum trading days, no recurring fee. No copy trading between users; no account arbitrage.</p>
+                    <p>Leverage varies by asset class: 5x crypto, 10x indices, stocks, and commodities, 20x ETFs, and 25x forex. Max 1% risk per trade by default — this limit can be removed with an optional add-on. At least 1 trade every 30 days to keep the account active. News trading is allowed, and weekend holding is allowed. No time limit, no consistency rule, no minimum trading days, no recurring fee. No copy trading between users; no account arbitrage.</p>
+
+                    <p style="font-weight:700;font-size:1.35rem;">Minimum trade duration: 60 seconds.</p>
 
                     <h2>DojiFunded Evaluation Process and Risk Management</h2>
 
@@ -200,10 +202,14 @@
                     Buy a challenge account, hit the profit target while staying inside drawdown and risk limits, and you qualify for funding.</p>
 
                     <p><strong>Are drawdowns equity-based at DojiFunded?</strong><br>
-                    Daily drawdown uses a high-water mark calculation — it resets at 00:00 UTC each day based on whichever is higher between your balance and equity at that moment.</p>
+                    Daily drawdown uses a high-water mark calculation — it resets every 24 hours based on whichever is higher between your balance and equity at that moment.</p>
 
-                    <p><strong>DojiFunded drawdown types explained:</strong><br>
-                    Static — fixed from your starting balance; never moves.</p>
+                    <p><strong>DojiFunded drawdown types explained:</strong></p>
+                    <ul>
+                        <li><strong>Trailing</strong> (Instant Funding) — follows your account's highest point, locking in gains as your balance climbs.</li>
+                        <li><strong>Smart</strong> (1-Step) — a hybrid that trails your profit up to a threshold, then converts to a fixed level so your funded balance is protected.</li>
+                        <li><strong>Static</strong> (2-Step Elite &amp; Classic) — fixed from your starting balance; never moves.</li>
+                    </ul>
 
                     <p><strong>What happens if I breach a trading rule?</strong><br>
                     Accounts that violate daily or max drawdown are automatically locked.</p>
