@@ -1,4 +1,4 @@
-# OnchainProp robots.txt
+# OnchainProps robots.txt
 # Welcomes all crawlers, including AI/LLM bots for maximum visibility
 
 User-agent: *

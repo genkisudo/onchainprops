@@ -27,12 +27,12 @@
     <meta property="og:description"
         content="Compare the best onchain prop trading firms. Hypernova offers 80% split up to $200K. ProprXYZ offers 80% split up to $200K. hyperpnl offers 80% split up to $25K. DojiFunded offers up to 90% split up to $100K. Find your next funded trading opportunity.">
     <!-- GEN:END og-description -->
-    <meta property="og:site_name" content="OnchainProp">
+    <meta property="og:site_name" content="OnchainProps">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://onchainprops.xyz/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="OnchainProp - Compare Top Onchain Prop Trading Firms">
+    <meta property="og:image:alt" content="OnchainProps - Compare Top Onchain Prop Trading Firms">
 
     <!-- Twitter/X Card -->
     <meta name="twitter:card" content="summary_large_image">
@@ -95,7 +95,7 @@
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <!-- Additional Meta -->
-    <meta name="author" content="OnchainProp">
+    <meta name="author" content="OnchainProps">
     <meta name="language" content="English">
     <meta name="theme-color" content="#14161b">
 
@@ -117,31 +117,45 @@
     <link rel="stylesheet" href="style.css">
 
     <!-- Organization Schema -->
+    <!-- GEN:BEGIN organization-schema -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "OnchainProp",
+      "@id": "https://onchainprops.xyz/#organization",
+      "name": "OnchainProps",
       "url": "https://onchainprops.xyz",
-      "logo": "https://onchainprops.xyz/og-image.png",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://onchainprops.xyz/og-image.png"
+      },
       "description": "Premier directory for onchain proprietary trading firms and DeFi trading tools",
       "sameAs": [
-        "https://github.com/kamikagome/onchainprops",
+        "https://github.com/genkisudo/onchainprops",
+        "https://t.me/wtfonchain",
         "https://onchainprops.com"
       ]
     }
     </script>
+    <!-- GEN:END organization-schema -->
 
     <!-- WebSite Schema -->
+    <!-- GEN:BEGIN website-schema -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
+      "@id": "https://onchainprops.xyz/#website",
       "url": "https://onchainprops.xyz",
-      "name": "OnchainProp",
-      "description": "Compare top onchain prop trading firms and DeFi tools for crypto traders"
+      "name": "OnchainProps",
+      "description": "Compare top onchain prop trading firms and DeFi tools for crypto traders",
+      "publisher": {
+        "@id": "https://onchainprops.xyz/#organization"
+      },
+      "inLanguage": "en"
     }
     </script>
+    <!-- GEN:END website-schema -->
 
     <!-- CollectionPage + Article Schema -->
     <!-- GEN:BEGIN collection-schema -->
@@ -155,15 +169,14 @@
       "url": "https://onchainprops.xyz",
       "datePublished": "2025-06-15",
       "dateModified": "2026-06-11",
+      "isPartOf": {
+        "@id": "https://onchainprops.xyz/#website"
+      },
       "author": {
-        "@type": "Organization",
-        "name": "OnchainProp",
-        "url": "https://onchainprops.xyz"
+        "@id": "https://onchainprops.xyz/#organization"
       },
       "publisher": {
-        "@type": "Organization",
-        "name": "OnchainProp",
-        "url": "https://onchainprops.xyz"
+        "@id": "https://onchainprops.xyz/#organization"
       },
       "about": {
         "@type": "Thing",
@@ -694,7 +707,7 @@
                 <a href="#">Privacy Policy</a>
             </div>
             <div class="footer-socials">
-                <a href="https://github.com/kamikagome/onchainprops" target="_blank" rel="noopener noreferrer"
+                <a href="https://github.com/genkisudo/onchainprops" target="_blank" rel="noopener noreferrer"
                     aria-label="GitHub">GitHub</a>
             </div>
         </div>
