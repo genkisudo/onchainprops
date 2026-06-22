@@ -114,7 +114,7 @@
       "chainPhrase": "Polymarket",
       "isAffiliate": false,
       "token": "No",
-      "payoutSpeed": "Bi-weekly",
+      "payoutSpeed": "Weekly",
       "rulesOnchain": "TBC"
     }
   ]

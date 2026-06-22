@@ -758,6 +758,135 @@ h1, h2, h3, h4 {
     margin-bottom: 1.3rem;
 }
 
+.firm-verdict-discount {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    text-align: center;
+}
+
+/* Payout requirements list */
+.firm-payout-list {
+    list-style: disc;
+    padding-left: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 0.5rem 0 1rem;
+}
+
+.firm-payout-list strong {
+    color: var(--text-primary);
+}
+
+/* Prohibited strategies callout */
+.firm-prohibited {
+    margin: 2rem 0;
+    padding: 1.5rem 1.6rem;
+    background: rgba(255, 80, 80, 0.06);
+    border: 1px solid rgba(255, 80, 80, 0.25);
+    border-left: 3px solid rgba(255, 80, 80, 0.6);
+    border-radius: var(--radius-lg);
+}
+
+.firm-prohibited-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 100, 100, 0.85);
+    margin-bottom: 0.3rem;
+}
+
+.firm-prohibited-title {
+    font-size: 1.25rem;
+    margin-top: 0;
+    margin-bottom: 0.6rem;
+    color: var(--text-primary);
+}
+
+.firm-prohibited-intro {
+    color: var(--text-secondary);
+    font-size: 0.93rem;
+    margin-bottom: 1.1rem;
+}
+
+.firm-faq-item--warn {
+    border-color: rgba(255, 80, 80, 0.2);
+}
+
+.firm-faq-item--warn > .firm-faq-question::after {
+    color: rgba(255, 100, 100, 0.7);
+}
+
+/* Firm-page FAQ */
+.firm-faq {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 1.5rem 0 2rem;
+}
+
+.firm-faq-item {
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--bg-card);
+    overflow: hidden;
+}
+
+.firm-faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    font-weight: 600;
+    font-size: 0.97rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    gap: 1rem;
+}
+
+.firm-faq-question::-webkit-details-marker { display: none; }
+
+.firm-faq-question::after {
+    content: '+';
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.firm-faq-item[open] > .firm-faq-question::after {
+    transform: rotate(45deg);
+}
+
+.firm-faq-answer {
+    padding: 0 1.25rem 1rem;
+    color: var(--text-secondary);
+    font-size: 0.93rem;
+    line-height: 1.7;
+}
+
+.firm-faq-answer p {
+    margin: 0 0 0.6rem;
+}
+
+.firm-faq-answer p:last-child { margin-bottom: 0; }
+
+.firm-faq-answer ul {
+    list-style: disc;
+    padding-left: 1.3rem;
+    margin: 0.3rem 0 0.7rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
 .firm-verdict-cta {
     width: 100%;
 }
