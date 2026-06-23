@@ -90,7 +90,7 @@ const AppState = {
         { name: "Hypernova", country: "Cayman Islands", split: "80%", maxAccount: "$200,000", profitTarget: "10%", website: "https://hypernova.xyz/", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "~5s", rulesOnchain: "Yes", aiAgents: undefined, scaledCapital: undefined },
         { name: "ProprXYZ", country: "BVI", split: "80%", maxAccount: "$200,000", profitTarget: "10%", website: "https://app.propr.xyz/r/nCnJ5uZ9", chain: "Hyperliquid", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: "Yes", scaledCapital: undefined },
         { name: "hyperpnl", country: "Cayman Islands", split: "80%", maxAccount: "$25k ($200k soon)", profitTarget: "10%", website: "https://app.hyperpnl.com/trade", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
-        { name: "DojiFunded", country: "Hong Kong", split: "Up to 90%", maxAccount: "$100,000", profitTarget: "10% (1-Step)", website: "https://app.dojifunded.com/?ref=05E1DA3A", chain: "Arbitrum", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
+        { name: "DojiFunded", country: "US (Delaware)", split: "Up to 90%", maxAccount: "$100,000", profitTarget: "10% (1-Step)", website: "https://app.dojifunded.com/?ref=05E1DA3A", chain: "Arbitrum", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
         { name: "Vanta Trading", country: "Cayman Islands", split: "100%", maxAccount: "$100,000", profitTarget: "10%", website: "https://vantatrading.io/?ref=kamil", chain: "Bittensor / Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
         { name: "Carrot Funding", country: "TBC", split: "Up to 80%", maxAccount: "$50k ($100k soon)", profitTarget: "8%", website: "https://app.carrotfunding.io/join/2VSSOTXBQZ", chain: "gTrade, Hyperliquid (soon)", isAffiliate: true, token: "Yes", payoutSpeed: "Within 24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
         { name: "FoxyFi", country: "BVI", split: "Up to 90%", maxAccount: "$10,000", profitTarget: "15%", website: "https://www.foxify.trade/", chain: "Hyperliquid (soon)", isAffiliate: false, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
@@ -331,10 +331,6 @@ const buildFirmRow = (firm, rank, { showProfitTarget = false } = {}) => {
         nameLink.after(scaleChip);
     }
 
-    const countryCell = document.createElement('td');
-    countryCell.dataset.label = 'Country';
-    countryCell.textContent = firm.country ?? 'TBC';
-
     const splitCell = document.createElement('td');
     splitCell.className = 'val-highlight';
     splitCell.dataset.label = 'Profit Split';
@@ -369,9 +365,9 @@ const buildFirmRow = (firm, rank, { showProfitTarget = false } = {}) => {
     visitCell.appendChild(linksDiv);
 
     if (showProfitTarget) {
-        row.append(nameCell, countryCell, splitCell, accountCell, profitTargetCell, tokenCell, visitCell);
+        row.append(nameCell, splitCell, accountCell, profitTargetCell, tokenCell, visitCell);
     } else {
-        row.append(nameCell, countryCell, splitCell, accountCell, tokenCell, visitCell);
+        row.append(nameCell, splitCell, accountCell, tokenCell, visitCell);
     }
     return row;
 };
