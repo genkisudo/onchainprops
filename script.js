@@ -94,7 +94,7 @@ const AppState = {
         { name: "Vanta Trading", country: "Cayman Islands", split: "100%", maxAccount: "$100,000", profitTarget: "10%", website: "https://vantatrading.io/?ref=kamil", chain: "Bittensor / Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
         { name: "Carrot Funding", country: "TBC", split: "Up to 80%", maxAccount: "$50k ($100k soon)", profitTarget: "8%", website: "https://app.carrotfunding.io/join/2VSSOTXBQZ", chain: "gTrade, Hyperliquid (soon)", isAffiliate: true, token: "Yes", payoutSpeed: "Within 24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
         { name: "FoxyFi", country: "BVI", split: "Up to 90%", maxAccount: "$10,000", profitTarget: "15%", website: "https://www.foxify.trade/", chain: "Hyperliquid (soon)", isAffiliate: false, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined },
-        { name: "HyperStack", country: "BVI", split: "Up to 90%", maxAccount: "$400,000", profitTarget: "10%", website: "https://www.hyperstack.trade/rules", chain: "TBC", isAffiliate: false, token: "TBC", payoutSpeed: "TBC", rulesOnchain: "TBC", aiAgents: undefined, scaledCapital: undefined }
+        { name: "HyperStack", country: "BVI", split: "Up to 90%", maxAccount: "$400,000", profitTarget: "10%", website: "https://www.hyperstack.trade/rules", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "TBC", aiAgents: undefined, scaledCapital: undefined }
     ],
     /** @type {PropFirm[]} */
     predictionMarketFirms: [
