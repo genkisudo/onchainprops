@@ -101,6 +101,20 @@
       "token": "Yes",
       "payoutSpeed": "Soon",
       "rulesOnchain": "No"
+    },
+    {
+      "name": "HyperStack",
+      "country": "BVI",
+      "split": "Up to 90%",
+      "maxAccount": "$400,000",
+      "profitTarget": "10%",
+      "website": "https://www.hyperstack.trade/rules",
+      "chain": "TBC",
+      "chainPhrase": "TBC",
+      "isAffiliate": false,
+      "token": "TBC",
+      "payoutSpeed": "TBC",
+      "rulesOnchain": "TBC"
     }
   ],
   "predictionMarketFirms": [
