@@ -57,7 +57,8 @@
       "isAffiliate": false,
       "token": "No",
       "payoutSpeed": "TBC",
-      "rulesOnchain": "No"
+      "rulesOnchain": "No",
+      "evalDataOnchain": "Yes"
     },
     {
       "name": "Vanta Trading",
