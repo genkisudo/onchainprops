@@ -24,7 +24,7 @@
         font-src https://fonts.gstatic.com;
         img-src 'self' data: https://agents.dante-ai.com;
         manifest-src 'self';
-        connect-src https://api.amplitude.com https://api2.amplitude.com https://analytics.eu.amplitude.com https://agents.dante-ai.com;
+        connect-src https://api.amplitude.com https://api2.amplitude.com https://analytics.eu.amplitude.com https://agents.dante-ai.com https://api.llama.fi;
         frame-src https://agents.dante-ai.com https://dune.com;
         object-src 'none';
         base-uri 'self';
@@ -162,7 +162,11 @@
 
                     <h2>ProprXYZ Dune Analytics Dashboard</h2>
                     <p>We independently track ProprXYZ's financials on a public <a href="https://dune.com/genkisudo123/propr-prop" target="_blank" rel="noopener noreferrer">Dune Analytics dashboard</a>. The dashboard monitors revenue data from Propr's API and tracks payout data for traders and referrals from onchain wallets — giving anyone an independent, verifiable view of how the firm is performing.</p>
-                    <iframe src="https://dune.com/embeds/7721819/11683257?darkMode=true" style="width:100%;height:400px;border:none;border-radius:8px;margin-top:1rem;" loading="lazy" title="ProprXYZ Dune Analytics Chart"></iframe>
+                    <div style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin-top:1rem;">
+                        <div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary);">Propr All-Time Revenue</div>
+                        <div id="propr-revenue-value" style="font-size:2rem;font-weight:700;color:var(--accent);margin:0.25rem 0;line-height:1.1;">Loading…</div>
+                        <div style="font-size:0.8rem;color:var(--text-secondary);">Source: <a href="https://defillama.com/protocol/propr" target="_blank" rel="noopener noreferrer">DeFiLlama</a></div>
+                    </div>
                     <iframe src="https://dune.com/embeds/7789781/11758183?darkMode=true" style="width:100%;height:400px;border:none;border-radius:8px;margin-top:1rem;" loading="lazy" title="Total USDC Payouts to traders"></iframe>
                     <iframe src="https://dune.com/embeds/7790175/11758626?darkMode=true" style="width:100%;height:400px;border:none;border-radius:8px;margin-top:1rem;" loading="lazy" title="ProprXYZ Dune Analytics Chart"></iframe>
 

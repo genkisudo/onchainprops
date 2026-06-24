@@ -641,6 +641,30 @@ const setupEventDelegation = () => {
     });
 };
 
+/**
+ * Populate the Propr all-time revenue figure from DeFiLlama's free fees API.
+ * No-op on any page without the `#propr-revenue-value` element, so it's safe
+ * to run on every page. Errors degrade gracefully to "Unavailable".
+ * @returns {Promise<void>}
+ */
+const loadProprRevenue = async () => {
+    const el = document.getElementById('propr-revenue-value');
+    if (!el) return;
+    try {
+        const res = await fetch('https://api.llama.fi/summary/fees/propr?dataType=dailyRevenue');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        const total = data?.totalAllTime;
+        if (typeof total !== 'number') throw new Error('missing totalAllTime');
+        el.textContent = total.toLocaleString('en-US', {
+            style: 'currency', currency: 'USD', maximumFractionDigits: 0
+        });
+    } catch (e) {
+        el.textContent = 'Unavailable';
+        console.error('Propr revenue fetch failed:', e);
+    }
+};
+
 // -----------------------------------------
 // Initialization
 // -----------------------------------------
@@ -665,6 +689,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setupSectionObservers();
         setupMobileNav();
         setupEventDelegation();
+        loadProprRevenue();
     } catch (e) {
         console.error("App initialization failure:", e);
         analytics.track('Error Encountered', {
