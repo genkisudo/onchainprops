@@ -679,7 +679,12 @@ const loadProprRevenue = async () => {
 // -----------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize Amplitude — must run before any tracking calls
-    analytics.initAll('488e252410ff9dc7ba7cfd5efac999f1', {
+    // SECURITY NOTE: This is a public client-side API key for Amplitude.
+    // For static sites, this must remain client-side. Configure rate limiting
+    // in your Amplitude dashboard to prevent abuse.
+    // For dynamic environments, consider using environment variables.
+    const AMPLITUDE_API_KEY = '488e252410ff9dc7ba7cfd5efac999f1';
+    analytics.initAll(AMPLITUDE_API_KEY, {
         "analytics": {
             // Hash-only navigation (#firms, #resources, #faq) scrolls within
             // this single page — it isn't a real route change, so don't let
