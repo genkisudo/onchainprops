@@ -93,7 +93,7 @@ const AppState = {
         { name: "DojiFunded", country: "US (Delaware)", split: "Up to 90%", maxAccount: "$100,000", profitTarget: "10% (1-Step)", website: "https://app.dojifunded.com/?ref=05E1DA3A", chain: "Arbitrum", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: "Yes" },
         { name: "Vanta Trading", country: "Cayman Islands", split: "100%", maxAccount: "$100,000", profitTarget: "10%", website: "https://vantatrading.io/?ref=kamil", chain: "Bittensor / Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined },
         { name: "Carrot Funding", country: "UAE", split: "Up to 80%", maxAccount: "$50k ($100k soon)", profitTarget: "8%", website: "https://app.carrotfunding.io/join/2VSSOTXBQZ", chain: "gTrade, Hyperliquid (soon)", isAffiliate: true, token: "Yes", payoutSpeed: "Within 24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined },
-        { name: "FoxyFi", country: "BVI", split: "Up to 90%", maxAccount: "$10,000", profitTarget: "15%", website: "https://www.foxify.trade/", chain: "Hyperliquid (soon)", isAffiliate: false, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined },
+        { name: "FUNDED/Foxify", country: "BVI", split: "Up to 90%", maxAccount: "$10,000", profitTarget: "15%", website: "https://www.foxify.trade/", chain: "Hyperliquid (soon)", isAffiliate: false, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined },
         { name: "HyperStack", country: "BVI", split: "Up to 90%", maxAccount: "$400,000", profitTarget: "10%", website: "https://www.hyperstack.trade/rules", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "TBC", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined }
     ],
     /** @type {PropFirm[]} */
@@ -287,7 +287,7 @@ const buildFirmRow = (firm, rank, { showProfitTarget = false } = {}) => {
     row.dataset.firmName = firm.name;
     row.dataset.firmRank = String(rank);
 
-    const firmSlug = firm.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    const firmSlug = firm.name.toLowerCase().replace(/[\s/]+/g, '-').replace(/[^a-z0-9-]/g, '');
     const firmPageUrl = `firms/${firmSlug}`;
     // The whole row hover-highlights like a card (see .prop-table tbody tr:hover),
     // so make the rest of it navigate too — otherwise clicks on the split/account/
