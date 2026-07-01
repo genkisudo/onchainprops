@@ -102,22 +102,6 @@
       "rulesOnchain": "No"
     },
     {
-      "name": "FUNDED by FOXIFY",
-      "country": "BVI",
-      "split": "Up to 90%",
-      "maxAccount": "$10,000",
-      "profitTarget": "15%",
-      "dailyDrawdown": "TBC",
-      "maxDrawdown": "TBC",
-      "website": "https://www.foxify.trade/",
-      "chain": "Hyperliquid (soon)",
-      "chainPhrase": "Hyperliquid (coming soon)",
-      "isAffiliate": false,
-      "token": "Yes",
-      "payoutSpeed": "Soon",
-      "rulesOnchain": "No"
-    },
-    {
       "name": "HyperStack",
       "country": "BVI",
       "split": "Up to 90%",
@@ -132,6 +116,22 @@
       "token": "No",
       "payoutSpeed": "TBC",
       "rulesOnchain": "TBC"
+    },
+    {
+      "name": "FUNDED by FOXIFY",
+      "country": "BVI",
+      "split": "Up to 90%",
+      "maxAccount": "$10,000",
+      "profitTarget": "15%",
+      "dailyDrawdown": "TBC",
+      "maxDrawdown": "TBC",
+      "website": "https://www.foxify.trade/",
+      "chain": "Hyperliquid (soon)",
+      "chainPhrase": "Hyperliquid (coming soon)",
+      "isAffiliate": false,
+      "token": "Yes",
+      "payoutSpeed": "Soon",
+      "rulesOnchain": "No"
     }
   ],
   "predictionMarketFirms": [
