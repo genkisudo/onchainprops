@@ -75,6 +75,13 @@ const an = (n) => (String(n).startsWith('8') ? 'an' : 'a');
 const stripTags = (s) => s.replace(/<[^>]+>/g, '');
 const escAttr = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
 const publicUrl = (f) => f.publicUrl ?? f.website;
+/** Same slug logic as buildFirmRow() in script.js — keep in sync. */
+const firmSlug = (f) => f.name.toLowerCase().replace(/[\s/]+/g, '-').replace(/[^a-z0-9-]/g, '');
+/** Root-relative detail-page path ("firms/<slug>"), or null if no page exists yet. */
+const detailPath = (f) => {
+    const p = `firms/${firmSlug(f)}`;
+    return fs.existsSync(path.join(ROOT, `${p}.html`)) ? p : null;
+};
 const displayDomain = (f) =>
     new URL(publicUrl(f)).hostname.replace(/^(www|app|waitlist)\./, '');
 
@@ -297,7 +304,7 @@ const faqAccordions = () =>
 
 const noscriptTable = (firms, label, { showProfitTarget = false } = {}) => {
     const rows = firms.map((f) => `        <tr>
-            <td>${f.name}</td>
+            <td>${detailPath(f) ? `<a href="${detailPath(f)}">${f.name}</a>` : f.name}</td>
             <td>${f.chain}</td>
             <td>${f.split}</td>
             <td>${f.maxAccount}</td>${showProfitTarget ? `\n            <td>${f.profitTarget ?? 'TBC'}</td>\n            <td>${f.dailyDrawdown ?? 'TBC'}</td>\n            <td>${f.maxDrawdown ?? 'TBC'}</td>` : ''}
@@ -346,10 +353,10 @@ ${predictionMarketFirms.map(firmLiteral).join(',\n')}
 // -----------------------------------------
 const llmsTxt = () => {
     const table = (firms) => {
-        const header = '| Firm | Country | Profit Split | Max Account | Chain(s) | Website |';
-        const sep = '|------|---------|--------------|-------------|----------|---------|';
+        const header = '| Firm | Country | Profit Split | Max Account | Chain(s) | Website | Review |';
+        const sep = '|------|---------|--------------|-------------|----------|---------|--------|';
         const rows = firms.map((f) =>
-            `| ${f.name} | ${f.country} | ${f.split} | ${f.maxAccount} | ${f.chain} | ${publicUrl(f)} |`);
+            `| ${f.name} | ${f.country} | ${f.split} | ${f.maxAccount} | ${f.chain} | ${publicUrl(f)} | ${detailPath(f) ? `${SITE}/${detailPath(f)}` : '—'} |`);
         return [header, sep, ...rows].join('\n');
     };
     const top = ranked[0];
@@ -430,10 +437,16 @@ const sitemapXml = () => {
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
   </url>`;
+    // Extensionless <loc>s match each page's canonical (GitHub Pages resolves them).
+    const firmUrls = [...propFirms, ...predictionMarketFirms]
+        .filter((f) => detailPath(f))
+        .map((f) => url(`${SITE}/${detailPath(f)}`, 'monthly', '0.7', `${f.name} — firm review & evaluation details`))
+        .join('');
     return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${url('https://onchainprops.xyz/', 'weekly', '1.0', 'Main page — single-page app, all content lives here')}
-${url('https://onchainprops.xyz/compare.html', 'weekly', '0.8', 'Compare Firms — long-form comparison article')}
+${url('https://onchainprops.xyz/compare.html', 'weekly', '0.8', 'Compare Firms — long-form comparison article')}${firmUrls}
+${url('https://onchainprops.xyz/resources', 'monthly', '0.6', 'Resources — tools & guides for onchain traders')}
 ${url('https://onchainprops.xyz/llms.txt', 'monthly', '0.5', 'llms.txt — for AI crawler discovery')}
 
 </urlset>
