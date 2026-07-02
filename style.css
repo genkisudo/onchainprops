@@ -1298,6 +1298,14 @@ footer {
     line-height: 1;
 }
 
+/* Payouts Verified column — green checkmark, same trust color as .trust-chip */
+.payout-verified-check {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.05rem;
+    cursor: help;
+}
+
 /* Capability chip (e.g. AI agents) — robot glyph instead of the verify check */
 .trust-chip--ai::before {
     content: '🤖';

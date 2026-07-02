@@ -301,7 +301,7 @@ const noscriptTable = (firms, label, { showProfitTarget = false } = {}) => {
             <td>${f.chain}</td>
             <td>${f.split}</td>
             <td>${f.maxAccount}</td>${showProfitTarget ? `\n            <td>${f.profitTarget ?? 'TBC'}</td>\n            <td>${f.dailyDrawdown ?? 'TBC'}</td>\n            <td>${f.maxDrawdown ?? 'TBC'}</td>` : ''}
-            <td>${f.token}</td>
+            <td>${f.token}</td>${showProfitTarget ? `\n            <td>${f.payoutsVerified === 'Yes' ? 'Yes' : 'No'}</td>` : ''}
             <td><a href="${publicUrl(f)}" rel="noopener noreferrer">${displayDomain(f)}</a></td>
         </tr>`).join('\n');
     return `<noscript>
@@ -312,7 +312,7 @@ const noscriptTable = (firms, label, { showProfitTarget = false } = {}) => {
                 <th>Chain</th>
                 <th>Profit Split</th>
                 <th>Max Account</th>${showProfitTarget ? '\n                <th>Profit Target</th>\n                <th>Daily Drawdown</th>\n                <th>Max Drawdown</th>' : ''}
-                <th>Token</th>
+                <th>Token</th>${showProfitTarget ? '\n                <th>Payouts Verified</th>' : ''}
                 <th>Website</th>
             </tr>
         </thead>
@@ -327,7 +327,7 @@ ${rows}
 // script.js block
 // -----------------------------------------
 const firmLiteral = (f) => {
-    const keys = ['name', 'country', 'split', 'maxAccount', 'profitTarget', 'dailyDrawdown', 'maxDrawdown', 'website', 'chain', 'isAffiliate', 'token', 'payoutSpeed', 'rulesOnchain', 'aiAgents', 'scaledCapital', 'evalDataOnchain'];
+    const keys = ['name', 'country', 'split', 'maxAccount', 'profitTarget', 'dailyDrawdown', 'maxDrawdown', 'website', 'chain', 'isAffiliate', 'token', 'payoutSpeed', 'rulesOnchain', 'aiAgents', 'scaledCapital', 'evalDataOnchain', 'payoutsVerified'];
     return '    { ' + keys.map((k) => `${k}: ${JSON.stringify(f[k])}`).join(', ') + ' }';
 };
 

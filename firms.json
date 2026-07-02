@@ -15,7 +15,8 @@
       "isAffiliate": false,
       "token": "No",
       "payoutSpeed": "~5s",
-      "rulesOnchain": "Yes"
+      "rulesOnchain": "Yes",
+      "payoutsVerified": "Yes"
     },
     {
       "name": "ProprXYZ",
@@ -33,7 +34,8 @@
       "token": "Yes",
       "payoutSpeed": "Soon",
       "rulesOnchain": "No",
-      "aiAgents": "Yes"
+      "aiAgents": "Yes",
+      "payoutsVerified": "Yes"
     },
     {
       "name": "hyperpnl",
@@ -49,7 +51,8 @@
       "isAffiliate": false,
       "token": "No",
       "payoutSpeed": "Soon",
-      "rulesOnchain": "No"
+      "rulesOnchain": "No",
+      "payoutsVerified": "Yes"
     },
     {
       "name": "DojiFunded",
@@ -66,7 +69,8 @@
       "token": "No",
       "payoutSpeed": "TBC",
       "rulesOnchain": "No",
-      "evalDataOnchain": "Yes"
+      "evalDataOnchain": "Yes",
+      "payoutsVerified": "Yes"
     },
     {
       "name": "Vanta Trading",
@@ -83,7 +87,8 @@
       "isAffiliate": true,
       "token": "No",
       "payoutSpeed": "Soon",
-      "rulesOnchain": "No"
+      "rulesOnchain": "No",
+      "payoutsVerified": "No"
     },
     {
       "name": "Carrot Funding",
@@ -99,7 +104,8 @@
       "isAffiliate": true,
       "token": "Yes",
       "payoutSpeed": "Within 24h",
-      "rulesOnchain": "No"
+      "rulesOnchain": "No",
+      "payoutsVerified": "No"
     },
     {
       "name": "HyperStack",
@@ -115,7 +121,8 @@
       "isAffiliate": false,
       "token": "No",
       "payoutSpeed": "TBC",
-      "rulesOnchain": "TBC"
+      "rulesOnchain": "TBC",
+      "payoutsVerified": "No"
     },
     {
       "name": "FUNDED by FOXIFY",
@@ -131,7 +138,8 @@
       "isAffiliate": false,
       "token": "Yes",
       "payoutSpeed": "Soon",
-      "rulesOnchain": "No"
+      "rulesOnchain": "No",
+      "payoutsVerified": "No"
     }
   ],
   "predictionMarketFirms": [
