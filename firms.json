@@ -105,7 +105,7 @@
       "token": "Yes",
       "payoutSpeed": "Within 24h",
       "rulesOnchain": "No",
-      "payoutsVerified": "No"
+      "payoutsVerified": "Yes"
     },
     {
       "name": "HyperStack",
