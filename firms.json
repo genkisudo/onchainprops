@@ -88,6 +88,7 @@
       "token": "No",
       "payoutSpeed": "Soon",
       "rulesOnchain": "No",
+      "bestSplit": "Yes",
       "payoutsVerified": "No"
     },
     {

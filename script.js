@@ -81,6 +81,7 @@ const analytics = {
  * @property {string} chain
  * @property {boolean} isAffiliate
  * @property {string} token
+ * @property {string} [bestSplit]
  * @property {string} [payoutsVerified]
  */
 
@@ -88,18 +89,18 @@ const AppState = {
     // GEN:BEGIN firm-data
     /** @type {PropFirm[]} */
     propFirms: [
-        { name: "Hypernova", country: "Cayman Islands", split: "80%", maxAccount: "$200,000", profitTarget: "10%", dailyDrawdown: "3-5%", maxDrawdown: "6-8%", website: "https://hypernova.xyz/", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "~5s", rulesOnchain: "Yes", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, payoutsVerified: "Yes" },
-        { name: "ProprXYZ", country: "BVI", split: "80%", maxAccount: "$200,000", profitTarget: "10%", dailyDrawdown: "3-5%", maxDrawdown: "6%", website: "https://app.propr.xyz/r/nCnJ5uZ9", chain: "Hyperliquid", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: "Yes", scaledCapital: undefined, evalDataOnchain: undefined, payoutsVerified: "Yes" },
-        { name: "hyperpnl", country: "Cayman Islands", split: "80%", maxAccount: "$25k ($200k soon)", profitTarget: "10%/5%", dailyDrawdown: "5%", maxDrawdown: "9%", website: "https://app.hyperpnl.com/trade", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, payoutsVerified: "Yes" },
-        { name: "DojiFunded", country: "US (Delaware)", split: "Up to 90%", maxAccount: "$100,000", profitTarget: "10%", dailyDrawdown: "3-5%", maxDrawdown: "6-8%", website: "https://app.dojifunded.com/kol/onchainprops", chain: "Arbitrum", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: "Yes", payoutsVerified: "Yes" },
-        { name: "Vanta Trading", country: "Cayman Islands", split: "100%", maxAccount: "$100,000", profitTarget: "8-10%", dailyDrawdown: "5%", maxDrawdown: "5%", website: "https://vantatrading.io/?ref=kamil", chain: "Bittensor / Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, payoutsVerified: "No" },
-        { name: "Carrot Funding", country: "UAE", split: "Up to 80%", maxAccount: "$50k ($100k soon)", profitTarget: "8%", dailyDrawdown: "4-5%", maxDrawdown: "8-10%", website: "https://app.carrotfunding.io/join/2VSSOTXBQZ", chain: "gTrade, Hyperliquid (soon)", isAffiliate: true, token: "Yes", payoutSpeed: "Within 24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, payoutsVerified: "Yes" },
-        { name: "HyperStack", country: "BVI", split: "Up to 90%", maxAccount: "$400,000", profitTarget: "10%", dailyDrawdown: "5%", maxDrawdown: "5%", website: "https://www.hyperstack.trade/rules", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "TBC", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, payoutsVerified: "No" },
-        { name: "FUNDED by FOXIFY", country: "BVI", split: "Up to 90%", maxAccount: "$10,000", profitTarget: "15%", dailyDrawdown: "N/A", maxDrawdown: "10-20%", website: "https://www.foxify.trade/", chain: "Hyperliquid (soon)", isAffiliate: false, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, payoutsVerified: "No" }
+        { name: "Hypernova", country: "Cayman Islands", split: "80%", maxAccount: "$200,000", profitTarget: "10%", dailyDrawdown: "3-5%", maxDrawdown: "6-8%", website: "https://hypernova.xyz/", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "~5s", rulesOnchain: "Yes", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, payoutsVerified: "Yes" },
+        { name: "ProprXYZ", country: "BVI", split: "80%", maxAccount: "$200,000", profitTarget: "10%", dailyDrawdown: "3-5%", maxDrawdown: "6%", website: "https://app.propr.xyz/r/nCnJ5uZ9", chain: "Hyperliquid", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: "Yes", scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, payoutsVerified: "Yes" },
+        { name: "hyperpnl", country: "Cayman Islands", split: "80%", maxAccount: "$25k ($200k soon)", profitTarget: "10%/5%", dailyDrawdown: "5%", maxDrawdown: "9%", website: "https://app.hyperpnl.com/trade", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, payoutsVerified: "Yes" },
+        { name: "DojiFunded", country: "US (Delaware)", split: "Up to 90%", maxAccount: "$100,000", profitTarget: "10%", dailyDrawdown: "3-5%", maxDrawdown: "6-8%", website: "https://app.dojifunded.com/kol/onchainprops", chain: "Arbitrum", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: "Yes", bestSplit: undefined, payoutsVerified: "Yes" },
+        { name: "Vanta Trading", country: "Cayman Islands", split: "100%", maxAccount: "$100,000", profitTarget: "8-10%", dailyDrawdown: "5%", maxDrawdown: "5%", website: "https://vantatrading.io/?ref=kamil", chain: "Bittensor / Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: "Yes", payoutsVerified: "No" },
+        { name: "Carrot Funding", country: "UAE", split: "Up to 80%", maxAccount: "$50k ($100k soon)", profitTarget: "8%", dailyDrawdown: "4-5%", maxDrawdown: "8-10%", website: "https://app.carrotfunding.io/join/2VSSOTXBQZ", chain: "gTrade, Hyperliquid (soon)", isAffiliate: true, token: "Yes", payoutSpeed: "Within 24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, payoutsVerified: "Yes" },
+        { name: "HyperStack", country: "BVI", split: "Up to 90%", maxAccount: "$400,000", profitTarget: "10%", dailyDrawdown: "5%", maxDrawdown: "5%", website: "https://www.hyperstack.trade/rules", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "TBC", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, payoutsVerified: "No" },
+        { name: "FUNDED by FOXIFY", country: "BVI", split: "Up to 90%", maxAccount: "$10,000", profitTarget: "15%", dailyDrawdown: "N/A", maxDrawdown: "10-20%", website: "https://www.foxify.trade/", chain: "Hyperliquid (soon)", isAffiliate: false, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, payoutsVerified: "No" }
     ],
     /** @type {PropFirm[]} */
     predictionMarketFirms: [
-        { name: "Funding Predicts", country: "USA", split: "Up to 90%", maxAccount: "$150,000", profitTarget: undefined, dailyDrawdown: undefined, maxDrawdown: undefined, website: "https://fundingpredicts.com/", chain: "Polymarket", isAffiliate: false, token: "No", payoutSpeed: "Weekly", rulesOnchain: "TBC", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, payoutsVerified: undefined }
+        { name: "Funding Predicts", country: "USA", split: "Up to 90%", maxAccount: "$150,000", profitTarget: undefined, dailyDrawdown: undefined, maxDrawdown: undefined, website: "https://fundingpredicts.com/", chain: "Polymarket", isAffiliate: false, token: "No", payoutSpeed: "Weekly", rulesOnchain: "TBC", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, payoutsVerified: undefined }
     ],
     // GEN:END firm-data
     /** @type {string|null} */
@@ -341,6 +342,15 @@ const buildFirmRow = (firm, rank, { showProfitTarget = false } = {}) => {
         nameLink.after(dataChip);
     }
 
+    // Standout signal: highest profit split among listed firms
+    if (firm.bestSplit === 'Yes') {
+        const splitChip = document.createElement('span');
+        splitChip.className = 'trust-chip trust-chip--split';
+        splitChip.textContent = 'Best profit split';
+        splitChip.title = 'Highest profit split among onchain prop firms in this directory';
+        nameLink.after(splitChip);
+    }
+
     const splitCell = document.createElement('td');
     splitCell.className = 'val-highlight';
     splitCell.dataset.label = 'Profit Split';
@@ -396,7 +406,7 @@ const buildFirmRow = (firm, rank, { showProfitTarget = false } = {}) => {
     visitCell.appendChild(linksDiv);
 
     if (showProfitTarget) {
-        row.append(nameCell, splitCell, accountCell, profitTargetCell, dailyDrawdownCell, maxDrawdownCell, tokenCell, payoutsVerifiedCell, visitCell);
+        row.append(nameCell, splitCell, accountCell, profitTargetCell, dailyDrawdownCell, maxDrawdownCell, payoutsVerifiedCell, visitCell);
     } else {
         row.append(nameCell, splitCell, accountCell, tokenCell, visitCell);
     }
