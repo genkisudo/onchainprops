@@ -4,7 +4,7 @@
   <!-- Main page — single-page app, all content lives here -->
   <url>
     <loc>https://onchainprops.xyz/</loc>
-    <lastmod>2026-06-11</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -12,70 +12,70 @@
   <!-- Compare Firms — long-form comparison article -->
   <url>
     <loc>https://onchainprops.xyz/compare.html</loc>
-    <lastmod>2026-06-11</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <!-- Hypernova — firm review & evaluation details -->
   <url>
     <loc>https://onchainprops.xyz/firms/hypernova</loc>
-    <lastmod>2026-06-11</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- ProprXYZ — firm review & evaluation details -->
   <url>
     <loc>https://onchainprops.xyz/firms/proprxyz</loc>
-    <lastmod>2026-06-11</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- hyperpnl — firm review & evaluation details -->
   <url>
     <loc>https://onchainprops.xyz/firms/hyperpnl</loc>
-    <lastmod>2026-06-11</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- DojiFunded — firm review & evaluation details -->
   <url>
     <loc>https://onchainprops.xyz/firms/dojifunded</loc>
-    <lastmod>2026-06-11</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- Vanta Trading — firm review & evaluation details -->
   <url>
     <loc>https://onchainprops.xyz/firms/vanta-trading</loc>
-    <lastmod>2026-06-11</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- Carrot Funding — firm review & evaluation details -->
   <url>
     <loc>https://onchainprops.xyz/firms/carrot-funding</loc>
-    <lastmod>2026-06-11</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- HyperStack — firm review & evaluation details -->
   <url>
     <loc>https://onchainprops.xyz/firms/hyperstack</loc>
-    <lastmod>2026-06-11</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- FUNDED by FOXIFY — firm review & evaluation details -->
   <url>
     <loc>https://onchainprops.xyz/firms/funded-by-foxify</loc>
-    <lastmod>2026-06-11</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- Funding Predicts — firm review & evaluation details -->
   <url>
     <loc>https://onchainprops.xyz/firms/funding-predicts</loc>
-    <lastmod>2026-06-11</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -83,7 +83,7 @@
   <!-- Resources — tools & guides for onchain traders -->
   <url>
     <loc>https://onchainprops.xyz/resources</loc>
-    <lastmod>2026-06-11</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -91,7 +91,7 @@
   <!-- llms.txt — for AI crawler discovery -->
   <url>
     <loc>https://onchainprops.xyz/llms.txt</loc>
-    <lastmod>2026-06-11</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
