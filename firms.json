@@ -52,6 +52,7 @@
       "token": "No",
       "payoutSpeed": "Soon",
       "rulesOnchain": "No",
+      "lowestFinalTarget": "Yes",
       "payoutsVerified": "Yes"
     },
     {

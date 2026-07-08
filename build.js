@@ -332,7 +332,7 @@ ${rows}
 // script.js block
 // -----------------------------------------
 const firmLiteral = (f) => {
-    const keys = ['name', 'country', 'split', 'maxAccount', 'profitTarget', 'dailyDrawdown', 'maxDrawdown', 'website', 'chain', 'isAffiliate', 'token', 'payoutSpeed', 'rulesOnchain', 'aiAgents', 'scaledCapital', 'evalDataOnchain', 'bestSplit', 'bestTargetToRisk', 'maxLeverage', 'bestLeverage', 'payoutsVerified'];
+    const keys = ['name', 'country', 'split', 'maxAccount', 'profitTarget', 'dailyDrawdown', 'maxDrawdown', 'website', 'chain', 'isAffiliate', 'token', 'payoutSpeed', 'rulesOnchain', 'aiAgents', 'scaledCapital', 'evalDataOnchain', 'bestSplit', 'bestTargetToRisk', 'maxLeverage', 'bestLeverage', 'lowestFinalTarget', 'payoutsVerified'];
     return '    { ' + keys.map((k) => `${k}: ${JSON.stringify(f[k])}`).join(', ') + ' }';
 };
 

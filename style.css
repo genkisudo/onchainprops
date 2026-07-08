@@ -1342,6 +1342,12 @@ footer {
     font-size: 0.8rem;
 }
 
+/* Standout chip (lowest final-phase target) — bullseye glyph */
+.trust-chip--final-target::before {
+    content: '🎯';
+    font-size: 0.8rem;
+}
+
 @media (max-width: 640px) {
     /* name cell becomes flex-column at this width; chip drops below the name */
     .trust-chip {
