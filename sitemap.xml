@@ -37,6 +37,13 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- Carrot Funding — firm review & evaluation details -->
+  <url>
+    <loc>https://onchainprops.xyz/firms/carrot-funding</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- DojiFunded — firm review & evaluation details -->
   <url>
     <loc>https://onchainprops.xyz/firms/dojifunded</loc>
@@ -47,13 +54,6 @@
   <!-- Vanta Trading — firm review & evaluation details -->
   <url>
     <loc>https://onchainprops.xyz/firms/vanta-trading</loc>
-    <lastmod>2026-07-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Carrot Funding — firm review & evaluation details -->
-  <url>
-    <loc>https://onchainprops.xyz/firms/carrot-funding</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
