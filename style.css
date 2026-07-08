@@ -1330,6 +1330,18 @@ footer {
     font-size: 0.8rem;
 }
 
+/* Standout chip (best target-to-risk ratio) — balance-scale glyph */
+.trust-chip--target-risk::before {
+    content: '⚖️';
+    font-size: 0.8rem;
+}
+
+/* Standout chip (highest max leverage) — lightning-bolt glyph */
+.trust-chip--leverage::before {
+    content: '⚡';
+    font-size: 0.8rem;
+}
+
 @media (max-width: 640px) {
     /* name cell becomes flex-column at this width; chip drops below the name */
     .trust-chip {

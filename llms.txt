@@ -15,7 +15,7 @@ The following table lists all tracked onchain prop firms:
 | Hypernova | Cayman Islands | 80% | $200,000 | Hyperliquid | https://hypernova.xyz/ | https://onchainprops.xyz/firms/hypernova |
 | ProprXYZ | BVI | 80% | $200,000 | Hyperliquid | https://www.propr.xyz/ | https://onchainprops.xyz/firms/proprxyz |
 | hyperpnl | Cayman Islands | 80% | $25k ($200k soon) | Hyperliquid | https://app.hyperpnl.com/trade | https://onchainprops.xyz/firms/hyperpnl |
-| Carrot Funding | UAE | Up to 80% | $50k ($100k soon) | gTrade, Hyperliquid (soon) | https://app.carrotfunding.io/join/2VSSOTXBQZ | https://onchainprops.xyz/firms/carrot-funding |
+| Carrot Funding | UAE | 80% | $50k ($100k soon) | gTrade, Hyperliquid (soon) | https://app.carrotfunding.io/join/2VSSOTXBQZ | https://onchainprops.xyz/firms/carrot-funding |
 | DojiFunded | US (Delaware) | Up to 90% | $100,000 | Arbitrum | https://app.dojifunded.com/kol/onchainprops | https://onchainprops.xyz/firms/dojifunded |
 | Vanta Trading | Cayman Islands | 100% | $100,000 | Bittensor / Hyperliquid | https://vantatrading.io/ | https://onchainprops.xyz/firms/vanta-trading |
 | HyperStack | BVI | Up to 90% | $400,000 | Hyperliquid | https://www.hyperstack.trade/rules | https://onchainprops.xyz/firms/hyperstack |

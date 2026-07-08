@@ -82,6 +82,9 @@ const analytics = {
  * @property {boolean} isAffiliate
  * @property {string} token
  * @property {string} [bestSplit]
+ * @property {string} [bestTargetToRisk]
+ * @property {string} [maxLeverage]
+ * @property {string} [bestLeverage]
  * @property {string} [payoutsVerified]
  */
 
@@ -89,18 +92,18 @@ const AppState = {
     // GEN:BEGIN firm-data
     /** @type {PropFirm[]} */
     propFirms: [
-        { name: "Hypernova", country: "Cayman Islands", split: "80%", maxAccount: "$200,000", profitTarget: "10%", dailyDrawdown: "3-5%", maxDrawdown: "6-8%", website: "https://hypernova.xyz/", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "~5s", rulesOnchain: "Yes", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, payoutsVerified: "Yes" },
-        { name: "ProprXYZ", country: "BVI", split: "80%", maxAccount: "$200,000", profitTarget: "10%", dailyDrawdown: "3-5%", maxDrawdown: "6%", website: "https://app.propr.xyz/r/nCnJ5uZ9", chain: "Hyperliquid", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: "Yes", scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, payoutsVerified: "Yes" },
-        { name: "hyperpnl", country: "Cayman Islands", split: "80%", maxAccount: "$25k ($200k soon)", profitTarget: "10%/5%", dailyDrawdown: "5%", maxDrawdown: "9%", website: "https://app.hyperpnl.com/trade", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, payoutsVerified: "Yes" },
-        { name: "Carrot Funding", country: "UAE", split: "Up to 80%", maxAccount: "$50k ($100k soon)", profitTarget: "8%", dailyDrawdown: "4-5%", maxDrawdown: "8-10%", website: "https://app.carrotfunding.io/join/2VSSOTXBQZ", chain: "gTrade, Hyperliquid (soon)", isAffiliate: true, token: "Yes", payoutSpeed: "Within 24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, payoutsVerified: "Yes" },
-        { name: "DojiFunded", country: "US (Delaware)", split: "Up to 90%", maxAccount: "$100,000", profitTarget: "10%", dailyDrawdown: "3-5%", maxDrawdown: "6-8%", website: "https://app.dojifunded.com/kol/onchainprops", chain: "Arbitrum", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: "Yes", bestSplit: undefined, payoutsVerified: "Yes" },
-        { name: "Vanta Trading", country: "Cayman Islands", split: "100%", maxAccount: "$100,000", profitTarget: "8-10%", dailyDrawdown: "5%", maxDrawdown: "5%", website: "https://vantatrading.io/?ref=kamil", chain: "Bittensor / Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: "Yes", payoutsVerified: "No" },
-        { name: "HyperStack", country: "BVI", split: "Up to 90%", maxAccount: "$400,000", profitTarget: "10%", dailyDrawdown: "5%", maxDrawdown: "5%", website: "https://www.hyperstack.trade/rules", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "TBC", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, payoutsVerified: "No" },
-        { name: "FUNDED by FOXIFY", country: "BVI", split: "Up to 90%", maxAccount: "$10,000", profitTarget: "15%", dailyDrawdown: "N/A", maxDrawdown: "10-20%", website: "https://www.foxify.trade/", chain: "Hyperliquid (soon)", isAffiliate: false, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, payoutsVerified: "No" }
+        { name: "Hypernova", country: "Cayman Islands", split: "80%", maxAccount: "$200,000", profitTarget: "10%", dailyDrawdown: "3-5%", maxDrawdown: "6-8%", website: "https://hypernova.xyz/", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "~5s", rulesOnchain: "Yes", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, payoutsVerified: "Yes" },
+        { name: "ProprXYZ", country: "BVI", split: "80%", maxAccount: "$200,000", profitTarget: "10%", dailyDrawdown: "3-5%", maxDrawdown: "6%", website: "https://app.propr.xyz/r/nCnJ5uZ9", chain: "Hyperliquid", isAffiliate: true, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: "Yes", scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, payoutsVerified: "Yes" },
+        { name: "hyperpnl", country: "Cayman Islands", split: "80%", maxAccount: "$25k ($200k soon)", profitTarget: "10%/5%", dailyDrawdown: "5%", maxDrawdown: "9%", website: "https://app.hyperpnl.com/trade", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, payoutsVerified: "Yes" },
+        { name: "Carrot Funding", country: "UAE", split: "80%", maxAccount: "$50k ($100k soon)", profitTarget: "5%/8%", dailyDrawdown: "4-5%", maxDrawdown: "8-10%", website: "https://app.carrotfunding.io/join/2VSSOTXBQZ", chain: "gTrade, Hyperliquid (soon)", isAffiliate: true, token: "Yes", payoutSpeed: "Within 24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: "Yes", maxLeverage: "200x", bestLeverage: "Yes", payoutsVerified: "Yes" },
+        { name: "DojiFunded", country: "US (Delaware)", split: "Up to 90%", maxAccount: "$100,000", profitTarget: "10%", dailyDrawdown: "3-5%", maxDrawdown: "6-8%", website: "https://app.dojifunded.com/kol/onchainprops", chain: "Arbitrum", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: "Yes", bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, payoutsVerified: "Yes" },
+        { name: "Vanta Trading", country: "Cayman Islands", split: "100%", maxAccount: "$100,000", profitTarget: "8-10%", dailyDrawdown: "5%", maxDrawdown: "5%", website: "https://vantatrading.io/?ref=kamil", chain: "Bittensor / Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: "Yes", bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, payoutsVerified: "No" },
+        { name: "HyperStack", country: "BVI", split: "Up to 90%", maxAccount: "$400,000", profitTarget: "10%", dailyDrawdown: "5%", maxDrawdown: "5%", website: "https://www.hyperstack.trade/rules", chain: "Hyperliquid", isAffiliate: false, token: "No", payoutSpeed: "TBC", rulesOnchain: "TBC", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, payoutsVerified: "No" },
+        { name: "FUNDED by FOXIFY", country: "BVI", split: "Up to 90%", maxAccount: "$10,000", profitTarget: "15%", dailyDrawdown: "N/A", maxDrawdown: "10-20%", website: "https://www.foxify.trade/", chain: "Hyperliquid (soon)", isAffiliate: false, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, payoutsVerified: "No" }
     ],
     /** @type {PropFirm[]} */
     predictionMarketFirms: [
-        { name: "Funding Predicts", country: "USA", split: "Up to 90%", maxAccount: "$150,000", profitTarget: undefined, dailyDrawdown: undefined, maxDrawdown: undefined, website: "https://fundingpredicts.com/", chain: "Polymarket", isAffiliate: false, token: "No", payoutSpeed: "Weekly", rulesOnchain: "TBC", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, payoutsVerified: undefined }
+        { name: "Funding Predicts", country: "USA", split: "Up to 90%", maxAccount: "$150,000", profitTarget: undefined, dailyDrawdown: undefined, maxDrawdown: undefined, website: "https://fundingpredicts.com/", chain: "Polymarket", isAffiliate: false, token: "No", payoutSpeed: "Weekly", rulesOnchain: "TBC", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, payoutsVerified: undefined }
     ],
     // GEN:END firm-data
     /** @type {string|null} */
@@ -306,13 +309,22 @@ const buildFirmRow = (firm, rank, { showProfitTarget = false } = {}) => {
     chainDiv.textContent = firm.chain;
     nameCell.append(nameLink, chainDiv);
 
+    // Chips are inserted after `chipAnchor`, which advances to each new chip so
+    // multiple chips stack left-to-right in check order (Node.after() alone would
+    // always insert right after nameLink, reversing the order of later chips).
+    let chipAnchor = nameLink;
+    const appendChip = (chip) => {
+        chipAnchor.after(chip);
+        chipAnchor = chip;
+    };
+
     // Payout-trust signal: rules enforced by smart contracts, verifiable onchain
     if (firm.rulesOnchain === 'Yes') {
         const trustChip = document.createElement('span');
         trustChip.className = 'trust-chip';
         trustChip.textContent = 'Rules onchain';
         trustChip.title = 'Evaluation rules are enforced by smart contracts — verifiable on the blockchain';
-        nameLink.after(trustChip);
+        appendChip(trustChip);
     }
 
     // Capability signal: firm supports trading by autonomous AI agents
@@ -321,7 +333,7 @@ const buildFirmRow = (firm, rank, { showProfitTarget = false } = {}) => {
         aiChip.className = 'trust-chip trust-chip--ai';
         aiChip.textContent = 'AI agents trading';
         aiChip.title = 'Supports automated trading by AI agents';
-        nameLink.after(aiChip);
+        appendChip(aiChip);
     }
 
     // Capability signal: account capital scales up as the trader performs
@@ -330,7 +342,7 @@ const buildFirmRow = (firm, rank, { showProfitTarget = false } = {}) => {
         scaleChip.className = 'trust-chip trust-chip--capital';
         scaleChip.textContent = 'Scaled capital';
         scaleChip.title = 'Account size scales up as you hit profit targets';
-        nameLink.after(scaleChip);
+        appendChip(scaleChip);
     }
 
     // Transparency signal: evaluation trade-level data recorded onchain
@@ -339,7 +351,7 @@ const buildFirmRow = (firm, rank, { showProfitTarget = false } = {}) => {
         dataChip.className = 'trust-chip trust-chip--data';
         dataChip.textContent = 'Eval trading data onchain';
         dataChip.title = 'Every evaluation trade is recorded onchain — independently verifiable';
-        nameLink.after(dataChip);
+        appendChip(dataChip);
     }
 
     // Standout signal: highest profit split among listed firms
@@ -348,7 +360,25 @@ const buildFirmRow = (firm, rank, { showProfitTarget = false } = {}) => {
         splitChip.className = 'trust-chip trust-chip--split';
         splitChip.textContent = 'Best profit split';
         splitChip.title = 'Highest profit split among onchain prop firms in this directory';
-        nameLink.after(splitChip);
+        appendChip(splitChip);
+    }
+
+    // Standout signal: lowest profit target relative to allowed drawdown
+    if (firm.bestTargetToRisk === 'Yes') {
+        const targetRiskChip = document.createElement('span');
+        targetRiskChip.className = 'trust-chip trust-chip--target-risk';
+        targetRiskChip.textContent = 'Best target-to-risk';
+        targetRiskChip.title = 'Lowest profit target relative to allowed drawdown among onchain prop firms in this directory';
+        appendChip(targetRiskChip);
+    }
+
+    // Standout signal: highest max leverage among listed firms
+    if (firm.bestLeverage === 'Yes') {
+        const leverageChip = document.createElement('span');
+        leverageChip.className = 'trust-chip trust-chip--leverage';
+        leverageChip.textContent = 'Max leverage';
+        leverageChip.title = `Highest max leverage among onchain prop firms in this directory (${firm.maxLeverage})`;
+        appendChip(leverageChip);
     }
 
     const splitCell = document.createElement('td');
