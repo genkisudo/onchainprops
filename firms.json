@@ -70,7 +70,6 @@
       "token": "Yes",
       "payoutSpeed": "Within 24h",
       "rulesOnchain": "No",
-      "bestTargetToRisk": "Yes",
       "maxLeverage": "200x",
       "bestLeverage": "Yes",
       "payoutsVerified": "Yes"
