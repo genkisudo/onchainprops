@@ -108,7 +108,7 @@ const AppState = {
     ],
     /** @type {PropFirm[]} */
     cryptoPropFirms: [
-        { name: "SizeProp", country: "TBC", split: "Up to 95%", maxAccount: "$100,000", profitTarget: undefined, dailyDrawdown: undefined, maxDrawdown: undefined, website: "https://sizeprop.com/referral?ref=ACUOKUDW", chain: "Crypto, Stocks, FX and Commodities", isAffiliate: true, token: "No", payoutSpeed: "~24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No" }
+        { name: "SizeProp", country: "TBC", split: "Up to 95%", maxAccount: "$100,000", profitTarget: undefined, dailyDrawdown: undefined, maxDrawdown: undefined, website: "https://sizeprop.com/referral?ref=ACUOKUDW", chain: "", isAffiliate: true, token: "No", payoutSpeed: "~24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No" }
     ],
     // GEN:END firm-data
     /** @type {string|null} */
