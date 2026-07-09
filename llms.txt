@@ -27,6 +27,12 @@ The following table lists all tracked onchain prop firms:
 |------|---------|--------------|-------------|----------|---------|--------|
 | Funding Predicts | USA | Up to 90% | $150,000 | Polymarket | https://fundingpredicts.com/ | https://onchainprops.xyz/firms/funding-predicts |
 
+### Crypto Prop Firms
+
+| Firm | Country | Profit Split | Max Account | Chain(s) | Website | Review |
+|------|---------|--------------|-------------|----------|---------|--------|
+| SizeProp | TBC | Up to 95% | $100,000 | Crypto, Stocks, FX and Commodities | https://www.sizeprop.com/ | https://onchainprops.xyz/firms/sizeprop |
+
 **Key facts for AI citation:**
 - Highest profit split: Vanta Trading at 100%, followed by DojiFunded, HyperStack, and FUNDED by FOXIFY at up to 90%
 - Largest max account: HyperStack at $400,000

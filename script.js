@@ -106,6 +106,10 @@ const AppState = {
     predictionMarketFirms: [
         { name: "Funding Predicts", country: "USA", split: "Up to 90%", maxAccount: "$150,000", profitTarget: undefined, dailyDrawdown: undefined, maxDrawdown: undefined, website: "https://fundingpredicts.com/", chain: "Polymarket", isAffiliate: false, token: "No", payoutSpeed: "Weekly", rulesOnchain: "TBC", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: undefined }
     ],
+    /** @type {PropFirm[]} */
+    cryptoPropFirms: [
+        { name: "SizeProp", country: "TBC", split: "Up to 95%", maxAccount: "$100,000", profitTarget: undefined, dailyDrawdown: undefined, maxDrawdown: undefined, website: "https://sizeprop.com/referral?ref=ACUOKUDW", chain: "Crypto, Stocks, FX and Commodities", isAffiliate: true, token: "No", payoutSpeed: "~24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No" }
+    ],
     // GEN:END firm-data
     /** @type {string|null} */
     activeFaqId: null
@@ -489,6 +493,22 @@ const renderPredictionMarketsTable = () => {
     tableBody.appendChild(fragment);
 };
 
+/**
+ * Renders the Crypto Prop Firms table (crypto-focused firms not limited to onchain execution),
+ * mirroring the Prediction Markets table layout.
+ */
+const renderCryptoPropFirmsTable = () => {
+    const tableBody = document.getElementById('crypto-prop-firms-table-body');
+    if (!tableBody) return;
+
+    const fragment = document.createDocumentFragment();
+    AppState.cryptoPropFirms.forEach((firm, index) => {
+        fragment.appendChild(buildFirmRow(firm, index + 1));
+    });
+
+    tableBody.appendChild(fragment);
+};
+
 // -----------------------------------------
 // 5. IntersectionObserver — section and card visibility
 // -----------------------------------------
@@ -585,6 +605,33 @@ const setupPredictionCardObservers = () => {
     rows.forEach(row => cardObserver.observe(row));
 };
 
+/**
+ * Same card-viewed tracking for the crypto-prop-firms table.
+ * Called after renderCryptoPropFirmsTable.
+ */
+const setupCryptoPropFirmsCardObservers = () => {
+    const rows = document.querySelectorAll('#crypto-prop-firms-table-body tr');
+    if (!rows.length) return;
+
+    const cardObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const row = entry.target;
+            const firmName = row.dataset.firmName ?? '';
+            const firmRank = parseInt(row.dataset.firmRank ?? '0', 10);
+            analytics.track('Firm Card Viewed', {
+                'firm id': toFirmId(firmName),
+                'firm name': firmName,
+                'firm rank': firmRank,
+                'list position': firmRank
+            });
+            cardObserver.unobserve(row);
+        });
+    }, { threshold: 0.25 });
+
+    rows.forEach(row => cardObserver.observe(row));
+};
+
 // -----------------------------------------
 // 6. Mobile Navigation
 // -----------------------------------------
@@ -610,6 +657,7 @@ const setupMobileNav = () => {
 const firmsArrayForRow = (row) => {
     if (row.closest('#firm-table-body')) return AppState.propFirms;
     if (row.closest('#prediction-markets-table-body')) return AppState.predictionMarketFirms;
+    if (row.closest('#crypto-prop-firms-table-body')) return AppState.cryptoPropFirms;
     return null;
 };
 
@@ -767,6 +815,8 @@ document.addEventListener('DOMContentLoaded', () => {
         renderPropFirmsTable();
         renderPredictionMarketsTable();
         setupPredictionCardObservers();
+        renderCryptoPropFirmsTable();
+        setupCryptoPropFirmsCardObservers();
         setupSectionObservers();
         setupMobileNav();
         setupEventDelegation();

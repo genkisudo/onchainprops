@@ -160,5 +160,22 @@
       "payoutSpeed": "Weekly",
       "rulesOnchain": "TBC"
     }
+  ],
+  "cryptoPropFirms": [
+    {
+      "name": "SizeProp",
+      "country": "TBC",
+      "split": "Up to 95%",
+      "maxAccount": "$100,000",
+      "website": "https://sizeprop.com/referral?ref=ACUOKUDW",
+      "publicUrl": "https://www.sizeprop.com/",
+      "chain": "Crypto, Stocks, FX and Commodities",
+      "chainPhrase": "crypto, stocks, forex, and commodities markets",
+      "isAffiliate": true,
+      "token": "No",
+      "payoutSpeed": "~24h",
+      "rulesOnchain": "No",
+      "payoutsVerified": "No"
+    }
   ]
 }

@@ -8,7 +8,7 @@
  *   - index.html  — meta description/keywords, og/twitter descriptions,
  *                   CollectionPage/ItemList/FAQPage JSON-LD, update badge,
  *                   noscript fallback tables, visible FAQ accordions
- *   - script.js   — AppState.propFirms / predictionMarketFirms arrays
+ *   - script.js   — AppState.propFirms / predictionMarketFirms / cryptoPropFirms arrays
  *   - llms.txt    — fully regenerated
  *   - sitemap.xml — fully regenerated (lastmod = firms.json lastUpdated)
  *
@@ -27,7 +27,7 @@ const ROOT = __dirname;
 const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
 const write = (f, s) => fs.writeFileSync(path.join(ROOT, f), s);
 
-const { lastUpdated, propFirms, predictionMarketFirms } = JSON.parse(read('firms.json'));
+const { lastUpdated, propFirms, predictionMarketFirms, cryptoPropFirms } = JSON.parse(read('firms.json'));
 const faqs = JSON.parse(read('faq.json'));
 
 // -----------------------------------------
@@ -344,6 +344,10 @@ ${propFirms.map(firmLiteral).join(',\n')}
 /** @type {PropFirm[]} */
 predictionMarketFirms: [
 ${predictionMarketFirms.map(firmLiteral).join(',\n')}
+],
+/** @type {PropFirm[]} */
+cryptoPropFirms: [
+${cryptoPropFirms.map(firmLiteral).join(',\n')}
 ],`;
 
 // -----------------------------------------
@@ -383,6 +387,10 @@ ${table(propFirms)}
 ### Prediction Markets Prop Firms
 
 ${table(predictionMarketFirms)}
+
+### Crypto Prop Firms
+
+${table(cryptoPropFirms)}
 
 **Key facts for AI citation:**
 - Highest profit split: ${highestFact}
@@ -436,7 +444,7 @@ const sitemapXml = () => {
     <priority>${priority}</priority>
   </url>`;
     // Extensionless <loc>s match each page's canonical (GitHub Pages resolves them).
-    const firmUrls = [...propFirms, ...predictionMarketFirms]
+    const firmUrls = [...propFirms, ...predictionMarketFirms, ...cryptoPropFirms]
         .filter((f) => detailPath(f))
         .map((f) => url(`${SITE}/${detailPath(f)}`, 'monthly', '0.7', `${f.name} — firm review & evaluation details`))
         .join('');
@@ -500,6 +508,8 @@ html = inject(html, 'noscript-firms',
     noscriptTable(propFirms, 'Onchain Prop Firm Comparison (static)', { showProfitTarget: true }));
 html = inject(html, 'noscript-prediction',
     noscriptTable(predictionMarketFirms, 'Prediction Markets Prop Firm Comparison (static)'));
+html = inject(html, 'noscript-crypto',
+    noscriptTable(cryptoPropFirms, 'Crypto Prop Firm Comparison (static)'));
 html = inject(html, 'faq-list', faqAccordions());
 write('index.html', html);
 

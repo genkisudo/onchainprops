@@ -79,6 +79,13 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- SizeProp — firm review & evaluation details -->
+  <url>
+    <loc>https://onchainprops.xyz/firms/sizeprop</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 
   <!-- Resources — tools & guides for onchain traders -->
   <url>
