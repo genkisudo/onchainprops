@@ -422,19 +422,6 @@ const buildFirmRow = (firm, rank, { showProfitTarget = false } = {}) => {
     tokenCell.dataset.label = 'Token';
     tokenCell.textContent = firm.token;
 
-    const payoutsVerifiedCell = document.createElement('td');
-    payoutsVerifiedCell.dataset.label = 'Payouts Verified';
-    if (firm.payoutsVerified === 'Yes') {
-        const check = document.createElement('span');
-        check.className = 'payout-verified-check';
-        check.setAttribute('aria-label', 'Payouts verified');
-        check.title = 'Payouts have been independently verified';
-        check.textContent = '✓';
-        payoutsVerifiedCell.appendChild(check);
-    } else {
-        payoutsVerifiedCell.textContent = '—';
-    }
-
     const visitCell = document.createElement('td');
     visitCell.dataset.label = 'Firm';
     const linksDiv = document.createElement('div');
@@ -450,7 +437,7 @@ const buildFirmRow = (firm, rank, { showProfitTarget = false } = {}) => {
     visitCell.appendChild(linksDiv);
 
     if (showProfitTarget) {
-        row.append(nameCell, splitCell, accountCell, profitTargetCell, dailyDrawdownCell, maxDrawdownCell, payoutsVerifiedCell, visitCell);
+        row.append(nameCell, splitCell, accountCell, profitTargetCell, dailyDrawdownCell, maxDrawdownCell, visitCell);
     } else {
         row.append(nameCell, splitCell, accountCell, tokenCell, visitCell);
     }
