@@ -20,7 +20,7 @@
       "payoutsVerified": "Yes"
     },
     {
-      "name": "ProprXYZ",
+      "name": "Propr",
       "country": "BVI",
       "split": "80%",
       "maxAccount": "Up to $300k",
@@ -39,6 +39,24 @@
       "payoutsVerified": "Yes"
     },
     {
+      "name": "DojiFunded",
+      "country": "US (Delaware)",
+      "split": "Up to 90%",
+      "maxAccount": "$100,000",
+      "profitTarget": "10%",
+      "dailyDrawdown": "3-5%",
+      "maxDrawdown": "6-8%",
+      "website": "https://app.dojifunded.com/kol/onchainprops",
+      "chain": "Arbitrum",
+      "chainPhrase": "the Arbitrum chain",
+      "isAffiliate": false,
+      "token": "No",
+      "payoutSpeed": "TBC",
+      "rulesOnchain": "No",
+      "evalDataOnchain": "Yes",
+      "payoutsVerified": "Yes"
+    },
+    {
       "name": "hyperpnl",
       "country": "Cayman Islands",
       "split": "80%",
@@ -53,7 +71,6 @@
       "token": "No",
       "payoutSpeed": "Soon",
       "rulesOnchain": "No",
-      "lowestFinalTarget": "Yes",
       "payoutsVerified": "Yes"
     },
     {
@@ -76,24 +93,6 @@
       "payoutsVerified": "Yes"
     },
     {
-      "name": "DojiFunded",
-      "country": "US (Delaware)",
-      "split": "Up to 90%",
-      "maxAccount": "$100,000",
-      "profitTarget": "10%",
-      "dailyDrawdown": "3-5%",
-      "maxDrawdown": "6-8%",
-      "website": "https://app.dojifunded.com/kol/onchainprops",
-      "chain": "Arbitrum",
-      "chainPhrase": "the Arbitrum chain",
-      "isAffiliate": false,
-      "token": "No",
-      "payoutSpeed": "TBC",
-      "rulesOnchain": "No",
-      "evalDataOnchain": "Yes",
-      "payoutsVerified": "Yes"
-    },
-    {
       "name": "Vanta Trading",
       "country": "Cayman Islands",
       "split": "100%",
@@ -109,7 +108,6 @@
       "token": "No",
       "payoutSpeed": "Soon",
       "rulesOnchain": "No",
-      "bestSplit": "Yes",
       "payoutsVerified": "No"
     },
     {

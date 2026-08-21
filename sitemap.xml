@@ -23,9 +23,16 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- ProprXYZ — firm review & evaluation details -->
+  <!-- Propr — firm review & evaluation details -->
   <url>
-    <loc>https://onchainprops.xyz/firms/proprxyz</loc>
+    <loc>https://onchainprops.xyz/firms/propr</loc>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- DojiFunded — firm review & evaluation details -->
+  <url>
+    <loc>https://onchainprops.xyz/firms/dojifunded</loc>
     <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -40,13 +47,6 @@
   <!-- Carrot Funding — firm review & evaluation details -->
   <url>
     <loc>https://onchainprops.xyz/firms/carrot-funding</loc>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- DojiFunded — firm review & evaluation details -->
-  <url>
-    <loc>https://onchainprops.xyz/firms/dojifunded</loc>
     <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
