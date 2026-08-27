@@ -84,6 +84,8 @@ const detailPath = (f) => {
 };
 const displayDomain = (f) =>
     new URL(publicUrl(f)).hostname.replace(/^(www|app|waitlist)\./, '');
+/** Google requires `rel="sponsored"` on paid/affiliate links; only add it when the rendered URL is actually the monetized one (firms with a `publicUrl` override show the clean canonical link instead). */
+const relFor = (f, href) => f.isAffiliate && href === f.website ? 'sponsored noopener noreferrer' : 'noopener noreferrer';
 
 const joinNames = (arr) =>
     arr.length <= 1 ? (arr[0] ?? '')
@@ -308,7 +310,7 @@ const noscriptTable = (firms, label, { showProfitTarget = false } = {}) => {
             <td>${f.chain}</td>
             <td>${f.split}</td>
             <td>${f.maxAccount}</td>${showProfitTarget ? `\n            <td>${f.profitTarget ?? 'TBC'}</td>\n            <td>${f.dailyDrawdown ?? 'TBC'}</td>\n            <td>${f.maxDrawdown ?? 'TBC'}</td>` : `\n            <td>${f.token}</td>`}
-            <td><a href="${publicUrl(f)}" rel="noopener noreferrer">${displayDomain(f)}</a></td>
+            <td><a href="${publicUrl(f)}" rel="${relFor(f, publicUrl(f))}">${displayDomain(f)}</a></td>
         </tr>`).join('\n');
     return `<noscript>
     <table class="prop-table" aria-label="${label}">
