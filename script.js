@@ -781,6 +781,41 @@ const loadProprRevenue = async () => {
     }
 };
 
+/**
+ * Blog category filter — client-side toggle over the blog listing grid.
+ * No-ops on any page that doesn't have #blog-grid (e.g. everything but blog.html).
+ */
+function setupBlogFilters() {
+    const grid = document.getElementById('blog-grid');
+    if (!grid) return;
+
+    const filterButtons = document.querySelectorAll('.blog-filter');
+    const cards = grid.querySelectorAll('.blog-card');
+    const emptyState = document.getElementById('blog-empty');
+
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filter = btn.dataset.filter;
+
+            filterButtons.forEach(b => {
+                b.classList.toggle('is-active', b === btn);
+                b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+            });
+
+            let visibleCount = 0;
+            cards.forEach(card => {
+                const match = filter === 'all' || card.dataset.category === filter;
+                card.hidden = !match;
+                if (match) visibleCount++;
+            });
+
+            if (emptyState) emptyState.hidden = visibleCount !== 0;
+
+            analytics.track('Blog Filter Applied', { 'filter category': filter });
+        });
+    });
+}
+
 // -----------------------------------------
 // Initialization
 // -----------------------------------------
@@ -808,6 +843,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setupMobileNav();
         setupEventDelegation();
         loadProprRevenue();
+        setupBlogFilters();
     } catch (e) {
         console.error("App initialization failure:", e);
         analytics.track('Error Encountered', {

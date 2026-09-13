@@ -87,6 +87,14 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Blog — payout safety and onchain prop trading guides -->
+  <url>
+    <loc>https://onchainprops.xyz/blog.html</loc>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Resources — tools & guides for onchain traders -->
   <url>
     <loc>https://onchainprops.xyz/resources</loc>
