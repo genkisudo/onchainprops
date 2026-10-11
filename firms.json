@@ -144,6 +144,24 @@
       "payoutSpeed": "Soon",
       "rulesOnchain": "No",
       "payoutsVerified": "No"
+    },
+    {
+      "name": "Iceberg",
+      "country": "TBC",
+      "split": "80%",
+      "maxAccount": "$100,000",
+      "profitTarget": "10%",
+      "dailyDrawdown": "3%",
+      "maxDrawdown": "6%",
+      "website": "https://www.iceberg.cash/?ref=3665E15AECCD7D44",
+      "publicUrl": "https://www.iceberg.cash/",
+      "chain": "Hyperliquid",
+      "chainPhrase": "the Hyperliquid chain",
+      "isAffiliate": true,
+      "token": "TBC",
+      "payoutSpeed": "TBC",
+      "rulesOnchain": "TBC",
+      "payoutsVerified": "No"
     }
   ],
   "predictionMarketFirms": [
