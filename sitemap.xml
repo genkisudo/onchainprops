@@ -72,6 +72,13 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- Iceberg — firm review & evaluation details -->
+  <url>
+    <loc>https://onchainprops.xyz/firms/iceberg</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- Funding Predicts — firm review & evaluation details -->
   <url>
     <loc>https://onchainprops.xyz/firms/funding-predicts</loc>
