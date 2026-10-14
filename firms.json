@@ -112,23 +112,6 @@
       "payoutsVerified": "No"
     },
     {
-      "name": "HyperStack",
-      "country": "BVI",
-      "split": "Up to 90%",
-      "maxAccount": "$400,000",
-      "profitTarget": "10%",
-      "dailyDrawdown": "5%",
-      "maxDrawdown": "5%",
-      "website": "https://www.hyperstack.trade/rules",
-      "chain": "Hyperliquid",
-      "chainPhrase": "Hyperliquid",
-      "isAffiliate": false,
-      "token": "No",
-      "payoutSpeed": "TBC",
-      "rulesOnchain": "TBC",
-      "payoutsVerified": "No"
-    },
-    {
       "name": "FUNDED by FOXIFY",
       "country": "BVI",
       "split": "Up to 90%",

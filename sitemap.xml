@@ -58,13 +58,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- HyperStack — firm review & evaluation details -->
-  <url>
-    <loc>https://onchainprops.xyz/firms/hyperstack</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- FUNDED by FOXIFY — firm review & evaluation details -->
   <url>
     <loc>https://onchainprops.xyz/firms/funded-by-foxify</loc>
