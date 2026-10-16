@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-10",
+  "lastUpdated": "2026-10-16",
   "propFirms": [
     {
       "name": "Hypernova",
@@ -37,6 +37,45 @@
       "rulesOnchain": "No",
       "aiAgents": "Yes",
       "payoutsVerified": "Yes"
+    },
+    {
+      "name": "Iceberg",
+      "country": "TBC",
+      "split": "80%",
+      "maxAccount": "$100,000",
+      "profitTarget": "None / 10%",
+      "dailyDrawdown": "3%",
+      "maxDrawdown": "6%",
+      "website": "https://www.iceberg.cash/?ref=3665E15AECCD7D44",
+      "publicUrl": "https://www.iceberg.cash/",
+      "chain": "Hyperliquid",
+      "chainPhrase": "the Hyperliquid chain",
+      "isAffiliate": true,
+      "token": "No",
+      "payoutSpeed": "~seconds",
+      "rulesOnchain": "No",
+      "maxLeverage": "25x",
+      "payoutsVerified": "No"
+    },
+    {
+      "name": "Cashed",
+      "country": "TBC",
+      "split": "Up to 90%",
+      "maxAccount": "$330,000",
+      "profitTarget": "None / 8-12%",
+      "dailyDrawdown": "2-5%",
+      "maxDrawdown": "3-8%",
+      "website": "https://cashed.fun/join?ref=GENKISUD-209C78",
+      "publicUrl": "https://www.cashed.fun/",
+      "chain": "Hyperliquid / Polymarket",
+      "chainPhrase": "Hyperliquid and Polymarket",
+      "isAffiliate": true,
+      "token": "No",
+      "payoutSpeed": "24h",
+      "rulesOnchain": "No",
+      "scaledCapital": "Yes",
+      "maxLeverage": "10x",
+      "payoutsVerified": "No"
     },
     {
       "name": "DojiFunded",
@@ -143,24 +182,6 @@
       "token": "Yes",
       "payoutSpeed": "Soon",
       "rulesOnchain": "No",
-      "payoutsVerified": "No"
-    },
-    {
-      "name": "Iceberg",
-      "country": "TBC",
-      "split": "80%",
-      "maxAccount": "$100,000",
-      "profitTarget": "10%",
-      "dailyDrawdown": "3%",
-      "maxDrawdown": "6%",
-      "website": "https://www.iceberg.cash/?ref=3665E15AECCD7D44",
-      "publicUrl": "https://www.iceberg.cash/",
-      "chain": "Hyperliquid",
-      "chainPhrase": "the Hyperliquid chain",
-      "isAffiliate": true,
-      "token": "TBC",
-      "payoutSpeed": "TBC",
-      "rulesOnchain": "TBC",
       "payoutsVerified": "No"
     }
   ],

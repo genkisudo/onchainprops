@@ -122,6 +122,7 @@ const scaledFirms = propFirms.filter((f) => /scaled/i.test(f.maxAccount)).map((f
 
 const hlLive = propFirms.filter((f) => f.chain === 'Hyperliquid');
 const hlSoon = propFirms.filter((f) => /hyperliquid \(soon\)/i.test(f.chain));
+const hlMixed = propFirms.filter((f) => /hyperliquid/i.test(f.chain) && f.chain !== 'Hyperliquid' && !/hyperliquid \(soon\)/i.test(f.chain));
 const nonHl = propFirms.filter((f) => !/hyperliquid/i.test(f.chain));
 
 // -----------------------------------------
@@ -162,6 +163,7 @@ const chainsAnswer = () => {
         `${joinNames(hlLive.map((f) => f.name))} all use Hyperliquid.`
     ];
     if (soonPhrases.length) sentences.push(joinNames(soonPhrases) + '.');
+    if (hlMixed.length) sentences.push(joinNames(hlMixed.map((f) => `${f.name} uses ${f.chain}`)) + '.');
     if (nonHl.length) sentences.push(nonHl.map((f) => `${f.name} operates on ${f.chain}`).join(' and ') + '.');
     return [sentences.join(' ')];
 };
