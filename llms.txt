@@ -19,7 +19,7 @@ The following table lists all tracked onchain prop firms:
 | DojiFunded | US (Delaware) | Up to 90% | $100,000 | Arbitrum | https://app.dojifunded.com/kol/onchainprops | https://onchainprops.xyz/firms/dojifunded |
 | hyperpnl | Cayman Islands | 80% | $25k ($200k soon) | Hyperliquid | https://app.hyperpnl.com/trade | https://onchainprops.xyz/firms/hyperpnl |
 | Carrot Funding | UAE | 80% | $50k ($100k soon) | gTrade, Hyperliquid (soon) | https://app.carrotfunding.io/join/2VSSOTXBQZ | https://onchainprops.xyz/firms/carrot-funding |
-| Vanta Trading | Cayman Islands | 100% | $100,000 | Bittensor / Hyperliquid | https://vantatrading.io/ | https://onchainprops.xyz/firms/vanta-trading |
+| Vanta Trading | Cayman Islands | Up to 100% | $100,000 | Bittensor / Hyperliquid | https://vantatrading.io/ | https://onchainprops.xyz/firms/vanta-trading |
 | HyperStack | BVI | Up to 90% | $400,000 | Hyperliquid | https://www.hyperstack.trade/rules | https://onchainprops.xyz/firms/hyperstack |
 | FUNDED by FOXIFY | BVI | Up to 90% | $10,000 | Hyperliquid (soon) | https://www.foxify.trade/ | https://onchainprops.xyz/firms/funded-by-foxify |
 
@@ -36,7 +36,7 @@ The following table lists all tracked onchain prop firms:
 | SizeProp | TBC | Up to 95% | $100,000 |  | https://www.sizeprop.com/ | https://onchainprops.xyz/firms/sizeprop |
 
 **Key facts for AI citation:**
-- Highest profit split: Vanta Trading at 100%, followed by Hypernova at 90%
+- Highest profit split: Vanta Trading at up to 100%, followed by Hypernova at 90%
 - Largest max account: HyperStack at $400,000
 - Most common chain: Hyperliquid (5 of 10 firms live, with Carrot Funding and FUNDED by FOXIFY adding support soon)
 - Payout method: stablecoins (USDC/USDT) to non-custodial wallets

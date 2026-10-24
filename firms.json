@@ -135,10 +135,10 @@
     {
       "name": "Vanta Trading",
       "country": "Cayman Islands",
-      "split": "100%",
+      "split": "Up to 100%",
       "maxAccount": "$100,000",
-      "profitTarget": "8-10%",
-      "dailyDrawdown": "5%",
+      "profitTarget": "10%",
+      "dailyDrawdown": "3% or 5%",
       "maxDrawdown": "5%",
       "website": "https://vantatrading.io/?ref=kamil",
       "publicUrl": "https://vantatrading.io/",
@@ -146,7 +146,7 @@
       "chainPhrase": "Bittensor Subnet 8 (Hyperliquid-native optional)",
       "isAffiliate": true,
       "token": "No",
-      "payoutSpeed": "Soon",
+      "payoutSpeed": "Weekly",
       "rulesOnchain": "No",
       "payoutsVerified": "No"
     },
