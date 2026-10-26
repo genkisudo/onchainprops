@@ -30,3 +30,7 @@ scripts/
 campaign/
 test-results/
 video_production_kit.md
+
+# Accidental nested repo copies
+/onchainprops/
+/onchainprops-1/
