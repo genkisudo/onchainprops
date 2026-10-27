@@ -14,12 +14,12 @@ The following table lists all tracked onchain prop firms:
 |------|---------|--------------|-------------|----------|---------|--------|
 | Hypernova | Cayman Islands | 90% | $300,000 | Hyperliquid | https://hypernova.xyz/ | https://onchainprops.xyz/firms/hypernova |
 | Propr | BVI | 80% | Up to $300k | Hyperliquid | https://www.propr.xyz/ | https://onchainprops.xyz/firms/propr |
+| Vanta Trading | Cayman Islands | Up to 100% | $100,000 | Bittensor / Hyperliquid | https://vantatrading.io/ | https://onchainprops.xyz/firms/vanta-trading |
 | Iceberg | TBC | 80% | $100,000 | Hyperliquid | https://www.iceberg.cash/ | https://onchainprops.xyz/firms/iceberg |
 | Cashed | TBC | Up to 90% | $330,000 | Hyperliquid / Polymarket | https://www.cashed.fun/ | https://onchainprops.xyz/firms/cashed |
 | DojiFunded | US (Delaware) | Up to 90% | $100,000 | Arbitrum | https://app.dojifunded.com/kol/onchainprops | https://onchainprops.xyz/firms/dojifunded |
 | hyperpnl | Cayman Islands | 80% | $25k ($200k soon) | Hyperliquid | https://app.hyperpnl.com/trade | https://onchainprops.xyz/firms/hyperpnl |
 | Carrot Funding | UAE | 80% | $50k ($100k soon) | gTrade, Hyperliquid (soon) | https://app.carrotfunding.io/join/2VSSOTXBQZ | https://onchainprops.xyz/firms/carrot-funding |
-| Vanta Trading | Cayman Islands | Up to 100% | $100,000 | Bittensor / Hyperliquid | https://vantatrading.io/ | https://onchainprops.xyz/firms/vanta-trading |
 | HyperStack | BVI | Up to 90% | $400,000 | Hyperliquid | https://www.hyperstack.trade/rules | https://onchainprops.xyz/firms/hyperstack |
 | FUNDED by FOXIFY | BVI | Up to 90% | $10,000 | Hyperliquid (soon) | https://www.foxify.trade/ | https://onchainprops.xyz/firms/funded-by-foxify |
 
