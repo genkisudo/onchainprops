@@ -1,6 +1,7 @@
 ---
 title: Exact H1 — phrase it as the question people ask
 description: 150-160 chars for the meta description / search snippet.
+seoTitle: Optional <title> tag (~55 chars); defaults to title + brand
 category: payout-safety
 date: 2026-10-29
 tldr: One or two sentences that fully answer the title question. This is what answer engines will quote.

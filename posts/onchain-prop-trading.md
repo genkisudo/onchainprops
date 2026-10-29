@@ -1,6 +1,7 @@
 ---
 title: Onchain Prop Trading: Why the Books Are Finally Opening
 description: Onchain prop trading explained: how onchain prop firms like Propr and Hypernova move hedging, rules and payouts onchain so traders can verify them.
+seoTitle: Onchain Prop Trading: Why Prop Firm Books Are Opening
 category: general
 date: 2026-10-29
 tldr: Onchain prop trading means anyone can audit the code and check the data themselves. Onchain prop firms move hedging, account rules, payouts and revenue onto the blockchain, so traders verify the firm instead of taking its word for it.

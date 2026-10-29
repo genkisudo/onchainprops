@@ -444,8 +444,7 @@ const CATEGORIES = {
     general: 'General',
     'payout-safety': 'Payout Safety',
     guides: 'Guides',
-    reviews: 'Firm Reviews',
-    basics: 'Basics'
+    reviews: 'Firm Reviews'
 };
 const escHtml = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const fmtDate = (iso) => {
@@ -545,7 +544,7 @@ const blogCards = () => posts.map((p) => `<a href="blog/${p.slug}" class="articl
 
 const postPage = (p) => {
     const url = `${SITE}/blog/${p.slug}`;
-    const title = `${p.title} | ${BRAND}`;
+    const title = p.seoTitle ?? `${p.title} | ${BRAND}`;
     const schemas = [{
         '@context': 'https://schema.org',
         '@type': 'Article',
@@ -555,8 +554,8 @@ const postPage = (p) => {
         dateModified: p.updated,
         mainEntityOfPage: url,
         image: `${SITE}/og-image.png`,
-        author: { '@id': ORG_ID },
-        publisher: { '@id': ORG_ID }
+        author: { '@type': 'Organization', '@id': ORG_ID, name: BRAND, url: `${SITE}/` },
+        publisher: { '@type': 'Organization', '@id': ORG_ID, name: BRAND, url: `${SITE}/` }
     }, {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',

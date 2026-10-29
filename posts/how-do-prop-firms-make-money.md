@@ -1,6 +1,7 @@
 ---
 title: How Do Crypto Prop Firms Make Money? A-Book vs B-Book Explained
 description: How do prop firms make money? Evaluation fees, profit splits and B-book vs A-book models explained, plus how to check if a crypto prop firm is legit.
+seoTitle: How Do Prop Firms Make Money? A-Book vs B-Book
 category: guides
 date: 2026-10-29
 tldr: Prop firms make money from evaluation fees, their share of the profit split on funded accounts, and extras like resets. On a B-book, traders sit on simulated accounts and the firm takes the other side, so trader losses are firm revenue. On an A-book, trader flow is hedged in the market and the firm earns when traders do.
