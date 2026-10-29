@@ -473,6 +473,7 @@ const mdBlocks = (body) => {
         const line = lines[i];
         let m;
         if (!line.trim()) { i++; continue; }
+        if (/^-{3,}\s*$/.test(line)) { out.push('<hr>'); i++; continue; }
         if ((m = /^(#{2,3})\s+(.+)$/.exec(line))) {
             out.push(`<h${m[1].length} id="${slugify(m[2])}">${mdInline(m[2])}</h${m[1].length}>`);
             i++;
@@ -493,7 +494,7 @@ const mdBlocks = (body) => {
             out.push(`<blockquote><p>${mdInline(q.join(' '))}</p></blockquote>`);
         } else {
             const p = [];
-            while (i < lines.length && lines[i].trim() && !/^(#{2,3}\s|\s*\||\s*([-*]|\d+\.)\s|>)/.test(lines[i])) p.push(lines[i++].trim());
+            while (i < lines.length && lines[i].trim() && !/^(#{2,3}\s|-{3,}\s*$|\s*\||\s*([-*]|\d+\.)\s|>)/.test(lines[i])) p.push(lines[i++].trim());
             out.push(`<p>${mdInline(p.join(' '))}</p>`);
         }
     }
@@ -523,7 +524,7 @@ const loadPosts = () => {
             const h = /^(#{2,3})\s+(.+)\n?([\s\S]*)$/.exec(block);
             if (!h) continue;
             if (h[1] === '##') inFaq = /^(faq|frequently asked questions)$/i.test(h[2].trim());
-            else if (inFaq) faq.push({ q: h[2].trim(), a: stripTags(mdBlocks(h[3])).replace(/\s+/g, ' ').trim() });
+            else if (inFaq) faq.push({ q: h[2].trim(), a: stripTags(mdBlocks(h[3].split(/\n-{3,}\s*(?:\n|$)/)[0])).replace(/\s+/g, ' ').trim() });
         }
         return {
             ...meta, slug, faq, html: mdBlocks(body),

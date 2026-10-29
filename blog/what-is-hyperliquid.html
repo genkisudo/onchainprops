@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Is Hyperliquid? HyperCore, HIP-3 &amp; Builder Codes</title>
+    <meta name="description" content="What is Hyperliquid? A plain-English guide to the onchain order book L1: HyperCore, HyperEVM, HIP-3 markets, builder codes and HIP-4 outcomes.">
+    <link rel="canonical" href="https://onchainprops.xyz/blog/what-is-hyperliquid">
+
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://onchainprops.xyz/blog/what-is-hyperliquid">
+    <meta property="og:title" content="What Is Hyperliquid? HyperCore, HIP-3 &amp; Builder Codes">
+    <meta property="og:description" content="What is Hyperliquid? A plain-English guide to the onchain order book L1: HyperCore, HyperEVM, HIP-3 markets, builder codes and HIP-4 outcomes.">
+    <meta property="og:image" content="https://onchainprops.xyz/og-image.png">
+    <meta property="article:published_time" content="2026-10-29">
+    <meta property="article:modified_time" content="2026-10-29">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@wtfonchain">
+    <meta name="twitter:title" content="What Is Hyperliquid? HyperCore, HIP-3 &amp; Builder Codes">
+    <meta name="twitter:description" content="What is Hyperliquid? A plain-English guide to the onchain order book L1: HyperCore, HyperEVM, HIP-3 markets, builder codes and HIP-4 outcomes.">
+    <meta name="twitter:image" content="https://onchainprops.xyz/og-image.png">
+
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'none';
+        script-src 'self' https://agents.dante-ai.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://agents.dante-ai.com;
+        font-src https://fonts.gstatic.com;
+        img-src 'self' data: https://agents.dante-ai.com;
+        manifest-src 'self';
+        connect-src https://api.amplitude.com https://api2.amplitude.com https://analytics.eu.amplitude.com https://agents.dante-ai.com;
+        frame-src https://agents.dante-ai.com;
+        object-src 'none';
+        base-uri 'self';
+        form-action 'none';
+        upgrade-insecure-requests;
+    ">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="theme-color" content="#14161b">
+
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../style.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "What Is Hyperliquid?",
+      "description": "What is Hyperliquid? A plain-English guide to the onchain order book L1: HyperCore, HyperEVM, HIP-3 markets, builder codes and HIP-4 outcomes.",
+      "datePublished": "2026-10-29",
+      "dateModified": "2026-10-29",
+      "mainEntityOfPage": "https://onchainprops.xyz/blog/what-is-hyperliquid",
+      "image": "https://onchainprops.xyz/og-image.png",
+      "author": {
+        "@type": "Organization",
+        "@id": "https://onchainprops.xyz/#organization",
+        "name": "OnchainProps",
+        "url": "https://onchainprops.xyz/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://onchainprops.xyz/#organization",
+        "name": "OnchainProps",
+        "url": "https://onchainprops.xyz/"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://onchainprops.xyz/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://onchainprops.xyz/blog.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "What Is Hyperliquid?",
+          "item": "https://onchainprops.xyz/blog/what-is-hyperliquid"
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Hyperliquid in simple terms?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A blockchain whose core is an onchain exchange for perps and spot, plus an EVM so apps can plug into that liquidity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does Hyperliquid work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "HyperBFT orders transactions. HyperCore matches orders and handles margin onchain. HyperEVM runs smart contracts on the same state."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Hyperliquid HIP-3?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Permissionless, builder-deployed perp markets, backed by 500k staked HYPE that validators can slash."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are Hyperliquid builder codes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "User-approved, onchain fees (up to 0.1% on perps and 1% on spot) that let independent frontends earn from the trades they route."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="container nav-content">
+            <div class="logo">
+                <a href="../" style="color: inherit; text-decoration: none;">
+                    <span class="accent-text">Onchain</span>Props
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../#firms">Prop Firms</a></li>
+                    <li><a href="../blog.html" aria-current="page">Blog</a></li>
+                    <li><a href="../resources.html">Resources</a></li>
+                    <li><a href="../#faq">FAQ</a></li>
+                </ul>
+            </nav>
+            <a href="../compare.html" class="btn btn-primary btn-nav" aria-label="Compare Firms">Compare Firms</a>
+            <button class="hamburger" id="hamburger-btn" aria-label="Open navigation menu" aria-expanded="false"
+                aria-controls="mobile-nav">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+    <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+        <ul>
+            <li><a href="../#firms">Prop Firms</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="../resources.html">Resources</a></li>
+            <li><a href="../#faq">FAQ</a></li>
+        </ul>
+        <a href="../compare.html" class="mobile-nav-cta">Compare Firms →</a>
+    </nav>
+
+    <main>
+        <article class="container article">
+            <header class="article-header">
+                <a href="../blog.html" class="back-link">← Back to Blog</a>
+                <span class="card-tag">Guides</span>
+                <h1>What Is Hyperliquid?</h1>
+                <div class="blog-card-meta article-meta">
+                    <span>By OnchainProps</span><span aria-hidden="true">·</span>
+                    <time datetime="2026-10-29">Oct 29, 2026</time><span aria-hidden="true">·</span><span>5 min read</span>
+                </div>
+            </header>
+
+            <aside class="article-tldr" aria-label="Short answer">
+                <strong>Short answer</strong>
+                <p>Hyperliquid is a layer-1 blockchain built around an onchain exchange. Its core, HyperCore, runs perpetual futures and spot order books with one-block finality, and HyperEVM adds smart contracts on the same chain. HIP-3 lets anyone deploy perp markets, builder codes let apps earn fees on the trades they route, and HIP-4 adds outcome markets.</p>
+            </aside>
+
+            <div class="article-body">
+                <p><em>No one competes with the internet.</em></p>
+                <p>Most of the prop firms I track on <a href="https://onchainprops.xyz/">onchainprops.xyz</a> run on Hyperliquid. So people keep asking me: what is Hyperliquid, really? A perp DEX? A chain? Something bigger? I read the <a href="https://hyperliquid.gitbook.io/hyperliquid-docs" target="_blank" rel="noopener noreferrer">official docs</a> and the team's TOKEN2049 keynote. Here's my answer.</p>
+                <p><strong>What is Hyperliquid?</strong> Hyperliquid is a layer-1 blockchain built for a fully onchain open financial system. Its core, HyperCore, runs perpetual futures and spot order books directly onchain, with one-block finality. HyperEVM adds general-purpose smart contracts on the same chain, so apps can build on that liquidity without bridging.</p>
+                <h2 id="how-does-hyperliquid-work">How Does Hyperliquid Work?</h2>
+                <p>Per the <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/about-hyperliquid" target="_blank" rel="noopener noreferrer">About page</a>, Hyperliquid is an L1 "written and optimized from first principles." It's secured by HyperBFT, a consensus algorithm inspired by HotStuff. Execution is split in two.</p>
+                <h3 id="hypercore">HyperCore</h3>
+                <p>HyperCore holds the margin and matching engine state. Every order, cancel, trade and liquidation happens onchain. No dark back room. The docs put it bluntly: it "does not rely on the crutch of off-chain order books" (<a href="https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/overview" target="_blank" rel="noopener noreferrer">HyperCore overview</a>).</p>
+                <ul><li>Mainnet supports roughly 200k orders per second.</li><li>Median end-to-end latency is 0.2 seconds for a co-located client.</li></ul>
+                <h3 id="hyperevm">HyperEVM</h3>
+                <p>HyperEVM is not a separate chain. It's secured by the same consensus, so smart contracts can read HyperCore order book prices directly (<a href="https://hyperliquid.gitbook.io/hyperliquid-docs/hyperevm" target="_blank" rel="noopener noreferrer">HyperEVM</a>). The docs still call it alpha. Read: build, but wear a helmet.</p>
+                <h3 id="hip-1-hip-2-hlp-and-hype">HIP-1, HIP-2, HLP and HYPE</h3>
+                <p>Around that core sit:</p>
+                <ul><li><strong><a href="https://hyperliquid.gitbook.io/hyperliquid-docs/hyperliquid-improvement-proposals-hips/hip-1-native-token-standard" target="_blank" rel="noopener noreferrer">HIP-1</a>:</strong> the token standard.</li><li><strong><a href="https://hyperliquid.gitbook.io/hyperliquid-docs/hyperliquid-improvement-proposals-hips/hip-2-hyperliquidity" target="_blank" rel="noopener noreferrer">HIP-2</a>:</strong> an onchain liquidity strategy for new tokens.</li><li><strong><a href="https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/vaults/protocol-vaults" target="_blank" rel="noopener noreferrer">HLP</a>:</strong> a community-owned vault that market-makes, performs liquidations and earns a share of fees.</li></ul>
+                <p>The <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/about-hyperliquid/hyperliquid-101-for-non-crypto-audiences" target="_blank" rel="noopener noreferrer">101 page</a> says HYPE secures the network, pays for network costs and gives trading fee discounts. Over $1B in annualized fees goes toward buying HYPE back. Development is fully self-funded. No VCs.</p>
+                <p>That fits the mission: financial systems open to everyone, and wealth creation as broadly accessible as possible. Ideally, to everyone on the planet.</p>
+                <h2 id="hyperliquid-hip-3-anyone-can-list-a-perp">Hyperliquid HIP-3: Anyone Can List a Perp</h2>
+                <p><a href="https://hyperliquid.gitbook.io/hyperliquid-docs/hyperliquid-improvement-proposals-hips/hip-3-builder-deployed-perpetuals" target="_blank" rel="noopener noreferrer">HIP-3</a> is "permissionless builder-deployed perps." The deployer defines the market, including the oracle and contract specs, and operates it. HIP-3 markets inherit HyperCore's order books and margining.</p>
+                <p>The requirements, per the docs:</p>
+                <ul><li>Deployers must keep 500k HYPE staked.</li><li>Validators can slash that stake by stake-weighted vote for malicious market operation.</li><li>Deployers can set an extra fee share of 0–300%.</li></ul>
+                <p>Permissionless, with a very expensive leash.</p>
+                <p>HIP-3 is the unlock for real-world asset markets. The reported numbers are striking: BTC and ETH down 30–40% year over year, Hyperliquid volume holding up anyway, and HIP-3 markets at roughly 30–50% of volume by mid-2026. Treat those as unverified. The docs don't include them.</p>
+                <h2 id="hyperliquid-builder-codes-and-the-unix-philosophy">Hyperliquid Builder Codes and the Unix Philosophy</h2>
+                <p>This is where the subtitle comes from. Fintech usually verticalizes everything into one closed app. Hyperliquid takes the Unix approach instead: small, independent tools plugged into one shared liquidity layer. Nobody competes with the internet. It's just a tool.</p>
+                <p>The mechanism is documented. <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/trading/builder-codes" target="_blank" rel="noopener noreferrer">Builder codes</a> let an app earn a fee on fills it sends for a user.</p>
+                <ul><li>The user approves a max fee and can revoke it anytime.</li><li>The cap is 0.1% on perps and 1% on spot.</li><li>It's all processed onchain.</li></ul>
+                <p>The 101 page says independent teams (mobile apps, trading terminals, wallets) have earned more than $65M through builder codes. Valor, MetaMask and Phantom are examples. Any of them can tap the deepest onchain markets without breaking their existing user flow.</p>
+                <h3 id="why-builder-codes-matter-for-prop-trading">Why Builder Codes Matter for Prop Trading</h3>
+                <p>This is why firms like <a href="https://onchainprops.xyz/firms/propr">Propr</a> and <a href="https://onchainprops.xyz/firms/hypernova">Hypernova</a> can build on Hyperliquid instead of rebuilding an exchange. It's also why their activity is visible onchain. More on that in <a href="https://onchainprops.xyz/blog/onchain-prop-trading">onchain prop trading</a>.</p>
+                <h2 id="hyperliquid-hip-4-outcome-markets-and-convexity">Hyperliquid HIP-4: Outcome Markets and Convexity</h2>
+                <p><a href="https://hyperliquid.gitbook.io/hyperliquid-docs/hyperliquid-improvement-proposals-hips/hip-4-outcome-markets" target="_blank" rel="noopener noreferrer">HIP-4</a> adds outcome markets: "fully collateralized contracts that settle within a fixed range." Per the docs, outcomes bring "non-linearity, dated contracts, and an alternative form of derivative trading that does not involve leverage or liquidations."</p>
+                <ul><li>Yes and No books are merged to share liquidity.</li><li>Standalone outcomes can settle to a fraction. The <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/hip-4-deployer-actions" target="_blank" rel="noopener noreferrer">deployer docs</a> call these scalar payouts.</li><li>The first market is a recurring daily BTC binary.</li></ul>
+                <p>Call it convexity, without leaving the venue. Outcomes compose with existing HyperCore primitives like portfolio margin and the HyperEVM, rather than living on a separate exchange. One caveat: the HIP-4 deployer actions page is still marked "Testnet-only."</p>
+                <h2 id="what-s-next-ai-agents-and-permissioned-markets">What's Next: AI Agents and Permissioned Markets</h2>
+                <p>Onchain systems keep data and value at the same level of abstraction. That's exactly what AI agents need to trade on their own.</p>
+                <p>The documented piece today is <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/nonces-and-api-wallets" target="_blank" rel="noopener noreferrer">API wallets</a>, which the docs also call "agent wallets." They let a separate key sign trades for an account. The robots already have a login.</p>
+                <p>Next up is HIP-3 Star: permissioned markets aimed at institutions. The docs list <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/hip-3-deployer-actions" target="_blank" rel="noopener noreferrer">HIP-3\*</a> as testnet-only, adding "an allow-list and proxied user actions" on top of HIP-3. Serving regulated institutions is the stated direction, not a documented commitment.</p>
+                <p>Where it ends up is hard to predict. Even the team admits that.</p>
+                <h2 id="faq">FAQ</h2>
+                <h3 id="what-is-hyperliquid-in-simple-terms">What is Hyperliquid in simple terms?</h3>
+                <p>A blockchain whose core is an onchain exchange for perps and spot, plus an EVM so apps can plug into that liquidity.</p>
+                <h3 id="how-does-hyperliquid-work">How does Hyperliquid work?</h3>
+                <p>HyperBFT orders transactions. HyperCore matches orders and handles margin onchain. HyperEVM runs smart contracts on the same state.</p>
+                <h3 id="what-is-hyperliquid-hip-3">What is Hyperliquid HIP-3?</h3>
+                <p>Permissionless, builder-deployed perp markets, backed by 500k staked HYPE that validators can slash.</p>
+                <h3 id="what-are-hyperliquid-builder-codes">What are Hyperliquid builder codes?</h3>
+                <p>User-approved, onchain fees (up to 0.1% on perps and 1% on spot) that let independent frontends earn from the trades they route.</p>
+                <hr>
+                <p>Building or trading on Hyperliquid? Compare the <a href="https://onchainprops.xyz/#firms">Hyperliquid prop firms</a> on onchainprops.xyz, browse <a href="https://onchainprops.xyz/resources">ecosystem resources</a>, and follow <a href="https://x.com/onchain_props" target="_blank" rel="noopener noreferrer">@onchain_props</a>.</p>
+                <p><em>Not financial advice. Docs checked October 29, 2026. Source talk: "Hyperliquid: Rebuilding Finance from First Principles," TOKEN2049 Singapore, 7 October 2026.</em></p>
+            </div>
+
+            <aside class="article-cta">
+                <h2>Compare payout terms side by side</h2>
+                <p>Splits, account sizes, chains, and payout rules for every tracked onchain prop firm.</p>
+                <a href="../compare.html" class="btn btn-primary">Compare Firms</a>
+            </aside>
+
+            <section class="article-more" aria-labelledby="more-heading">
+                <h2 id="more-heading">More from the blog</h2>
+                <div class="cards-grid blog-grid">
+                    <a href="how-do-prop-firms-make-money" class="article-card blog-card">
+                        <span class="card-tag">Guides</span>
+                        <h3>How Do Crypto Prop Firms Make Money? A-Book vs B-Book Explained</h3>
+                        <p>Prop firms make money from evaluation fees, their share of the profit split on funded accounts, and extras like resets. On a B-book, traders sit on simulated accounts and the firm takes the other side, so trader losses are firm revenue. On an A-book, trader flow is hedged in the market and the firm earns when traders do.</p>
+                    </a>
+                    <a href="onchain-prop-trading" class="article-card blog-card">
+                        <span class="card-tag">General</span>
+                        <h3>Onchain Prop Trading: Why the Books Are Finally Opening</h3>
+                        <p>Onchain prop trading means anyone can audit the code and check the data themselves. Onchain prop firms move hedging, account rules, payouts and revenue onto the blockchain, so traders verify the firm instead of taking its word for it.</p>
+                    </a>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <span class="accent-text">Onchain</span>Props
+                <p>The premier directory for decentralized capital and trading tools.</p>
+            </div>
+            <div class="footer-links">
+                <a href="../#firms">Prop Firms</a>
+                <a href="../blog.html">Blog</a>
+                <a href="../resources.html">Resources</a>
+                <a href="../#faq">FAQ</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="footer-socials">
+                <a href="https://github.com/genkisudo/onchainprops" target="_blank" rel="noopener noreferrer"
+                    aria-label="GitHub">GitHub</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 OnchainProps. From trenches with ❤️</p>
+                <p class="footer-disclaimer">This is not financial advice. Listings are not an endorsement. Always
+                    DYOR (Do Your Own Research) before trading or depositing funds.</p>
+                <p class="footer-disclaimer">Some links on this site are affiliate links. We may earn a commission if
+                    you sign up through them, at no extra cost to you. This never affects our rankings.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../amplitude.min.js"></script>
+    <script src="../script.js"></script>
+    <script
+        src="https://agents.dante-ai.com/embed.js"
+        data-agent-id="9faaaeb8-0c93-4420-b124-c3b492f51d07"
+        data-widget-key="wk_GOp-URDnnABK7UgHX5qRMCF-DZjKTnTO"
+        crossorigin="anonymous"
+        async>
+    </script>
+</body>
+
+</html>
