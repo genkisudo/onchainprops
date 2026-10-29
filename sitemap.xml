@@ -108,6 +108,13 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- How Do Crypto Prop Firms Make Money? A-Book vs B-Book Explained -->
+  <url>
+    <loc>https://onchainprops.xyz/blog/how-do-prop-firms-make-money</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
   <!-- Onchain Prop Trading: Why the Books Are Finally Opening -->
   <url>
     <loc>https://onchainprops.xyz/blog/onchain-prop-trading</loc>
