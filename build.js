@@ -461,7 +461,8 @@ const mdInline = (raw) => escHtml(raw)
     .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, text, href) => {
         if (!/^(https?:\/\/|mailto:|\/|\.\.?\/|#|[\w-]+(\.html)?(#.*)?$)/.test(href)) return text;
         const ext = /^https?:\/\//.test(href) && !href.startsWith(SITE);
-        return `<a href="${href}"${ext ? ' target="_blank" rel="noopener noreferrer"' : ''}>${text}</a>`;
+        const rel = /[?&]ref=/.test(href) ? 'sponsored noopener noreferrer' : 'noopener noreferrer';
+        return `<a href="${href}"${ext ? ` target="_blank" rel="${rel}"` : ''}>${text}</a>`;
     });
 
 /** Block markdown subset: ##/### headings, paragraphs, -/1. lists, > quotes, pipe tables. */

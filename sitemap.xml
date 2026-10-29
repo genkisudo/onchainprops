@@ -122,6 +122,13 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  <!-- Polymarket Prop Firms: Funded Prediction Market Trading Compared -->
+  <url>
+    <loc>https://onchainprops.xyz/blog/polymarket-prop-firms</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 
   <!-- Resources — tools & guides for onchain traders -->
   <url>
