@@ -44,6 +44,9 @@ The following table lists all tracked onchain prop firms:
 ## What is an Onchain Prop Firm?
 An onchain prop trading firm provides capital to traders in cryptocurrency. Traders must pass an evaluation phase — demonstrating consistent profitability within drawdown rules — then receive a funded account. Profits are split between the trader and the firm, with the trader's share paid directly to their non-custodial crypto wallet via stablecoins. This differs from traditional prop firms in that execution is transparent, on-chain, and verifiable by smart contract.
 
+## Blog
+- [Onchain Prop Trading: Why the Books Are Finally Opening](https://onchainprops.xyz/blog/onchain-prop-trading) — Onchain prop trading means anyone can audit the code and check the data themselves. Onchain prop firms move hedging, account rules, payouts and revenue onto the blockchain, so traders verify the firm instead of taking its word for it.
+
 ## Content Sections
 - **Onchain Prop Firms** — Directory of funded prop trading platforms, split comparisons, account sizes
 - **Onchain Data Tools** — Analytics platforms (Nansen, Dune, Arkham) for edge in trading

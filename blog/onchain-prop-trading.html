@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onchain Prop Trading: Why the Books Are Finally Opening | OnchainProps</title>
+    <meta name="description" content="Onchain prop trading explained: how onchain prop firms like Propr and Hypernova move hedging, rules and payouts onchain so traders can verify them.">
+    <link rel="canonical" href="https://onchainprops.xyz/blog/onchain-prop-trading">
+
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://onchainprops.xyz/blog/onchain-prop-trading">
+    <meta property="og:title" content="Onchain Prop Trading: Why the Books Are Finally Opening | OnchainProps">
+    <meta property="og:description" content="Onchain prop trading explained: how onchain prop firms like Propr and Hypernova move hedging, rules and payouts onchain so traders can verify them.">
+    <meta property="og:image" content="https://onchainprops.xyz/og-image.png">
+    <meta property="article:published_time" content="2026-10-29">
+    <meta property="article:modified_time" content="2026-10-29">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@wtfonchain">
+    <meta name="twitter:title" content="Onchain Prop Trading: Why the Books Are Finally Opening | OnchainProps">
+    <meta name="twitter:description" content="Onchain prop trading explained: how onchain prop firms like Propr and Hypernova move hedging, rules and payouts onchain so traders can verify them.">
+    <meta name="twitter:image" content="https://onchainprops.xyz/og-image.png">
+
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'none';
+        script-src 'self' https://agents.dante-ai.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://agents.dante-ai.com;
+        font-src https://fonts.gstatic.com;
+        img-src 'self' data: https://agents.dante-ai.com;
+        manifest-src 'self';
+        connect-src https://api.amplitude.com https://api2.amplitude.com https://analytics.eu.amplitude.com https://agents.dante-ai.com;
+        frame-src https://agents.dante-ai.com;
+        object-src 'none';
+        base-uri 'self';
+        form-action 'none';
+        upgrade-insecure-requests;
+    ">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="theme-color" content="#14161b">
+
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../style.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Onchain Prop Trading: Why the Books Are Finally Opening",
+      "description": "Onchain prop trading explained: how onchain prop firms like Propr and Hypernova move hedging, rules and payouts onchain so traders can verify them.",
+      "datePublished": "2026-10-29",
+      "dateModified": "2026-10-29",
+      "mainEntityOfPage": "https://onchainprops.xyz/blog/onchain-prop-trading",
+      "image": "https://onchainprops.xyz/og-image.png",
+      "author": {
+        "@id": "https://onchainprops.xyz/#organization"
+      },
+      "publisher": {
+        "@id": "https://onchainprops.xyz/#organization"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://onchainprops.xyz/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://onchainprops.xyz/blog.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Onchain Prop Trading: Why the Books Are Finally Opening",
+          "item": "https://onchainprops.xyz/blog/onchain-prop-trading"
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is onchain prop trading?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Onchain prop trading means anyone can audit the code and check the data for themselves. Onchain prop firms move parts of the business, such as hedging, account rules, payouts and revenue, onto the blockchain so traders can verify them instead of taking the firm's word for it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's wrong with the traditional prop firm model?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most legacy prop firms earn mainly from evaluation fees, and most accounts are heavily B-booked: traders are on simulated accounts and the firm takes the other side, so every dollar a trader wins comes out of the firm's pocket."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between A-book and B-book at a prop firm?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "On a B-book, traders are on simulated accounts and the firm takes the other side of their trades. With A-booking, trader flow is actually hedged in the market, which aligns the platform with the trader instead of pitting them against each other."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What types of crypto prop firms are there?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Crypto prop firms fall roughly into three groups: legacy rebrands (the old model with crypto deposits and withdrawals added), CEX-based props built on centralized exchange infrastructure (e.g., Breakout), and onchain prop firms."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are all prop firm transparency dashboards trustworthy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Onchain dashboards read from smart contracts and blockchain transactions, so anyone can verify the data independently. Offchain dashboards pull from the firm's own internal database, so you're still taking the firm's word for it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Propr vs Hypernova: how do they differ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Propr makes its hedging public, with onchain hedging on Hyperliquid, payouts and revenue trackable onchain, and published financial reporting. Hypernova puts account rules, account state and payout eligibility in smart contracts and pays traders from an onchain reserve with no manual approval step; its September payouts averaged 5.9 seconds from click to wallet."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="container nav-content">
+            <div class="logo">
+                <a href="../" style="color: inherit; text-decoration: none;">
+                    <span class="accent-text">Onchain</span>Props
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../#firms">Prop Firms</a></li>
+                    <li><a href="../blog.html" aria-current="page">Blog</a></li>
+                    <li><a href="../resources.html">Resources</a></li>
+                    <li><a href="../#faq">FAQ</a></li>
+                </ul>
+            </nav>
+            <a href="../compare.html" class="btn btn-primary btn-nav" aria-label="Compare Firms">Compare Firms</a>
+            <button class="hamburger" id="hamburger-btn" aria-label="Open navigation menu" aria-expanded="false"
+                aria-controls="mobile-nav">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+    <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+        <ul>
+            <li><a href="../#firms">Prop Firms</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="../resources.html">Resources</a></li>
+            <li><a href="../#faq">FAQ</a></li>
+        </ul>
+        <a href="../compare.html" class="mobile-nav-cta">Compare Firms →</a>
+    </nav>
+
+    <main>
+        <article class="container article">
+            <header class="article-header">
+                <a href="../blog.html" class="back-link">← Back to Blog</a>
+                <span class="card-tag">General</span>
+                <h1>Onchain Prop Trading: Why the Books Are Finally Opening</h1>
+                <div class="blog-card-meta article-meta">
+                    <span>By OnchainProps</span><span aria-hidden="true">·</span>
+                    <time datetime="2026-10-29">Oct 29, 2026</time><span aria-hidden="true">·</span><span>7 min read</span>
+                </div>
+            </header>
+
+            <aside class="article-tldr" aria-label="Short answer">
+                <strong>Short answer</strong>
+                <p>Onchain prop trading means anyone can audit the code and check the data themselves. Onchain prop firms move hedging, account rules, payouts and revenue onto the blockchain, so traders verify the firm instead of taking its word for it.</p>
+            </aside>
+
+            <div class="article-body">
+                <p>Traditional prop trading has a structural problem: the incentives are broken from day one.</p>
+                <h2 id="the-problem-with-legacy-prop-firms-b-booking-and-evaluation-fees">The Problem With Legacy Prop Firms: B-Booking and Evaluation Fees</h2>
+                <p>Most legacy prop firms don't actually need their traders to succeed. Their revenue comes mainly from evaluation fees, and most accounts are heavily B-booked. That means traders are on simulated accounts, and the firm takes the other side, so every dollar a trader wins comes straight out of the firm's pocket. When your business model depends on traders failing, it's hard to claim you're on their side.</p>
+                <p>A different story is spreading through my feed right now: onchain prop trading.</p>
+                <h2 id="what-is-onchain-prop-trading-the-crypto-prop-firm-landscape">What Is Onchain Prop Trading? The Crypto Prop Firm Landscape</h2>
+                <p>The core idea is simple. Onchain prop trading means anyone can audit the code and check the data for themselves. But "crypto prop firm" covers very different businesses. Today crypto prop firms fall roughly into three groups:</p>
+                <ul><li><strong>Legacy rebrands.</strong> Same old model with crypto deposits and withdrawals added. No smart contracts, no new transparency.</li><li><strong>CEX-based props (e.g., Breakout).</strong> Crypto-native, but built on centralized exchange infrastructure.</li><li><strong>Onchain prop firms.</strong> The focus of this article.</li></ul>
+                <p>Over the past few weeks I've been digging into how these onchain prop firms actually work under the hood. Approaches vary a lot. Some teams are shipping genuinely new infrastructure, while others have already shut down.</p>
+                <p>In my view, <a href="../firms/hypernova">Hypernova</a> and <a href="../firms/propr">Propr</a> are the current market leaders among onchain prop firms. Elsewhere, a recent podcast with the <a href="../firms/vanta-trading">Vanta</a> founder went viral on X, <a href="../firms/dojifunded">Doji Funded</a> is recording every closed trade on the blockchain, and a number of new protocols are building quietly in stealth.</p>
+                <h2 id="onchain-vs-offchain-not-all-prop-firm-transparency-dashboards-are-equal">Onchain vs Offchain: Not All Prop Firm Transparency Dashboards Are Equal</h2>
+                <p>"Transparency dashboard" has become a buzzword, so it's worth being precise. There are two kinds of prop firm transparency dashboard, and they are not the same:</p>
+                <ul><li><strong>Onchain dashboards</strong> read from smart contracts and blockchain transactions. The data is already public, and anyone can verify it independently.</li><li><strong>Offchain dashboards</strong> pull from the firm's own internal database. No smart contracts, so you're still taking the firm's word for it.</li></ul>
+                <p>In practice it isn't black and white. If a trader pays for an evaluation with a credit card, that payment will never be onchain. Not everything can live on a blockchain, but the direction matters: the more of a prop firm that moves onchain, the less trust traders need to extend. Open-sourcing code is another encouraging trend.</p>
+                <h2 id="infrastructure-and-access-to-capital-why-onchain-prop-firms-work-now">Infrastructure and Access to Capital: Why Onchain Prop Firms Work Now</h2>
+                <h3 id="a-book-vs-b-book-aligning-the-firm-with-the-trader">A-Book vs B-Book: Aligning the Firm With the Trader</h3>
+                <p>The trust problem is being solved one component at a time, by moving more of the business onchain and making it verifiable. A-booking, where trader flow is actually hedged in the market, aligns the platform with the trader instead of pitting them against each other.</p>
+                <h3 id="hyperliquid-and-low-fee-l2s">Hyperliquid and Low-Fee L2s</h3>
+                <p>The infrastructure has finally caught up too. Hyperliquid gives traders CEX-level performance and liquidity with zero gas fees on execution, and fees on L2s like Arbitrum are now low as well.</p>
+                <h3 id="access-to-capital-for-more-traders">Access to Capital for More Traders</h3>
+                <p>There's also an access story. Traders in jurisdictions that never had access to capital or professional infrastructure can now trade, including RWA perps.</p>
+                <h2 id="propr-vs-hypernova-how-the-leading-onchain-prop-firms-approach-transparency">Propr vs Hypernova: How the Leading Onchain Prop Firms Approach Transparency</h2>
+                <h3 id="propr-open-books-public-hedging-on-hyperliquid">Propr: Open Books, Public Hedging on Hyperliquid</h3>
+                <p>Propr's position is that hedging is the single most important part of a prop firm, so it's the part they've made public. Today, Propr offers:</p>
+                <ul><li><strong>Onchain hedging</strong> on Hyperliquid, publicly visible and verifiable</li><li><strong>Traceable flows</strong>, with revenue and payouts trackable onchain</li><li><strong>Financial and operational reporting</strong>, including published financials, revenue attribution and active user numbers</li></ul>
+                <p>Next on their roadmap are a fully onchain simulated order book (CLOB), onchain trade state and fully automated hedging PnL. The stated aim is to shrink the amount of trust traders have to place in the firm.</p>
+                <p>Those items aren't live yet, but in response to demand from traders and affiliates, Propr's next app update adds full payout transparency: gross payouts, net payouts, total spent on evaluations, total net PnL across paid evaluations and funded accounts, and how each trader's signals feed into their hedging algorithm.</p>
+                <p>The longer-term goal is to back traders whose results would hold up on a live account just as well as in a prop program. Propr's team says that in conversations with other prop firm CEOs, more of them are moving the same way. Prop trading gets far more powerful when the books are open.</p>
+                <h3 id="hypernova-prop-firm-business-logic-in-smart-contracts">Hypernova: Prop Firm Business Logic in Smart Contracts</h3>
+                <p>Hypernova went further down the stack. Its account rules, account state and payout eligibility all live in smart contracts. Traders interact with those contracts directly and get paid from an onchain reserve, with no manual approval step.</p>
+                <p>The hard part, as the team explains it, was risk. With instant settlement there's no withdrawal review queue to catch abuse after the fact, so it has to be caught during trading. Hypernova built its in-flight risk checks from scratch for exactly that reason.</p>
+                <p>Making sure this holds up at scale is a big part of why they've stayed in closed alpha/beta. The results so far are striking: September payouts averaged 5.9 seconds from click to wallet, the fastest in the prop space by a wide margin. There's more work ahead, but it's a clear case of choosing the harder path and having it pay off.</p>
+                <h2 id="why-i-m-building-onchain-props">Why I'm Building Onchain Props</h2>
+                <p>My background explains a lot of this. Back in 2017–2018 I was running spot arbitrage between CEXs and early DEXs, and I got hacked twice on centralized exchanges (Cryptopia, I'm looking at you). So I understand on a gut level why traders prefer Hyperliquid to CEXs, and why they don't trust legacy props.</p>
+                <h3 id="the-onchain-paradox-transparent-but-unreadable">The Onchain Paradox: Transparent but Unreadable</h3>
+                <p>But there's a catch. Onchain data is open, yet raw blockchain data isn't useful to most traders. Transparency you can't read isn't much better than no transparency at all. MCP and newer tooling make it easier, but there's still a gap.</p>
+                <p>That's what we're closing at @onchain_props. We've built a dedicated data tools section to help traders navigate onchain prop firms, and I've been working on analytics covering the whole space. No black boxes, just blockchain data.</p>
+                <h2 id="faq">FAQ</h2>
+                <h3 id="what-is-onchain-prop-trading">What is onchain prop trading?</h3>
+                <p>Onchain prop trading means anyone can audit the code and check the data for themselves. Onchain prop firms move parts of the business, such as hedging, account rules, payouts and revenue, onto the blockchain so traders can verify them instead of taking the firm's word for it.</p>
+                <h3 id="what-s-wrong-with-the-traditional-prop-firm-model">What's wrong with the traditional prop firm model?</h3>
+                <p>Most legacy prop firms earn mainly from evaluation fees, and most accounts are heavily B-booked: traders are on simulated accounts and the firm takes the other side, so every dollar a trader wins comes out of the firm's pocket.</p>
+                <h3 id="what-is-the-difference-between-a-book-and-b-book-at-a-prop-firm">What is the difference between A-book and B-book at a prop firm?</h3>
+                <p>On a B-book, traders are on simulated accounts and the firm takes the other side of their trades. With A-booking, trader flow is actually hedged in the market, which aligns the platform with the trader instead of pitting them against each other.</p>
+                <h3 id="what-types-of-crypto-prop-firms-are-there">What types of crypto prop firms are there?</h3>
+                <p>Crypto prop firms fall roughly into three groups: legacy rebrands (the old model with crypto deposits and withdrawals added), CEX-based props built on centralized exchange infrastructure (e.g., Breakout), and onchain prop firms.</p>
+                <h3 id="are-all-prop-firm-transparency-dashboards-trustworthy">Are all prop firm transparency dashboards trustworthy?</h3>
+                <p>No. Onchain dashboards read from smart contracts and blockchain transactions, so anyone can verify the data independently. Offchain dashboards pull from the firm's own internal database, so you're still taking the firm's word for it.</p>
+                <h3 id="propr-vs-hypernova-how-do-they-differ">Propr vs Hypernova: how do they differ?</h3>
+                <p>Propr makes its hedging public, with onchain hedging on Hyperliquid, payouts and revenue trackable onchain, and published financial reporting. Hypernova puts account rules, account state and payout eligibility in smart contracts and pays traders from an onchain reserve with no manual approval step; its September payouts averaged 5.9 seconds from click to wallet.</p>
+            </div>
+
+            <aside class="article-cta">
+                <h2>Compare payout terms side by side</h2>
+                <p>Splits, account sizes, chains, and payout rules for every tracked onchain prop firm.</p>
+                <a href="../compare.html" class="btn btn-primary">Compare Firms</a>
+            </aside>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <span class="accent-text">Onchain</span>Props
+                <p>The premier directory for decentralized capital and trading tools.</p>
+            </div>
+            <div class="footer-links">
+                <a href="../#firms">Prop Firms</a>
+                <a href="../blog.html">Blog</a>
+                <a href="../resources.html">Resources</a>
+                <a href="../#faq">FAQ</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="footer-socials">
+                <a href="https://github.com/genkisudo/onchainprops" target="_blank" rel="noopener noreferrer"
+                    aria-label="GitHub">GitHub</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 OnchainProps. From trenches with ❤️</p>
+                <p class="footer-disclaimer">This is not financial advice. Listings are not an endorsement. Always
+                    DYOR (Do Your Own Research) before trading or depositing funds.</p>
+                <p class="footer-disclaimer">Some links on this site are affiliate links. We may earn a commission if
+                    you sign up through them, at no extra cost to you. This never affects our rankings.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../amplitude.min.js"></script>
+    <script src="../script.js"></script>
+    <script
+        src="https://agents.dante-ai.com/embed.js"
+        data-agent-id="9faaaeb8-0c93-4420-b124-c3b492f51d07"
+        data-widget-key="wk_GOp-URDnnABK7UgHX5qRMCF-DZjKTnTO"
+        crossorigin="anonymous"
+        async>
+    </script>
+</body>
+
+</html>

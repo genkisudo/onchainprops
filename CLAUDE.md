@@ -32,6 +32,7 @@ CI (`.github/workflows/build.yml`) also runs this on every push to `main` and co
   - `llms.txt` — fully regenerated
 - Generated regions are wrapped in marker comments: `<!-- GEN:BEGIN key --> … <!-- GEN:END key -->` (HTML) and `// GEN:BEGIN key … // GEN:END key` (JS)
 - **Key rule**: NEVER hand-edit content inside GEN markers or any of llms.txt — edit `firms.json`/`faq.json` and run `node build.js`
+- **Blog**: write `posts/<slug>.md` (copy `posts/_template.md`), run `node build.js`. It generates `blog/<slug>.html` (Article + Breadcrumb + FAQPage JSON-LD), the cards in `blog.html` (`blog-cards` GEN block), and the sitemap/llms.txt entries. Never hand-edit `blog/*.html`.
 - Not generated (hand-maintained): `compare.html` article prose, the per-firm pages in `firms/`, `README.md` — keep these consistent with `firms.json` when data changes
 
 ### 1. **PubSub Store (Reactive State)**

@@ -11,6 +11,8 @@
  *   - script.js   — AppState.propFirms / predictionMarketFirms / cryptoPropFirms arrays
  *   - llms.txt    — fully regenerated
  *   - sitemap.xml — fully regenerated (lastmod = firms.json lastUpdated)
+ *   - blog.html   — article cards (from posts/*.md)
+ *   - blog/*.html — one article page per posts/*.md, with Article/FAQPage/Breadcrumb JSON-LD
  *
  * Generated regions are delimited by marker comments:
  *   HTML:  <!-- GEN:BEGIN key --> ... <!-- GEN:END key -->
@@ -405,7 +407,7 @@ ${table(cryptoPropFirms)}
 ## What is an Onchain Prop Firm?
 An onchain prop trading firm provides capital to traders in cryptocurrency. Traders must pass an evaluation phase — demonstrating consistent profitability within drawdown rules — then receive a funded account. Profits are split between the trader and the firm, with the trader's share paid directly to their non-custodial crypto wallet via stablecoins. This differs from traditional prop firms in that execution is transparent, on-chain, and verifiable by smart contract.
 
-## Content Sections
+${postsLlmsSection()}## Content Sections
 - **Onchain Prop Firms** — Directory of funded prop trading platforms, split comparisons, account sizes
 - **Onchain Data Tools** — Analytics platforms (Nansen, Dune, Arkham) for edge in trading
 - **Hyperliquid** — L1 perpetuals guide: 100,000+ TPS, sub-100ms latency, $8B+ daily volume Q1 2026
@@ -436,6 +438,330 @@ Last updated: ${lastUpdated}
 };
 
 // -----------------------------------------
+// Blog (posts/*.md → blog/<slug>.html + blog.html cards)
+// -----------------------------------------
+const CATEGORIES = {
+    general: 'General',
+    'payout-safety': 'Payout Safety',
+    guides: 'Guides',
+    reviews: 'Firm Reviews',
+    basics: 'Basics'
+};
+const escHtml = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const fmtDate = (iso) => {
+    const [y, m, d] = iso.split('-').map(Number);
+    return `${MONTHS[m - 1].slice(0, 3)} ${d}, ${y}`;
+};
+const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+/** Inline markdown: `code`, **bold**, *em*, [text](url). Input is HTML-escaped first. */
+const mdInline = (raw) => escHtml(raw)
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/(^|[\s(])\*([^*\s][^*]*)\*(?=[\s).,;:!?]|$)/g, '$1<em>$2</em>')
+    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, text, href) => {
+        if (!/^(https?:\/\/|mailto:|\/|\.\.?\/|#|[\w-]+(\.html)?(#.*)?$)/.test(href)) return text;
+        const ext = /^https?:\/\//.test(href) && !href.startsWith(SITE);
+        return `<a href="${href}"${ext ? ' target="_blank" rel="noopener noreferrer"' : ''}>${text}</a>`;
+    });
+
+/** Block markdown subset: ##/### headings, paragraphs, -/1. lists, > quotes, pipe tables. */
+const mdBlocks = (body) => {
+    const lines = body.replace(/\r/g, '').split('\n');
+    const out = [];
+    for (let i = 0; i < lines.length;) {
+        const line = lines[i];
+        let m;
+        if (!line.trim()) { i++; continue; }
+        if ((m = /^(#{2,3})\s+(.+)$/.exec(line))) {
+            out.push(`<h${m[1].length} id="${slugify(m[2])}">${mdInline(m[2])}</h${m[1].length}>`);
+            i++;
+        } else if (/^\s*\|/.test(line)) {
+            const rows = [];
+            while (i < lines.length && /^\s*\|/.test(lines[i])) rows.push(lines[i++]);
+            const cells = (r) => r.trim().replace(/^\||\|$/g, '').split('|').map((c) => mdInline(c.trim()));
+            const [head, , ...rest] = rows;
+            out.push(`<div class="table-scroll"><table class="prop-table"><thead><tr>${cells(head).map((c) => `<th>${c}</th>`).join('')}</tr></thead><tbody>${rest.map((r) => `<tr>${cells(r).map((c) => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`);
+        } else if (/^\s*([-*]|\d+\.)\s+/.test(line)) {
+            const tag = /^\s*\d+\./.test(line) ? 'ol' : 'ul';
+            const items = [];
+            while (i < lines.length && /^\s*([-*]|\d+\.)\s+/.test(lines[i])) items.push(lines[i++].replace(/^\s*([-*]|\d+\.)\s+/, ''));
+            out.push(`<${tag}>${items.map((t) => `<li>${mdInline(t)}</li>`).join('')}</${tag}>`);
+        } else if (/^>\s?/.test(line)) {
+            const q = [];
+            while (i < lines.length && /^>\s?/.test(lines[i])) q.push(lines[i++].replace(/^>\s?/, ''));
+            out.push(`<blockquote><p>${mdInline(q.join(' '))}</p></blockquote>`);
+        } else {
+            const p = [];
+            while (i < lines.length && lines[i].trim() && !/^(#{2,3}\s|\s*\||\s*([-*]|\d+\.)\s|>)/.test(lines[i])) p.push(lines[i++].trim());
+            out.push(`<p>${mdInline(p.join(' '))}</p>`);
+        }
+    }
+    return out.join('\n');
+};
+
+/** Reads posts/*.md (frontmatter + markdown), newest first. */
+const loadPosts = () => {
+    const dir = path.join(ROOT, 'posts');
+    if (!fs.existsSync(dir)) return [];
+    return fs.readdirSync(dir).filter((f) => f.endsWith('.md') && !f.startsWith('_')).map((f) => {
+        const m = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/.exec(read(`posts/${f}`).replace(/\r/g, ''));
+        if (!m) throw new Error(`posts/${f}: missing frontmatter`);
+        const meta = Object.fromEntries(m[1].split('\n').filter(Boolean).map((l) => {
+            const i = l.indexOf(':');
+            return [l.slice(0, i).trim(), l.slice(i + 1).trim()];
+        }));
+        for (const k of ['title', 'description', 'category', 'date', 'tldr']) {
+            if (!meta[k]) throw new Error(`posts/${f}: frontmatter "${k}" is required`);
+        }
+        if (!CATEGORIES[meta.category]) throw new Error(`posts/${f}: category must be one of ${Object.keys(CATEGORIES).join(', ')}`);
+        const slug = f.replace(/\.md$/, '');
+        const body = m[2].trim();
+        const faq = [];
+        let inFaq = false;
+        for (const block of body.split(/\n(?=#{2,3}\s)/)) {
+            const h = /^(#{2,3})\s+(.+)\n?([\s\S]*)$/.exec(block);
+            if (!h) continue;
+            if (h[1] === '##') inFaq = /^(faq|frequently asked questions)$/i.test(h[2].trim());
+            else if (inFaq) faq.push({ q: h[2].trim(), a: stripTags(mdBlocks(h[3])).replace(/\s+/g, ' ').trim() });
+        }
+        return {
+            ...meta, slug, faq, html: mdBlocks(body),
+            updated: meta.updated ?? meta.date,
+            minutes: Math.max(1, Math.round(body.split(/\s+/).length / 200))
+        };
+    }).sort((a, b) => b.date.localeCompare(a.date));
+};
+const posts = loadPosts();
+
+const blogCards = () => posts.map((p) => `<a href="blog/${p.slug}" class="article-card blog-card" data-category="${p.category}">
+    <span class="card-tag">${CATEGORIES[p.category]}</span>
+    <h3>${escHtml(p.title)}</h3>
+    <p>${escHtml(p.tldr)}</p>
+    <div class="blog-card-meta">
+        <span>${fmtDate(p.date)}</span><span aria-hidden="true">·</span><span>${p.minutes} min read</span>
+    </div>
+</a>`).join('\n\n');
+
+const postPage = (p) => {
+    const url = `${SITE}/blog/${p.slug}`;
+    const title = `${p.title} | ${BRAND}`;
+    const schemas = [{
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: p.title,
+        description: p.description,
+        datePublished: p.date,
+        dateModified: p.updated,
+        mainEntityOfPage: url,
+        image: `${SITE}/og-image.png`,
+        author: { '@id': ORG_ID },
+        publisher: { '@id': ORG_ID }
+    }, {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
+            { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE}/blog.html` },
+            { '@type': 'ListItem', position: 3, name: p.title, item: url }
+        ]
+    }];
+    if (p.faq.length) schemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: p.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }))
+    });
+    const ld = schemas.map((s) => `    <script type="application/ld+json">\n${jsonLd(s).replace(/^/gm, '    ')}\n    </script>`).join('\n');
+    const more = posts.filter((o) => o.slug !== p.slug).slice(0, 2);
+    return `<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${escHtml(title)}</title>
+    <meta name="description" content="${escAttr(p.description)}">
+    <link rel="canonical" href="${url}">
+
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="${url}">
+    <meta property="og:title" content="${escAttr(title)}">
+    <meta property="og:description" content="${escAttr(p.description)}">
+    <meta property="og:image" content="${SITE}/og-image.png">
+    <meta property="article:published_time" content="${p.date}">
+    <meta property="article:modified_time" content="${p.updated}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@wtfonchain">
+    <meta name="twitter:title" content="${escAttr(title)}">
+    <meta name="twitter:description" content="${escAttr(p.description)}">
+    <meta name="twitter:image" content="${SITE}/og-image.png">
+
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'none';
+        script-src 'self' https://agents.dante-ai.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://agents.dante-ai.com;
+        font-src https://fonts.gstatic.com;
+        img-src 'self' data: https://agents.dante-ai.com;
+        manifest-src 'self';
+        connect-src https://api.amplitude.com https://api2.amplitude.com https://analytics.eu.amplitude.com https://agents.dante-ai.com;
+        frame-src https://agents.dante-ai.com;
+        object-src 'none';
+        base-uri 'self';
+        form-action 'none';
+        upgrade-insecure-requests;
+    ">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="theme-color" content="#14161b">
+
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../style.css">
+
+${ld}
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="container nav-content">
+            <div class="logo">
+                <a href="../" style="color: inherit; text-decoration: none;">
+                    <span class="accent-text">Onchain</span>Props
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../#firms">Prop Firms</a></li>
+                    <li><a href="../blog.html" aria-current="page">Blog</a></li>
+                    <li><a href="../resources.html">Resources</a></li>
+                    <li><a href="../#faq">FAQ</a></li>
+                </ul>
+            </nav>
+            <a href="../compare.html" class="btn btn-primary btn-nav" aria-label="Compare Firms">Compare Firms</a>
+            <button class="hamburger" id="hamburger-btn" aria-label="Open navigation menu" aria-expanded="false"
+                aria-controls="mobile-nav">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+    <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+        <ul>
+            <li><a href="../#firms">Prop Firms</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="../resources.html">Resources</a></li>
+            <li><a href="../#faq">FAQ</a></li>
+        </ul>
+        <a href="../compare.html" class="mobile-nav-cta">Compare Firms →</a>
+    </nav>
+
+    <main>
+        <article class="container article">
+            <header class="article-header">
+                <a href="../blog.html" class="back-link">← Back to Blog</a>
+                <span class="card-tag">${CATEGORIES[p.category]}</span>
+                <h1>${escHtml(p.title)}</h1>
+                <div class="blog-card-meta article-meta">
+                    <span>By ${BRAND}</span><span aria-hidden="true">·</span>
+                    <time datetime="${p.date}">${fmtDate(p.date)}</time>${p.updated !== p.date ? `<span aria-hidden="true">·</span><span>Updated <time datetime="${p.updated}">${fmtDate(p.updated)}</time></span>` : ''}<span aria-hidden="true">·</span><span>${p.minutes} min read</span>
+                </div>
+            </header>
+
+            <aside class="article-tldr" aria-label="Short answer">
+                <strong>Short answer</strong>
+                <p>${mdInline(p.tldr)}</p>
+            </aside>
+
+            <div class="article-body">
+${p.html.replace(/^/gm, '                ')}
+            </div>
+
+            <aside class="article-cta">
+                <h2>Compare payout terms side by side</h2>
+                <p>Splits, account sizes, chains, and payout rules for every tracked onchain prop firm.</p>
+                <a href="../compare.html" class="btn btn-primary">Compare Firms</a>
+            </aside>
+${more.length ? `
+            <section class="article-more" aria-labelledby="more-heading">
+                <h2 id="more-heading">More from the blog</h2>
+                <div class="cards-grid blog-grid">
+${more.map((o) => `                    <a href="${o.slug}" class="article-card blog-card">
+                        <span class="card-tag">${CATEGORIES[o.category]}</span>
+                        <h3>${escHtml(o.title)}</h3>
+                        <p>${escHtml(o.tldr)}</p>
+                    </a>`).join('\n')}
+                </div>
+            </section>
+` : ''}        </article>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <span class="accent-text">Onchain</span>Props
+                <p>The premier directory for decentralized capital and trading tools.</p>
+            </div>
+            <div class="footer-links">
+                <a href="../#firms">Prop Firms</a>
+                <a href="../blog.html">Blog</a>
+                <a href="../resources.html">Resources</a>
+                <a href="../#faq">FAQ</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="footer-socials">
+                <a href="https://github.com/genkisudo/onchainprops" target="_blank" rel="noopener noreferrer"
+                    aria-label="GitHub">GitHub</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; ${year} ${BRAND}. From trenches with ❤️</p>
+                <p class="footer-disclaimer">This is not financial advice. Listings are not an endorsement. Always
+                    DYOR (Do Your Own Research) before trading or depositing funds.</p>
+                <p class="footer-disclaimer">Some links on this site are affiliate links. We may earn a commission if
+                    you sign up through them, at no extra cost to you. This never affects our rankings.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../amplitude.min.js"></script>
+    <script src="../script.js"></script>
+    <script
+        src="https://agents.dante-ai.com/embed.js"
+        data-agent-id="9faaaeb8-0c93-4420-b124-c3b492f51d07"
+        data-widget-key="wk_GOp-URDnnABK7UgHX5qRMCF-DZjKTnTO"
+        crossorigin="anonymous"
+        async>
+    </script>
+</body>
+
+</html>
+`;
+};
+
+const postSitemapUrls = () => posts.map((p) => `
+  <!-- ${p.title} -->
+  <url>
+    <loc>${SITE}/blog/${p.slug}</loc>
+    <lastmod>${p.updated}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>`).join('');
+
+const postsLlmsSection = () => posts.length ? `## Blog
+${posts.map((p) => `- [${p.title}](${SITE}/blog/${p.slug}) — ${p.tldr}`).join('\n')}
+
+` : '';
+
+// -----------------------------------------
 // sitemap.xml (fully generated)
 // -----------------------------------------
 const sitemapXml = () => {
@@ -456,7 +782,7 @@ const sitemapXml = () => {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${url('https://onchainprops.xyz/', 'weekly', '1.0', 'Main page — single-page app, all content lives here')}
 ${url('https://onchainprops.xyz/compare.html', 'weekly', '0.8', 'Compare Firms — long-form comparison article')}${firmUrls}
-${url('https://onchainprops.xyz/blog.html', 'weekly', '0.7', 'Blog — payout safety and onchain prop trading guides')}
+${url('https://onchainprops.xyz/blog.html', 'weekly', '0.7', 'Blog — payout safety and onchain prop trading guides')}${postSitemapUrls()}
 ${url('https://onchainprops.xyz/resources', 'monthly', '0.6', 'Resources — tools & guides for onchain traders')}
 ${url('https://onchainprops.xyz/llms.txt', 'monthly', '0.5', 'llms.txt — for AI crawler discovery')}
 
@@ -522,7 +848,16 @@ let js = read('script.js');
 js = inject(js, 'firm-data', firmDataBlock(), 'js');
 write('script.js', js);
 
+let blogHtml = read('blog.html');
+blogHtml = inject(blogHtml, 'blog-cards', blogCards());
+write('blog.html', blogHtml);
+
+fs.mkdirSync(path.join(ROOT, 'blog'), { recursive: true });
+for (const f of fs.readdirSync(path.join(ROOT, 'blog'))) fs.rmSync(path.join(ROOT, 'blog', f)); // drop pages of deleted posts
+for (const p of posts) write(`blog/${p.slug}.html`, postPage(p));
+if (!posts.length) fs.rmdirSync(path.join(ROOT, 'blog'));
+
 write('llms.txt', llmsTxt());
 write('sitemap.xml', sitemapXml());
 
-console.log(`Regenerated index.html, script.js, llms.txt, sitemap.xml from firms.json (${propFirms.length} firms, updated ${lastUpdated}).`);
+console.log(`Regenerated index.html, script.js, llms.txt, sitemap.xml from firms.json (${propFirms.length} firms, ${posts.length} posts, updated ${lastUpdated}).`);

@@ -130,6 +130,7 @@
         <section id="blog-list" class="pillar-section container">
             <div class="blog-filters" role="group" aria-label="Filter posts by category">
                 <button class="blog-filter is-active" data-filter="all" aria-pressed="true">All</button>
+                <button class="blog-filter" data-filter="general" aria-pressed="false">General</button>
                 <button class="blog-filter" data-filter="payout-safety" aria-pressed="false">Payout Safety</button>
                 <button class="blog-filter" data-filter="guides" aria-pressed="false">Guides</button>
                 <button class="blog-filter" data-filter="reviews" aria-pressed="false">Firm Reviews</button>
@@ -137,97 +138,16 @@
             </div>
 
             <div class="cards-grid blog-grid" id="blog-grid">
-
-                <a href="#" class="article-card blog-card" data-category="guides">
-                    <span class="card-tag">Guides</span>
-                    <h3>How to Verify a Prop Firm Payout On-Chain Before You Deposit</h3>
-                    <p>A five-minute checklist for confirming a firm's payout wallet, past transaction history, and
-                        smart-contract settlement claims — before you fund an evaluation.</p>
+                <!-- GEN:BEGIN blog-cards -->
+                <a href="blog/onchain-prop-trading" class="article-card blog-card" data-category="general">
+                    <span class="card-tag">General</span>
+                    <h3>Onchain Prop Trading: Why the Books Are Finally Opening</h3>
+                    <p>Onchain prop trading means anyone can audit the code and check the data themselves. Onchain prop firms move hedging, account rules, payouts and revenue onto the blockchain, so traders verify the firm instead of taking its word for it.</p>
                     <div class="blog-card-meta">
-                        <span>Sep 10, 2026</span><span aria-hidden="true">·</span><span>6 min read</span>
+                        <span>Oct 29, 2026</span><span aria-hidden="true">·</span><span>7 min read</span>
                     </div>
                 </a>
-
-                <a href="#" class="article-card blog-card" data-category="payout-safety">
-                    <span class="card-tag">Payout Safety</span>
-                    <h3>7 Signs a Crypto Prop Firm Won't Pay You</h3>
-                    <p>Delayed withdrawals, vague settlement language, no on-chain payout history — the recurring
-                        patterns across firms that stopped paying traders.</p>
-                    <div class="blog-card-meta">
-                        <span>Sep 3, 2026</span><span aria-hidden="true">·</span><span>7 min read</span>
-                    </div>
-                </a>
-
-                <a href="#" class="article-card blog-card" data-category="basics">
-                    <span class="card-tag">Basics</span>
-                    <h3>Hyperliquid vs Solana: Which Chain Is Safer for Prop Firm Payouts?</h3>
-                    <p>Settlement finality, custody model, and why the chain a firm builds on matters as much as the
-                        profit split it advertises.</p>
-                    <div class="blog-card-meta">
-                        <span>Aug 27, 2026</span><span aria-hidden="true">·</span><span>5 min read</span>
-                    </div>
-                </a>
-
-                <a href="#" class="article-card blog-card" data-category="payout-safety">
-                    <span class="card-tag">Payout Safety</span>
-                    <h3>Profit Split Isn't the Whole Story: What Actually Determines Your Payout</h3>
-                    <p>Two firms both advertise 80%. One nets you meaningfully more. Here's the math evaluation fees,
-                        withdrawal caps, and consistency rules do to your real take-home.</p>
-                    <div class="blog-card-meta">
-                        <span>Aug 20, 2026</span><span aria-hidden="true">·</span><span>8 min read</span>
-                    </div>
-                </a>
-
-                <a href="#" class="article-card blog-card" data-category="reviews">
-                    <span class="card-tag">Firm Reviews</span>
-                    <h3>DojiFunded vs Hypernova: Full Payout &amp; Rules Comparison</h3>
-                    <p>Side-by-side on evaluation rules, max account size, payout cadence, and what each firm's
-                        on-chain history actually shows.</p>
-                    <div class="blog-card-meta">
-                        <span>Aug 13, 2026</span><span aria-hidden="true">·</span><span>9 min read</span>
-                    </div>
-                </a>
-
-                <a href="#" class="article-card blog-card" data-category="basics">
-                    <span class="card-tag">Basics</span>
-                    <h3>What Is an Onchain Prop Firm? A Beginner's Guide</h3>
-                    <p>How onchain funded-trading platforms differ from legacy prop firms — smart-contract rules,
-                        transparent execution, and non-custodial payouts explained.</p>
-                    <div class="blog-card-meta">
-                        <span>Aug 6, 2026</span><span aria-hidden="true">·</span><span>4 min read</span>
-                    </div>
-                </a>
-
-                <a href="#" class="article-card blog-card" data-category="guides">
-                    <span class="card-tag">Guides</span>
-                    <h3>Evaluation Fees Explained: What You're Really Paying For</h3>
-                    <p>Breaking down where evaluation fees go, which firms refund them on your first payout, and how
-                        to avoid paying twice for the same account size.</p>
-                    <div class="blog-card-meta">
-                        <span>Jul 30, 2026</span><span aria-hidden="true">·</span><span>6 min read</span>
-                    </div>
-                </a>
-
-                <a href="#" class="article-card blog-card" data-category="payout-safety">
-                    <span class="card-tag">Payout Safety</span>
-                    <h3>Red Flags in Prop Firm Terms of Service (And How to Spot Them)</h3>
-                    <p>The clauses that let a firm withhold a payout after you've already met every trading rule —
-                        and exactly where to find them before you sign up.</p>
-                    <div class="blog-card-meta">
-                        <span>Jul 23, 2026</span><span aria-hidden="true">·</span><span>7 min read</span>
-                    </div>
-                </a>
-
-                <a href="#" class="article-card blog-card" data-category="basics">
-                    <span class="card-tag">Basics</span>
-                    <h3>Stablecoin Payouts 101: USDC, USDT, and Settlement Speed</h3>
-                    <p>Why most onchain prop firms settle in stablecoins, how settlement speed varies by chain, and
-                        what "instant payout" actually means in practice.</p>
-                    <div class="blog-card-meta">
-                        <span>Jul 16, 2026</span><span aria-hidden="true">·</span><span>5 min read</span>
-                    </div>
-                </a>
-
+                <!-- GEN:END blog-cards -->
             </div>
 
             <p class="blog-empty" id="blog-empty" hidden>No posts in this category yet.</p>
