@@ -108,6 +108,13 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- What Is Vanta Trading? -->
+  <url>
+    <loc>https://onchainprops.xyz/blog/what-is-vanta-trading</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
   <!-- How Do Crypto Prop Firms Make Money? A-Book vs B-Book Explained -->
   <url>
     <loc>https://onchainprops.xyz/blog/how-do-prop-firms-make-money</loc>
