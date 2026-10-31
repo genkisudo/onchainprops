@@ -37,6 +37,13 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- Vanta Trading — firm review & evaluation details -->
+  <url>
+    <loc>https://onchainprops.xyz/firms/vanta-trading</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- Cashed — firm review & evaluation details -->
   <url>
     <loc>https://onchainprops.xyz/firms/cashed</loc>
@@ -61,13 +68,6 @@
   <!-- Carrot Funding — firm review & evaluation details -->
   <url>
     <loc>https://onchainprops.xyz/firms/carrot-funding</loc>
-    <lastmod>2026-10-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Vanta Trading — firm review & evaluation details -->
-  <url>
-    <loc>https://onchainprops.xyz/firms/vanta-trading</loc>
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
