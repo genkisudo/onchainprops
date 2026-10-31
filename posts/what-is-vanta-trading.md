@@ -60,6 +60,15 @@ These are the team's own claims and plans. Check the dashboards and onchain data
 
 Bittensor is a blockchain network that pays computers for useful work, judged by other computers. Its native token is TAO. The network is split into subnets, each with its own task and its own scoring rules (Vanta repo).
 
+You can track Subnet 8 live (emissions, miners, validators and price) on [SubnetRadar](https://subnetradar.com/subnet/8).
+
+Other places to follow Subnet 8:
+
+- [Taostats](https://taostats.io/subnets/8): main explorer page for SN8
+- [Bittensor.ai](https://bittensor.ai/subnets/8): subnet overview
+- [TaoMarketCap](https://taomarketcap.com/subnets/8): market data and trading
+- [Subnet Metrics](https://subnetmetrics.com/subnets/8): burns, emissions and more
+
 The three roles that matter most here:
 
 - **Miners** do the work. On Subnet 8, the work is trading signals.
