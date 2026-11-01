@@ -110,7 +110,8 @@ const AppState = {
     ],
     /** @type {PropFirm[]} */
     cryptoPropFirms: [
-        { name: "SizeProp", country: "TBC", split: "Up to 95%", maxAccount: "$100,000", profitTarget: undefined, dailyDrawdown: undefined, maxDrawdown: undefined, website: "https://sizeprop.com/referral?ref=ONCHAINPROPS", chain: "", isAffiliate: true, token: "No", payoutSpeed: "~24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No" }
+        { name: "SizeProp", country: "TBC", split: "Up to 95%", maxAccount: "$100,000", profitTarget: undefined, dailyDrawdown: undefined, maxDrawdown: undefined, website: "https://sizeprop.com/referral?ref=ONCHAINPROPS", chain: "", isAffiliate: true, token: "No", payoutSpeed: "~24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No" },
+        { name: "HyroTrader", country: "UAE / BVI", split: "Up to 90%", maxAccount: "$200,000", profitTarget: "10%", dailyDrawdown: "3-5%", maxDrawdown: "5-10%", website: "https://www.hyrotrader.com/", chain: "", isAffiliate: false, token: "No", payoutSpeed: "~24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No" }
     ],
     // GEN:END firm-data
     /** @type {string|null} */

@@ -216,6 +216,23 @@
       "payoutSpeed": "~24h",
       "rulesOnchain": "No",
       "payoutsVerified": "No"
+    },
+    {
+      "name": "HyroTrader",
+      "country": "UAE / BVI",
+      "split": "Up to 90%",
+      "maxAccount": "$200,000",
+      "profitTarget": "10%",
+      "dailyDrawdown": "3-5%",
+      "maxDrawdown": "5-10%",
+      "website": "https://www.hyrotrader.com/",
+      "chain": "",
+      "chainPhrase": "crypto perpetual futures (Bybit, BloFin, and the Hyro platform)",
+      "isAffiliate": false,
+      "token": "No",
+      "payoutSpeed": "~24h",
+      "rulesOnchain": "No",
+      "payoutsVerified": "No"
     }
   ]
 }

@@ -100,6 +100,13 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- HyroTrader — firm review & evaluation details -->
+  <url>
+    <loc>https://onchainprops.xyz/firms/hyrotrader</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 
   <!-- Blog — payout safety and onchain prop trading guides -->
   <url>
