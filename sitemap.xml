@@ -108,6 +108,13 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- Are Onchain Prop Firms Legit? How to Verify a Payout Before You Buy a Challenge -->
+  <url>
+    <loc>https://onchainprops.xyz/blog/are-onchain-prop-firms-legit</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
   <!-- What Is Vanta Trading? -->
   <url>
     <loc>https://onchainprops.xyz/blog/what-is-vanta-trading</loc>
