@@ -723,6 +723,8 @@ ${more.map((o) => `                    <a href="${o.slug}" class="article-card b
                     aria-label="GitHub">GitHub</a>
                 <a href="https://x.com/onchain_props" target="_blank" rel="noopener noreferrer"
                     aria-label="X (Twitter)">X</a>
+                <a href="https://t.me/wtfonchain" target="_blank" rel="noopener noreferrer"
+                    aria-label="Telegram">Telegram</a>
             </div>
         </div>
         <div class="footer-bottom">
