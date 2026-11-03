@@ -41,6 +41,7 @@ const ORG_ID = `${SITE}/#organization`;
 const WEBSITE_ID = `${SITE}/#website`;
 const SAME_AS = [
     'https://github.com/genkisudo/onchainprops',
+    'https://x.com/onchain_props',
     'https://t.me/wtfonchain',
     'https://onchainprops.com'
 ];
@@ -720,6 +721,8 @@ ${more.map((o) => `                    <a href="${o.slug}" class="article-card b
             <div class="footer-socials">
                 <a href="https://github.com/genkisudo/onchainprops" target="_blank" rel="noopener noreferrer"
                     aria-label="GitHub">GitHub</a>
+                <a href="https://x.com/onchain_props" target="_blank" rel="noopener noreferrer"
+                    aria-label="X (Twitter)">X</a>
             </div>
         </div>
         <div class="footer-bottom">
