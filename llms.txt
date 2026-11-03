@@ -28,6 +28,7 @@ The following table lists all tracked onchain prop firms:
 | Firm | Country | Profit Split | Max Account | Chain(s) | Website | Review |
 |------|---------|--------------|-------------|----------|---------|--------|
 | Funding Predicts | USA | Up to 90% | $150,000 | Polymarket | https://fundingpredicts.com/ | https://onchainprops.xyz/firms/funding-predicts |
+| Catalyst | TBC | Fixed payout | $50,000 | Polymarket | https://www.tradecatalyst.com/ | https://onchainprops.xyz/firms/catalyst |
 
 ### Crypto Prop Firms
 

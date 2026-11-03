@@ -199,6 +199,23 @@
       "token": "No",
       "payoutSpeed": "Weekly",
       "rulesOnchain": "TBC"
+    },
+    {
+      "name": "Catalyst",
+      "country": "TBC",
+      "split": "Fixed payout",
+      "maxAccount": "$50,000",
+      "profitTarget": "12-15%",
+      "dailyDrawdown": "None",
+      "maxDrawdown": "4-5% trailing",
+      "website": "https://www.tradecatalyst.com/",
+      "chain": "Polymarket",
+      "chainPhrase": "Polymarket",
+      "isAffiliate": false,
+      "token": "No",
+      "payoutSpeed": "Instant on pass",
+      "rulesOnchain": "No",
+      "payoutsVerified": "No"
     }
   ],
   "cryptoPropFirms": [

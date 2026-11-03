@@ -106,7 +106,8 @@ const AppState = {
     ],
     /** @type {PropFirm[]} */
     predictionMarketFirms: [
-        { name: "Funding Predicts", country: "USA", split: "Up to 90%", maxAccount: "$150,000", profitTarget: undefined, dailyDrawdown: undefined, maxDrawdown: undefined, website: "https://fundingpredicts.com/purchase?ref=ONCHAINPROPS", chain: "Polymarket", isAffiliate: true, token: "No", payoutSpeed: "Weekly", rulesOnchain: "TBC", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: undefined }
+        { name: "Funding Predicts", country: "USA", split: "Up to 90%", maxAccount: "$150,000", profitTarget: undefined, dailyDrawdown: undefined, maxDrawdown: undefined, website: "https://fundingpredicts.com/purchase?ref=ONCHAINPROPS", chain: "Polymarket", isAffiliate: true, token: "No", payoutSpeed: "Weekly", rulesOnchain: "TBC", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: undefined },
+        { name: "Catalyst", country: "TBC", split: "Fixed payout", maxAccount: "$50,000", profitTarget: "12-15%", dailyDrawdown: "None", maxDrawdown: "4-5% trailing", website: "https://www.tradecatalyst.com/", chain: "Polymarket", isAffiliate: false, token: "No", payoutSpeed: "Instant on pass", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No" }
     ],
     /** @type {PropFirm[]} */
     cryptoPropFirms: [
