@@ -39,6 +39,24 @@
       "payoutsVerified": "Yes"
     },
     {
+      "name": "Vanta Trading",
+      "country": "Cayman Islands",
+      "split": "Up to 100%",
+      "maxAccount": "$100,000",
+      "profitTarget": "10%",
+      "dailyDrawdown": "3% or 5%",
+      "maxDrawdown": "5%",
+      "website": "https://vantatrading.io/?ref=kamil",
+      "publicUrl": "https://vantatrading.io/",
+      "chain": "Bittensor / Hyperliquid",
+      "chainPhrase": "Bittensor Subnet 8 (Hyperliquid-native optional)",
+      "isAffiliate": true,
+      "token": "No",
+      "payoutSpeed": "Weekly",
+      "rulesOnchain": "No",
+      "payoutsVerified": "Work in progress"
+    },
+    {
       "name": "Iceberg",
       "country": "TBC",
       "split": "80%",
@@ -56,24 +74,6 @@
       "rulesOnchain": "No",
       "maxLeverage": "25x",
       "payoutsVerified": "No"
-    },
-    {
-      "name": "Vanta Trading",
-      "country": "Cayman Islands",
-      "split": "Up to 100%",
-      "maxAccount": "$100,000",
-      "profitTarget": "10%",
-      "dailyDrawdown": "3% or 5%",
-      "maxDrawdown": "5%",
-      "website": "https://vantatrading.io/?ref=kamil",
-      "publicUrl": "https://vantatrading.io/",
-      "chain": "Bittensor / Hyperliquid",
-      "chainPhrase": "Bittensor Subnet 8 (Hyperliquid-native optional)",
-      "isAffiliate": true,
-      "token": "No",
-      "payoutSpeed": "Weekly",
-      "rulesOnchain": "No",
-      "payoutsVerified": "Work in progress"
     },
     {
       "name": "Cashed",

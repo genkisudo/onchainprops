@@ -30,16 +30,16 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Iceberg — firm review & evaluation details -->
+  <!-- Vanta Trading — firm review & evaluation details -->
   <url>
-    <loc>https://onchainprops.xyz/firms/iceberg</loc>
+    <loc>https://onchainprops.xyz/firms/vanta-trading</loc>
     <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Vanta Trading — firm review & evaluation details -->
+  <!-- Iceberg — firm review & evaluation details -->
   <url>
-    <loc>https://onchainprops.xyz/firms/vanta-trading</loc>
+    <loc>https://onchainprops.xyz/firms/iceberg</loc>
     <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
