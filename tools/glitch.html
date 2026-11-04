@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glitch Review 2026 — AI Strategy Lab Built Into Vanta | OnchainProps</title>
+    <meta name="description"
+        content="Glitch review: AI agents build, backtest and stress-test your trading setups, then deploy them into Vanta prop accounts. Free beta; plans $19–$79/mo.">
+    <link rel="canonical" href="https://onchainprops.xyz/tools/glitch">
+
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://onchainprops.xyz/tools/glitch">
+    <meta property="og:title" content="Glitch Review 2026 — AI Strategy Lab Built Into Vanta | OnchainProps">
+    <meta property="og:description"
+        content="Glitch review: an AI strategy lab that builds, backtests and stress-tests trading setups, then deploys them straight into Vanta prop accounts.">
+    <meta property="og:image" content="https://onchainprops.xyz/og-image.png">
+
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'none';
+        script-src 'self' https://agents.dante-ai.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://agents.dante-ai.com;
+        font-src https://fonts.gstatic.com;
+        img-src 'self' data: https://agents.dante-ai.com;
+        manifest-src 'self';
+        connect-src https://api.amplitude.com https://api2.amplitude.com https://analytics.eu.amplitude.com https://agents.dante-ai.com;
+        frame-src https://agents.dante-ai.com;
+        object-src 'none';
+        base-uri 'self';
+        form-action 'none';
+        upgrade-insecure-requests;
+    ">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="theme-color" content="#14161b">
+
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../style.css">
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Glitch?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Glitch is a strategy-testing and automation platform for traders. You describe a setup in plain English or bring Pine Script, a swarm of AI agents codes and backtests several versions after fees and slippage, and a Skeptic agent retests them on unseen data. You then decide whether to advance, revise or reject each version. Nothing runs until you deploy it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does Glitch cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Launch pricing: Explore is free (3 alerts), Signals is $19/month, Operator is $39/month (runs strategies), and Builder is $79/month (the full agent swarm). Every Builder subscription includes a $1M Pro account evaluation on Vanta, traded by a strategy you built in Glitch. Glitch is currently in free beta, by invite."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does Glitch work with Vanta?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Glitch is built into Vanta. You can buy Vanta prop accounts inside Glitch and deploy strategies straight into them, without exporting code or running third-party bots."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does the Skeptic agent check for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Skeptic retests strategies on data they were not built on and tries to break them. It looks for the problems that make a backtest look better than reality: overfitting to past noise, look-ahead bias (a rule reading a price that didn't exist yet, such as a candle close before the candle has closed), and fragility to fees, slippage or regime shifts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Glitch trade automatically?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only if you choose to. Discretionary traders can use alerts that watch setups 24/7 and send Telegram notifications. Systematic traders can deploy a strategy and let it run (running strategies starts at the $39/month Operator plan). Nothing is deployed without your approval."
+      }
+    }
+  ]
+}
+    </script>
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="container nav-content">
+            <div class="logo">
+                <a href="../" style="color: inherit; text-decoration: none;">
+                    <span class="accent-text">Onchain</span>Props
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../#firms">Prop Firms</a></li>
+                    <li><a href="../blog.html">Blog</a></li>
+                    <li><a href="../resources.html">Resources</a></li>
+                    <li><a href="../#faq">FAQ</a></li>
+                </ul>
+            </nav>
+            <a href="../compare.html" class="btn btn-primary btn-nav" aria-label="Compare Firms">Compare Firms</a>
+            <button class="hamburger" id="hamburger-btn" aria-label="Open navigation menu" aria-expanded="false"
+                aria-controls="mobile-nav">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+    <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+        <ul>
+            <li><a href="../#firms">Prop Firms</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="../resources.html">Resources</a></li>
+            <li><a href="../#faq">FAQ</a></li>
+        </ul>
+        <a href="../compare.html" class="mobile-nav-cta">Compare Firms →</a>
+    </nav>
+
+    <main>
+        <section class="hero container">
+            <div class="hero-content">
+                <a href="../#trading-tools" class="back-link">← Back to Trading Tools</a>
+                <h1>Glitch Review</h1>
+                <p class="subtitle">An AI strategy lab that builds, backtests and tries to break your trading ideas before they cost you an evaluation fee, then deploys them straight into Vanta prop accounts.</p>
+            </div>
+        </section>
+
+        <section class="pillar-section container">
+            <div class="firm-detail firm-detail--wide">
+                <div class="firm-meta">
+                    <span class="firm-meta-item">Category: <strong>Strategy testing &amp; automation</strong></span>
+                    <span class="firm-meta-item">Pricing: <strong>Free – $79/mo</strong></span>
+                    <span class="firm-meta-item">Status: <strong>Free beta (invite)</strong></span>
+                    <span class="firm-meta-item">Prop integration: <strong>Vanta</strong></span>
+                </div>
+
+                <div class="firm-layout">
+                    <aside class="firm-aside">
+                        <div class="firm-facts-card">
+                            <p class="firm-facts-title">Key Facts</p>
+                            <dl class="firm-facts">
+                                <div><dt>Tool</dt><dd>Glitch</dd></div>
+                                <div><dt>Website</dt><dd><a href="https://tradewithglitch.com/?ref=onchainprops" target="_blank" rel="sponsored noopener noreferrer">Visit site&nbsp;↗</a></dd></div>
+                                <div><dt>Category</dt><dd>Strategy testing &amp; automation</dd></div>
+                                <div><dt>Input</dt><dd>Plain English or Pine Script</dd></div>
+                                <div><dt>Backtests</dt><dd>After fees &amp; slippage</dd></div>
+                                <div><dt>Alerts</dt><dd>Telegram, 24/7</dd></div>
+                                <div><dt>Prop integration</dt><dd><a href="../firms/vanta-trading">Vanta</a> (native)</dd></div>
+                                <div><dt>Pricing</dt><dd>Free, $19, $39, $79/mo</dd></div>
+                                <div><dt>Access</dt><dd>Free beta, by invite</dd></div>
+                            </dl>
+                            <a href="https://tradewithglitch.com/?ref=onchainprops" class="btn btn-primary firm-cta-btn" target="_blank" rel="sponsored noopener noreferrer">Try Glitch ↗</a>
+                        </div>
+                    </aside>
+
+                    <article class="firm-detail-content">
+                    <h2 class="firm-lead">Glitch Review: Test Like a Quant Before You Pay for an Eval</h2>
+
+                    <p>A hedge fund quant starts the day with clean data, a backtesting engine and a risk team. A retail trader starts with TradingView and a setup that worked great last Tuesday. The gap isn't talent. It's infrastructure to test ideas before they cost money.</p>
+
+                    <p>Without that infrastructure, most traders test in production: buy a challenge, trade the setup that "looked great," hit the drawdown limit on day four, buy another. That loop is a business model for prop firms, not for traders. Glitch is built to break it by giving you a place to build and stress-test a strategy <em>before</em> it touches an evaluation.</p>
+
+                    <h2>Why Backtests Lie</h2>
+
+                    <p>Most traders fail evals because nobody helped them test properly: no out-of-sample testing, no fees or slippage in the backtest, rules that live only in their head. A good-looking backtest can hide three killers:</p>
+
+                    <ul class="firm-payout-list">
+                        <li><strong>Overfitting.</strong> The strategy memorized past noise. On new data, results get worse.</li>
+                        <li><strong>Look-ahead bias.</strong> A rule peeks at a price that didn't exist yet at the time of the trade.</li>
+                        <li><strong>Hidden fragility.</strong> Fees, slippage or a regime shift quietly erase the edge.</li>
+                    </ul>
+
+                    <p>"Just add AI" doesn't fix this on its own. Glitch's launch write-up cites two examples: on ClawStreet, a public arena of paper-trading AI agents, about 41% of 137 agents are profitable after fees and slippage, and the median sits near zero; and in 2025's Alpha Arena, GPT-5 lost over 60% of its account in under three weeks. The builders getting it right use one design: code owns the math and the risk limits, models make narrow judgments, and humans approve anything irreversible. Glitch follows that design.</p>
+
+                    <h2>How Glitch Works</h2>
+
+                    <ul class="firm-payout-list">
+                        <li><strong>1. Describe.</strong> Write a setup in plain English, or bring your existing Pine Script.</li>
+                        <li><strong>2. Build.</strong> A swarm of agents codes several versions and backtests them after fees and slippage.</li>
+                        <li><strong>3. Check.</strong> A Skeptic agent retests them on unseen data and tries to break them.</li>
+                        <li><strong>4. Decide.</strong> Advance, revise or reject. Nothing runs until you deploy it.</li>
+                    </ul>
+
+                    <p><strong>Example:</strong> "Go long when funding turns negative and price reclaims yesterday's high." Glitch builds daily, 4h and weekly versions, sets risk at 1% per trade, and backtests all three. The Skeptic then flags version B: it reads the 4h close before the candle has closed. That's look-ahead bias, and it would have made the backtest look far better than live trading ever could.</p>
+
+                    <p>Once a strategy survives, you choose how to use it. <strong>Discretionary traders</strong> can set alerts that watch setups 24/7 and ping you on Telegram. <strong>Systematic traders</strong> can deploy the strategy and let it run.</p>
+
+                    <h2>Built Into Vanta</h2>
+
+                    <p>Glitch is integrated with <a href="../firms/vanta-trading">Vanta Trading</a>, the prop firm on Bittensor Subnet 8 with a public payout ledger (USDC payouts can be checked onchain on Base; bank payouts can't). You can buy Vanta accounts inside Glitch and deploy strategies straight into them. No exporting code, no third-party bots.</p>
+
+                    <p>The two halves are designed to fit together: Glitch is where you test, Vanta is where you get funded. Funding an untested strategy with $1M doesn't make you a better trader; it makes you blow up faster. Glitch's job is to make sure the strategy is worth funding first. Glitch subscription revenue also flows back to the Vanta network, paying for Builder evaluations and funding competitions that give free evals to the best traders on Glitch.</p>
+
+                    <h2>Pricing</h2>
+
+                    <div class="table-container">
+                    <table class="prop-table" aria-label="Glitch launch pricing">
+                        <thead>
+                            <tr><th>Plan</th><th>Price</th><th>What you get</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Explore</td><td>Free</td><td>3 alerts</td></tr>
+                            <tr><td>Signals</td><td>$19/mo</td><td>Not detailed at launch</td></tr>
+                            <tr><td>Operator</td><td>$39/mo</td><td>Runs strategies</td></tr>
+                            <tr><td>Builder</td><td>$79/mo</td><td>Full agent swarm + $1M Pro account eval on Vanta</td></tr>
+                        </tbody>
+                    </table>
+                    </div>
+
+                    <p>Builder includes a $1M Pro account evaluation on Vanta, traded by a strategy you built in Glitch. These are launch prices. Glitch is currently in free beta, by invite.</p>
+
+                    <h2>What's Next</h2>
+
+                    <p>Glitch has announced these features on its roadmap. None of them are live yet:</p>
+
+                    <ul class="firm-payout-list">
+                        <li><strong>Shared modules.</strong> Publish a component such as a regime classifier, and share in the profit split when it helps someone else's strategy.</li>
+                        <li><strong>Your own swarm.</strong> Add subagents and pick which model each one runs.</li>
+                        <li><strong>CI for trading.</strong> Agents hunt for improvements nonstop; you approve what ships.</li>
+                        <li><strong>Hosted infra.</strong> No extra subscriptions to bring.</li>
+                    </ul>
+
+                    <h2>What Gives Us Pause</h2>
+
+                    <p>Glitch is a new product in invite-only beta, so there's no long public track record yet. A backtest that survives the Skeptic is better evidence than one that doesn't, but it is still not a guarantee of live results. Markets change, and passing an out-of-sample test reduces the odds of a hidden bug without proving an edge.</p>
+
+                    <p>The $1M account included with Builder is an <strong>evaluation</strong>, not funded capital: your strategy still has to pass Vanta's rules. And because Glitch is built into Vanta, its prop integration currently points to one firm. Check <a href="../firms/vanta-trading">our Vanta review</a> for how payouts are recorded and verified before you rely on that path.</p>
+
+                    <h2>The Verdict</h2>
+
+                    <p>Glitch goes after the real reason most traders lose evaluation fees: untested strategies. Plain-English strategy building, backtests that include fees and slippage, and a dedicated agent whose only job is to break your idea give retail traders a piece of quant infrastructure they usually don't have. The native Vanta deployment closes the loop from idea to funded account. Start with the free Explore plan, and only scale up once a strategy has survived the Skeptic.</p>
+
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="firm-faq">
+                        <details class="firm-faq-item">
+                            <summary class="firm-faq-question">What is Glitch?</summary>
+                            <div class="firm-faq-answer">
+                                <p>Glitch is a strategy-testing and automation platform for traders. You describe a setup in plain English or bring Pine Script, a swarm of AI agents codes and backtests several versions after fees and slippage, and a Skeptic agent retests them on unseen data. You then decide whether to advance, revise or reject each version. Nothing runs until you deploy it.</p>
+                            </div>
+                        </details>
+
+                        <details class="firm-faq-item">
+                            <summary class="firm-faq-question">How much does Glitch cost?</summary>
+                            <div class="firm-faq-answer">
+                                <p>Launch pricing: Explore is free (3 alerts), Signals is $19/month, Operator is $39/month (runs strategies), and Builder is $79/month (the full agent swarm). Every Builder subscription includes a $1M Pro account evaluation on Vanta, traded by a strategy you built in Glitch. Glitch is currently in free beta, by invite.</p>
+                            </div>
+                        </details>
+
+                        <details class="firm-faq-item">
+                            <summary class="firm-faq-question">How does Glitch work with Vanta?</summary>
+                            <div class="firm-faq-answer">
+                                <p>Glitch is built into Vanta. You can buy Vanta prop accounts inside Glitch and deploy strategies straight into them, without exporting code or running third-party bots.</p>
+                            </div>
+                        </details>
+
+                        <details class="firm-faq-item">
+                            <summary class="firm-faq-question">What does the Skeptic agent check for?</summary>
+                            <div class="firm-faq-answer">
+                                <p>The Skeptic retests strategies on data they were not built on and tries to break them. It looks for the problems that make a backtest look better than reality: overfitting to past noise, look-ahead bias (a rule reading a price that didn't exist yet, such as a candle close before the candle has closed), and fragility to fees, slippage or regime shifts.</p>
+                            </div>
+                        </details>
+
+                        <details class="firm-faq-item">
+                            <summary class="firm-faq-question">Does Glitch trade automatically?</summary>
+                            <div class="firm-faq-answer">
+                                <p>Only if you choose to. Discretionary traders can use alerts that watch setups 24/7 and send Telegram notifications. Systematic traders can deploy a strategy and let it run (running strategies starts at the $39/month Operator plan). Nothing is deployed without your approval.</p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="firm-verdict">
+                        <p class="firm-verdict-label">Rating</p>
+                        <p class="firm-verdict-score">Promising — Early Beta</p>
+                        <p class="firm-verdict-note">Quant-style testing for retail traders, with a direct path into Vanta prop accounts. New and invite-only, so start on the free plan.</p>
+                        <a href="https://tradewithglitch.com/?ref=onchainprops" class="btn btn-primary firm-verdict-cta" target="_blank" rel="sponsored noopener noreferrer">Try Glitch ↗</a>
+                    </div>
+                    <p class="footer-disclaimer" style="text-align: left; margin-left: 0;">Glitch links on this page are referral links. We may earn a commission at no extra cost to you.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <span class="accent-text">Onchain</span>Props
+                <p>The premier directory for decentralized capital and trading tools.</p>
+            </div>
+            <div class="footer-links">
+                <a href="../#firms">Prop Firms</a>
+                <a href="../blog.html">Blog</a>
+                <a href="../resources.html">Resources</a>
+                <a href="../#faq">FAQ</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="footer-socials">
+                <a href="https://github.com/genkisudo/onchainprops" target="_blank" rel="noopener noreferrer"
+                    aria-label="GitHub">GitHub</a>
+                <a href="https://x.com/onchain_props" target="_blank" rel="noopener noreferrer"
+                    aria-label="X (Twitter)">X</a>
+                <a href="https://t.me/wtfonchain" target="_blank" rel="noopener noreferrer"
+                    aria-label="Telegram">Telegram</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 OnchainProps. From trenches with ❤️</p>
+                <p class="footer-disclaimer">This is not financial advice. Listings are not an endorsement. Always
+                    DYOR (Do Your Own Research) before trading or depositing funds.</p>
+                <p class="footer-disclaimer">Some links on this site are affiliate links. We may earn a commission if you sign up through them, at no extra cost to you. This never affects our rankings.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../amplitude.min.js"></script>
+    <script src="../script.js"></script>
+    <script
+        src="https://agents.dante-ai.com/embed.js"
+        data-agent-id="9faaaeb8-0c93-4420-b124-c3b492f51d07"
+        data-widget-key="wk_GOp-URDnnABK7UgHX5qRMCF-DZjKTnTO"
+        crossorigin="anonymous"
+        async>
+    </script>
+</body>
+
+</html>

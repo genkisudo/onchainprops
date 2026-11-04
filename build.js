@@ -408,6 +408,9 @@ ${table(cryptoPropFirms)}
 ## What is an Onchain Prop Firm?
 An onchain prop trading firm provides capital to traders in cryptocurrency. Traders must pass an evaluation phase — demonstrating consistent profitability within drawdown rules — then receive a funded account. Profits are split between the trader and the firm, with the trader's share paid directly to their non-custodial crypto wallet via stablecoins. This differs from traditional prop firms in that execution is transparent, on-chain, and verifiable by smart contract.
 
+## Trading Tools
+- [Glitch](${SITE}/tools/glitch) — AI strategy lab: describe a setup in plain English or Pine Script, agents build and backtest it after fees and slippage, a Skeptic agent retests on unseen data; deploys straight into Vanta prop accounts. Free beta; $19–$79/mo.
+
 ${postsLlmsSection()}## Content Sections
 - **Onchain Prop Firms** — Directory of funded prop trading platforms, split comparisons, account sizes
 - **Onchain Data Tools** — Analytics platforms (Nansen, Dune, Arkham) for edge in trading
@@ -788,6 +791,7 @@ const sitemapXml = () => {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${url('https://onchainprops.xyz/', 'weekly', '1.0', 'Main page — single-page app, all content lives here')}
 ${url('https://onchainprops.xyz/compare.html', 'weekly', '0.8', 'Compare Firms — long-form comparison article')}${firmUrls}
+${url(`${SITE}/tools/glitch`, 'monthly', '0.7', 'Glitch — trading tool review')}
 ${url('https://onchainprops.xyz/blog.html', 'weekly', '0.7', 'Blog — payout safety and onchain prop trading guides')}${postSitemapUrls()}
 ${url('https://onchainprops.xyz/resources', 'monthly', '0.6', 'Resources — tools & guides for onchain traders')}
 ${url('https://onchainprops.xyz/llms.txt', 'monthly', '0.5', 'llms.txt — for AI crawler discovery')}

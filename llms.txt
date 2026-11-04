@@ -47,6 +47,9 @@ The following table lists all tracked onchain prop firms:
 ## What is an Onchain Prop Firm?
 An onchain prop trading firm provides capital to traders in cryptocurrency. Traders must pass an evaluation phase — demonstrating consistent profitability within drawdown rules — then receive a funded account. Profits are split between the trader and the firm, with the trader's share paid directly to their non-custodial crypto wallet via stablecoins. This differs from traditional prop firms in that execution is transparent, on-chain, and verifiable by smart contract.
 
+## Trading Tools
+- [Glitch](https://onchainprops.xyz/tools/glitch) — AI strategy lab: describe a setup in plain English or Pine Script, agents build and backtest it after fees and slippage, a Skeptic agent retests on unseen data; deploys straight into Vanta prop accounts. Free beta; $19–$79/mo.
+
 ## Blog
 - [Are Onchain Prop Firms Legit? How to Verify a Payout Before You Buy a Challenge](https://onchainprops.xyz/blog/are-onchain-prop-firms-legit) — Some onchain prop firms are legit and some aren't, and you can check before you pay. Look for payouts with public transaction hashes, a visible treasury or reserve, rules enforced by smart contracts, public hedging, and a named team. The fewer of these a firm can show, the more you are taking its word for it.
 - [What Is Vanta Trading?](https://onchainprops.xyz/blog/what-is-vanta-trading) — Vanta Trading is a prop trading evaluation platform built on Bittensor Subnet 8 (Vanta Network). You pay a one-time fee, pass a one-step challenge with a 10% profit target on a simulated account, and earn weekly rewards in USDC or by bank transfer, with a 100% profit split by default.

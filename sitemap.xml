@@ -122,6 +122,14 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Glitch — trading tool review -->
+  <url>
+    <loc>https://onchainprops.xyz/tools/glitch</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Blog — payout safety and onchain prop trading guides -->
   <url>
     <loc>https://onchainprops.xyz/blog.html</loc>
