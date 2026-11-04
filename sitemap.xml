@@ -100,6 +100,13 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- Breakout — firm review & evaluation details -->
+  <url>
+    <loc>https://onchainprops.xyz/firms/breakout</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- SizeProp — firm review & evaluation details -->
   <url>
     <loc>https://onchainprops.xyz/firms/sizeprop</loc>

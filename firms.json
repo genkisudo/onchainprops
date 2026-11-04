@@ -220,6 +220,24 @@
   ],
   "cryptoPropFirms": [
     {
+      "name": "Breakout",
+      "country": "TBC",
+      "split": "80% (90% add-on)",
+      "maxAccount": "$200,000",
+      "profitTarget": "9-12%",
+      "dailyDrawdown": "3%",
+      "maxDrawdown": "3-6%",
+      "website": "https://www.breakoutprop.com/",
+      "chain": "",
+      "chainPhrase": "simulated crypto perpetuals plus select commodities and indices (Kraken-owned)",
+      "isAffiliate": false,
+      "token": "No",
+      "payoutSpeed": "12-24h",
+      "rulesOnchain": "No",
+      "maxLeverage": "40x",
+      "payoutsVerified": "No"
+    },
+    {
       "name": "SizeProp",
       "country": "TBC",
       "split": "Up to 95%",
