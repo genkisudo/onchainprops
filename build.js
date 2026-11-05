@@ -741,7 +741,6 @@ ${more.map((o) => `                    <a href="${o.slug}" class="article-card b
         </div>
     </footer>
 
-    <script src="../amplitude.min.js"></script>
     <script src="../script.js"></script>
     <script
         src="https://agents.dante-ai.com/embed.js"

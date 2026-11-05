@@ -3,9 +3,15 @@
  * @description State-driven application logic implementing Reactive PubSub,
  * Web Components, and performant DocumentFragment manipulations.
  *
- * Amplitude Analytics is loaded as a UMD global via amplitude.min.js,
- * which sets window.amplitude before this script runs.
+ * Amplitude Analytics (amplitude.min.js, ~700KB) is lazy-loaded by this
+ * script AFTER the page content renders — see loadAnalytics() below — so the
+ * firm tables never wait on the analytics download.
  */
+
+// Resolve amplitude.min.js relative to this script's own URL, so the same
+// code works from /, /firms/, /blog/ and /tools/. document.currentScript is
+// only set during top-level execution, so capture it now.
+const AMPLITUDE_SRC = new URL('amplitude.min.js', document.currentScript?.src ?? location.href).href;
 
 // Collapse /index.html to / before Amplitude initializes below, so
 // onchainprops.xyz/ and onchainprops.xyz/index.html aren't tracked as
@@ -62,10 +68,29 @@ class PubSub {
 
 const Store = new PubSub();
 
-/** Safe analytics wrapper — no-ops when amplitude.min.js is blocked or fails to load */
+/**
+ * Safe analytics wrapper. Events tracked before amplitude.min.js has loaded
+ * are queued (capped) and flushed once it initializes; if the script is
+ * blocked or fails to load, everything silently no-ops.
+ */
 const analytics = {
-    track: (...args) => { try { amplitude.track(...args); } catch (_) {} },
-    initAll: (...args) => { try { amplitude.initAll(...args); } catch (_) {} }
+    ready: false,
+    /** @type {any[][]} */
+    queue: [],
+    track(...args) {
+        if (!this.ready) {
+            if (this.queue.length < 50) this.queue.push(args);
+            return;
+        }
+        try { amplitude.track(...args); } catch (_) {}
+    },
+    initAll(...args) {
+        try {
+            amplitude.initAll(...args);
+            this.ready = true;
+            this.queue.splice(0).forEach(a => this.track(...a));
+        } catch (_) {}
+    }
 };
 
 // -----------------------------------------
@@ -825,18 +850,6 @@ function setupBlogFilters() {
 // Initialization
 // -----------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize Amplitude — must run before any tracking calls
-    analytics.initAll('488e252410ff9dc7ba7cfd5efac999f1', {
-        "analytics": {
-            // Hash-only navigation (#firms, #resources, #faq) scrolls within
-            // this single page — it isn't a real route change, so don't let
-            // it fire a duplicate Page View. Other autocapture categories
-            // (attribution, sessions, clicks, etc.) stay on by default.
-            "autocapture": { "pageViews": { "trackHistoryChanges": "pathOnly" } }
-        },
-        "sessionReplay": { "sampleRate": 1 }
-    });
-
     // Initialize UI — errors here are reported to Amplitude
     try {
         renderPropFirmsTable();
@@ -859,4 +872,27 @@ document.addEventListener('DOMContentLoaded', () => {
             'http status code': null
         });
     }
+
+    // Content is on screen — now fetch analytics without blocking anything.
+    loadAnalytics();
 });
+
+/** Injects amplitude.min.js and initializes it once loaded. */
+function loadAnalytics() {
+    const script = document.createElement('script');
+    script.src = AMPLITUDE_SRC;
+    script.async = true;
+    script.onload = () => analytics.initAll('488e252410ff9dc7ba7cfd5efac999f1', {
+        "analytics": {
+            // Hash-only navigation (#firms, #resources, #faq) scrolls within
+            // this single page — it isn't a real route change, so don't let
+            // it fire a duplicate Page View. Other autocapture categories
+            // (attribution, sessions, clicks, etc.) stay on by default.
+            "autocapture": { "pageViews": { "trackHistoryChanges": "pathOnly" } }
+        },
+        // Record 20% of sessions — plenty of replays at current traffic,
+        // without making every visitor pay the recording CPU cost.
+        "sessionReplay": { "sampleRate": 0.2 }
+    });
+    document.body.appendChild(script);
+}
