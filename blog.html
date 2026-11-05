@@ -30,11 +30,11 @@
         font-src https://fonts.gstatic.com;
         img-src 'self' data: https://agents.dante-ai.com;
         manifest-src 'self';
-        connect-src https://api.amplitude.com https://api2.amplitude.com https://analytics.eu.amplitude.com https://agents.dante-ai.com;
+        connect-src https://api.amplitude.com https://api2.amplitude.com https://analytics.eu.amplitude.com https://agents.dante-ai.com https://app.kit.com;
         frame-src https://agents.dante-ai.com;
         object-src 'none';
         base-uri 'self';
-        form-action 'none';
+        form-action https://app.kit.com;
         upgrade-insecure-requests;
     ">
     <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -195,6 +195,43 @@
             </div>
 
             <p class="blog-empty" id="blog-empty" hidden>No posts in this category yet.</p>
+
+            <!-- GEN:BEGIN newsletter -->
+            <newsletter-signup class="newsletter" data-placement="blog-index">
+                <div class="newsletter-main">
+                    <p class="newsletter-eyebrow"><span class="newsletter-pulse" aria-hidden="true"></span>Payout Watch</p>
+                    <h2 class="newsletter-title">Know when a firm <em>stops paying</em>, before you buy the eval.</h2>
+                    <p class="newsletter-lede">A short weekly email tracking payout delays, rule changes and new onchain firms. No shilling, one email a week at most.</p>
+                    <form class="newsletter-form" action="https://app.kit.com/forms/10146847/subscriptions" method="post">
+                        <label for="nl-email-blog-index" class="visually-hidden">Email address</label>
+                        <div class="newsletter-field">
+                            <input id="nl-email-blog-index" class="newsletter-input" type="email" name="email_address"
+                                placeholder="you@email.com" autocomplete="email" required maxlength="254">
+                            <button type="submit" class="newsletter-btn">Get alerts <span aria-hidden="true">→</span></button>
+                        </div>
+                        <div class="newsletter-hp" aria-hidden="true">
+                            <label>Leave this empty <input type="text" name="nl_website" tabindex="-1" autocomplete="off"></label>
+                        </div>
+                    </form>
+                    <p class="newsletter-status" role="status" aria-live="polite"></p>
+                    <p class="newsletter-fine">Free. You'll confirm by email first, and you can unsubscribe in one click.</p>
+                </div>
+                <ul class="newsletter-feed" aria-label="What Payout Watch emails cover">
+                    <li class="feed-item" data-tone="warn">
+                        <span class="feed-tag">Payout delay</span>
+                        <span class="feed-text">A firm misses its stated payout window</span>
+                    </li>
+                    <li class="feed-item" data-tone="info">
+                        <span class="feed-tag">Rule change</span>
+                        <span class="feed-text">Drawdown, split or payout terms quietly edited</span>
+                    </li>
+                    <li class="feed-item" data-tone="ok">
+                        <span class="feed-tag">New firm</span>
+                        <span class="feed-text">A new onchain firm added to the directory</span>
+                    </li>
+                </ul>
+            </newsletter-signup>
+            <!-- GEN:END newsletter -->
         </section>
     </main>
 

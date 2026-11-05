@@ -47,6 +47,15 @@ const SAME_AS = [
 ];
 
 // -----------------------------------------
+// Newsletter (Kit) — the ONLY place the form ID lives.
+// Kit → Grow → Landing Pages & Forms → your form → Publish → HTML:
+// copy the number from action="https://app.kit.com/forms/<ID>/subscriptions".
+// The ID is public by design (it ships in every embed); no API key is used.
+// -----------------------------------------
+const KIT_FORM_ID = '10146847';
+const KIT_ACTION = `https://app.kit.com/forms/${KIT_FORM_ID}/subscriptions`;
+
+// -----------------------------------------
 // Helpers
 // -----------------------------------------
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -609,11 +618,11 @@ const postPage = (p) => {
         font-src https://fonts.gstatic.com;
         img-src 'self' data: https://agents.dante-ai.com;
         manifest-src 'self';
-        connect-src https://api.amplitude.com https://api2.amplitude.com https://analytics.eu.amplitude.com https://agents.dante-ai.com;
+        connect-src https://api.amplitude.com https://api2.amplitude.com https://analytics.eu.amplitude.com https://agents.dante-ai.com https://app.kit.com;
         frame-src https://agents.dante-ai.com;
         object-src 'none';
         base-uri 'self';
-        form-action 'none';
+        form-action https://app.kit.com;
         upgrade-insecure-requests;
     ">
     <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -694,6 +703,8 @@ ${p.html.replace(/^/gm, '                ')}
                 <p>Splits, account sizes, chains, and payout rules for every tracked onchain prop firm.</p>
                 <a href="../compare.html" class="btn btn-primary">Compare Firms</a>
             </aside>
+
+${newsletterForm('post').replace(/^/gm, '            ')}
 ${more.length ? `
             <section class="article-more" aria-labelledby="more-heading">
                 <h2 id="more-heading">More from the blog</h2>
@@ -800,6 +811,49 @@ ${url('https://onchainprops.xyz/llms.txt', 'monthly', '0.5', 'llms.txt — for A
 };
 
 // -----------------------------------------
+// Newsletter signup block
+// -----------------------------------------
+/**
+ * Progressive-enhancement signup form: a plain POST to Kit that works with
+ * JS off; <newsletter-signup> (script.js) upgrades it to an inline fetch.
+ * @param {string} placement - analytics label ('home', 'blog-index', 'post')
+ */
+const newsletterForm = (placement) => `<newsletter-signup class="newsletter" data-placement="${placement}">
+    <div class="newsletter-main">
+        <p class="newsletter-eyebrow"><span class="newsletter-pulse" aria-hidden="true"></span>Payout Watch</p>
+        <h2 class="newsletter-title">Know when a firm <em>stops paying</em>, before you buy the eval.</h2>
+        <p class="newsletter-lede">A short weekly email tracking payout delays, rule changes and new onchain firms. No shilling, one email a week at most.</p>
+        <form class="newsletter-form" action="${KIT_ACTION}" method="post">
+            <label for="nl-email-${placement}" class="visually-hidden">Email address</label>
+            <div class="newsletter-field">
+                <input id="nl-email-${placement}" class="newsletter-input" type="email" name="email_address"
+                    placeholder="you@email.com" autocomplete="email" required maxlength="254">
+                <button type="submit" class="newsletter-btn">Get alerts <span aria-hidden="true">→</span></button>
+            </div>
+            <div class="newsletter-hp" aria-hidden="true">
+                <label>Leave this empty <input type="text" name="nl_website" tabindex="-1" autocomplete="off"></label>
+            </div>
+        </form>
+        <p class="newsletter-status" role="status" aria-live="polite"></p>
+        <p class="newsletter-fine">Free. You'll confirm by email first, and you can unsubscribe in one click.</p>
+    </div>
+    <ul class="newsletter-feed" aria-label="What Payout Watch emails cover">
+        <li class="feed-item" data-tone="warn">
+            <span class="feed-tag">Payout delay</span>
+            <span class="feed-text">A firm misses its stated payout window</span>
+        </li>
+        <li class="feed-item" data-tone="info">
+            <span class="feed-tag">Rule change</span>
+            <span class="feed-text">Drawdown, split or payout terms quietly edited</span>
+        </li>
+        <li class="feed-item" data-tone="ok">
+            <span class="feed-tag">New firm</span>
+            <span class="feed-text">A new onchain firm added to the directory</span>
+        </li>
+    </ul>
+</newsletter-signup>`;
+
+// -----------------------------------------
 // Marker injection
 // -----------------------------------------
 /**
@@ -851,6 +905,7 @@ html = inject(html, 'noscript-prediction',
 html = inject(html, 'noscript-crypto',
     noscriptTable(cryptoPropFirms, 'Crypto Prop Firm Comparison (static)'));
 html = inject(html, 'faq-list', faqAccordions());
+html = inject(html, 'newsletter', newsletterForm('home'));
 write('index.html', html);
 
 let js = read('script.js');
@@ -859,6 +914,7 @@ write('script.js', js);
 
 let blogHtml = read('blog.html');
 blogHtml = inject(blogHtml, 'blog-cards', blogCards());
+blogHtml = inject(blogHtml, 'newsletter', newsletterForm('blog-index'));
 write('blog.html', blogHtml);
 
 fs.mkdirSync(path.join(ROOT, 'blog'), { recursive: true });
@@ -869,4 +925,5 @@ if (!posts.length) fs.rmdirSync(path.join(ROOT, 'blog'));
 write('llms.txt', llmsTxt());
 write('sitemap.xml', sitemapXml());
 
+if (!/^\d+$/.test(KIT_FORM_ID)) console.warn('⚠ KIT_FORM_ID is not set in build.js — newsletter forms will not work until it is.');
 console.log(`Regenerated index.html, script.js, llms.txt, sitemap.xml from firms.json (${propFirms.length} firms, ${posts.length} posts, updated ${lastUpdated}).`);

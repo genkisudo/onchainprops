@@ -313,6 +313,88 @@ class FaqAccordion extends HTMLElement {
 customElements.define('faq-accordion', FaqAccordion);
 
 // -----------------------------------------
+// Newsletter signup (Kit)
+// -----------------------------------------
+/**
+ * Upgrades the build.js-generated signup form (light DOM, so it still posts
+ * natively to Kit with JS off) into an inline fetch with live status.
+ * Uses light DOM rather than Shadow DOM on purpose: the <form> must exist in
+ * the HTML for the no-JS fallback to work.
+ * Safety: honeypot field silently drops bots; Kit's double opt-in confirms
+ * every real address; no API key is involved (form endpoints are public).
+ */
+class NewsletterSignup extends HTMLElement {
+    connectedCallback() {
+        this.form = this.querySelector('form');
+        this.status = this.querySelector('.newsletter-status');
+        this.btn = this.form?.querySelector('button[type="submit"]');
+        this._onSubmit = this.onSubmit.bind(this);
+        this.form?.addEventListener('submit', this._onSubmit);
+    }
+
+    disconnectedCallback() {
+        this.form?.removeEventListener('submit', this._onSubmit);
+    }
+
+    /** @param {string} msg @param {'ok'|'error'|''} kind */
+    setStatus(msg, kind) {
+        if (!this.status) return;
+        this.status.textContent = msg;
+        this.status.dataset.kind = kind;
+    }
+
+    /** @param {SubmitEvent} e */
+    async onSubmit(e) {
+        e.preventDefault();
+        const placement = this.dataset.placement ?? 'unknown';
+        const data = new FormData(this.form);
+
+        // Honeypot: humans never see this field. Pretend success so bots move on.
+        if (data.get('nl_website')) {
+            this.setStatus('Thanks! Check your inbox to confirm.', 'ok');
+            return;
+        }
+        data.delete('nl_website');
+
+        this.btn.disabled = true;
+        this.setStatus('Subscribing…', '');
+        try {
+            const res = await fetch(this.form.action, {
+                method: 'POST',
+                body: data,
+                headers: { Accept: 'application/json' }
+            });
+            const json = await res.json().catch(() => ({}));
+            // Kit returns HTTP 200 + {status:'failed', errors:{messages:[...]}} for bad input
+            const kitMsg = json?.errors?.messages?.[0];
+            if (kitMsg) {
+                this.setStatus(kitMsg, 'error');
+                return;
+            }
+            if (!res.ok || json?.status === 'failed') throw new Error(`HTTP ${res.status}`);
+
+            this.form.reset();
+            this.form.hidden = true;
+            this.setStatus('Almost done — check your inbox and click the confirmation link.', 'ok');
+            analytics.track('Newsletter Subscribed', { placement });
+        } catch (err) {
+            this.setStatus('Something went wrong. Please try again in a moment.', 'error');
+            analytics.track('Error Encountered', {
+                'error category': 'newsletter',
+                'error message': err?.message ?? 'Unknown error',
+                'error context': `newsletter signup (${placement})`,
+                'error code': null,
+                'http status code': null
+            });
+        } finally {
+            this.btn.disabled = false;
+        }
+    }
+}
+
+customElements.define('newsletter-signup', NewsletterSignup);
+
+// -----------------------------------------
 // 3b. Performant DOM Rendering
 // -----------------------------------------
 /**
