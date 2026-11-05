@@ -169,8 +169,6 @@
                         <div id="propr-revenue-value" style="font-size:2rem;font-weight:700;color:var(--accent);margin:0.25rem 0;line-height:1.1;">Loading…</div>
                         <div style="font-size:0.8rem;color:var(--text-secondary);">Source: <a href="https://defillama.com/protocol/propr" target="_blank" rel="noopener noreferrer">DeFiLlama</a></div>
                     </div>
-                    <iframe src="https://dune.com/embeds/7789781/11758183?darkMode=true" style="width:100%;height:400px;border:none;border-radius:8px;margin-top:1rem;" loading="lazy" title="Total USDC Payouts to traders"></iframe>
-                    <iframe src="https://dune.com/embeds/7790175/11758626?darkMode=true" style="width:100%;height:400px;border:none;border-radius:8px;margin-top:1rem;" loading="lazy" title="Propr Dune Analytics Chart"></iframe>
 
                     <h2>Propr Profit Split</h2>
                     <p>Funded traders keep 80% of all profits. The remaining 20% goes to Propr. The profit split applies to all funded accounts regardless of account size or evaluation type (1-Step or 2-Step). There are no tiered splits or conditions attached.</p>
@@ -224,6 +222,7 @@
                     <p>All A-booked trades executed on Propr accounts are routed through Hyperliquid and are verifiable onchain. This means:</p>
                     <p>Every A-booked trade, including entries, exits, and liquidations, is recorded on Hyperliquid's blockchain. Traders can independently verify A-booked trade history onchain. Propr's aggregate payout history will be published onchain.</p>
                     <p>B-booked trades (internal book entries) are not routed to Hyperliquid and are therefore not visible onchain. The P&amp;L outcome is identical regardless of execution method. Every trade on your Propr dashboard is labeled as A-booked or B-booked, so you always have full visibility into how each trade was executed.</p>
+                    <p><strong>Propr's hedging wallet:</strong> you can follow the firm's hedging activity on Hyperliquid live at <a href="https://hyperdash.com/address/0x3b9e9c9f82eb1C321535FD2Bc48d8DB9E8E8c503" target="_blank" rel="noopener noreferrer">0x3b9e…c503 on Hyperdash</a>. Note: this is Propr's hedging wallet, not its payout wallet.</p>
 
                     <h2>How Propr Decides Who Gets A-Booked: The Open-Source Algorithm</h2>
                     <p>The A/B booking decision is made by an <strong>open-source algorithm</strong> published under <code>XBorgLabs/ab-booking</code> on GitHub (<code>@xborglabs/ab-booking</code> on npm). The source code is public — anyone can inspect exactly how Propr classifies traders.</p>
