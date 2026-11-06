@@ -54,6 +54,7 @@
       "token": "No",
       "payoutSpeed": "Weekly",
       "rulesOnchain": "No",
+      "scaledCapital": "Yes",
       "payoutsVerified": "Work in progress"
     },
     {
@@ -129,7 +130,6 @@
       "token": "No",
       "payoutSpeed": "TBC",
       "rulesOnchain": "No",
-      "evalDataOnchain": "Yes",
       "payoutsVerified": "Yes"
     },
     {
