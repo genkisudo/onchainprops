@@ -76,6 +76,25 @@
       "payoutsVerified": "No"
     },
     {
+      "name": "Vest Capital",
+      "country": "TBC",
+      "split": "Up to 95%",
+      "maxAccount": "$25,000",
+      "profitTarget": "None / 10-20%",
+      "dailyDrawdown": "None / 3-4%",
+      "maxDrawdown": "2-6%",
+      "website": "https://next.vestmarkets.com/r/6ionchainprops",
+      "publicUrl": "https://next.vestmarkets.com/vest-capital",
+      "chain": "Arbitrum / Base",
+      "chainPhrase": "Arbitrum and Base (USDC)",
+      "isAffiliate": true,
+      "token": "No",
+      "payoutSpeed": "24h",
+      "rulesOnchain": "No",
+      "maxLeverage": "75x",
+      "payoutsVerified": "No"
+    },
+    {
       "name": "Cashed",
       "country": "TBC",
       "split": "Up to 90%",

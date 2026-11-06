@@ -44,6 +44,13 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- Vest Capital — firm review & evaluation details -->
+  <url>
+    <loc>https://onchainprops.xyz/firms/vest-capital</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- Cashed — firm review & evaluation details -->
   <url>
     <loc>https://onchainprops.xyz/firms/cashed</loc>
