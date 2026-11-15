@@ -13,6 +13,8 @@
  *   - sitemap.xml — fully regenerated (lastmod = firms.json lastUpdated)
  *   - blog.html   — article cards (from posts/*.md)
  *   - blog/*.html — one article page per posts/*.md, with Article/FAQPage/Breadcrumb JSON-LD
+ *   - firms/*.html — stats header + "last verified" line, meta/og descriptions
+ *                   (title, review prose and FAQ JSON-LD stay hand-written)
  *
  * Generated regions are delimited by marker comments:
  *   HTML:  <!-- GEN:BEGIN key --> ... <!-- GEN:END key -->
@@ -877,6 +879,105 @@ const inject = (src, key, inner, style = 'html') => {
 };
 
 // -----------------------------------------
+// Firm detail pages (firms/<slug>.html)
+// -----------------------------------------
+// The stats header and the meta/og descriptions are generated; everything
+// else on the page (title, review prose, FAQ JSON-LD) stays hand-written.
+
+/** firms.json `payoutsVerified` → label shown on the page. */
+const VERIFIED_LABEL = { Yes: 'Yes', No: 'Not yet', 'Work in progress': 'In progress' };
+
+/**
+ * Stats pills, trust/payout-safety signals first. Fields that are unset
+ * (or empty, like `chain` for offchain crypto firms) are skipped, except
+ * the trust fields, which show "TBC" so a missing check is visible.
+ * @param {object} f - firm entry from firms.json
+ * @returns {[string, string][]} label/value pairs
+ */
+const firmStats = (f) => [
+    ['Payouts verified', VERIFIED_LABEL[f.payoutsVerified] ?? f.payoutsVerified ?? 'TBC'],
+    ['Rules onchain', f.rulesOnchain ?? 'TBC'],
+    ['Payout speed', f.payoutSpeed],
+    ['Split', f.split],
+    ['Max account', f.maxAccount],
+    ['Chain', f.chain],
+    ['Max leverage', f.maxLeverage],
+    ['Token', f.token],
+    ['Country', f.country]
+].filter(([, v]) => v);
+
+const firmStatsBlock = (f) => {
+    const items = firmStats(f).map(([k, v]) =>
+        `    <span class="firm-meta-item">${k}: <strong>${escHtml(v)}</strong></span>`).join('\n');
+    const verified = f.lastVerified
+        ? `Stats last verified <time datetime="${f.lastVerified}">${fmtDate(f.lastVerified)}</time>`
+        : 'Stats not yet verified';
+    return `<div class="firm-meta">\n${items}\n</div>\n<p class="firm-verified">${verified}</p>`;
+};
+
+/** "<Name> review: <pageHook> <facts from firms.json>" */
+const firmDescription = (f) => {
+    const split = /tbc/i.test(f.split) ? 'Profit split TBC'
+        : parseSplit(f.split) ? `${f.split} profit split` : f.split;
+    const market = f.chain ? `trading on ${f.chainPhrase}` : `trading ${f.chainPhrase}`;
+    const speed = /^(tbc|soon)$/i.test(f.payoutSpeed ?? 'TBC') ? '' : ` Payout speed: ${f.payoutSpeed}.`;
+    const verified = {
+        Yes: ' Payouts independently verified.',
+        No: ' Payouts not yet independently verified.',
+        'Work in progress': ' Payout verification in progress.'
+    }[f.payoutsVerified] ?? '';
+    const hook = f.pageHook ? ` ${f.pageHook}` : '';
+    const maxAccount = /^up to/i.test(f.maxAccount) ? lcFirst(f.maxAccount) : f.maxAccount;
+    return `${f.name} review:${hook} ${split}, max account ${maxAccount}, ${market}.${speed}${verified}`;
+};
+
+/**
+ * Titles stay hand-written, so warn when a % or $ figure in one no longer
+ * matches firms.json (or drops the "up to" the data uses).
+ * @returns {string[]} warnings
+ */
+const titleDrift = (f, title) => {
+    const out = [];
+    const splitNums = [...f.split.matchAll(/([\d.]+)\s*%/g)].map((m) => m[1]);
+    for (const m of title.matchAll(/([\d.]+)\s*%/g)) {
+        if (!splitNums.includes(m[1])) out.push(`"${m[0]}" not in split "${f.split}"`);
+        else if (parseSplit(f.split)?.upTo && !/up to\s*$/i.test(title.slice(0, m.index))) {
+            out.push(`"${m[0]}" should read "up to ${m[0]}" (split is "${f.split}")`);
+        }
+    }
+    const max = parseMoney(f.maxAccount);
+    for (const m of title.matchAll(/\$[\d,.]+\s*[kKmM]?\b/g)) {
+        if (parseMoney(m[0]) !== max) out.push(`"${m[0]}" doesn't match max account "${f.maxAccount}"`);
+    }
+    return out;
+};
+
+const firmPageWarnings = [];
+const buildFirmPages = () => {
+    let n = 0;
+    for (const f of [...propFirms, ...predictionMarketFirms, ...cryptoPropFirms]) {
+        const p = detailPath(f);
+        if (!p) continue;
+        const file = `${p}.html`;
+        let page = read(file);
+        try {
+            const desc = escAttr(firmDescription(f));
+            page = inject(page, 'firm-description', `<meta name="description"\n    content="${desc}">`);
+            page = inject(page, 'firm-og-description', `<meta property="og:description"\n    content="${desc}">`);
+            page = inject(page, 'firm-stats', firmStatsBlock(f));
+        } catch (e) {
+            throw new Error(`${file}: ${e.message} — add the firm-description, firm-og-description and firm-stats GEN markers (copy them from firms/hypernova.html)`);
+        }
+        const title = /<title>([^<]*)<\/title>/.exec(page)?.[1] ?? '';
+        for (const w of titleDrift(f, title)) firmPageWarnings.push(`${file} <title>: ${w}`);
+        if (!f.lastVerified) firmPageWarnings.push(`${f.name}: no lastVerified date in firms.json`);
+        write(file, page);
+        n++;
+    }
+    return n;
+};
+
+// -----------------------------------------
 // Run
 // -----------------------------------------
 let html = read('index.html');
@@ -924,6 +1025,8 @@ if (!posts.length) fs.rmdirSync(path.join(ROOT, 'blog'));
 
 write('llms.txt', llmsTxt());
 write('sitemap.xml', sitemapXml());
+const firmPageCount = buildFirmPages();
 
 if (!/^\d+$/.test(KIT_FORM_ID)) console.warn('⚠ KIT_FORM_ID is not set in build.js — newsletter forms will not work until it is.');
-console.log(`Regenerated index.html, script.js, llms.txt, sitemap.xml from firms.json (${propFirms.length} firms, ${posts.length} posts, updated ${lastUpdated}).`);
+for (const w of firmPageWarnings) console.warn(`⚠ ${w}`);
+console.log(`Regenerated index.html, script.js, llms.txt, sitemap.xml, ${firmPageCount} firm pages from firms.json (${propFirms.length} firms, ${posts.length} posts, updated ${lastUpdated}).`);

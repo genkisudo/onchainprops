@@ -17,7 +17,9 @@
       "token": "No",
       "payoutSpeed": "~5s",
       "rulesOnchain": "Yes",
-      "payoutsVerified": "Yes"
+      "payoutsVerified": "Yes",
+      "lastVerified": "2026-10-21",
+      "pageHook": "onchain prop trading protocol on Hyperliquid liquidity, with every account rule and payout recorded in public smart contracts."
     },
     {
       "name": "Propr",
@@ -36,7 +38,9 @@
       "payoutSpeed": "Soon",
       "rulesOnchain": "No",
       "aiAgents": "Yes",
-      "payoutsVerified": "Yes"
+      "payoutsVerified": "Yes",
+      "lastVerified": "2026-11-05",
+      "pageHook": "transparent crypto prop firm with onchain trade verification, bot and AI agent trading, and no payout caps."
     },
     {
       "name": "Vanta Trading",
@@ -55,7 +59,9 @@
       "payoutSpeed": "Weekly",
       "rulesOnchain": "No",
       "scaledCapital": "Yes",
-      "payoutsVerified": "Work in progress"
+      "payoutsVerified": "Work in progress",
+      "lastVerified": "2026-10-31",
+      "pageHook": "prop firm from Taoshi, the team behind Bittensor Subnet 8, with a trader-selectable reward split and an optional Hyperliquid-native mode."
     },
     {
       "name": "Iceberg",
@@ -74,7 +80,9 @@
       "payoutSpeed": "~seconds",
       "rulesOnchain": "No",
       "maxLeverage": "25x",
-      "payoutsVerified": "No"
+      "payoutsVerified": "No",
+      "lastVerified": "2026-10-16",
+      "pageHook": "Instant Funding or 1-Step Unlimited accounts, with USDC payouts from a public Arbitrum pool."
     },
     {
       "name": "Vest Capital",
@@ -93,7 +101,9 @@
       "payoutSpeed": "24h",
       "rulesOnchain": "No",
       "maxLeverage": "75x",
-      "payoutsVerified": "No"
+      "payoutsVerified": "No",
+      "lastVerified": "2026-11-06",
+      "pageHook": "funded accounts on the Vest Markets perp exchange, with a static drawdown and no consistency rule."
     },
     {
       "name": "Cashed",
@@ -113,7 +123,9 @@
       "rulesOnchain": "No",
       "scaledCapital": "Yes",
       "maxLeverage": "10x",
-      "payoutsVerified": "No"
+      "payoutsVerified": "No",
+      "lastVerified": "2026-10-29",
+      "pageHook": "deposit-multiplier funding across perps and prediction markets, with USDC payouts on BNB Smart Chain."
     },
     {
       "name": "DojiFunded",
@@ -130,7 +142,9 @@
       "token": "No",
       "payoutSpeed": "TBC",
       "rulesOnchain": "No",
-      "payoutsVerified": "Yes"
+      "payoutsVerified": "Yes",
+      "lastVerified": "2026-08-27",
+      "pageHook": "onchain crypto prop firm with Instant Funding, 1-Step, and 2-Step evaluations across crypto, forex, stocks, and commodities."
     },
     {
       "name": "hyperpnl",
@@ -148,7 +162,9 @@
       "token": "No",
       "payoutSpeed": "Soon",
       "rulesOnchain": "No",
-      "payoutsVerified": "Yes"
+      "payoutsVerified": "Yes",
+      "lastVerified": "2026-08-27",
+      "pageHook": "Hyperliquid prop firm with a static max drawdown, instant onchain payouts, and a two-phase evaluation."
     },
     {
       "name": "Carrot Funding",
@@ -167,7 +183,9 @@
       "rulesOnchain": "No",
       "maxLeverage": "200x",
       "bestLeverage": "Yes",
-      "payoutsVerified": "Yes"
+      "payoutsVerified": "Yes",
+      "lastVerified": "2026-07-08",
+      "pageHook": "onchain prop firm on gTrade with Proof of Reserves, NFT-based Proof of Skill, and payouts verifiable on Dune."
     },
     {
       "name": "HyperStack",
@@ -184,7 +202,9 @@
       "token": "No",
       "payoutSpeed": "TBC",
       "rulesOnchain": "TBC",
-      "payoutsVerified": "No"
+      "payoutsVerified": "No",
+      "lastVerified": "2026-06-23",
+      "pageHook": "one-step challenge with non-custodial trading from your own wallet and monthly USDC payouts onchain."
     },
     {
       "name": "FUNDED by FOXIFY",
@@ -201,7 +221,9 @@
       "token": "Yes",
       "payoutSpeed": "Soon",
       "rulesOnchain": "No",
-      "payoutsVerified": "No"
+      "payoutsVerified": "No",
+      "lastVerified": "2026-06-26",
+      "pageHook": "Challenge Funding and Flash Funding paths, with Hyperliquid support coming soon."
     }
   ],
   "predictionMarketFirms": [
@@ -217,7 +239,9 @@
       "isAffiliate": true,
       "token": "No",
       "payoutSpeed": "Weekly",
-      "rulesOnchain": "TBC"
+      "rulesOnchain": "TBC",
+      "lastVerified": "2026-08-27",
+      "pageHook": "prediction markets prop firm on Polymarket, backed by MyFundedFutures."
     },
     {
       "name": "Catalyst",
@@ -234,7 +258,9 @@
       "token": "No",
       "payoutSpeed": "Instant on pass",
       "rulesOnchain": "No",
-      "payoutsVerified": "No"
+      "payoutsVerified": "No",
+      "lastVerified": "2026-11-03",
+      "pageHook": "Polymarket prop firm with low one-time fees, simulated accounts, and a fixed payout instead of a profit split."
     }
   ],
   "cryptoPropFirms": [
@@ -254,7 +280,9 @@
       "payoutSpeed": "12-24h",
       "rulesOnchain": "No",
       "maxLeverage": "40x",
-      "payoutsVerified": "No"
+      "payoutsVerified": "No",
+      "lastVerified": "2026-11-04",
+      "pageHook": "crypto prop firm with 1-Step Classic, Pro, Turbo, and Spark evaluations and static drawdowns."
     },
     {
       "name": "SizeProp",
@@ -269,7 +297,9 @@
       "token": "No",
       "payoutSpeed": "~24h",
       "rulesOnchain": "No",
-      "payoutsVerified": "No"
+      "payoutsVerified": "No",
+      "lastVerified": "2026-08-21",
+      "pageHook": "multi-asset crypto prop firm backed by Igloo Inc (Pudgy Penguins)."
     },
     {
       "name": "HyroTrader",
@@ -286,7 +316,9 @@
       "token": "No",
       "payoutSpeed": "~24h",
       "rulesOnchain": "No",
-      "payoutsVerified": "No"
+      "payoutsVerified": "No",
+      "lastVerified": "2026-11-04",
+      "pageHook": "crypto futures prop firm with Zero-Step, One-Step, and Two-Step challenges. Use code DED5IJB for 5% off."
     }
   ]
 }

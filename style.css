@@ -583,6 +583,12 @@ h1, h2, h3, h4 {
     font-weight: 600;
 }
 
+.firm-detail .firm-verified {
+    margin: -1rem 0 1.75rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
 .firm-detail-content {
     margin-bottom: 2rem;
 }
