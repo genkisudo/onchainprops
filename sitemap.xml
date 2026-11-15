@@ -144,6 +144,13 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- Hyperliquid Trading Tips: 11 Rules From Founder Jeff Yan -->
+  <url>
+    <loc>https://onchainprops.xyz/blog/hyperliquid-trading-tips-jeff-yan</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
   <!-- Are Onchain Prop Firms Legit? How to Verify a Payout Before You Buy a Challenge -->
   <url>
     <loc>https://onchainprops.xyz/blog/are-onchain-prop-firms-legit</loc>

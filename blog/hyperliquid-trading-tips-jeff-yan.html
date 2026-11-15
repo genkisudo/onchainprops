@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyperliquid Trading Tips: 11 Rules From Jeff Yan</title>
+    <meta name="description" content="Hyperliquid founder Jeff Yan's 11 trading rules from 2023: when to cross the spread, funding arb, liquidations, latency and sizing. Every quote sourced.">
+    <link rel="canonical" href="https://onchainprops.xyz/blog/hyperliquid-trading-tips-jeff-yan">
+
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://onchainprops.xyz/blog/hyperliquid-trading-tips-jeff-yan">
+    <meta property="og:title" content="Hyperliquid Trading Tips: 11 Rules From Jeff Yan">
+    <meta property="og:description" content="Hyperliquid founder Jeff Yan's 11 trading rules from 2023: when to cross the spread, funding arb, liquidations, latency and sizing. Every quote sourced.">
+    <meta property="og:image" content="https://onchainprops.xyz/og-image.png">
+    <meta property="article:published_time" content="2026-11-15">
+    <meta property="article:modified_time" content="2026-11-15">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@wtfonchain">
+    <meta name="twitter:title" content="Hyperliquid Trading Tips: 11 Rules From Jeff Yan">
+    <meta name="twitter:description" content="Hyperliquid founder Jeff Yan's 11 trading rules from 2023: when to cross the spread, funding arb, liquidations, latency and sizing. Every quote sourced.">
+    <meta name="twitter:image" content="https://onchainprops.xyz/og-image.png">
+
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'none';
+        script-src 'self' https://agents.dante-ai.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://agents.dante-ai.com;
+        font-src https://fonts.gstatic.com;
+        img-src 'self' data: https://agents.dante-ai.com;
+        manifest-src 'self';
+        connect-src https://api.amplitude.com https://api2.amplitude.com https://analytics.eu.amplitude.com https://agents.dante-ai.com https://app.kit.com;
+        frame-src https://agents.dante-ai.com;
+        object-src 'none';
+        base-uri 'self';
+        form-action https://app.kit.com;
+        upgrade-insecure-requests;
+    ">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="theme-color" content="#14161b">
+
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../style.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Hyperliquid Trading Tips: 11 Rules From Founder Jeff Yan",
+      "description": "Hyperliquid founder Jeff Yan's 11 trading rules from 2023: when to cross the spread, funding arb, liquidations, latency and sizing. Every quote sourced.",
+      "datePublished": "2026-11-15",
+      "dateModified": "2026-11-15",
+      "mainEntityOfPage": "https://onchainprops.xyz/blog/hyperliquid-trading-tips-jeff-yan",
+      "image": "https://onchainprops.xyz/og-image.png",
+      "author": {
+        "@type": "Organization",
+        "@id": "https://onchainprops.xyz/#organization",
+        "name": "OnchainProps",
+        "url": "https://onchainprops.xyz/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://onchainprops.xyz/#organization",
+        "name": "OnchainProps",
+        "url": "https://onchainprops.xyz/"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://onchainprops.xyz/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://onchainprops.xyz/blog.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Hyperliquid Trading Tips: 11 Rules From Founder Jeff Yan",
+          "item": "https://onchainprops.xyz/blog/hyperliquid-trading-tips-jeff-yan"
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Who is Jeff Yan (@chameleon_jeff)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Jeff Yan is the co-founder of Hyperliquid, an onchain order book exchange for perpetual futures, and the founder of the crypto market-making firm Chameleon Trading. He posts as @chameleon_jeff on X."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I use limit or market orders on Hyperliquid?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Jeff Yan's 2023 advice for traders who aren't running HFT was to take liquidity when you have a signal, because resting orders tend to fill when you're wrong. He made exceptions for skewed fee schedules and orders resting far from the price. Either way, set a limit price on every order."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Hyperliquid funding arbitrage risk-free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Funding can pay well when one side is crowded, but fees, slippage on both legs, funding flipping sign, liquidation risk and the cost of moving collateral can all eat the return."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you build a crypto trading bot in Python?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Jeff Yan said in 2023 that a large class of profitable crypto HFT strategies can be written in Python, using one event loop, one state machine and PyPy for speed, moving to a compiled language only once working strategies show what the system needs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much money do you need to start algorithmic crypto trading?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Jeff Yan said he personally started with under $10,000. His advice was to aim for live pnl first and improve the system later."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do these tips apply to prop firm accounts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mostly, yes. Small position limits, checking your fills and knowing the liquidation rules matter even more under a prop firm's drawdown limits. Also check whether the firm's accounts trade on the live order book and whether its payouts can be verified onchain."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="container nav-content">
+            <div class="logo">
+                <a href="../" style="color: inherit; text-decoration: none;">
+                    <span class="accent-text">Onchain</span>Props
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../#firms">Prop Firms</a></li>
+                    <li><a href="../blog.html" aria-current="page">Blog</a></li>
+                    <li><a href="../resources.html">Resources</a></li>
+                    <li><a href="../#faq">FAQ</a></li>
+                </ul>
+            </nav>
+            <a href="../compare.html" class="btn btn-primary btn-nav" aria-label="Compare Firms">Compare Firms</a>
+            <button class="hamburger" id="hamburger-btn" aria-label="Open navigation menu" aria-expanded="false"
+                aria-controls="mobile-nav">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+    <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+        <ul>
+            <li><a href="../#firms">Prop Firms</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="../resources.html">Resources</a></li>
+            <li><a href="../#faq">FAQ</a></li>
+        </ul>
+        <a href="../compare.html" class="mobile-nav-cta">Compare Firms →</a>
+    </nav>
+
+    <main>
+        <article class="container article">
+            <header class="article-header">
+                <a href="../blog.html" class="back-link">← Back to Blog</a>
+                <span class="card-tag">Guides</span>
+                <h1>Hyperliquid Trading Tips: 11 Rules From Founder Jeff Yan</h1>
+                <div class="blog-card-meta article-meta">
+                    <span>By OnchainProps</span><span aria-hidden="true">·</span>
+                    <time datetime="2026-11-15">Nov 15, 2026</time><span aria-hidden="true">·</span><span>14 min read</span>
+                </div>
+            </header>
+
+            <aside class="article-tldr" aria-label="Short answer">
+                <strong>Short answer</strong>
+                <p>In 2023, Hyperliquid founder Jeff Yan (@chameleon_jeff) posted long threads on how professional crypto traders make money. His core advice: know who pays you, trade only where the order book is enforced onchain, cross the spread when you have a signal, collect funding but hedge it, and keep positions small while you prove your edge with markouts.</p>
+            </aside>
+
+            <div class="article-body">
+                <h2 id="hyperliquid-trading-tips-at-a-glance">Hyperliquid trading tips at a glance</h2>
+                <p><strong>Short answer:</strong> In 2023, Hyperliquid founder Jeff Yan (@chameleon_jeff) posted long threads on how professional crypto traders make money. His core advice: know who pays you, trade only where the order book is enforced onchain, cross the spread when you have a signal, collect funding but hedge it, and keep positions small while you prove your edge with markouts.</p>
+                <p>This guide turns those posts into 11 rules. Every quote is his, word for word, with a link to the original post. The commentary between quotes is ours. Jeff founded Hyperliquid, so many of his examples come from it. All figures are from 2023 and have probably changed since.</p>
+                <div class="table-scroll"><table class="prop-table"><thead><tr><th>#</th><th>Rule</th><th>Who it helps most</th></tr></thead><tbody><tr><td>1</td><td>Figure out who is paying you</td><td>Every trader</td></tr><tr><td>2</td><td>Only trade on books enforced onchain</td><td>Anyone choosing a venue</td></tr><tr><td>3</td><td>If you have a signal, cross the spread</td><td>Discretionary and medium-frequency traders</td></tr><tr><td>4</td><td>Get paid funding, and hedge it</td><td>Basis and carry traders</td></tr><tr><td>5</td><td>Mine the public onchain data</td><td>Quant and data-driven traders</td></tr><tr><td>6</td><td>Learn who gets the liquidations</td><td>Perps traders on long-tail assets</td></tr><tr><td>7</td><td>Measure latency before you optimize it</td><td>Bot builders</td></tr><tr><td>8</td><td>Keep positions small and lean toward flat</td><td>New market makers, funded traders</td></tr><tr><td>9</td><td>Research with simple priors and expect decay</td><td>Strategy researchers</td></tr><tr><td>10</td><td>To move size, announce it</td><td>Large traders and funds</td></tr><tr><td>11</td><td>Start small and get to live pnl</td><td>Beginners in algo trading</td></tr></tbody></table></div>
+                <h2 id="who-is-jeff-yan">Who is Jeff Yan?</h2>
+                <p>Jeff Yan is the co-founder of Hyperliquid, an onchain order book exchange for perpetual futures, and the founder of the crypto market-making firm Chameleon Trading. <a href="https://x.com/chameleon_jeff/status/1660079528054595584" target="_blank" rel="noopener noreferrer">In a May 2023 post</a> he described Chameleon as "the crypto MM firm I built and have been leading for more than 3 years".</p>
+                <p>That year he wrote long threads on latency, making vs taking, MEV, funding, liquidations and research. We read all of his 2023 posts and pulled out the advice that still holds up.</p>
+                <h2 id="1-figure-out-who-is-paying-you">1. Figure out who is paying you</h2>
+                <p>Before you can have an edge, you need to know who is on the other side of your trade. In his first serious thread, Jeff split a market into four groups: retail, makers, HFT takers ("toxic flow") and arbitrageurs. "Retail" describes how the flow behaves. It isn't an insult:</p>
+                <blockquote><p>"Retail doesn't mean "dumb," but rather that HFT actors want to trade against their flow."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1626665946269257728" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Feb 17, 2023</a></p>
+                <p>The edge comes from seeing what the other side needs:</p>
+                <blockquote><p>"often your alpha is someone else's undesired risk."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1650868940728582146" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Apr 25, 2023</a></p>
+                <p><strong>Takeaway:</strong> if you can't name who pays you and why, it's probably you.</p>
+                <h2 id="2-only-trade-on-order-books-that-are-enforced-onchain">2. Only trade on order books that are enforced onchain</h2>
+                <p>Your venue sets the quality of your fills. Jeff's main structural argument of the year:</p>
+                <blockquote><p>"Order books offer more competitive liquidity than AMMs, but they must live onchain."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1672715768470044673" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Jun 24, 2023</a></p>
+                <p>The reason is MEV (maximal extractable value). If the book lives offchain, whoever runs the matching engine decides who gets filled:</p>
+                <blockquote><p>"MEV for offchain order books is at the level of matching, not just tx ordering."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1672715760140161024" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Jun 24, 2023</a></p>
+                <p>With an onchain book, a validator can't skip the best, earliest order. Filling anyone else is an invalid state transition, so the block gets rejected.</p>
+                <p>Centralized exchanges deserve the same check. Jeff publicly called out an exchange where his team watched trades print through their own top-of-book order:</p>
+                <blockquote><p>"literally see trades executing at farther prices while our order chilled there."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1643610606082334720" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Apr 5, 2023</a></p>
+                <p><strong>Takeaway:</strong> before you size up anywhere, check that your fills, the public prints and the order book all agree.</p>
+                <h2 id="3-limit-or-market-order-if-you-have-a-signal-cross-the-spread">3. Limit or market order? If you have a signal, cross the spread</h2>
+                <p>Resting a limit order inside a wide spread looks cheaper. Usually it isn't, because you get filled when you're wrong and miss the fill when you're right.</p>
+                <blockquote><p>"Just like in poker, if you make a bet, you tend to get called by better hand than those that fold."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1634021058469826561" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Mar 10, 2023</a></p>
+                <p>Resting orders make money based on queue position, and the fastest traders win that race. So his advice for anyone who isn't running HFT:</p>
+                <blockquote><p>"if you're looking at medium frequency or longer, just take liquidity to start."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1637986814748397569" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Mar 21, 2023</a></p>
+                <p>He gives two exceptions: heavily skewed fee schedules, and resting orders far from the price to catch big wicks.</p>
+                <p><strong>Takeaway:</strong> if you're not HFT and you have a view, take liquidity. Either way, put a limit price on every order so a thin book can't fill you at a terrible price.</p>
+                <h2 id="4-hyperliquid-funding-arbitrage-get-paid-funding-and-hedge-it">4. Hyperliquid funding arbitrage: get paid funding, and hedge it</h2>
+                <p>Funding is one of the clearest edges in onchain perps. When a venue is crowded on one side, funding pays you to take the other side, and you can hedge on a venue where funding is flat. In October 2023, Jeff wrote:</p>
+                <blockquote><p>"Super juicy BTC funding arb available in 7 figs on @HyperliquidX"  "Almost 400% annualized to short, while CEXs are flat for an easy hedge."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1716588460033647020" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Oct 23, 2023</a></p>
+                <p>When funding gets extreme, a precise hedge matters less:</p>
+                <blockquote><p>"When funding pays up to 1%/hr all you need is a rough beta hedge."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1693649491889443147" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Aug 21, 2023</a></p>
+                <p>These trades pay for a reason. On Hyperliquid, funding is what pays someone to take a large one-sided position off the main liquidity provider. That makes funding arb a service you are paid to provide:</p>
+                <blockquote><p>"alpha is a service you provide to the market."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1663968386681012224" target="_blank" rel="noopener noreferrer">Jeff Yan on X, May 31, 2023</a></p>
+                <p><strong>Our caution, not Jeff's:</strong> funding arb is not risk-free. Before you call it an arb, count trading fees, slippage on both legs, funding flipping sign, the liquidation buffer on each leg and the cost of moving collateral between venues.</p>
+                <h2 id="5-mine-the-public-onchain-data">5. Mine the public onchain data</h2>
+                <p>On a centralized exchange you see anonymous prints. On a fully onchain venue like Hyperliquid you also see addresses, positions and vaults. Jeff labeled addresses as retail or market maker by their rolling 30-day volume, then plotted retail trades against the best bid and offer. He called that chart</p>
+                <blockquote><p>"something that you could never see with CEX feed data."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1660835008318423041" target="_blank" rel="noopener noreferrer">Jeff Yan on X, May 23, 2023</a></p>
+                <p>Why it matters:</p>
+                <blockquote><p>"retail flow can be a strong predictor of medium-term price movements."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1660835014471487488" target="_blank" rel="noopener noreferrer">Jeff Yan on X, May 23, 2023</a></p>
+                <p>One of his favorite medium-frequency signals came from his own firm's HFT pnl. When it spiked, retail was usually piling in, and the price impact tended to partly revert. His lesson:</p>
+                <blockquote><p>"If you have a unique insight into markets through your interacting with them, use it."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1639081540612411392" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Mar 24, 2023</a></p>
+                <p><strong>Takeaway:</strong> onchain, much of the data that used to be private is public. The edge goes to whoever builds tools to read it.</p>
+                <h2 id="6-learn-who-gets-the-liquidations">6. Learn who gets the liquidations</h2>
+                <p>Liquidation flow is some of the most profitable flow in perps, and someone always captures it:</p>
+                <blockquote><p>"Who gets the juicy liquidation flow?"  "Answer: DMMs/internal desks on CEXs, MEV bots on DEXs."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1650293672808792067" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Apr 24, 2023</a></p>
+                <p>How a venue liquidates decides how much you lose when it happens to you. On Hyperliquid, liquidations used to mean the protocol took over the position and its collateral. Then they moved to the order book. After that change, a liquidated user lost only slippage and fees, not the whole maintenance margin. Jeff said the switch</p>
+                <blockquote><p>"can be a 100x improvement on illiquid assets with strict margin requirements."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1713551137020706897" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Oct 15, 2023</a></p>
+                <p>Design also limits what manipulators can do on thin markets. <a href="https://x.com/chameleon_jeff/status/1726091053491470408" target="_blank" rel="noopener noreferrer">After the YFI incident on dYdX</a>, he described isolated-only perps and auto-deleveraging (ADL) as defenses. He also noted that some CEX-style rules fail onchain because "DEX attackers can always split positions".</p>
+                <p><strong>Takeaway:</strong> read a venue's margin, liquidation and backstop rules before you trade its long-tail perps.</p>
+                <h2 id="7-building-a-trading-bot-measure-latency-before-you-optimize-it">7. Building a trading bot? Measure latency before you optimize it</h2>
+                <p>Crypto is slow compared with traditional HFT. <a href="https://x.com/chameleon_jeff/status/1650875274341359619" target="_blank" rel="noopener noreferrer">In Jeff's words</a>, "Time scales are orders of magnitude larger than tradfi HFT."</p>
+                <p>So start simple:</p>
+                <blockquote><p>"Even today, you can write a large class of profitable crypto HFT strategies in python."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1645071425731170304" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Apr 9, 2023</a></p>
+                <p>His setup: one event loop, one state machine that turns feed messages into orders and cancels, and PyPy for speed. Rewrite in a compiled language only once working strategies show what the system needs. <a href="https://x.com/chameleon_jeff/status/1649776559555747840" target="_blank" rel="noopener noreferrer">Run it in the cloud, not at home</a>: "I wouldn't try from your mac unless you live in the relevant AWS datacenter."</p>
+                <p>Then measure:</p>
+                <ul><li>Plot your clock against the matching engine's timestamp.</li><li>Watch round-trip latency during volatile periods.</li><li>Overlay how many messages per second your strategy is processing, so you can tell when you are the bottleneck.</li></ul>
+                <p><a href="https://x.com/chameleon_jeff/status/1649770620953980930" target="_blank" rel="noopener noreferrer">When his team did this</a>, the fix was simple: "get a lot more boxes and split up the symbols."</p>
+                <h2 id="8-keep-positions-small-and-lean-toward-flat">8. Keep positions small and lean toward flat</h2>
+                <p>When you start market making, only a few things have to be exactly right: model, strategy and latency. Inventory, sizing and hedging can be 80/20. His starter rule:</p>
+                <blockquote><p>"Keep a small position limit, and bias towards flattening."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1674922359214465024" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Jun 30, 2023</a></p>
+                <p>Don't assume your buys and sells will even out. They won't:</p>
+                <blockquote><p>"With this strategy you always hit your risk limit on one side. This is why your threshold and/or fair should scale with your position."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1673720508607594496" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Jun 27, 2023</a></p>
+                <p>To find out whether you have an edge at all, Jeff's same post says to "Compute markouts to determine if you have edge". A markout measures how the price moved in your favor or against you at set intervals after each fill.</p>
+                <p><strong>Takeaway:</strong> if your fills don't come out profitable shortly afterward, better sizing won't save you.</p>
+                <h2 id="9-research-with-simple-priors-and-expect-your-edge-to-decay">9. Research with simple priors and expect your edge to decay</h2>
+                <p>Start every idea from a simple story, or you'll end up fitting noise:</p>
+                <blockquote><p>"Your hypotheses should be based on simple priors, or you will just overfit to noise."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1639081516356739072" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Mar 24, 2023</a></p>
+                <p>Be suspicious of easy wins. Strategies that are easy to backtest draw the most competition:</p>
+                <blockquote><p>"There is no free lunch. Edge and inconvenience are often correlated."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1658249142551076864" target="_blank" rel="noopener noreferrer">Jeff Yan on X, May 15, 2023</a></p>
+                <p>Every trick stops working eventually. Your research process is what lasts:</p>
+                <blockquote><p>"the most important alpha is the research process. Any specific effect will decay"</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1635101000548913153" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Mar 13, 2023</a></p>
+                <h2 id="10-to-move-size-announce-it">10. To move size, announce it</h2>
+                <p>Retail threads often cast big buyers as victims of front-running. Jeff argued the opposite:</p>
+                <blockquote><p>"If you want to execute large size, often the best thing to do is announce it."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1635313678013841410" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Mar 13, 2023</a></p>
+                <p>Once quants know the flow is coming, they compete to supply it. The price still moves, but you pay something close to the "correct" impact. His traditional-finance example is leveraged ETFs, which rebalance predictably at the close.</p>
+                <p>He also argues that market makers and quants make markets thicker (more "viscous", in his words), so shocks fade faster. That's in his <a href="https://x.com/chameleon_jeff/status/1636350311974715393" target="_blank" rel="noopener noreferrer">"viscous fluid" thread</a>.</p>
+                <h2 id="11-start-small-and-get-to-live-pnl">11. Start small and get to live pnl</h2>
+                <p>You don't need a fund to start:</p>
+                <blockquote><p>"HFT is high enough ROI that it can be tiny. I started with &lt;$10k personally."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1661237273009029123" target="_blank" rel="noopener noreferrer">Jeff Yan on X, May 24, 2023</a></p>
+                <p>Aim for live pnl first. Polish can wait:</p>
+                <blockquote><p>"The zero to one moment of live pnl should be your first goal."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1637986806749872128" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Mar 21, 2023</a></p>
+                <p>Start with whatever programming language you already know:</p>
+                <blockquote><p>"If I had started with rust or C++ from day 1, there would've been no trading."</p></blockquote>
+                <p>— <a href="https://x.com/chameleon_jeff/status/1645071422480617473" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Apr 9, 2023</a></p>
+                <p>Then put in the hours. <a href="https://x.com/chameleon_jeff/status/1632001038772506629" target="_blank" rel="noopener noreferrer">His most-liked thread of the year</a> was about work, not markets. While building an automated trading system from scratch, he worked "5am-10pm 7days/week" for months. He says himself that most people don't need to live that way, but it's an honest picture of what it took him.</p>
+                <h2 id="what-these-rules-mean-for-funded-traders">What these rules mean for funded traders</h2>
+                <p>This section is our commentary, not Jeff's. If you trade a funded account from an onchain prop firm, several of his rules map directly onto the firm's rules:</p>
+                <ul><li><strong>Small position limits (rule 8)</strong> matter even more when a daily drawdown limit can end the account in one bad session. Size so that a normal losing day stays well inside the limit.</li><li><strong>Check your fills (rule 2)</strong> applies to the firm as well as the exchange. Find out whether your account trades on the live Hyperliquid book or on a simulated feed, and whether payouts can be checked on a block explorer.</li><li><strong>Know who pays you (rule 1)</strong> applies to the firm's business model too. Learn whether it earns from your trading or from challenge fees (<a href="https://onchainprops.xyz/blog/how-do-prop-firms-make-money">how prop firms make money</a>).</li><li><strong>Liquidation rules (rule 6)</strong> and the firm's own stop-out rules both decide how much a bad trade costs you.</li></ul>
+                <p>To compare firms on profit split, drawdown rules and payout proof, see our <a href="https://onchainprops.xyz/#firms">Hyperliquid prop firm comparison</a>.</p>
+                <h2 id="key-takeaways">Key takeaways</h2>
+                <ul><li>Know who pays you. Your edge is a service.</li><li>Trade where matching is enforced onchain, and check that fills match the book.</li><li>If you have a signal and you're not HFT, cross the spread.</li><li>Collect funding, and hedge it with every cost counted.</li><li>Onchain transparency is data you can trade on.</li><li>Know how a venue liquidates before you size up.</li><li>Measure latency first. Python is fine to start.</li><li>Use small position limits, lean toward flat, and judge your edge by markouts.</li><li>Use simple priors, expect decay, and invest in the research process.</li><li>Start small and get to live pnl.</li></ul>
+                <h2 id="faq">FAQ</h2>
+                <h3 id="who-is-jeff-yan-chameleon-jeff">Who is Jeff Yan (@chameleon_jeff)?</h3>
+                <p>Jeff Yan is the co-founder of Hyperliquid, an onchain order book exchange for perpetual futures, and the founder of the crypto market-making firm Chameleon Trading. He posts as @chameleon_jeff on X.</p>
+                <h3 id="should-i-use-limit-or-market-orders-on-hyperliquid">Should I use limit or market orders on Hyperliquid?</h3>
+                <p>Jeff Yan's 2023 advice for traders who aren't running HFT was to take liquidity when you have a signal, because resting orders tend to fill when you're wrong. He made exceptions for skewed fee schedules and orders resting far from the price. Either way, set a limit price on every order.</p>
+                <h3 id="is-hyperliquid-funding-arbitrage-risk-free">Is Hyperliquid funding arbitrage risk-free?</h3>
+                <p>No. Funding can pay well when one side is crowded, but fees, slippage on both legs, funding flipping sign, liquidation risk and the cost of moving collateral can all eat the return.</p>
+                <h3 id="can-you-build-a-crypto-trading-bot-in-python">Can you build a crypto trading bot in Python?</h3>
+                <p>Jeff Yan said in 2023 that a large class of profitable crypto HFT strategies can be written in Python, using one event loop, one state machine and PyPy for speed, moving to a compiled language only once working strategies show what the system needs.</p>
+                <h3 id="how-much-money-do-you-need-to-start-algorithmic-crypto-trading">How much money do you need to start algorithmic crypto trading?</h3>
+                <p>Jeff Yan said he personally started with under $10,000. His advice was to aim for live pnl first and improve the system later.</p>
+                <h3 id="do-these-tips-apply-to-prop-firm-accounts">Do these tips apply to prop firm accounts?</h3>
+                <p>Mostly, yes. Small position limits, checking your fills and knowing the liquidation rules matter even more under a prop firm's drawdown limits. Also check whether the firm's accounts trade on the live order book and whether its payouts can be verified onchain.</p>
+                <hr>
+                <p><em>Credit: compiled from the public 2023 X posts of Jeff Yan (@chameleon_jeff), co-founder of Hyperliquid and founder of Chameleon Trading. Quotes are his, linked to each post. Commentary between quotes is ours. All figures are from 2023. This article is for education only and is not financial advice.</em></p>
+            </div>
+
+            <aside class="article-cta">
+                <h2>Compare payout terms side by side</h2>
+                <p>Splits, account sizes, chains, and payout rules for every tracked onchain prop firm.</p>
+                <a href="../compare.html" class="btn btn-primary">Compare Firms</a>
+            </aside>
+
+            <newsletter-signup class="newsletter" data-placement="post">
+                <div class="newsletter-main">
+                    <p class="newsletter-eyebrow"><span class="newsletter-pulse" aria-hidden="true"></span>Payout Watch</p>
+                    <h2 class="newsletter-title">Know when a firm <em>stops paying</em>, before you buy the eval.</h2>
+                    <p class="newsletter-lede">A short weekly email tracking payout delays, rule changes and new onchain firms. No shilling, one email a week at most.</p>
+                    <form class="newsletter-form" action="https://app.kit.com/forms/10146847/subscriptions" method="post">
+                        <label for="nl-email-post" class="visually-hidden">Email address</label>
+                        <div class="newsletter-field">
+                            <input id="nl-email-post" class="newsletter-input" type="email" name="email_address"
+                                placeholder="you@email.com" autocomplete="email" required maxlength="254">
+                            <button type="submit" class="newsletter-btn">Get alerts <span aria-hidden="true">→</span></button>
+                        </div>
+                        <div class="newsletter-hp" aria-hidden="true">
+                            <label>Leave this empty <input type="text" name="nl_website" tabindex="-1" autocomplete="off"></label>
+                        </div>
+                    </form>
+                    <p class="newsletter-status" role="status" aria-live="polite"></p>
+                    <p class="newsletter-fine">Free. You'll confirm by email first, and you can unsubscribe in one click.</p>
+                </div>
+                <ul class="newsletter-feed" aria-label="What Payout Watch emails cover">
+                    <li class="feed-item" data-tone="warn">
+                        <span class="feed-tag">Payout delay</span>
+                        <span class="feed-text">A firm misses its stated payout window</span>
+                    </li>
+                    <li class="feed-item" data-tone="info">
+                        <span class="feed-tag">Rule change</span>
+                        <span class="feed-text">Drawdown, split or payout terms quietly edited</span>
+                    </li>
+                    <li class="feed-item" data-tone="ok">
+                        <span class="feed-tag">New firm</span>
+                        <span class="feed-text">A new onchain firm added to the directory</span>
+                    </li>
+                </ul>
+            </newsletter-signup>
+
+            <section class="article-more" aria-labelledby="more-heading">
+                <h2 id="more-heading">More from the blog</h2>
+                <div class="cards-grid blog-grid">
+                    <a href="are-onchain-prop-firms-legit" class="article-card blog-card">
+                        <span class="card-tag">Payout Safety</span>
+                        <h3>Are Onchain Prop Firms Legit? How to Verify a Payout Before You Buy a Challenge</h3>
+                        <p>Some onchain prop firms are legit and some aren't, and you can check before you pay. Look for payouts with public transaction hashes, a visible treasury or reserve, rules enforced by smart contracts, public hedging, and a named team. The fewer of these a firm can show, the more you are taking its word for it.</p>
+                    </a>
+                    <a href="what-is-vanta-trading" class="article-card blog-card">
+                        <span class="card-tag">Guides</span>
+                        <h3>What Is Vanta Trading?</h3>
+                        <p>Vanta Trading is a prop trading evaluation platform built on Bittensor Subnet 8 (Vanta Network). You pay a one-time fee, pass a one-step challenge with a 10% profit target on a simulated account, and earn weekly rewards in USDC or by bank transfer, with a 100% profit split by default.</p>
+                    </a>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <span class="accent-text">Onchain</span>Props
+                <p>The premier directory for decentralized capital and trading tools.</p>
+            </div>
+            <div class="footer-links">
+                <a href="../#firms">Prop Firms</a>
+                <a href="../blog.html">Blog</a>
+                <a href="../resources.html">Resources</a>
+                <a href="../#faq">FAQ</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="footer-socials">
+                <a href="https://github.com/genkisudo/onchainprops" target="_blank" rel="noopener noreferrer"
+                    aria-label="GitHub">GitHub</a>
+                <a href="https://x.com/onchain_props" target="_blank" rel="noopener noreferrer"
+                    aria-label="X (Twitter)">X</a>
+                <a href="https://t.me/wtfonchain" target="_blank" rel="noopener noreferrer"
+                    aria-label="Telegram">Telegram</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 OnchainProps. From trenches with ❤️</p>
+                <p class="footer-disclaimer">This is not financial advice. Listings are not an endorsement. Always
+                    DYOR (Do Your Own Research) before trading or depositing funds.</p>
+                <p class="footer-disclaimer">Some links on this site are affiliate links. We may earn a commission if
+                    you sign up through them, at no extra cost to you. This never affects our rankings.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script
+        src="https://agents.dante-ai.com/embed.js"
+        data-agent-id="9faaaeb8-0c93-4420-b124-c3b492f51d07"
+        data-widget-key="wk_GOp-URDnnABK7UgHX5qRMCF-DZjKTnTO"
+        crossorigin="anonymous"
+        async>
+    </script>
+</body>
+
+</html>
