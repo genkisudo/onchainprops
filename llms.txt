@@ -86,4 +86,4 @@ Canonical: https://onchainprops.xyz
 Mirror: https://onchainprops.com
 GitHub: https://github.com/genkisudo/onchainprops
 Community: https://t.me/wtfonchain
-Last updated: 2026-11-01
+Last updated: 2026-11-06

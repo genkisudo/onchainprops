@@ -903,7 +903,7 @@ const firmStats = (f) => [
     ['Chain', f.chain],
     ['Max leverage', f.maxLeverage],
     ['Token', f.token],
-    ['Country', f.country]
+    ['Country', /^tbc$/i.test(f.country ?? '') ? '' : f.country]
 ].filter(([, v]) => v);
 
 const firmStatsBlock = (f) => {

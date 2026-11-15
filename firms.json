@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-01",
+  "lastUpdated": "2026-11-06",
   "propFirms": [
     {
       "name": "Hypernova",
@@ -103,7 +103,7 @@
       "maxLeverage": "75x",
       "payoutsVerified": "No",
       "lastVerified": "2026-11-06",
-      "pageHook": "funded accounts on the Vest Markets perp exchange, with a static drawdown and no consistency rule."
+      "pageHook": "funded accounts on the Vest Markets perp exchange across crypto, stocks, indices, FX and commodities, with 1-Step and 2-Step evaluations, instant funding, a static drawdown and no consistency rule."
     },
     {
       "name": "Cashed",
@@ -318,7 +318,7 @@
       "rulesOnchain": "No",
       "payoutsVerified": "No",
       "lastVerified": "2026-11-04",
-      "pageHook": "crypto futures prop firm with Zero-Step, One-Step, and Two-Step challenges. Use code DED5IJB for 5% off."
+      "pageHook": "crypto futures prop firm with Zero-Step, One-Step, and Two-Step challenges."
     }
   ]
 }
