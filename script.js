@@ -3,7 +3,8 @@
  * @description State-driven application logic implementing Reactive PubSub,
  * Web Components, and performant DocumentFragment manipulations.
  *
- * Amplitude Analytics (amplitude.min.js, ~700KB) is lazy-loaded by this
+ * Amplitude Analytics (amplitude.min.js, ~260KB / ~70KB gzipped — the
+ * @amplitude/analytics-browser UMD build, no session replay) is lazy-loaded by this
  * script AFTER the page content renders — see loadAnalytics() below — so the
  * firm tables never wait on the analytics download.
  */
@@ -84,9 +85,9 @@ const analytics = {
         }
         try { amplitude.track(...args); } catch (_) {}
     },
-    initAll(...args) {
+    init(...args) {
         try {
-            amplitude.initAll(...args);
+            amplitude.init(...args);
             this.ready = true;
             this.queue.splice(0).forEach(a => this.track(...a));
         } catch (_) {}
@@ -965,17 +966,15 @@ function loadAnalytics() {
     const script = document.createElement('script');
     script.src = AMPLITUDE_SRC;
     script.async = true;
-    script.onload = () => analytics.initAll('488e252410ff9dc7ba7cfd5efac999f1', {
-        "analytics": {
-            // Hash-only navigation (#firms, #resources, #faq) scrolls within
-            // this single page — it isn't a real route change, so don't let
-            // it fire a duplicate Page View. Other autocapture categories
-            // (attribution, sessions, clicks, etc.) stay on by default.
-            "autocapture": { "pageViews": { "trackHistoryChanges": "pathOnly" } }
-        },
-        // Record 20% of sessions — plenty of replays at current traffic,
-        // without making every visitor pay the recording CPU cost.
-        "sessionReplay": { "sampleRate": 0.2 }
+    script.onload = () => analytics.init('488e252410ff9dc7ba7cfd5efac999f1', {
+        // Hash-only navigation (#firms, #resources, #faq) scrolls within
+        // this single page — it isn't a real route change, so don't let
+        // it fire a duplicate Page View. Other autocapture categories
+        // (attribution, sessions, clicks, etc.) stay on by default.
+        "autocapture": { "pageViews": { "trackHistoryChanges": "pathOnly" } },
+        // The CSP connect-src doesn't allow sr-client-cfg.amplitude.com, so
+        // the dashboard-config fetch would only fail (and retry) on every load.
+        "remoteConfig": { "fetchRemoteConfig": false }
     });
     document.body.appendChild(script);
 }
