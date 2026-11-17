@@ -59,6 +59,7 @@
       "payoutSpeed": "Weekly",
       "rulesOnchain": "No",
       "scaledCapital": "Yes",
+      "bestSplit": "Yes",
       "payoutsVerified": "Work in progress",
       "lastVerified": "2026-11-17",
       "pageHook": "prop firm from Taoshi, the team behind Bittensor Subnet 8, with a trader-selectable reward split and automatic promotion to larger Pro accounts."
