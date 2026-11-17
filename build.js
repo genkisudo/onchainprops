@@ -69,9 +69,10 @@ const monthYear = (() => {
 const year = lastUpdated.slice(0, 4);
 
 /** "80%" → {max:80, upTo:false}; "Up to 90%" → {max:90, upTo:true}; "TBC" → null */
+/** "80%" → {max: 80}; "Up to 90%" and "80% (90% add-on)" → {max: 90, upTo: true} */
 const parseSplit = (s) => {
-    const m = /([\d.]+)\s*%/.exec(s);
-    return m ? { max: Number(m[1]), upTo: /up to/i.test(s) } : null;
+    const nums = [...s.matchAll(/([\d.]+)\s*%/g)].map((m) => Number(m[1]));
+    return nums.length ? { max: Math.max(...nums), upTo: /up to/i.test(s) || nums.length > 1 } : null;
 };
 /** "$200,000" → 200000; "$50k" → 50000; "$2.5m" → 2500000; "Scaled"/"TBC" → null */
 const parseMoney = (s) => {
@@ -113,8 +114,11 @@ const joinNames = (arr) =>
 const splitGroups = (() => {
     const map = new Map();
     for (const f of propFirms) {
-        if (!map.has(f.split)) map.set(f.split, { split: f.split, parsed: parseSplit(f.split), names: [] });
-        map.get(f.split).names.push(f.name);
+        // Group by parsed value so "Up to 90%" and "80% (90% add-on)" share a tier
+        const parsed = parseSplit(f.split);
+        const key = parsed ? `${parsed.max}|${parsed.upTo}` : f.split;
+        if (!map.has(key)) map.set(key, { split: f.split, parsed, names: [] });
+        map.get(key).names.push(f.name);
     }
     return [...map.values()].sort((a, b) => (b.parsed?.max ?? -1) - (a.parsed?.max ?? -1));
 })();
@@ -193,9 +197,15 @@ const resolvedFaqs = faqs.map((item) => ({
 // -----------------------------------------
 // index.html blocks
 // -----------------------------------------
+/** Compact split for summaries: "80% (90% add-on)" → "up to 90%"; "Up to 95%" → "up to 95%" */
+const splitShort = (f) => {
+    const p = parseSplit(f.split);
+    return p.upTo ? `up to ${p.max}%` : `${p.max}%`;
+};
+
 const metaDescription = () => {
     const list = propFirms.slice(0, 5).map((f) =>
-        parseSplit(f.split) ? `${f.name} (${lcFirst(f.split)})` : f.name);
+        parseSplit(f.split) ? `${f.name} (${splitShort(f)})` : f.name);
     return `Get funded with crypto capital. Compare evaluations, profit splits, and payout rules across the top decentralized and onchain proprietary trading platforms. Platforms include ${joinNames(list)}. Get funded trading crypto onchain.`;
 };
 
@@ -204,7 +214,7 @@ const metaKeywords = () =>
 
 const ogDescription = () => {
     const sentences = propFirms.slice(0, 4).map((f) => {
-        const split = parseSplit(f.split) ? `${lcFirst(f.split)} split` : 'split TBC';
+        const split = parseSplit(f.split) ? `${splitShort(f)} split` : 'split TBC';
         const money = parseMoney(f.maxAccount);
         const size = money !== null ? `up to ${shortMoney(money)}` : 'with scaled accounts';
         return `${f.name} offers ${split} ${size}.`;
@@ -214,7 +224,7 @@ const ogDescription = () => {
 
 const twitterDescription = () => {
     const items = propFirms.slice(0, 5).map((f) => {
-        const split = parseSplit(f.split) ? lcFirst(f.split) : 'TBC';
+        const split = parseSplit(f.split) ? splitShort(f) : 'TBC';
         const money = parseMoney(f.maxAccount);
         const size = money !== null ? `up to ${shortMoney(money)}` : '(scaled accounts)';
         return `${f.name} ${split} ${size}`;
@@ -941,7 +951,7 @@ const titleDrift = (f, title) => {
     const splitNums = [...f.split.matchAll(/([\d.]+)\s*%/g)].map((m) => m[1]);
     for (const m of title.matchAll(/([\d.]+)\s*%/g)) {
         if (!splitNums.includes(m[1])) out.push(`"${m[0]}" not in split "${f.split}"`);
-        else if (parseSplit(f.split)?.upTo && !/up to\s*$/i.test(title.slice(0, m.index))) {
+        else if (/up to/i.test(f.split) && !/up to\s*$/i.test(title.slice(0, m.index))) {
             out.push(`"${m[0]}" should read "up to ${m[0]}" (split is "${f.split}")`);
         }
     }

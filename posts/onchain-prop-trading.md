@@ -62,7 +62,7 @@ Propr's position is that hedging is the single most important part of a prop fir
 
 Next on their roadmap are a fully onchain simulated order book (CLOB), onchain trade state and fully automated hedging PnL. The stated aim is to shrink the amount of trust traders have to place in the firm.
 
-Those items aren't live yet, but in response to demand from traders and affiliates, Propr's next app update adds full payout transparency: gross payouts, net payouts, total spent on evaluations, total net PnL across paid evaluations and funded accounts, and how each trader's signals feed into their hedging algorithm.
+Those roadmap items aren't live yet. Payout transparency is: every payout is now listed with its onchain transaction hash on Propr's [transparency page](https://www.propr.xyz/transparency), alongside its public reserve wallets, hedging account, revenue and pass rates. Propr reports over $4M paid to traders, with a median payout time of about 20 minutes (Nov 2026).
 
 The longer-term goal is to back traders whose results would hold up on a live account just as well as in a prop program. Propr's team says that in conversations with other prop firm CEOs, more of them are moving the same way. Prop trading gets far more powerful when the books are open.
 

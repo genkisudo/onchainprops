@@ -4,7 +4,7 @@ description: Vanta Trading is a one-step prop firm from Taoshi, built on Bittens
 seoTitle: What Is Vanta Trading? Rules, Pricing & Payouts (2026)
 category: guides
 date: 2026-10-31
-tldr: Vanta Trading is a prop trading evaluation platform built on Bittensor Subnet 8 (Vanta Network). You pay a one-time fee, pass a one-step challenge with a 10% profit target on a simulated account, and earn weekly rewards in USDC or by bank transfer, with a 100% profit split by default.
+tldr: Vanta Trading is a prop trading evaluation platform built on Bittensor Subnet 8 (Vanta Network). You pay a one-time fee, pass a one-step challenge with a 10% profit target on a simulated account, and earn weekly rewards in USDC or Vanta Network alpha, with a 100% profit split by default.
 ---
 
 ## What Is Vanta?
@@ -13,7 +13,7 @@ To understand Vanta Trading, start with Bittensor. Bittensor is a blockchain mad
 
 Each subnet has four kinds of participant. Subnet creators define the rules and rewards, miners produce the commodity, validators score the miners, and stakers back validators with TAO. Vanta runs on Subnet 8, where the commodity is trading performance: miners compete as traders, and the best results earn rewards.
 
-**Vanta Trading** is a prop trading evaluation platform. You pay a one-time fee, pass a one-step challenge on a simulated account, and then earn weekly rewards on your simulated profit, with a 100% profit split by default. Rewards are paid in USDC or by bank transfer and listed on a public Payout Ledger. See the full [Vanta Trading firm page](https://onchainprops.xyz/firms/vanta-trading) for current pricing.
+**Vanta Trading** is a prop trading evaluation platform. You pay a one-time fee, pass a one-step challenge on a simulated account, and then earn weekly rewards on your simulated profit, with a 100% profit split by default. Rewards are paid in USDC or Vanta Network alpha and listed on a public Payout Ledger. See the full [Vanta Trading firm page](https://onchainprops.xyz/firms/vanta-trading) for current pricing.
 
 ## Why Vanta Says It Is Different: Open Source, Onchain, Decentralized
 
@@ -25,11 +25,11 @@ His answer has three parts:
 - **Onchain:** activity and payouts can be checked independently.
 - **Decentralized:** independent validators receive every order, apply the rules and reach consensus on payouts, so no single company has the final say.
 
-That is the pitch. In practice, only part of it is verifiable today: USDC rewards settle on Base with public transaction hashes, but bank rewards are paid in USD via Stripe and cannot be checked onchain, and the evaluation rules themselves are enforced by Vanta rather than a smart contract. Read the Payout Ledger yourself before relying on the claim.
+That is the pitch. In practice, only part of it is verifiable today: USDC rewards settle on Base with public transaction hashes, but some earlier rewards were bank transfers via Stripe that cannot be checked onchain, and the evaluation rules themselves are enforced by Vanta rather than a smart contract. Read the Payout Ledger yourself before relying on the claim.
 
 He also separates the two brands. Vanta Network (SN8) is the open infrastructure. Vanta Trading is one prop firm built on it. Other firms can build on SN8 too, and traders can join the network directly as miners.
 
-At the network level, payouts are made in SN8's alpha token (theta) based on profit, and prop firms pay the network in theta to fund their traders. Vanta Trading then pays its own customers in USDC or by bank transfer. Validators, in turn, get access to the trading data, which gives them a reason to help find the best traders.
+At the network level, payouts are made in SN8's alpha token (theta) based on profit, and prop firms pay the network in theta to fund their traders. Vanta Trading then pays its own customers in USDC or Vanta Network alpha. Validators, in turn, get access to the trading data, which gives them a reason to help find the best traders.
 
 ## Vanta Tokenomics: Buybacks, Burns and Locked Emissions
 
@@ -113,7 +113,7 @@ Theta has four main uses on the network:
 
 Theta is also how the network pays: emissions go to miners, validators, the owner and stakers. The supply model caps alpha at 21 million, with a first halving at 10.5 million minted. In a late-August 2026 snapshot, theta traded near $8.45, with about 5.45 million in circulation (Yellow).
 
-Vanta Trading users do not need theta. Classic evaluations are paid by card, bank or crypto, and rewards come in USDC or by bank transfer. Theta matters to miners, validators and investors in the subnet, not to retail traders. It is a volatile token, and this is not investment advice.
+Vanta Trading users do not need theta. Classic evaluations are paid by card or crypto, and rewards come in USDC, with Vanta Network alpha as an option. Theta matters to miners, validators and investors in the subnet, not to retail traders. It is a volatile token, and this is not investment advice.
 
 ## How the Vanta Trading Evaluation Works
 

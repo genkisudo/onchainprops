@@ -1,46 +1,46 @@
 {
-  "lastUpdated": "2026-11-06",
+  "lastUpdated": "2026-11-17",
   "propFirms": [
     {
       "name": "Hypernova",
       "country": "Cayman Islands",
-      "split": "Up to 90%",
+      "split": "80% (90% add-on)",
       "maxAccount": "$300,000",
-      "profitTarget": "10%",
+      "profitTarget": "9-10%",
       "dailyDrawdown": "3-5%",
-      "maxDrawdown": "6-8%",
+      "maxDrawdown": "3-8%",
       "website": "https://hn.xyz/r/rcvmoy",
       "publicUrl": "https://hypernova.xyz/",
       "chain": "Hyperliquid",
       "chainPhrase": "the Hyperliquid chain",
       "isAffiliate": true,
       "token": "No",
-      "payoutSpeed": "~5s",
+      "payoutSpeed": "~6s",
       "rulesOnchain": "Yes",
       "payoutsVerified": "Yes",
-      "lastVerified": "2026-10-21",
-      "pageHook": "onchain prop trading protocol on Hyperliquid liquidity, with every account rule and payout recorded in public smart contracts."
+      "lastVerified": "2026-11-17",
+      "pageHook": "onchain prop trading protocol priced from Hyperliquid market data, with every account rule and payout recorded in public smart contracts on Arbitrum."
     },
     {
       "name": "Propr",
       "country": "BVI",
       "split": "80%",
       "maxAccount": "Up to $300k",
-      "profitTarget": "10%",
+      "profitTarget": "9-12%",
       "dailyDrawdown": "3-5%",
-      "maxDrawdown": "6%",
+      "maxDrawdown": "3-8%",
       "website": "https://app.propr.xyz/r/nCnJ5uZ9",
       "publicUrl": "https://www.propr.xyz/",
       "chain": "Hyperliquid",
       "chainPhrase": "the Hyperliquid chain",
       "isAffiliate": true,
-      "token": "Yes",
-      "payoutSpeed": "Soon",
+      "token": "Planned",
+      "payoutSpeed": "~20 min",
       "rulesOnchain": "No",
       "aiAgents": "Yes",
       "payoutsVerified": "Yes",
-      "lastVerified": "2026-11-05",
-      "pageHook": "transparent crypto prop firm with onchain trade verification, bot and AI agent trading, and no payout caps."
+      "lastVerified": "2026-11-17",
+      "pageHook": "perps prop firm on Hyperliquid that publishes its payouts, reserve wallets and hedging account, with full support for bots and AI agents."
     },
     {
       "name": "Vanta Trading",
@@ -53,15 +53,15 @@
       "website": "https://vantatrading.io/?ref=kamil",
       "publicUrl": "https://vantatrading.io/",
       "chain": "Bittensor / Hyperliquid",
-      "chainPhrase": "Bittensor Subnet 8 (Hyperliquid-native optional)",
+      "chainPhrase": "Bittensor Subnet 8 (Vanta Network), with prices from Hyperliquid",
       "isAffiliate": true,
       "token": "No",
       "payoutSpeed": "Weekly",
       "rulesOnchain": "No",
       "scaledCapital": "Yes",
       "payoutsVerified": "Work in progress",
-      "lastVerified": "2026-10-31",
-      "pageHook": "prop firm from Taoshi, the team behind Bittensor Subnet 8, with a trader-selectable reward split and an optional Hyperliquid-native mode."
+      "lastVerified": "2026-11-17",
+      "pageHook": "prop firm from Taoshi, the team behind Bittensor Subnet 8, with a trader-selectable reward split and automatic promotion to larger Pro accounts."
     },
     {
       "name": "Iceberg",
@@ -281,7 +281,7 @@
       "rulesOnchain": "No",
       "maxLeverage": "40x",
       "payoutsVerified": "No",
-      "lastVerified": "2026-11-04",
+      "lastVerified": "2026-11-17",
       "pageHook": "crypto prop firm with 1-Step Classic, Pro, Turbo, and Spark evaluations and static drawdowns."
     },
     {
