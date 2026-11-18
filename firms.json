@@ -40,7 +40,18 @@
       "aiAgents": "Yes",
       "payoutsVerified": "Yes",
       "lastVerified": "2026-11-17",
-      "pageHook": "perps prop firm on Hyperliquid that publishes its payouts, reserve wallets and hedging account, with full support for bots and AI agents."
+      "pageHook": "perps prop firm on Hyperliquid that publishes its payouts, reserve wallets and hedging account, with full support for bots and AI agents.",
+      "payoutWallets": [
+        {
+          "chainId": 1,
+          "chain": "Ethereum",
+          "address": "0x0353f53BD55b8011BAD3dE1D939FF4D8335cbB1d",
+          "token": "USDC",
+          "tokenAddress": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+          "decimals": 6,
+          "exclude": ["0x3b9e9c9f82eb1C321535FD2Bc48d8DB9E8E8c503"]
+        }
+      ]
     },
     {
       "name": "Vanta Trading",

@@ -1,0 +1,27 @@
+{
+  "generatedAt": "2026-11-18T17:35:16.167Z",
+  "firms": {
+    "Propr": [
+      {
+        "chainId": 1,
+        "chain": "Ethereum",
+        "address": "0x0353f53BD55b8011BAD3dE1D939FF4D8335cbB1d",
+        "token": "USDC",
+        "windowDays": 30,
+        "paidOut": 1075302.14,
+        "payoutCount": 1483,
+        "uniqueRecipients": 354,
+        "medianPayout": 247.23,
+        "largestPayout": {
+          "amount": 22657.07,
+          "hash": "0x129e67d721ecb87b885a8382d4ee0ce9909cdf434086bc4acb1c6a066ef710ac",
+          "date": "2026-10-27"
+        },
+        "lastPayout": "2026-11-18",
+        "fundedIn": 1143510.47,
+        "excludedTransfers": 2,
+        "balance": 14004.22
+      }
+    ]
+  }
+}

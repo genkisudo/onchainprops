@@ -32,6 +32,8 @@ const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
 const write = (f, s) => fs.writeFileSync(path.join(ROOT, f), s);
 
 const { lastUpdated, propFirms, predictionMarketFirms, cryptoPropFirms } = JSON.parse(read('firms.json'));
+// Onchain payout stats fetched by payouts.js (optional: the build works without it)
+const payouts = fs.existsSync(path.join(ROOT, 'payouts.json')) ? JSON.parse(read('payouts.json')) : null;
 const faqs = JSON.parse(read('faq.json'));
 
 // -----------------------------------------
@@ -922,7 +924,29 @@ const firmStatsBlock = (f) => {
     const verified = f.lastVerified
         ? `Stats last verified <time datetime="${f.lastVerified}">${fmtDate(f.lastVerified)}</time>`
         : 'Stats not yet verified';
-    return `<div class="firm-meta">\n${items}\n</div>\n<p class="firm-verified">${verified}</p>`;
+    return `<div class="firm-meta">\n${items}\n</div>\n<p class="firm-verified">${verified}</p>${firmPayoutsBlock(f)}`;
+};
+
+const EXPLORERS = { 1: 'https://etherscan.io', 42161: 'https://arbiscan.io', 8453: 'https://basescan.org' };
+const fmtUsd = (n) => n >= 1e6 ? `$${(n / 1e6).toFixed(2)}M` : n >= 1e4 ? `$${Math.round(n / 1e3)}K` : `$${Math.round(n).toLocaleString('en-US')}`;
+const shortAddr = (a) => `${a.slice(0, 6)}…${a.slice(-4)}`;
+
+/** "Onchain payouts, last 30 days" lines from payouts.json, one per payout wallet. */
+const firmPayoutsBlock = (f) => {
+    const stats = payouts?.firms?.[f.name];
+    if (!stats?.length) return '';
+    const updated = payouts.generatedAt.slice(0, 10);
+    if (Date.now() - Date.parse(payouts.generatedAt) > 3 * 86400e3) {
+        firmPageWarnings.push(`${f.name}: payouts.json is older than 3 days (${updated}) — run payouts.js`);
+    }
+    const lines = stats.map((s) => {
+        const url = `${EXPLORERS[s.chainId] ?? 'https://etherscan.io'}/address/${s.address}#tokentxns`;
+        const largest = s.largestPayout
+            ? `, largest <a href="${EXPLORERS[s.chainId] ?? 'https://etherscan.io'}/tx/${s.largestPayout.hash}" target="_blank" rel="noopener noreferrer">${fmtUsd(s.largestPayout.amount)}</a>`
+            : '';
+        return `<p class="firm-payouts">Onchain payouts, last ${s.windowDays} days: <strong>${fmtUsd(s.paidOut)} ${escHtml(s.token)}</strong> to <strong>${s.uniqueRecipients.toLocaleString('en-US')} wallets</strong> in ${s.payoutCount.toLocaleString('en-US')} transfers (median ${fmtUsd(s.medianPayout)}${largest}) from <a href="${url}" target="_blank" rel="noopener noreferrer">${shortAddr(s.address)}</a> on ${escHtml(s.chain)}. Updated <time datetime="${updated}">${fmtDate(updated)}</time>.</p>`;
+    });
+    return '\n' + lines.join('\n');
 };
 
 /** "<Name> review: <pageHook> <facts from firms.json>" */
