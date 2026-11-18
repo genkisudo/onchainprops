@@ -1,0 +1,47 @@
+# Daily: fetch onchain payout stats (payouts.js → payouts.json) with the
+# ETHERSCAN_API_KEY repo secret, regenerate the firm pages, commit the result.
+# Triggers are schedule + manual only: never pull_request, so fork PRs can
+# never run with the secret.
+name: Refresh onchain payout stats
+
+on:
+  schedule:
+    - cron: '30 6 * * *'  # Daily at 06:30 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: payouts
+  cancel-in-progress: false
+
+jobs:
+  payouts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Fetch payout stats from Etherscan
+        env:
+          ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+        run: node payouts.js
+
+      - name: Regenerate site content
+        run: node build.js
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet; then
+            echo "Nothing changed."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add payouts.json index.html script.js llms.txt sitemap.xml firms blog.html blog
+            git commit -m "chore: refresh onchain payout stats [skip ci]"
+            git push
+          fi
