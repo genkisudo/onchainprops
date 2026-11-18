@@ -55,7 +55,6 @@ Our [comparison table](https://onchainprops.xyz/#firms) marks each firm's payout
 | [Vanta Trading](../firms/vanta-trading) | Work in progress | No |
 | [Iceberg](../firms/iceberg) | No | No |
 | [Cashed](../firms/cashed) | No | No |
-| [HyperStack](../firms/hyperstack) | No | TBC |
 
 A "Yes" means we found payouts we could verify. It is not a safety guarantee, and a "No" does not mean a firm is a scam. It means we have not been able to verify its payouts yet, so you would be relying on trust. Statuses change, so check the live table before you buy.
 

@@ -189,25 +189,6 @@
       "pageHook": "onchain prop firm on gTrade with Proof of Reserves, NFT-based Proof of Skill, and payouts verifiable on Dune."
     },
     {
-      "name": "HyperStack",
-      "country": "BVI",
-      "split": "Up to 90%",
-      "maxAccount": "$400,000",
-      "profitTarget": "10%",
-      "dailyDrawdown": "5%",
-      "maxDrawdown": "5%",
-      "website": "https://www.hyperstack.trade/rules",
-      "chain": "Hyperliquid",
-      "chainPhrase": "Hyperliquid",
-      "isAffiliate": false,
-      "token": "No",
-      "payoutSpeed": "TBC",
-      "rulesOnchain": "TBC",
-      "payoutsVerified": "No",
-      "lastVerified": "2026-06-23",
-      "pageHook": "one-step challenge with non-custodial trading from your own wallet and monthly USDC payouts onchain."
-    },
-    {
       "name": "FUNDED by FOXIFY",
       "country": "BVI",
       "split": "Up to 90%",
