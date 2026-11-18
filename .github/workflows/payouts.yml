@@ -36,17 +36,21 @@ jobs:
 
       - name: Commit if changed
         run: |
-          if git diff --quiet; then
-            echo "Nothing changed."
-          else
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp payouts.json "$RUNNER_TEMP/payouts.json"
+          # main may move during the run (another workflow or push). Everything committed
+          # here is generated, so instead of merging: take the latest main, put this run's
+          # payouts.json on top, rebuild, and push. Retry if main moves again.
+          for i in 1 2 3; do
+            git fetch -q origin main
+            git reset -q --hard origin/main
+            cp "$RUNNER_TEMP/payouts.json" payouts.json
+            node build.js
+            if git diff --quiet; then echo "Nothing changed."; exit 0; fi
             git add payouts.json index.html script.js llms.txt sitemap.xml firms blog.html blog
-            git commit -m "chore: refresh onchain payout stats [skip ci]"
-            # main may have moved during the run (another workflow or a push): rebase and retry
-            for i in 1 2 3; do
-              git pull --rebase origin main && git push && exit 0
-              sleep $((i * 10))
-            done
-            exit 1
-          fi
+            git commit -q -m "chore: refresh onchain payout stats [skip ci]"
+            git push -q origin HEAD:main && exit 0
+            sleep $((i * 10))
+          done
+          exit 1
