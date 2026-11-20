@@ -57,7 +57,7 @@
          Breakdown:
            default-src 'none'       — deny everything not explicitly listed
            script-src 'self' agents.dante-ai.com
-                                    — script.js + Dante AI chat widget; JSON-LD <script type="application/ld+json"> is exempt (data, not JS)
+                                    — script.js + Dante AI chat widget; JSON-LD (application/ld+json) blocks are exempt (data, not JS)
            style-src 'self' 'unsafe-inline' fonts.googleapis.com agents.dante-ai.com
                                     — style.css + Google Fonts CSS + Shadow DOM <style> in FaqAccordion + Dante widget.css
            font-src fonts.gstatic.com — Google Fonts woff2 files
