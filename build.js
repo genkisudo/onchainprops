@@ -10,6 +10,7 @@
  *                   noscript fallback tables, visible FAQ accordions
  *   - script.js   — AppState.propFirms / predictionMarketFirms / cryptoPropFirms arrays
  *   - llms.txt    — fully regenerated
+ *   - feed.xml    — RSS 2.0 feed of blog posts (full content), fully regenerated
  *   - sitemap.xml — fully regenerated (lastmod = firms.json lastUpdated)
  *   - blog.html   — article cards (from posts/*.md)
  *   - blog/*.html — one article page per posts/*.md, with BlogPosting/FAQPage/Breadcrumb JSON-LD
@@ -634,6 +635,7 @@ const postPage = (p) => {
     <title>${escHtml(title)}</title>
     <meta name="description" content="${escAttr(p.description)}">
     <link rel="canonical" href="${url}">
+    <link rel="alternate" type="application/rss+xml" title="${BRAND} Blog" href="${SITE}/feed.xml">
 
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
     <meta property="og:type" content="article">
@@ -817,6 +819,40 @@ const postsLlmsSection = () => posts.length ? `## Blog
 ${posts.map((p) => `- [${p.title}](${SITE}/blog/${p.slug}) — ${p.tldr}`).join('\n')}
 
 ` : '';
+
+// -----------------------------------------
+// feed.xml (RSS 2.0, full post content)
+// -----------------------------------------
+const rfc822 = (d) => new Date(`${d}T00:00:00Z`).toUTCString();
+const cdata = (s) => `<![CDATA[${s.replace(/]]>/g, ']]]]><![CDATA[>')}]]>`;
+/** Post HTML with relative links made absolute, so it reads correctly in feed readers. */
+const absoluteLinks = (html) => html
+    .replace(/(href|src)="\.\.\//g, `$1="${SITE}/`)
+    .replace(/(href|src)="\/(?!\/)/g, `$1="${SITE}/`)
+    .replace(/(href|src)="(?![a-z][a-z0-9+.-]*:|#|\/)/gi, `$1="${SITE}/blog/`);
+const feedXml = () => `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel>
+  <title>${BRAND} Blog</title>
+  <link>${SITE}/blog.html</link>
+  <atom:link href="${SITE}/feed.xml" rel="self" type="application/rss+xml"/>
+  <description>Payout safety, profit-split breakdowns, and guides for onchain and Hyperliquid prop trading firms.</description>
+  <language>en</language>
+  <lastBuildDate>${rfc822(posts.reduce((m, p) => (p.updated > m ? p.updated : m), lastUpdated))}</lastBuildDate>
+  <image><url>${SITE}/og-image.png</url><title>${BRAND} Blog</title><link>${SITE}/blog.html</link></image>
+${posts.map((p) => `  <item>
+    <title>${escHtml(p.title)}</title>
+    <link>${SITE}/blog/${p.slug}</link>
+    <guid isPermaLink="true">${SITE}/blog/${p.slug}</guid>
+    <pubDate>${rfc822(p.date)}</pubDate>
+    <dc:creator>${BRAND}</dc:creator>
+    <category>${escHtml(CATEGORIES[p.category])}</category>
+    <description>${escHtml(p.description)}</description>
+    <content:encoded>${cdata(absoluteLinks(p.html))}</content:encoded>
+  </item>`).join('\n')}
+</channel>
+</rss>
+`;
 
 // -----------------------------------------
 // sitemap.xml (fully generated)
@@ -1111,8 +1147,9 @@ if (!posts.length) fs.rmdirSync(path.join(ROOT, 'blog'));
 
 write('llms.txt', llmsTxt());
 write('sitemap.xml', sitemapXml());
+write('feed.xml', feedXml());
 const firmPageCount = buildFirmPages();
 
 if (!/^\d+$/.test(KIT_FORM_ID)) console.warn('⚠ KIT_FORM_ID is not set in build.js — newsletter forms will not work until it is.');
 for (const w of firmPageWarnings) console.warn(`⚠ ${w}`);
-console.log(`Regenerated index.html, script.js, llms.txt, sitemap.xml, ${firmPageCount} firm pages from firms.json (${propFirms.length} firms, ${posts.length} posts, updated ${lastUpdated}).`);
+console.log(`Regenerated index.html, script.js, llms.txt, sitemap.xml, feed.xml, ${firmPageCount} firm pages from firms.json (${propFirms.length} firms, ${posts.length} posts, updated ${lastUpdated}).`);

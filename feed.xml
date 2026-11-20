@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel>
+  <title>OnchainProps Blog</title>
+  <link>https://onchainprops.xyz/blog.html</link>
+  <atom:link href="https://onchainprops.xyz/feed.xml" rel="self" type="application/rss+xml"/>
+  <description>Payout safety, profit-split breakdowns, and guides for onchain and Hyperliquid prop trading firms.</description>
+  <language>en</language>
+  <lastBuildDate>Tue, 17 Nov 2026 00:00:00 GMT</lastBuildDate>
+  <image><url>https://onchainprops.xyz/og-image.png</url><title>OnchainProps Blog</title><link>https://onchainprops.xyz/blog.html</link></image>
+  <item>
+    <title>Hyperliquid Trading Tips: 11 Rules From Founder Jeff Yan</title>
+    <link>https://onchainprops.xyz/blog/hyperliquid-trading-tips-jeff-yan</link>
+    <guid isPermaLink="true">https://onchainprops.xyz/blog/hyperliquid-trading-tips-jeff-yan</guid>
+    <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
+    <dc:creator>OnchainProps</dc:creator>
+    <category>Guides</category>
+    <description>Hyperliquid founder Jeff Yan's 11 trading rules from 2023: when to cross the spread, funding arb, liquidations, latency and sizing. Every quote sourced.</description>
+    <content:encoded><![CDATA[<h2 id="hyperliquid-trading-tips-at-a-glance">Hyperliquid trading tips at a glance</h2>
+<p><strong>Short answer:</strong> In 2023, Hyperliquid founder Jeff Yan (@chameleon_jeff) posted long threads on how professional crypto traders make money. His core advice: know who pays you, trade only where the order book is enforced onchain, cross the spread when you have a signal, collect funding but hedge it, and keep positions small while you prove your edge with markouts.</p>
+<p>This guide turns those posts into 11 rules. Every quote is his, word for word, with a link to the original post. The commentary between quotes is ours. Jeff founded Hyperliquid, so many of his examples come from it. All figures are from 2023 and have probably changed since.</p>
+<div class="table-scroll"><table class="prop-table"><thead><tr><th>#</th><th>Rule</th><th>Who it helps most</th></tr></thead><tbody><tr><td>1</td><td>Figure out who is paying you</td><td>Every trader</td></tr><tr><td>2</td><td>Only trade on books enforced onchain</td><td>Anyone choosing a venue</td></tr><tr><td>3</td><td>If you have a signal, cross the spread</td><td>Discretionary and medium-frequency traders</td></tr><tr><td>4</td><td>Get paid funding, and hedge it</td><td>Basis and carry traders</td></tr><tr><td>5</td><td>Mine the public onchain data</td><td>Quant and data-driven traders</td></tr><tr><td>6</td><td>Learn who gets the liquidations</td><td>Perps traders on long-tail assets</td></tr><tr><td>7</td><td>Measure latency before you optimize it</td><td>Bot builders</td></tr><tr><td>8</td><td>Keep positions small and lean toward flat</td><td>New market makers, funded traders</td></tr><tr><td>9</td><td>Research with simple priors and expect decay</td><td>Strategy researchers</td></tr><tr><td>10</td><td>To move size, announce it</td><td>Large traders and funds</td></tr><tr><td>11</td><td>Start small and get to live pnl</td><td>Beginners in algo trading</td></tr></tbody></table></div>
+<h2 id="who-is-jeff-yan">Who is Jeff Yan?</h2>
+<p>Jeff Yan is the co-founder of Hyperliquid, an onchain order book exchange for perpetual futures, and the founder of the crypto market-making firm Chameleon Trading. <a href="https://x.com/chameleon_jeff/status/1660079528054595584" target="_blank" rel="noopener noreferrer">In a May 2023 post</a> he described Chameleon as "the crypto MM firm I built and have been leading for more than 3 years".</p>
+<p>That year he wrote long threads on latency, making vs taking, MEV, funding, liquidations and research. We read all of his 2023 posts and pulled out the advice that still holds up.</p>
+<h2 id="1-figure-out-who-is-paying-you">1. Figure out who is paying you</h2>
+<p>Before you can have an edge, you need to know who is on the other side of your trade. In his first serious thread, Jeff split a market into four groups: retail, makers, HFT takers ("toxic flow") and arbitrageurs. "Retail" describes how the flow behaves. It isn't an insult:</p>
+<blockquote><p>"Retail doesn't mean "dumb," but rather that HFT actors want to trade against their flow."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1626665946269257728" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Feb 17, 2023</a></p>
+<p>The edge comes from seeing what the other side needs:</p>
+<blockquote><p>"often your alpha is someone else's undesired risk."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1650868940728582146" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Apr 25, 2023</a></p>
+<p><strong>Takeaway:</strong> if you can't name who pays you and why, it's probably you.</p>
+<h2 id="2-only-trade-on-order-books-that-are-enforced-onchain">2. Only trade on order books that are enforced onchain</h2>
+<p>Your venue sets the quality of your fills. Jeff's main structural argument of the year:</p>
+<blockquote><p>"Order books offer more competitive liquidity than AMMs, but they must live onchain."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1672715768470044673" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Jun 24, 2023</a></p>
+<p>The reason is MEV (maximal extractable value). If the book lives offchain, whoever runs the matching engine decides who gets filled:</p>
+<blockquote><p>"MEV for offchain order books is at the level of matching, not just tx ordering."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1672715760140161024" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Jun 24, 2023</a></p>
+<p>With an onchain book, a validator can't skip the best, earliest order. Filling anyone else is an invalid state transition, so the block gets rejected.</p>
+<p>Centralized exchanges deserve the same check. Jeff publicly called out an exchange where his team watched trades print through their own top-of-book order:</p>
+<blockquote><p>"literally see trades executing at farther prices while our order chilled there."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1643610606082334720" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Apr 5, 2023</a></p>
+<p><strong>Takeaway:</strong> before you size up anywhere, check that your fills, the public prints and the order book all agree.</p>
+<h2 id="3-limit-or-market-order-if-you-have-a-signal-cross-the-spread">3. Limit or market order? If you have a signal, cross the spread</h2>
+<p>Resting a limit order inside a wide spread looks cheaper. Usually it isn't, because you get filled when you're wrong and miss the fill when you're right.</p>
+<blockquote><p>"Just like in poker, if you make a bet, you tend to get called by better hand than those that fold."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1634021058469826561" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Mar 10, 2023</a></p>
+<p>Resting orders make money based on queue position, and the fastest traders win that race. So his advice for anyone who isn't running HFT:</p>
+<blockquote><p>"if you're looking at medium frequency or longer, just take liquidity to start."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1637986814748397569" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Mar 21, 2023</a></p>
+<p>He gives two exceptions: heavily skewed fee schedules, and resting orders far from the price to catch big wicks.</p>
+<p><strong>Takeaway:</strong> if you're not HFT and you have a view, take liquidity. Either way, put a limit price on every order so a thin book can't fill you at a terrible price.</p>
+<h2 id="4-hyperliquid-funding-arbitrage-get-paid-funding-and-hedge-it">4. Hyperliquid funding arbitrage: get paid funding, and hedge it</h2>
+<p>Funding is one of the clearest edges in onchain perps. When a venue is crowded on one side, funding pays you to take the other side, and you can hedge on a venue where funding is flat. In October 2023, Jeff wrote:</p>
+<blockquote><p>"Super juicy BTC funding arb available in 7 figs on @HyperliquidX"  "Almost 400% annualized to short, while CEXs are flat for an easy hedge."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1716588460033647020" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Oct 23, 2023</a></p>
+<p>When funding gets extreme, a precise hedge matters less:</p>
+<blockquote><p>"When funding pays up to 1%/hr all you need is a rough beta hedge."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1693649491889443147" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Aug 21, 2023</a></p>
+<p>These trades pay for a reason. On Hyperliquid, funding is what pays someone to take a large one-sided position off the main liquidity provider. That makes funding arb a service you are paid to provide:</p>
+<blockquote><p>"alpha is a service you provide to the market."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1663968386681012224" target="_blank" rel="noopener noreferrer">Jeff Yan on X, May 31, 2023</a></p>
+<p><strong>Our caution, not Jeff's:</strong> funding arb is not risk-free. Before you call it an arb, count trading fees, slippage on both legs, funding flipping sign, the liquidation buffer on each leg and the cost of moving collateral between venues.</p>
+<h2 id="5-mine-the-public-onchain-data">5. Mine the public onchain data</h2>
+<p>On a centralized exchange you see anonymous prints. On a fully onchain venue like Hyperliquid you also see addresses, positions and vaults. Jeff labeled addresses as retail or market maker by their rolling 30-day volume, then plotted retail trades against the best bid and offer. He called that chart</p>
+<blockquote><p>"something that you could never see with CEX feed data."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1660835008318423041" target="_blank" rel="noopener noreferrer">Jeff Yan on X, May 23, 2023</a></p>
+<p>Why it matters:</p>
+<blockquote><p>"retail flow can be a strong predictor of medium-term price movements."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1660835014471487488" target="_blank" rel="noopener noreferrer">Jeff Yan on X, May 23, 2023</a></p>
+<p>One of his favorite medium-frequency signals came from his own firm's HFT pnl. When it spiked, retail was usually piling in, and the price impact tended to partly revert. His lesson:</p>
+<blockquote><p>"If you have a unique insight into markets through your interacting with them, use it."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1639081540612411392" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Mar 24, 2023</a></p>
+<p><strong>Takeaway:</strong> onchain, much of the data that used to be private is public. The edge goes to whoever builds tools to read it.</p>
+<h2 id="6-learn-who-gets-the-liquidations">6. Learn who gets the liquidations</h2>
+<p>Liquidation flow is some of the most profitable flow in perps, and someone always captures it:</p>
+<blockquote><p>"Who gets the juicy liquidation flow?"  "Answer: DMMs/internal desks on CEXs, MEV bots on DEXs."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1650293672808792067" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Apr 24, 2023</a></p>
+<p>How a venue liquidates decides how much you lose when it happens to you. On Hyperliquid, liquidations used to mean the protocol took over the position and its collateral. Then they moved to the order book. After that change, a liquidated user lost only slippage and fees, not the whole maintenance margin. Jeff said the switch</p>
+<blockquote><p>"can be a 100x improvement on illiquid assets with strict margin requirements."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1713551137020706897" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Oct 15, 2023</a></p>
+<p>Design also limits what manipulators can do on thin markets. <a href="https://x.com/chameleon_jeff/status/1726091053491470408" target="_blank" rel="noopener noreferrer">After the YFI incident on dYdX</a>, he described isolated-only perps and auto-deleveraging (ADL) as defenses. He also noted that some CEX-style rules fail onchain because "DEX attackers can always split positions".</p>
+<p><strong>Takeaway:</strong> read a venue's margin, liquidation and backstop rules before you trade its long-tail perps.</p>
+<h2 id="7-building-a-trading-bot-measure-latency-before-you-optimize-it">7. Building a trading bot? Measure latency before you optimize it</h2>
+<p>Crypto is slow compared with traditional HFT. <a href="https://x.com/chameleon_jeff/status/1650875274341359619" target="_blank" rel="noopener noreferrer">In Jeff's words</a>, "Time scales are orders of magnitude larger than tradfi HFT."</p>
+<p>So start simple:</p>
+<blockquote><p>"Even today, you can write a large class of profitable crypto HFT strategies in python."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1645071425731170304" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Apr 9, 2023</a></p>
+<p>His setup: one event loop, one state machine that turns feed messages into orders and cancels, and PyPy for speed. Rewrite in a compiled language only once working strategies show what the system needs. <a href="https://x.com/chameleon_jeff/status/1649776559555747840" target="_blank" rel="noopener noreferrer">Run it in the cloud, not at home</a>: "I wouldn't try from your mac unless you live in the relevant AWS datacenter."</p>
+<p>Then measure:</p>
+<ul><li>Plot your clock against the matching engine's timestamp.</li><li>Watch round-trip latency during volatile periods.</li><li>Overlay how many messages per second your strategy is processing, so you can tell when you are the bottleneck.</li></ul>
+<p><a href="https://x.com/chameleon_jeff/status/1649770620953980930" target="_blank" rel="noopener noreferrer">When his team did this</a>, the fix was simple: "get a lot more boxes and split up the symbols."</p>
+<h2 id="8-keep-positions-small-and-lean-toward-flat">8. Keep positions small and lean toward flat</h2>
+<p>When you start market making, only a few things have to be exactly right: model, strategy and latency. Inventory, sizing and hedging can be 80/20. His starter rule:</p>
+<blockquote><p>"Keep a small position limit, and bias towards flattening."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1674922359214465024" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Jun 30, 2023</a></p>
+<p>Don't assume your buys and sells will even out. They won't:</p>
+<blockquote><p>"With this strategy you always hit your risk limit on one side. This is why your threshold and/or fair should scale with your position."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1673720508607594496" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Jun 27, 2023</a></p>
+<p>To find out whether you have an edge at all, Jeff's same post says to "Compute markouts to determine if you have edge". A markout measures how the price moved in your favor or against you at set intervals after each fill.</p>
+<p><strong>Takeaway:</strong> if your fills don't come out profitable shortly afterward, better sizing won't save you.</p>
+<h2 id="9-research-with-simple-priors-and-expect-your-edge-to-decay">9. Research with simple priors and expect your edge to decay</h2>
+<p>Start every idea from a simple story, or you'll end up fitting noise:</p>
+<blockquote><p>"Your hypotheses should be based on simple priors, or you will just overfit to noise."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1639081516356739072" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Mar 24, 2023</a></p>
+<p>Be suspicious of easy wins. Strategies that are easy to backtest draw the most competition:</p>
+<blockquote><p>"There is no free lunch. Edge and inconvenience are often correlated."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1658249142551076864" target="_blank" rel="noopener noreferrer">Jeff Yan on X, May 15, 2023</a></p>
+<p>Every trick stops working eventually. Your research process is what lasts:</p>
+<blockquote><p>"the most important alpha is the research process. Any specific effect will decay"</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1635101000548913153" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Mar 13, 2023</a></p>
+<h2 id="10-to-move-size-announce-it">10. To move size, announce it</h2>
+<p>Retail threads often cast big buyers as victims of front-running. Jeff argued the opposite:</p>
+<blockquote><p>"If you want to execute large size, often the best thing to do is announce it."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1635313678013841410" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Mar 13, 2023</a></p>
+<p>Once quants know the flow is coming, they compete to supply it. The price still moves, but you pay something close to the "correct" impact. His traditional-finance example is leveraged ETFs, which rebalance predictably at the close.</p>
+<p>He also argues that market makers and quants make markets thicker (more "viscous", in his words), so shocks fade faster. That's in his <a href="https://x.com/chameleon_jeff/status/1636350311974715393" target="_blank" rel="noopener noreferrer">"viscous fluid" thread</a>.</p>
+<h2 id="11-start-small-and-get-to-live-pnl">11. Start small and get to live pnl</h2>
+<p>You don't need a fund to start:</p>
+<blockquote><p>"HFT is high enough ROI that it can be tiny. I started with &lt;$10k personally."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1661237273009029123" target="_blank" rel="noopener noreferrer">Jeff Yan on X, May 24, 2023</a></p>
+<p>Aim for live pnl first. Polish can wait:</p>
+<blockquote><p>"The zero to one moment of live pnl should be your first goal."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1637986806749872128" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Mar 21, 2023</a></p>
+<p>Start with whatever programming language you already know:</p>
+<blockquote><p>"If I had started with rust or C++ from day 1, there would've been no trading."</p></blockquote>
+<p>— <a href="https://x.com/chameleon_jeff/status/1645071422480617473" target="_blank" rel="noopener noreferrer">Jeff Yan on X, Apr 9, 2023</a></p>
+<p>Then put in the hours. <a href="https://x.com/chameleon_jeff/status/1632001038772506629" target="_blank" rel="noopener noreferrer">His most-liked thread of the year</a> was about work, not markets. While building an automated trading system from scratch, he worked "5am-10pm 7days/week" for months. He says himself that most people don't need to live that way, but it's an honest picture of what it took him.</p>
+<h2 id="what-these-rules-mean-for-funded-traders">What these rules mean for funded traders</h2>
+<p>This section is our commentary, not Jeff's. If you trade a funded account from an onchain prop firm, several of his rules map directly onto the firm's rules:</p>
+<ul><li><strong>Small position limits (rule 8)</strong> matter even more when a daily drawdown limit can end the account in one bad session. Size so that a normal losing day stays well inside the limit.</li><li><strong>Check your fills (rule 2)</strong> applies to the firm as well as the exchange. Find out whether your account trades on the live Hyperliquid book or on a simulated feed, and whether payouts can be checked on a block explorer.</li><li><strong>Know who pays you (rule 1)</strong> applies to the firm's business model too. Learn whether it earns from your trading or from challenge fees (<a href="https://onchainprops.xyz/blog/how-do-prop-firms-make-money">how prop firms make money</a>).</li><li><strong>Liquidation rules (rule 6)</strong> and the firm's own stop-out rules both decide how much a bad trade costs you.</li></ul>
+<p>To compare firms on profit split, drawdown rules and payout proof, see our <a href="https://onchainprops.xyz/#firms">Hyperliquid prop firm comparison</a>.</p>
+<h2 id="key-takeaways">Key takeaways</h2>
+<ul><li>Know who pays you. Your edge is a service.</li><li>Trade where matching is enforced onchain, and check that fills match the book.</li><li>If you have a signal and you're not HFT, cross the spread.</li><li>Collect funding, and hedge it with every cost counted.</li><li>Onchain transparency is data you can trade on.</li><li>Know how a venue liquidates before you size up.</li><li>Measure latency first. Python is fine to start.</li><li>Use small position limits, lean toward flat, and judge your edge by markouts.</li><li>Use simple priors, expect decay, and invest in the research process.</li><li>Start small and get to live pnl.</li></ul>
+<h2 id="faq">FAQ</h2>
+<h3 id="who-is-jeff-yan-chameleon-jeff">Who is Jeff Yan (@chameleon_jeff)?</h3>
+<p>Jeff Yan is the co-founder of Hyperliquid, an onchain order book exchange for perpetual futures, and the founder of the crypto market-making firm Chameleon Trading. He posts as @chameleon_jeff on X.</p>
+<h3 id="should-i-use-limit-or-market-orders-on-hyperliquid">Should I use limit or market orders on Hyperliquid?</h3>
+<p>Jeff Yan's 2023 advice for traders who aren't running HFT was to take liquidity when you have a signal, because resting orders tend to fill when you're wrong. He made exceptions for skewed fee schedules and orders resting far from the price. Either way, set a limit price on every order.</p>
+<h3 id="is-hyperliquid-funding-arbitrage-risk-free">Is Hyperliquid funding arbitrage risk-free?</h3>
+<p>No. Funding can pay well when one side is crowded, but fees, slippage on both legs, funding flipping sign, liquidation risk and the cost of moving collateral can all eat the return.</p>
+<h3 id="can-you-build-a-crypto-trading-bot-in-python">Can you build a crypto trading bot in Python?</h3>
+<p>Jeff Yan said in 2023 that a large class of profitable crypto HFT strategies can be written in Python, using one event loop, one state machine and PyPy for speed, moving to a compiled language only once working strategies show what the system needs.</p>
+<h3 id="how-much-money-do-you-need-to-start-algorithmic-crypto-trading">How much money do you need to start algorithmic crypto trading?</h3>
+<p>Jeff Yan said he personally started with under $10,000. His advice was to aim for live pnl first and improve the system later.</p>
+<h3 id="do-these-tips-apply-to-prop-firm-accounts">Do these tips apply to prop firm accounts?</h3>
+<p>Mostly, yes. Small position limits, checking your fills and knowing the liquidation rules matter even more under a prop firm's drawdown limits. Also check whether the firm's accounts trade on the live order book and whether its payouts can be verified onchain.</p>
+<hr>
+<p><em>Credit: compiled from the public 2023 X posts of Jeff Yan (@chameleon_jeff), co-founder of Hyperliquid and founder of Chameleon Trading. Quotes are his, linked to each post. Commentary between quotes is ours. All figures are from 2023. This article is for education only and is not financial advice.</em></p>]]></content:encoded>
+  </item>
+  <item>
+    <title>Are Onchain Prop Firms Legit? How to Verify a Payout Before You Buy a Challenge</title>
+    <link>https://onchainprops.xyz/blog/are-onchain-prop-firms-legit</link>
+    <guid isPermaLink="true">https://onchainprops.xyz/blog/are-onchain-prop-firms-legit</guid>
+    <pubDate>Sun, 01 Nov 2026 00:00:00 GMT</pubDate>
+    <dc:creator>OnchainProps</dc:creator>
+    <category>Payout Safety</category>
+    <description>Are onchain prop firms legit? A 6-step checklist to verify payouts, treasuries and rules onchain before paying for a challenge, plus where each firm stands.</description>
+    <content:encoded><![CDATA[<p>Before you pay for a challenge, ask one question: are onchain prop firms legit, and can I prove it before I pay? Profit split and account size are easy to compare. Whether the firm actually pays out is the part that costs traders money, and onchain it is something you can check.</p>
+<h2 id="are-onchain-prop-firms-legit">Are Onchain Prop Firms Legit?</h2>
+<p>Some are, and some aren't. "Onchain prop firm" is a loose label. It covers firms whose rules and payouts live in smart contracts, and firms that trade on a blockchain venue like Hyperliquid but run everything else on their own servers.</p>
+<p>The label alone proves nothing. What matters is how much of the firm you can verify without trusting it. A firm that shows its payouts, its treasury and its rules publicly asks for less trust than one that shows a nice dashboard.</p>
+<h2 id="why-payout-verification-matters-more-than-profit-split">Why Payout Verification Matters More Than Profit Split</h2>
+<p>A 90% split means nothing if the payout never arrives. The failure mode in prop trading is rarely a bad split. It is a firm that reviews your payout request, finds a reason to reject it, or pauses operations after collecting fees.</p>
+<p>The problem is structural: in most prop firms, the company that took your fee also decides whether your payout is valid. Onchain, parts of that decision can move into public code and public transactions, which is why I rank payout proof above every other column in the table.</p>
+<h2 id="6-step-checklist-how-to-verify-an-onchain-prop-firm">6-Step Checklist: How to Verify an Onchain Prop Firm</h2>
+<ol><li><strong>Find real payouts with transaction hashes.</strong> Ask for payout proof you can open on a block explorer. A screenshot of a payout is not proof. A transaction hash is. Payouts sent in stablecoins to wallets leave a public trail.</li><li><strong>Check the treasury or reserve.</strong> A visible onchain wallet or reserve shows whether there is money behind the promises. Compare its size to the payouts the firm advertises.</li><li><strong>See where the rules live.</strong> If payout eligibility is enforced by a smart contract, no one has to approve it by hand. If rules sit in the firm's database, you are trusting the firm to apply them fairly.</li><li><strong>Know which dashboard you're reading.</strong> Onchain dashboards read from smart contracts and blockchain transactions. Offchain dashboards pull from the firm's own database, so you are taking its word for it.</li><li><strong>Check how the firm makes money.</strong> Does it earn when you win, or when you fail? A firm that lives on evaluation fees and B-books its traders does not need you to succeed. See <a href="https://onchainprops.xyz/blog/how-do-prop-firms-make-money">how prop firms make money</a> for the A-book vs B-book breakdown.</li><li><strong>Look at the team and the entity.</strong> Check whether the founders are named, and where the company is registered. An anonymous team with no entity gives you nowhere to go if a payout is refused.</li></ol>
+<p>No firm passes all six perfectly, and nothing guarantees safety. The goal is to know exactly what you are trusting before you pay.</p>
+<h2 id="red-flags-to-watch-for">Red Flags to Watch For</h2>
+<ul><li><strong>Payout "proof" without transaction hashes.</strong> Screenshots and testimonials are easy to fake.</li><li><strong>A payout ledger you can't cross-check.</strong> If entries can't be matched to a chain, they are the firm's claims, not data.</li><li><strong>No visible treasury.</strong> You can't tell if funded traders can actually be paid.</li><li><strong>Vague account type.</strong> The firm calls an account "funded" but won't say whether your trades are simulated or hedged.</li><li><strong>Rules that change after you pay.</strong> Look for versioned, public rules rather than a page that can be edited quietly.</li><li><strong>Pressure to buy now.</strong> Countdown timers and "last discount" banners do not tell you anything about solvency.</li></ul>
+<h2 id="where-each-firm-stands-on-payout-verification">Where Each Firm Stands on Payout Verification</h2>
+<p>Our <a href="https://onchainprops.xyz/#firms">comparison table</a> marks each firm's payout verification and whether its rules live onchain. Here is how some of the listed firms stood when this was written:</p>
+<div class="table-scroll"><table class="prop-table"><thead><tr><th>Firm</th><th>Payouts verified</th><th>Rules onchain</th></tr></thead><tbody><tr><td><a href="https://onchainprops.xyz/firms/hypernova">Hypernova</a></td><td>Yes</td><td>Yes</td></tr><tr><td><a href="https://onchainprops.xyz/firms/propr">Propr</a></td><td>Yes</td><td>No</td></tr><tr><td><a href="https://onchainprops.xyz/firms/dojifunded">DojiFunded</a></td><td>Yes</td><td>No (evaluation data onchain)</td></tr><tr><td><a href="https://onchainprops.xyz/firms/hyperpnl">hyperpnl</a></td><td>Yes</td><td>No</td></tr><tr><td><a href="https://onchainprops.xyz/firms/carrot-funding">Carrot Funding</a></td><td>Yes</td><td>No</td></tr><tr><td><a href="https://onchainprops.xyz/firms/vanta-trading">Vanta Trading</a></td><td>Work in progress</td><td>No</td></tr><tr><td><a href="https://onchainprops.xyz/firms/iceberg">Iceberg</a></td><td>No</td><td>No</td></tr><tr><td><a href="https://onchainprops.xyz/firms/cashed">Cashed</a></td><td>No</td><td>No</td></tr></tbody></table></div>
+<p>A "Yes" means we found payouts we could verify. It is not a safety guarantee, and a "No" does not mean a firm is a scam. It means we have not been able to verify its payouts yet, so you would be relying on trust. Statuses change, so check the live table before you buy.</p>
+<p><a href="https://onchainprops.xyz/firms/hypernova">Hypernova</a> is currently the furthest along on this checklist: payout eligibility lives in smart contracts, and traders are paid from an onchain reserve with no manual approval. For a firm that is still building its verification, read <a href="https://onchainprops.xyz/blog/what-is-vanta-trading">what is Vanta Trading</a> to see which parts of its pitch you can check today and which you can't.</p>
+<h2 id="a-simple-pre-purchase-routine">A Simple Pre-Purchase Routine</h2>
+<p>Before paying for any challenge:</p>
+<ol><li>Open the firm's payout page and pick three recent payouts.</li><li>Look each one up on a block explorer and confirm the amount, the date and the receiving wallet.</li><li>Find the treasury or reserve and see whether it can cover what has been paid.</li><li>Read the rules for payout approval and note who decides.</li><li>Start with the smallest account size. Keep your first fee small until the firm has paid you.</li></ol>
+<p>It takes about ten minutes, and it is the cheapest risk control a prop trader has.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="are-onchain-prop-firms-legit">Are onchain prop firms legit?</h3>
+<p>Some are, some aren't. Verify payouts with transaction hashes, check the treasury, and see whether rules are enforced by smart contracts before you buy.</p>
+<h3 id="how-can-i-verify-an-onchain-prop-firm-s-payouts">How can I verify an onchain prop firm's payouts?</h3>
+<p>Ask for payout transaction hashes and look them up on a block explorer. Confirm the amount, date and receiving wallet. Screenshots are not proof.</p>
+<h3 id="are-onchain-prop-firm-funded-accounts-real">Are onchain prop firm funded accounts real?</h3>
+<p>Often they are simulated, with real payouts on top. Ask whether your account is hedged in the market, and look for the hedges on a public venue like Hyperliquid.</p>
+<h3 id="what-is-the-biggest-red-flag-in-a-prop-firm">What is the biggest red flag in a prop firm?</h3>
+<p>Payout "proof" you can't check. If you can't match a payout to a blockchain transaction, you are relying on the firm's word.</p>
+<h3 id="is-a-high-profit-split-a-sign-of-a-good-prop-firm">Is a high profit split a sign of a good prop firm?</h3>
+<p>No. A high split only matters if payouts arrive. Check payout proof first, then compare splits.</p>
+<p>Want to compare onchain prop firms by chain, profit split and payout proof? Browse <a href="https://onchainprops.xyz/">onchainprops.xyz</a> and follow <a href="https://x.com/onchain_props" target="_blank" rel="noopener noreferrer">@onchain_props</a>. No black boxes, just blockchain data.</p>]]></content:encoded>
+  </item>
+  <item>
+    <title>What Is Vanta Trading?</title>
+    <link>https://onchainprops.xyz/blog/what-is-vanta-trading</link>
+    <guid isPermaLink="true">https://onchainprops.xyz/blog/what-is-vanta-trading</guid>
+    <pubDate>Sat, 31 Oct 2026 00:00:00 GMT</pubDate>
+    <dc:creator>OnchainProps</dc:creator>
+    <category>Guides</category>
+    <description>Vanta Trading is a one-step prop firm from Taoshi, built on Bittensor Subnet 8. 10% target, 100% split, weekly USDC payouts. Full rules and prices.</description>
+    <content:encoded><![CDATA[<h2 id="what-is-vanta">What Is Vanta?</h2>
+<p>To understand Vanta Trading, start with Bittensor. Bittensor is a blockchain made of independent subnets, each producing a digital commodity such as compute, AI inference, storage or predictions. The chain pays participants in its token, TAO, according to the value they add.</p>
+<p>Each subnet has four kinds of participant. Subnet creators define the rules and rewards, miners produce the commodity, validators score the miners, and stakers back validators with TAO. Vanta runs on Subnet 8, where the commodity is trading performance: miners compete as traders, and the best results earn rewards.</p>
+<p><strong>Vanta Trading</strong> is a prop trading evaluation platform. You pay a one-time fee, pass a one-step challenge on a simulated account, and then earn weekly rewards on your simulated profit, with a 100% profit split by default. Rewards are paid in USDC or Vanta Network alpha and listed on a public Payout Ledger. See the full <a href="https://onchainprops.xyz/firms/vanta-trading">Vanta Trading firm page</a> for current pricing.</p>
+<h2 id="why-vanta-says-it-is-different-open-source-onchain-decentralized">Why Vanta Says It Is Different: Open Source, Onchain, Decentralized</h2>
+<p>Founder and CEO Arrash Yasavolian argues that the core problem with prop firms is trust: the firm that took your fee also decides whether your payout is valid. He points to The Funded Trader, which blocked over $2M in withdrawals and then paused operations.</p>
+<p>His answer has three parts:</p>
+<ul><li><strong>Open source:</strong> Vanta Network's rules are public code that anyone can read.</li><li><strong>Onchain:</strong> activity and payouts can be checked independently.</li><li><strong>Decentralized:</strong> independent validators receive every order, apply the rules and reach consensus on payouts, so no single company has the final say.</li></ul>
+<p>That is the pitch. In practice, only part of it is verifiable today: USDC rewards settle on Base with public transaction hashes, but some earlier rewards were bank transfers via Stripe that cannot be checked onchain, and the evaluation rules themselves are enforced by Vanta rather than a smart contract. Read the Payout Ledger yourself before relying on the claim.</p>
+<p>He also separates the two brands. Vanta Network (SN8) is the open infrastructure. Vanta Trading is one prop firm built on it. Other firms can build on SN8 too, and traders can join the network directly as miners.</p>
+<p>At the network level, payouts are made in SN8's alpha token (theta) based on profit, and prop firms pay the network in theta to fund their traders. Vanta Trading then pays its own customers in USDC or Vanta Network alpha. Validators, in turn, get access to the trading data, which gives them a reason to help find the best traders.</p>
+<h2 id="vanta-tokenomics-buybacks-burns-and-locked-emissions">Vanta Tokenomics: Buybacks, Burns and Locked Emissions</h2>
+<p>Vanta Trading supports the SN8 (theta) token in three ways: it buys theta, burns it to register traders, and locks its own emissions. The figures below come from CEO Arrash Yasavolian.</p>
+<h3 id="160-000-of-sn8-buybacks-in-one-month">$160,000 of SN8 buybacks in one month</h3>
+<p>Vanta Trading bought about $160,000 of SN8 alpha in a single month, valued in TAO at the time of purchase. Every trader Vanta Trading registers on the network needs collateral, and that collateral is burned. So more traders means more buybacks and more burns.</p>
+<h3 id="emissions-locked-in-conviction">Emissions locked in conviction</h3>
+<p>Vanta Trading has locked its share of miner emissions in conviction: about 40,000 alpha, worth roughly $300,000 at the time (transaction on Taostats). It keeps only what it needs to pay traders and cover operations.</p>
+<p>Counting that lock, buybacks covered 76% of miner emissions for the month. Vanta has no owner emissions, since it cut them to 0% and locked them too. The team says it will keep locking its Vanta Trading emissions and fund trader collateral from buybacks.</p>
+<h3 id="what-s-next-2-500-miners-and-an-agentic-trading-platform">What's next: 2,500 miners and an agentic trading platform</h3>
+<p>Two upcoming changes are meant to raise demand for theta:</p>
+<ul><li><strong>Null Consensus</strong> will expand SN8 to 2,500 miner slots. Vanta plans to fill each one with a trader posting collateral, which means more buybacks and burns.</li><li>An <strong>agentic trading SaaS platform</strong> will give traders AI-driven tooling to compete on Vanta. It will also run its own buybacks and burns.</li></ul>
+<p>The stated goal is for demand for funding to cover 100% or more of miner emissions. Live figures are on the Vanta Network metrics and tokenomics dashboards.</p>
+<p>These are the team's own claims and plans. Check the dashboards and onchain data, and remember that theta is a volatile token; nothing here is investment advice.</p>
+<h2 id="what-is-a-bittensor-subnet">What Is a Bittensor Subnet?</h2>
+<p>Bittensor is a blockchain network that pays computers for useful work, judged by other computers. Its native token is TAO. The network is split into subnets, each with its own task and its own scoring rules (Vanta repo).</p>
+<p>You can track Subnet 8 live (emissions, miners, validators and price) on <a href="https://subnetradar.com/subnet/8" target="_blank" rel="noopener noreferrer">SubnetRadar</a>.</p>
+<p>Other places to follow Subnet 8:</p>
+<ul><li><a href="https://taostats.io/subnets/8" target="_blank" rel="noopener noreferrer">Taostats</a>: main explorer page for SN8</li><li><a href="https://bittensor.ai/subnets/8" target="_blank" rel="noopener noreferrer">Bittensor.ai</a>: subnet overview</li><li><a href="https://taomarketcap.com/subnets/8" target="_blank" rel="noopener noreferrer">TaoMarketCap</a>: market data and trading</li><li><a href="https://subnetmetrics.com/subnets/8" target="_blank" rel="noopener noreferrer">Subnet Metrics</a>: burns, emissions and more</li></ul>
+<p>The three roles that matter most here:</p>
+<ul><li><strong>Miners</strong> do the work. On Subnet 8, the work is trading signals.</li><li><strong>Validators</strong> check the work, score each miner and set weights on the chain.</li><li><strong>The subnet owner</strong> writes the rules. For Subnet 8 that is Taoshi.</li></ul>
+<p>Since the dynamic TAO (dTAO) upgrade in 2025, each subnet also has its own token, called its alpha. Subnet tokens are named after Greek letters in order, and people buy them with TAO (Taostats). Subnet 8's token is therefore theta (θ).</p>
+<h2 id="how-vanta-network-miners-work">How Vanta Network Miners Work</h2>
+<p>On Subnet 8 (testnet 116), miners are traders or trading bots. They send LONG, SHORT or FLAT signals on forex, crypto, equities or commodities, and validators track each miner's simulated portfolio (README).</p>
+<p>The miner rules look a lot like a prop firm challenge:</p>
+<ul><li><strong>Registration:</strong> a miner registers a hotkey on Bittensor for under 1 TAO.</li><li><strong>Collateral:</strong> a miner deposits 300 to 1,000 theta. Each theta unlocks $500 of trading capacity, so account sizes run from $150,000 to $500,000 (miner docs).</li><li><strong>One asset class:</strong> each miner picks crypto, forex, equities or commodities and trades only that.</li><li><strong>Challenge period:</strong> within 90 days, a miner needs 61+ trading days, returns above 10% (8% for forex), no breach of a 5% intraday or 5% end-of-day drawdown, and a rank in the top 25 of its asset class.</li><li><strong>Eliminations:</strong> in the main competition, a miner is removed for a 5% intraday or 8% end-of-day drawdown, 60 days without an order, or copying another miner. An eliminated hotkey is blacklisted for good.</li><li><strong>Real trading costs:</strong> carry fees (10.95% a year for crypto at 1x, or live Hyperliquid funding rates), spread fees and slippage are all charged.</li></ul>
+<p>Miners are paid in network emissions (theta, tracked in TAO and USD), not in cash. Since December 2025 Vanta uses debt-based scoring: last week's profit, scaled by penalties, sets what each miner is owed, and validator weights pay it out by midnight UTC on Sunday. Average daily PnL currently carries 100% of the score. Unused weight goes to a burn address.</p>
+<h3 id="entity-miners-how-vanta-trading-plugs-in">Entity miners: how Vanta Trading plugs in</h3>
+<p>The repo also defines entity miners. An entity pays 1,000 theta once to register, then opens many subaccounts, each trading like its own miner (entity miner docs). At most 10 entities can exist on the network.</p>
+<p>This is the plumbing behind a prop firm on Subnet 8. Subaccounts have challenge, funded, Instant Funded and pro stages, with the same 5% static or daily loss rules seen on Vanta Trading. Hyperliquid-linked subaccounts are also supported. Each subaccount's registration fee is paid in theta and burned, for example 66.67 theta for a $100,000 account at a 5% daily limit.</p>
+<h2 id="what-is-the-theta-token">What Is the Theta (θ) Token?</h2>
+<p>Theta is Subnet 8's alpha token, also listed as SN8. You get it by staking TAO into the Subnet 8 pool, using the Vanta CLI or any Bittensor wallet (Vanta CLI docs).</p>
+<p>Theta has four main uses on the network:</p>
+<div class="table-scroll"><table class="prop-table"><thead><tr><th>Use</th><th>Amount</th></tr></thead><tbody><tr><td>Miner collateral</td><td>300 to 1,000 theta ($500 of capacity each)</td></tr><tr><td>Validator stake</td><td>1,000 theta minimum</td></tr><tr><td>Entity registration</td><td>1,000 theta, burned</td></tr><tr><td>Subaccount and pro promotion fees</td><td>Set by account size; burned</td></tr></tbody></table></div>
+<p>Theta is also how the network pays: emissions go to miners, validators, the owner and stakers. The supply model caps alpha at 21 million, with a first halving at 10.5 million minted. In a late-August 2026 snapshot, theta traded near $8.45, with about 5.45 million in circulation (Yellow).</p>
+<p>Vanta Trading users do not need theta. Classic evaluations are paid by card or crypto, and rewards come in USDC, with Vanta Network alpha as an option. Theta matters to miners, validators and investors in the subnet, not to retail traders. It is a volatile token, and this is not investment advice.</p>
+<h2 id="how-the-vanta-trading-evaluation-works">How the Vanta Trading Evaluation Works</h2>
+<p>The Classic evaluation is one step at every size. Hit a 10% profit target without breaching either loss limit, and your scaled account activates immediately.</p>
+<ul><li><strong>Static loss limit:</strong> equity may never fall more than 5% below your starting balance.</li><li><strong>Daily loss limit:</strong> equity may never fall more than 3% or 5% below the start-of-day balance (UTC). You choose at purchase; 3% is the default.</li><li>Both limits use equity, so open losses count. Breach either and the account closes.</li><li>No time limit, no minimum days, no consistency rule. Trade at least once every 60 days to stay active.</li></ul>
+<p>Any style is allowed on Classic: manual, algorithmic, intraday, swing and news trading, as long as the strategy is yours. Third-party copy trading means disqualification.</p>
+<p>You trade on the Vanta Trading Desk with real-time data, across 500+ instruments in crypto, forex, equities, indices and commodities. Accounts are simulated; there is no real money in your account.</p>
+<h2 id="latest-vanta-trading-news">Latest Vanta Trading News</h2>
+<p>Vanta Trading has passed $1,000,000 in trader payouts, and celebrated with a $100,000 Classic challenge giveaway. Other recent updates:</p>
+<ul><li>Vanta Trading locked its share of miner emissions in conviction, about 40,000 alpha (~$300,000), keeping only what it needs for payouts and operations.</li><li>Buybacks covered 76% of miner emissions for the month; future collateral deposits will be funded by buybacks and burns.</li><li>Owner emissions were cut to 0% and locked in conviction, and Vanta Trading bought about $160,000 of SN8 alpha in one month.</li><li>A coming change called Null Consensus is set to expand the network to 2,500 miners.</li><li>The founder set out why prop firms need to be open source, onchain and decentralized.</li><li>Vanta's tokenomics are tracked on the public tokenomics dashboard.</li></ul>
+<h2 id="faq">FAQ</h2>
+<h3 id="is-vanta-trading-a-bittensor-subnet">Is Vanta Trading a Bittensor subnet?</h3>
+<p>Vanta Trading is a product built on Bittensor Subnet 8, the Vanta Network. The subnet handles performance tracking and rule enforcement.</p>
+<h3 id="do-i-trade-real-money-on-vanta">Do I trade real money on Vanta?</h3>
+<p>No. Accounts are simulated; rewards are real and paid weekly.</p>
+<h3 id="what-is-the-vanta-trading-profit-split">What is the Vanta Trading profit split?</h3>
+<p>100% by default. You can choose 60/40 to 90/10 for a cheaper fee.</p>
+<h3 id="does-vanta-trading-require-kyc">Does Vanta Trading require KYC?</h3>
+<p>Yes, once, when your scaled account is activated and before rewards are paid.</p>
+<h3 id="what-is-the-vanta-sn8-token">What is the Vanta (SN8) token?</h3>
+<p>Theta (θ), Subnet 8's alpha token. Miners and validators stake it as collateral; Vanta Trading customers never need it.</p>
+<h3 id="can-i-mine-on-vanta-network">Can I mine on Vanta Network?</h3>
+<p>Yes. Register a hotkey on Subnet 8, deposit 300 to 1,000 theta, pick an asset class and pass the 90-day challenge period.</p>
+<h3 id="how-do-i-contact-vanta">How do I contact Vanta?</h3>
+<p>Through Discord or support@vantatrading.io.</p>]]></content:encoded>
+  </item>
+  <item>
+    <title>How Do Crypto Prop Firms Make Money? A-Book vs B-Book Explained</title>
+    <link>https://onchainprops.xyz/blog/how-do-prop-firms-make-money</link>
+    <guid isPermaLink="true">https://onchainprops.xyz/blog/how-do-prop-firms-make-money</guid>
+    <pubDate>Thu, 29 Oct 2026 00:00:00 GMT</pubDate>
+    <dc:creator>OnchainProps</dc:creator>
+    <category>Guides</category>
+    <description>How do prop firms make money? Evaluation fees, profit splits and B-book vs A-book models explained, plus how to check if a crypto prop firm is legit.</description>
+    <content:encoded><![CDATA[<p>Before you pay for a challenge, ask: how do prop firms make money? The answer tells you whether the firm wants you to win or needs you to lose. In crypto, where books can live onchain, you can increasingly check it yourself.</p>
+<h2 id="how-do-prop-firms-make-money-the-main-revenue-streams">How Do Prop Firms Make Money? The Main Revenue Streams</h2>
+<p>Prop firms typically combine a few income sources:</p>
+<ul><li><strong>Evaluation fees.</strong> You pay upfront for a challenge, and the firm keeps the fee pass or fail. For many legacy firms, it's the main revenue source.</li><li><strong>Profit split.</strong> Once you're funded, you keep most of the profit and the firm keeps the rest. That share only exists if traders make money.</li><li><strong>Resets and add-ons.</strong> Retrying a failed challenge usually costs another fee.</li><li><strong>Trader flow and signals.</strong> A hedging firm can use trader activity as an input. <a href="https://onchainprops.xyz/firms/propr">Propr</a>, for example, says each trader's signals feed into its hedging algorithm.</li></ul>
+<p>The mix matters. A firm that lives on evaluation fees has very different incentives from one that lives on funded traders' profits.</p>
+<h2 id="prop-firm-a-book-vs-b-book-what-s-the-difference">Prop Firm A-Book vs B-Book: What's the Difference?</h2>
+<h3 id="b-book-the-firm-takes-the-other-side">B-Book: The Firm Takes the Other Side</h3>
+<p>On a B-book, your trades never reach the market: you're on a simulated account, and the firm is your counterparty. Every dollar you win comes straight out of the firm's pocket, and every dollar you lose stays there.</p>
+<p>That creates a structural conflict: when the business runs on evaluation fees and trader losses, the firm doesn't need its traders to succeed.</p>
+<h3 id="a-book-flow-hedged-in-the-market">A-Book: Flow Hedged in the Market</h3>
+<p>On an A-book, trader flow is actually hedged in the market. If you go long, the firm puts on a matching position, so it earns its profit split when you win. That aligns the platform with the trader instead of pitting them against each other.</p>
+<h3 id="hybrid-models">Hybrid Models</h3>
+<p>Many firms run a hybrid: evaluations stay simulated, and only funded or consistently profitable traders get hedged. Hybrid isn't automatically bad. What matters is whether the firm tells you which model applies to your account, and whether you can check it.</p>
+<h2 id="are-funded-accounts-simulated">Are Funded Accounts Simulated?</h2>
+<p>Often, yes. At many prop firms, both the challenge and the "funded" account run in a simulated environment. Payouts are real money, but your trades may never touch an order book.</p>
+<p>That isn't a scam by itself; it's how much of the industry works. The issue is disclosure. If a firm calls an account "funded" without saying whether your trades are hedged, ask. Onchain prop firms make this easier: Propr, for instance, hedges publicly on Hyperliquid.</p>
+<h2 id="are-crypto-prop-firms-legit-how-to-check">Are Crypto Prop Firms Legit? How to Check</h2>
+<p>"Crypto prop firm" covers everything from legacy firms that just added crypto deposits to firms running their rules and payouts onchain. Here's how I'd judge one:</p>
+<ol><li><strong>Follow the incentives.</strong> Ask how the firm makes money. Heavy reliance on evaluation fees plus B-booking is a red flag, even if payouts arrive.</li><li><strong>Verify hedging onchain.</strong> If a firm says it A-books, look for the hedges on a public venue like Hyperliquid.</li><li><strong>Verify payouts onchain.</strong> Payouts sent in stablecoins to wallets leave a public trail. <a href="https://onchainprops.xyz/firms/hypernova">Hypernova</a> goes further: payout eligibility lives in smart contracts, and traders are paid from an onchain reserve with no manual approval.</li><li><strong>Check the treasury.</strong> A visible onchain wallet or reserve shows whether there's money behind the promises.</li><li><strong>Know which dashboard you're reading.</strong> Onchain dashboards read from smart contracts and blockchain transactions. Offchain dashboards pull from the firm's own database, so you're taking its word for it.</li></ol>
+<p>Nothing guarantees safety, but the more that lives onchain, the less trust you need to extend.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="how-do-prop-firms-make-money">How do prop firms make money?</h3>
+<p>Evaluation fees, a share of funded traders' profits, and resets. B-book firms also profit when traders lose.</p>
+<h3 id="what-is-a-book-vs-b-book-in-prop-trading">What is A-book vs B-book in prop trading?</h3>
+<p>B-book: simulated accounts, with the firm taking the other side. A-book: trader flow hedged in the real market.</p>
+<h3 id="are-prop-firm-funded-accounts-simulated">Are prop firm funded accounts simulated?</h3>
+<p>At many firms, yes. Ask whether your account is hedged, or verify it onchain.</p>
+<h3 id="are-crypto-prop-firms-legit">Are crypto prop firms legit?</h3>
+<p>Some are, some aren't. Check the business model, and verify hedging, payouts and treasuries onchain where possible.</p>
+<p>Want to compare onchain prop firms by chain, profit split and payout proof? Browse <a href="https://onchainprops.xyz/">onchainprops.xyz</a> and follow <a href="https://x.com/onchain_props" target="_blank" rel="noopener noreferrer">@onchain_props</a>. No black boxes, just blockchain data.</p>]]></content:encoded>
+  </item>
+  <item>
+    <title>Onchain Prop Trading: Why the Books Are Finally Opening</title>
+    <link>https://onchainprops.xyz/blog/onchain-prop-trading</link>
+    <guid isPermaLink="true">https://onchainprops.xyz/blog/onchain-prop-trading</guid>
+    <pubDate>Thu, 29 Oct 2026 00:00:00 GMT</pubDate>
+    <dc:creator>OnchainProps</dc:creator>
+    <category>General</category>
+    <description>Onchain prop trading explained: how onchain prop firms like Propr and Hypernova move hedging, rules and payouts onchain so traders can verify them.</description>
+    <content:encoded><![CDATA[<p>Traditional prop trading has a structural problem: the incentives are broken from day one.</p>
+<h2 id="the-problem-with-legacy-prop-firms-b-booking-and-evaluation-fees">The Problem With Legacy Prop Firms: B-Booking and Evaluation Fees</h2>
+<p>Most legacy prop firms don't actually need their traders to succeed. Their revenue comes mainly from evaluation fees, and most accounts are heavily B-booked. That means traders are on simulated accounts, and the firm takes the other side, so every dollar a trader wins comes straight out of the firm's pocket. When your business model depends on traders failing, it's hard to claim you're on their side.</p>
+<p>A different story is spreading through my feed right now: onchain prop trading.</p>
+<h2 id="what-is-onchain-prop-trading-the-crypto-prop-firm-landscape">What Is Onchain Prop Trading? The Crypto Prop Firm Landscape</h2>
+<p>The core idea is simple. Onchain prop trading means anyone can audit the code and check the data for themselves. But "crypto prop firm" covers very different businesses. Today crypto prop firms fall roughly into three groups:</p>
+<ul><li><strong>Legacy rebrands.</strong> Same old model with crypto deposits and withdrawals added. No smart contracts, no new transparency.</li><li><strong>CEX-based props (e.g., Breakout).</strong> Crypto-native, but built on centralized exchange infrastructure.</li><li><strong>Onchain prop firms.</strong> The focus of this article.</li></ul>
+<p>Over the past few weeks I've been digging into how these onchain prop firms actually work under the hood. Approaches vary a lot. Some teams are shipping genuinely new infrastructure, while others have already shut down.</p>
+<p>In my view, <a href="https://onchainprops.xyz/firms/hypernova">Hypernova</a> and <a href="https://onchainprops.xyz/firms/propr">Propr</a> are the current market leaders among onchain prop firms. Elsewhere, a recent podcast with the <a href="https://onchainprops.xyz/firms/vanta-trading">Vanta</a> founder went viral on X, <a href="https://onchainprops.xyz/firms/dojifunded">Doji Funded</a> is recording every closed trade on the blockchain, and a number of new protocols are building quietly in stealth.</p>
+<h2 id="onchain-vs-offchain-not-all-prop-firm-transparency-dashboards-are-equal">Onchain vs Offchain: Not All Prop Firm Transparency Dashboards Are Equal</h2>
+<p>"Transparency dashboard" has become a buzzword, so it's worth being precise. There are two kinds of prop firm transparency dashboard, and they are not the same:</p>
+<ul><li><strong>Onchain dashboards</strong> read from smart contracts and blockchain transactions. The data is already public, and anyone can verify it independently.</li><li><strong>Offchain dashboards</strong> pull from the firm's own internal database. No smart contracts, so you're still taking the firm's word for it.</li></ul>
+<p>In practice it isn't black and white. If a trader pays for an evaluation with a credit card, that payment will never be onchain. Not everything can live on a blockchain, but the direction matters: the more of a prop firm that moves onchain, the less trust traders need to extend. Open-sourcing code is another encouraging trend.</p>
+<h2 id="infrastructure-and-access-to-capital-why-onchain-prop-firms-work-now">Infrastructure and Access to Capital: Why Onchain Prop Firms Work Now</h2>
+<h3 id="a-book-vs-b-book-aligning-the-firm-with-the-trader">A-Book vs B-Book: Aligning the Firm With the Trader</h3>
+<p>The trust problem is being solved one component at a time, by moving more of the business onchain and making it verifiable. A-booking, where trader flow is actually hedged in the market, aligns the platform with the trader instead of pitting them against each other.</p>
+<h3 id="hyperliquid-and-low-fee-l2s">Hyperliquid and Low-Fee L2s</h3>
+<p>The infrastructure has finally caught up too. Hyperliquid gives traders CEX-level performance and liquidity with zero gas fees on execution, and fees on L2s like Arbitrum are now low as well.</p>
+<h3 id="access-to-capital-for-more-traders">Access to Capital for More Traders</h3>
+<p>There's also an access story. Traders in jurisdictions that never had access to capital or professional infrastructure can now trade, including RWA perps.</p>
+<h2 id="propr-vs-hypernova-how-the-leading-onchain-prop-firms-approach-transparency">Propr vs Hypernova: How the Leading Onchain Prop Firms Approach Transparency</h2>
+<h3 id="propr-open-books-public-hedging-on-hyperliquid">Propr: Open Books, Public Hedging on Hyperliquid</h3>
+<p>Propr's position is that hedging is the single most important part of a prop firm, so it's the part they've made public. Today, Propr offers:</p>
+<ul><li><strong>Onchain hedging</strong> on Hyperliquid, publicly visible and verifiable</li><li><strong>Traceable flows</strong>, with revenue and payouts trackable onchain</li><li><strong>Financial and operational reporting</strong>, including published financials, revenue attribution and active user numbers</li></ul>
+<p>Next on their roadmap are a fully onchain simulated order book (CLOB), onchain trade state and fully automated hedging PnL. The stated aim is to shrink the amount of trust traders have to place in the firm.</p>
+<p>Those roadmap items aren't live yet. Payout transparency is: every payout is now listed with its onchain transaction hash on Propr's <a href="https://www.propr.xyz/transparency" target="_blank" rel="noopener noreferrer">transparency page</a>, alongside its public reserve wallets, hedging account, revenue and pass rates. Propr reports over $4M paid to traders, with a median payout time of about 20 minutes (Nov 2026).</p>
+<p>The longer-term goal is to back traders whose results would hold up on a live account just as well as in a prop program. Propr's team says that in conversations with other prop firm CEOs, more of them are moving the same way. Prop trading gets far more powerful when the books are open.</p>
+<h3 id="hypernova-prop-firm-business-logic-in-smart-contracts">Hypernova: Prop Firm Business Logic in Smart Contracts</h3>
+<p>Hypernova went further down the stack. Its account rules, account state and payout eligibility all live in smart contracts. Traders interact with those contracts directly and get paid from an onchain reserve, with no manual approval step.</p>
+<p>The hard part, as the team explains it, was risk. With instant settlement there's no withdrawal review queue to catch abuse after the fact, so it has to be caught during trading. Hypernova built its in-flight risk checks from scratch for exactly that reason.</p>
+<p>Making sure this holds up at scale is a big part of why they've stayed in closed alpha/beta. The results so far are striking: September payouts averaged 5.9 seconds from click to wallet, the fastest in the prop space by a wide margin. There's more work ahead, but it's a clear case of choosing the harder path and having it pay off.</p>
+<h2 id="why-i-m-building-onchain-props">Why I'm Building Onchain Props</h2>
+<p>My background explains a lot of this. Back in 2017–2018 I was running spot arbitrage between CEXs and early DEXs, and I got hacked twice on centralized exchanges (Cryptopia, I'm looking at you). So I understand on a gut level why traders prefer Hyperliquid to CEXs, and why they don't trust legacy props.</p>
+<h3 id="the-onchain-paradox-transparent-but-unreadable">The Onchain Paradox: Transparent but Unreadable</h3>
+<p>But there's a catch. Onchain data is open, yet raw blockchain data isn't useful to most traders. Transparency you can't read isn't much better than no transparency at all. MCP and newer tooling make it easier, but there's still a gap.</p>
+<p>That's what we're closing at @onchain_props. We've built a dedicated data tools section to help traders navigate onchain prop firms, and I've been working on analytics covering the whole space. No black boxes, just blockchain data.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="what-is-onchain-prop-trading">What is onchain prop trading?</h3>
+<p>Onchain prop trading means anyone can audit the code and check the data for themselves. Onchain prop firms move parts of the business, such as hedging, account rules, payouts and revenue, onto the blockchain so traders can verify them instead of taking the firm's word for it.</p>
+<h3 id="what-s-wrong-with-the-traditional-prop-firm-model">What's wrong with the traditional prop firm model?</h3>
+<p>Most legacy prop firms earn mainly from evaluation fees, and most accounts are heavily B-booked: traders are on simulated accounts and the firm takes the other side, so every dollar a trader wins comes out of the firm's pocket.</p>
+<h3 id="what-is-the-difference-between-a-book-and-b-book-at-a-prop-firm">What is the difference between A-book and B-book at a prop firm?</h3>
+<p>On a B-book, traders are on simulated accounts and the firm takes the other side of their trades. With A-booking, trader flow is actually hedged in the market, which aligns the platform with the trader instead of pitting them against each other.</p>
+<h3 id="what-types-of-crypto-prop-firms-are-there">What types of crypto prop firms are there?</h3>
+<p>Crypto prop firms fall roughly into three groups: legacy rebrands (the old model with crypto deposits and withdrawals added), CEX-based props built on centralized exchange infrastructure (e.g., Breakout), and onchain prop firms.</p>
+<h3 id="are-all-prop-firm-transparency-dashboards-trustworthy">Are all prop firm transparency dashboards trustworthy?</h3>
+<p>No. Onchain dashboards read from smart contracts and blockchain transactions, so anyone can verify the data independently. Offchain dashboards pull from the firm's own internal database, so you're still taking the firm's word for it.</p>
+<h3 id="propr-vs-hypernova-how-do-they-differ">Propr vs Hypernova: how do they differ?</h3>
+<p>Propr makes its hedging public, with onchain hedging on Hyperliquid, payouts and revenue trackable onchain, and published financial reporting. Hypernova puts account rules, account state and payout eligibility in smart contracts and pays traders from an onchain reserve with no manual approval step; its September payouts averaged 5.9 seconds from click to wallet.</p>]]></content:encoded>
+  </item>
+  <item>
+    <title>Polymarket Prop Firms: Funded Prediction Market Trading Compared</title>
+    <link>https://onchainprops.xyz/blog/polymarket-prop-firms</link>
+    <guid isPermaLink="true">https://onchainprops.xyz/blog/polymarket-prop-firms</guid>
+    <pubDate>Thu, 29 Oct 2026 00:00:00 GMT</pubDate>
+    <dc:creator>OnchainProps</dc:creator>
+    <category>Guides</category>
+    <description>Polymarket prop firms compared: evaluation rules, payout methods and what you can verify onchain at Funding Predicts, PolyFundr, PropMarket and more.</description>
+    <content:encoded><![CDATA[<p>Every week someone slides into my DMs with the same question: which Polymarket prop firm actually pays? Fair. A year ago this category barely existed. Now a handful of firms sell funded accounts on event contracts. I read every firm's site and docs so you don't have to. Here's what's live, what the rules say, and what you can check onchain.</p>
+<p><strong>What is a prediction market prop firm?</strong> A prediction market prop firm sells a one-time evaluation. You trade event contracts, usually priced off live Polymarket order books, on a simulated balance. Hit the profit target without breaking the loss limits and you get a funded account. Then you keep a share of profits, typically 80–90%, paid in USDC or fiat.</p>
+<h2 id="how-it-differs-from-perps-prop-trading">How It Differs From Perps Prop Trading</h2>
+<p>Coming from <a href="https://onchainprops.xyz/#firms">Hyperliquid prop firms</a>? Three things change:</p>
+<ul><li><strong>Binary outcomes.</strong> A contract settles at $1 or $0. There's no stop-loss on the way to zero. Gravity doesn't negotiate. That's why firms add price bands and per-position caps.</li><li><strong>Resolution risk.</strong> Your P&amp;L depends on how a market resolves. Disputed resolutions happen. None of the firms below documents what happens to a funded account when one does.</li><li><strong>Liquidity per market.</strong> Every market has its own thin book. Firms either simulate fills against real depth or exclude thin markets entirely.</li></ul>
+<p>One more thing. Every firm below runs <strong>simulated</strong> accounts. Your trades never touch Polymarket. If that surprises you, read <a href="https://onchainprops.xyz/blog/how-do-prop-firms-make-money">how prop firms make money</a> first.</p>
+<h2 id="the-polymarket-prop-firms-live-right-now">The Polymarket Prop Firms Live Right Now</h2>
+<h3 id="funding-predicts">Funding Predicts</h3>
+<ul><li><strong>Evaluation:</strong> single phase. $10K–$150K Standard accounts for $85–$535. 6% target, trailing end-of-day drawdown, daily loss limit, 35% consistency rule, 5 minimum trading days, 10–90¢ entry band. 30 days, extendable to 45 (<a href="https://fundingpredicts.com/" target="_blank" rel="noopener noreferrer">pricing</a>, <a href="https://fundingpredicts.com/faq" target="_blank" rel="noopener noreferrer">FAQ</a>).</li><li><strong>Payouts:</strong> up to 90% split, weekly, through Rise. KYC and a 7-day wait before the first payout. $100,000 lifetime cap per trader. Its FAQ says crypto payouts are "temporarily under maintenance" (<a href="https://fundingpredicts.com/faq" target="_blank" rel="noopener noreferrer">FAQ</a>).</li><li><strong>Onchain:</strong> payout wallet not disclosed. Backed by MyFundedFutures. The site states accounts are simulated and not connected to Polymarket.</li></ul>
+<p>Our review: <a href="https://onchainprops.xyz/firms/funding-predicts">Funding Predicts</a> · <a href="https://fundingpredicts.com/purchase?ref=ONCHAINPROPS" target="_blank" rel="sponsored noopener noreferrer">Get a challenge</a></p>
+<h3 id="polyfundr">PolyFundr</h3>
+<ul><li><strong>Evaluation:</strong> $5K–$50K for $49–$500. 30% target. 10% daily and 20% total drawdown. 5% max risk per trade. No time limit. No KYC (<a href="https://support.polyfundr.com/challenges/overview" target="_blank" rel="noopener noreferrer">tiers</a>).</li><li><strong>Payouts:</strong> 80% split, 90% with an upgrade. USDC on Polygon to any EVM wallet. First payout unlocks at 2% profit. 7-day cooldown. The cap ladder starts at 5% of the account and tops out at $5,000 per payout (<a href="https://support.polyfundr.com/faq/payouts" target="_blank" rel="noopener noreferrer">payouts</a>).</li><li><strong>Onchain:</strong> each payout is a Polygon USDC transfer you can see on an explorer. Firm treasury/payout wallet: not disclosed.</li></ul>
+<h3 id="propmarket">PropMarket</h3>
+<ul><li><strong>Evaluation:</strong> $5K–$100K from $59. 20% target in 30 days. 10% trailing drawdown, no daily limit. 10%-per-market consistency rule. 20–80¢ price band. Polymarket and Kalshi markets (<a href="https://prop.market/" target="_blank" rel="noopener noreferrer">site</a>).</li><li><strong>Payouts:</strong> 70/30 split, 90/10 as a paid add-on. Weekly, with a 7-day wait before the first withdrawal. Payout method: not disclosed.</li><li><strong>Onchain:</strong> nothing disclosed. Evaluations are run by Prop Account, LLC, per its footer.</li></ul>
+<h3 id="fundmyprediction">FundMyPrediction</h3>
+<ul><li><strong>Evaluation:</strong> $5K–$150K for $49–$665. 10% target, 2% daily loss, 3% trailing drawdown. 3 minimum trading days. 5–95¢ entry band. No time limit (<a href="https://fundmyprediction.com/faq" target="_blank" rel="noopener noreferrer">FAQ</a>).</li><li><strong>Payouts:</strong> 80% split, 90% as an add-on. $10 minimum. Decisions "within 24 hours." One-time KYC before your first payout. Payout method: not disclosed.</li><li><strong>Onchain:</strong> nothing disclosed. Status is mixed. The homepage says "Now open." The FAQ banner still says "launching soon." Schrödinger's prop firm.</li></ul>
+<h3 id="cashed">Cashed</h3>
+<ul><li><strong>Evaluation:</strong> no fixed account size. You pay a deposit of $5–$1,500 and it gets multiplied into "Trading Power." The Standard plan is 115×, with a 10% target, 3% daily loss and 6% static drawdown. One account covers Hyperliquid perps and Polymarket markets (<a href="https://cashed.fun/rulebook" target="_blank" rel="noopener noreferrer">rulebook</a>).</li><li><strong>Payouts:</strong> 80% starting split. $20 USDC minimum. One payout per 24h, max $10,000 per trader per rolling 24h. New payouts go out in USDC on BNB Smart Chain.</li><li><strong>Onchain:</strong> the payout feed lives on Discord and the firm wallet isn't disclosed. We haven't verified payouts onchain yet.</li></ul>
+<p>Our review: <a href="https://onchainprops.xyz/firms/cashed">Cashed</a> · <a href="https://cashed.fun/join?ref=GENKISUD-209C78" target="_blank" rel="sponsored noopener noreferrer">Open an account</a></p>
+<p><strong>Not included:</strong> Propr's Polymarket product. It's still only on Propr's <a href="https://www.propr.xyz/roadmap" target="_blank" rel="noopener noreferrer">roadmap</a>, and its old prediction-market page now returns a 404. FundedPoly is winding down. PolyFunded's site is under maintenance.</p>
+<h2 id="risks-i-d-weigh-first">Risks I'd Weigh First</h2>
+<ul><li><strong>It's all simulated.</strong> Payouts come from the firm's revenue. Your real counterparty is the firm's balance sheet. Firm solvency is the risk that matters.</li><li><strong>Little is verifiable onchain.</strong> No firm here publishes a treasury or payout wallet. PolyFundr's Polygon USDC payouts come closest.</li><li><strong>Rules change fast.</strong> Cashed amended its payout limits on October 20, 2026. Re-read the rulebook before every purchase. Yes, every one.</li><li><strong>Resolution edge cases</strong> are undocumented everywhere. Hope is not a risk model.</li></ul>
+<h2 id="faq">FAQ</h2>
+<h3 id="what-is-a-polymarket-prop-firm">What is a polymarket prop firm?</h3>
+<p>A firm that sells an evaluation priced off Polymarket markets and pays a profit share on a funded, usually simulated, account.</p>
+<h3 id="is-a-funded-polymarket-account-real-money-on-polymarket">Is a funded Polymarket account real money on Polymarket?</h3>
+<p>At the firms above, no. Trades are simulated against live prices. The payouts are real.</p>
+<h3 id="which-prediction-market-prop-firm-pays-in-usdc">Which prediction market prop firm pays in USDC?</h3>
+<p>PolyFundr pays in USDC on Polygon. Cashed pays in USDC on BNB Chain. Funding Predicts pays through Rise.</p>
+<h3 id="can-i-verify-a-prediction-market-funded-trader-s-payouts-onchain">Can I verify a prediction market funded trader's payouts onchain?</h3>
+<p>Partly. You can see your own USDC transfer. No firm publishes a payout wallet yet.</p>
+<hr>
+<p>I'm tracking this category as it grows. Compare firms on <a href="https://onchainprops.xyz/">onchainprops.xyz</a> and follow <a href="https://x.com/onchain_props" target="_blank" rel="noopener noreferrer">@onchain_props</a> for updates.</p>]]></content:encoded>
+  </item>
+  <item>
+    <title>What Is Hyperliquid?</title>
+    <link>https://onchainprops.xyz/blog/what-is-hyperliquid</link>
+    <guid isPermaLink="true">https://onchainprops.xyz/blog/what-is-hyperliquid</guid>
+    <pubDate>Thu, 29 Oct 2026 00:00:00 GMT</pubDate>
+    <dc:creator>OnchainProps</dc:creator>
+    <category>Guides</category>
+    <description>What is Hyperliquid? A plain-English guide to the onchain order book L1: HyperCore, HyperEVM, HIP-3 markets, builder codes and HIP-4 outcomes.</description>
+    <content:encoded><![CDATA[<p><em>No one competes with the internet.</em></p>
+<p>Most of the prop firms I track on <a href="https://onchainprops.xyz/">onchainprops.xyz</a> run on Hyperliquid. So people keep asking me: what is Hyperliquid, really? A perp DEX? A chain? Something bigger? I read the <a href="https://hyperliquid.gitbook.io/hyperliquid-docs" target="_blank" rel="noopener noreferrer">official docs</a> and the team's TOKEN2049 keynote. Here's my answer.</p>
+<p><strong>What is Hyperliquid?</strong> Hyperliquid is a layer-1 blockchain built for a fully onchain open financial system. Its core, HyperCore, runs perpetual futures and spot order books directly onchain, with one-block finality. HyperEVM adds general-purpose smart contracts on the same chain, so apps can build on that liquidity without bridging.</p>
+<h2 id="how-does-hyperliquid-work">How Does Hyperliquid Work?</h2>
+<p>Per the <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/about-hyperliquid" target="_blank" rel="noopener noreferrer">About page</a>, Hyperliquid is an L1 "written and optimized from first principles." It's secured by HyperBFT, a consensus algorithm inspired by HotStuff. Execution is split in two.</p>
+<h3 id="hypercore">HyperCore</h3>
+<p>HyperCore holds the margin and matching engine state. Every order, cancel, trade and liquidation happens onchain. No dark back room. The docs put it bluntly: it "does not rely on the crutch of off-chain order books" (<a href="https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/overview" target="_blank" rel="noopener noreferrer">HyperCore overview</a>).</p>
+<ul><li>Mainnet supports roughly 200k orders per second.</li><li>Median end-to-end latency is 0.2 seconds for a co-located client.</li></ul>
+<h3 id="hyperevm">HyperEVM</h3>
+<p>HyperEVM is not a separate chain. It's secured by the same consensus, so smart contracts can read HyperCore order book prices directly (<a href="https://hyperliquid.gitbook.io/hyperliquid-docs/hyperevm" target="_blank" rel="noopener noreferrer">HyperEVM</a>). The docs still call it alpha. Read: build, but wear a helmet.</p>
+<h3 id="hip-1-hip-2-hlp-and-hype">HIP-1, HIP-2, HLP and HYPE</h3>
+<p>Around that core sit:</p>
+<ul><li><strong><a href="https://hyperliquid.gitbook.io/hyperliquid-docs/hyperliquid-improvement-proposals-hips/hip-1-native-token-standard" target="_blank" rel="noopener noreferrer">HIP-1</a>:</strong> the token standard.</li><li><strong><a href="https://hyperliquid.gitbook.io/hyperliquid-docs/hyperliquid-improvement-proposals-hips/hip-2-hyperliquidity" target="_blank" rel="noopener noreferrer">HIP-2</a>:</strong> an onchain liquidity strategy for new tokens.</li><li><strong><a href="https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/vaults/protocol-vaults" target="_blank" rel="noopener noreferrer">HLP</a>:</strong> a community-owned vault that market-makes, performs liquidations and earns a share of fees.</li></ul>
+<p>The <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/about-hyperliquid/hyperliquid-101-for-non-crypto-audiences" target="_blank" rel="noopener noreferrer">101 page</a> says HYPE secures the network, pays for network costs and gives trading fee discounts. Over $1B in annualized fees goes toward buying HYPE back. Development is fully self-funded. No VCs.</p>
+<p>That fits the mission: financial systems open to everyone, and wealth creation as broadly accessible as possible. Ideally, to everyone on the planet.</p>
+<h2 id="hyperliquid-hip-3-anyone-can-list-a-perp">Hyperliquid HIP-3: Anyone Can List a Perp</h2>
+<p><a href="https://hyperliquid.gitbook.io/hyperliquid-docs/hyperliquid-improvement-proposals-hips/hip-3-builder-deployed-perpetuals" target="_blank" rel="noopener noreferrer">HIP-3</a> is "permissionless builder-deployed perps." The deployer defines the market, including the oracle and contract specs, and operates it. HIP-3 markets inherit HyperCore's order books and margining.</p>
+<p>The requirements, per the docs:</p>
+<ul><li>Deployers must keep 500k HYPE staked.</li><li>Validators can slash that stake by stake-weighted vote for malicious market operation.</li><li>Deployers can set an extra fee share of 0–300%.</li></ul>
+<p>Permissionless, with a very expensive leash.</p>
+<p>HIP-3 is the unlock for real-world asset markets. The reported numbers are striking: BTC and ETH down 30–40% year over year, Hyperliquid volume holding up anyway, and HIP-3 markets at roughly 30–50% of volume by mid-2026. Treat those as unverified. The docs don't include them.</p>
+<h2 id="hyperliquid-builder-codes-and-the-unix-philosophy">Hyperliquid Builder Codes and the Unix Philosophy</h2>
+<p>This is where the subtitle comes from. Fintech usually verticalizes everything into one closed app. Hyperliquid takes the Unix approach instead: small, independent tools plugged into one shared liquidity layer. Nobody competes with the internet. It's just a tool.</p>
+<p>The mechanism is documented. <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/trading/builder-codes" target="_blank" rel="noopener noreferrer">Builder codes</a> let an app earn a fee on fills it sends for a user.</p>
+<ul><li>The user approves a max fee and can revoke it anytime.</li><li>The cap is 0.1% on perps and 1% on spot.</li><li>It's all processed onchain.</li></ul>
+<p>The 101 page says independent teams (mobile apps, trading terminals, wallets) have earned more than $65M through builder codes. Valor, MetaMask and Phantom are examples. Any of them can tap the deepest onchain markets without breaking their existing user flow.</p>
+<h3 id="why-builder-codes-matter-for-prop-trading">Why Builder Codes Matter for Prop Trading</h3>
+<p>This is why firms like <a href="https://onchainprops.xyz/firms/propr">Propr</a> and <a href="https://onchainprops.xyz/firms/hypernova">Hypernova</a> can build on Hyperliquid instead of rebuilding an exchange. It's also why their activity is visible onchain. More on that in <a href="https://onchainprops.xyz/blog/onchain-prop-trading">onchain prop trading</a>.</p>
+<h2 id="hyperliquid-hip-4-outcome-markets-and-convexity">Hyperliquid HIP-4: Outcome Markets and Convexity</h2>
+<p><a href="https://hyperliquid.gitbook.io/hyperliquid-docs/hyperliquid-improvement-proposals-hips/hip-4-outcome-markets" target="_blank" rel="noopener noreferrer">HIP-4</a> adds outcome markets: "fully collateralized contracts that settle within a fixed range." Per the docs, outcomes bring "non-linearity, dated contracts, and an alternative form of derivative trading that does not involve leverage or liquidations."</p>
+<ul><li>Yes and No books are merged to share liquidity.</li><li>Standalone outcomes can settle to a fraction. The <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/hip-4-deployer-actions" target="_blank" rel="noopener noreferrer">deployer docs</a> call these scalar payouts.</li><li>The first market is a recurring daily BTC binary.</li></ul>
+<p>Call it convexity, without leaving the venue. Outcomes compose with existing HyperCore primitives like portfolio margin and the HyperEVM, rather than living on a separate exchange. One caveat: the HIP-4 deployer actions page is still marked "Testnet-only."</p>
+<h2 id="what-s-next-ai-agents-and-permissioned-markets">What's Next: AI Agents and Permissioned Markets</h2>
+<p>Onchain systems keep data and value at the same level of abstraction. That's exactly what AI agents need to trade on their own.</p>
+<p>The documented piece today is <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/nonces-and-api-wallets" target="_blank" rel="noopener noreferrer">API wallets</a>, which the docs also call "agent wallets." They let a separate key sign trades for an account. The robots already have a login.</p>
+<p>Next up is HIP-3 Star: permissioned markets aimed at institutions. The docs list <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/hip-3-deployer-actions" target="_blank" rel="noopener noreferrer">HIP-3\*</a> as testnet-only, adding "an allow-list and proxied user actions" on top of HIP-3. Serving regulated institutions is the stated direction, not a documented commitment.</p>
+<p>Where it ends up is hard to predict. Even the team admits that.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="what-is-hyperliquid-in-simple-terms">What is Hyperliquid in simple terms?</h3>
+<p>A blockchain whose core is an onchain exchange for perps and spot, plus an EVM so apps can plug into that liquidity.</p>
+<h3 id="how-does-hyperliquid-work">How does Hyperliquid work?</h3>
+<p>HyperBFT orders transactions. HyperCore matches orders and handles margin onchain. HyperEVM runs smart contracts on the same state.</p>
+<h3 id="what-is-hyperliquid-hip-3">What is Hyperliquid HIP-3?</h3>
+<p>Permissionless, builder-deployed perp markets, backed by 500k staked HYPE that validators can slash.</p>
+<h3 id="what-are-hyperliquid-builder-codes">What are Hyperliquid builder codes?</h3>
+<p>User-approved, onchain fees (up to 0.1% on perps and 1% on spot) that let independent frontends earn from the trades they route.</p>
+<hr>
+<p>Building or trading on Hyperliquid? Compare the <a href="https://onchainprops.xyz/#firms">Hyperliquid prop firms</a> on onchainprops.xyz, browse <a href="https://onchainprops.xyz/resources">ecosystem resources</a>, and follow <a href="https://x.com/onchain_props" target="_blank" rel="noopener noreferrer">@onchain_props</a>.</p>
+<p><em>Not financial advice. Docs checked October 29, 2026. Source talk: "Hyperliquid: Rebuilding Finance from First Principles," TOKEN2049 Singapore, 7 October 2026.</em></p>]]></content:encoded>
+  </item>
+</channel>
+</rss>

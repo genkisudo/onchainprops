@@ -30,6 +30,7 @@ CI (`.github/workflows/build.yml`) also runs this on every push to `main` and co
   - `index.html` — meta description/keywords, og/twitter descriptions, CollectionPage/ItemList/FAQPage JSON-LD, "updated in …" badge, noscript fallback tables, visible FAQ accordions
   - `script.js` — `AppState.propFirms` / `predictionMarketFirms` arrays
   - `llms.txt` — fully regenerated
+  - `feed.xml` — RSS 2.0 feed of blog posts (full content, categories, dates), fully regenerated; linked via `rel="alternate"` from index.html, blog.html and every post
 - Generated regions are wrapped in marker comments: `<!-- GEN:BEGIN key --> … <!-- GEN:END key -->` (HTML) and `// GEN:BEGIN key … // GEN:END key` (JS)
 - **Key rule**: NEVER hand-edit content inside GEN markers or any of llms.txt — edit `firms.json`/`faq.json` and run `node build.js`
 - **Blog**: write `posts/<slug>.md` (copy `posts/_template.md`), run `node build.js`. It generates `blog/<slug>.html` (BlogPosting + Breadcrumb + FAQPage JSON-LD), the cards and Blog/BlogPosting schema in `blog.html` (`blog-cards`, `blog-schema` GEN blocks), and the sitemap/llms.txt entries. Never hand-edit `blog/*.html`.
