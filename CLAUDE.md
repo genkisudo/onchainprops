@@ -32,13 +32,14 @@ CI (`.github/workflows/build.yml`) also runs this on every push to `main` and co
   - `llms.txt` — fully regenerated
 - Generated regions are wrapped in marker comments: `<!-- GEN:BEGIN key --> … <!-- GEN:END key -->` (HTML) and `// GEN:BEGIN key … // GEN:END key` (JS)
 - **Key rule**: NEVER hand-edit content inside GEN markers or any of llms.txt — edit `firms.json`/`faq.json` and run `node build.js`
-- **Blog**: write `posts/<slug>.md` (copy `posts/_template.md`), run `node build.js`. It generates `blog/<slug>.html` (Article + Breadcrumb + FAQPage JSON-LD), the cards in `blog.html` (`blog-cards` GEN block), and the sitemap/llms.txt entries. Never hand-edit `blog/*.html`.
-- **Firm pages** (`firms/<slug>.html`): three GEN blocks are generated from the firm's `firms.json` entry:
+- **Blog**: write `posts/<slug>.md` (copy `posts/_template.md`), run `node build.js`. It generates `blog/<slug>.html` (BlogPosting + Breadcrumb + FAQPage JSON-LD), the cards and Blog/BlogPosting schema in `blog.html` (`blog-cards`, `blog-schema` GEN blocks), and the sitemap/llms.txt entries. Never hand-edit `blog/*.html`.
+- **Firm pages** (`firms/<slug>.html`): four GEN blocks are generated from the firm's `firms.json` entry:
   - `firm-stats`: the stats pills (trust signals first: payouts verified, rules onchain, payout speed, then split, account, chain, leverage, token, country) plus a "Terms last verified" line from `lastVerified`
+  - `firm-breadcrumb`: BreadcrumbList JSON-LD (Home › Compare › Firm)
   - `firm-description` / `firm-og-description`: `"<Name> review: <pageHook> <generated facts>"`. Keep `pageHook` free of splits and account sizes; the facts sentence adds those
   - Everything else on the page (`<title>`, review prose, FAQ JSON-LD) is hand-written. `node build.js` warns when a % or $ figure in a `<title>` no longer matches the data
   - **When you re-check a firm's terms, update its `lastVerified` (YYYY-MM-DD) in firms.json.** That date is shown publicly on the page
-  - A new firm page must contain all three marker pairs (copy them from `firms/hypernova.html`), or the build fails
+  - A new firm page must contain all four marker pairs (copy them from `firms/hypernova.html`), or the build fails
 - Not generated (hand-maintained): `compare.html` article prose, the review prose in `firms/` pages, `README.md` — keep these consistent with `firms.json` when data changes
 
 ### 1. **PubSub Store (Reactive State)**
@@ -134,7 +135,7 @@ CI (`.github/workflows/build.yml`) also runs this on every push to `main` and co
 # 2. Regenerate all derived content:
 node build.js
 ```
-Derived facts (highest split, largest account, chain counts) in the FAQ, JSON-LD, and llms.txt are recomputed automatically. Also create a matching detail page in `firms/` for new firms (with the three firm GEN marker pairs, plus `lastVerified` and `pageHook` in its firms.json entry) and keep `compare.html` prose in sync. The review prose and compare.html are not generated.
+Derived facts (highest split, largest account, chain counts) in the FAQ, JSON-LD, and llms.txt are recomputed automatically. Also create a matching detail page in `firms/` for new firms (with the four firm GEN marker pairs, plus `lastVerified` and `pageHook` in its firms.json entry) and keep `compare.html` prose in sync. The review prose and compare.html are not generated.
 
 **Change theme colors:**
 Update CSS custom properties in `:root` in `style.css`:

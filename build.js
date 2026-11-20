@@ -12,7 +12,7 @@
  *   - llms.txt    — fully regenerated
  *   - sitemap.xml — fully regenerated (lastmod = firms.json lastUpdated)
  *   - blog.html   — article cards (from posts/*.md)
- *   - blog/*.html — one article page per posts/*.md, with Article/FAQPage/Breadcrumb JSON-LD
+ *   - blog/*.html — one article page per posts/*.md, with BlogPosting/FAQPage/Breadcrumb JSON-LD
  *   - firms/*.html — stats header + "last verified" line, meta/og descriptions
  *                   (title, review prose and FAQ JSON-LD stay hand-written)
  *
@@ -250,6 +250,8 @@ const itemDescription = (f) => {
 };
 
 const jsonLd = (obj) => JSON.stringify(obj, null, 2);
+/** One JSON-LD <script> block (unindented; inject() adds the marker's indent). */
+const ldScript = (obj) => `<script type="application/ld+json">\n${jsonLd(obj)}\n</script>`;
 
 const organizationSchema = () => jsonLd({
     '@context': 'https://schema.org',
@@ -598,7 +600,7 @@ const postPage = (p) => {
     const title = p.seoTitle ?? `${p.title} | ${BRAND}`;
     const schemas = [{
         '@context': 'https://schema.org',
-        '@type': 'Article',
+        '@type': 'BlogPosting',
         headline: p.title,
         description: p.description,
         datePublished: p.date,
@@ -1021,8 +1023,17 @@ const buildFirmPages = () => {
             page = inject(page, 'firm-description', `<meta name="description"\n    content="${desc}">`);
             page = inject(page, 'firm-og-description', `<meta property="og:description"\n    content="${desc}">`);
             page = inject(page, 'firm-stats', firmStatsBlock(f));
+            page = inject(page, 'firm-breadcrumb', ldScript({
+                '@context': 'https://schema.org',
+                '@type': 'BreadcrumbList',
+                itemListElement: [
+                    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
+                    { '@type': 'ListItem', position: 2, name: 'Compare', item: `${SITE}/compare` },
+                    { '@type': 'ListItem', position: 3, name: `${f.name} Review`, item: `${SITE}/${p}` }
+                ]
+            }));
         } catch (e) {
-            throw new Error(`${file}: ${e.message} — add the firm-description, firm-og-description and firm-stats GEN markers (copy them from firms/hypernova.html)`);
+            throw new Error(`${file}: ${e.message} — add the firm-description, firm-og-description, firm-stats and firm-breadcrumb GEN markers (copy them from firms/hypernova.html)`);
         }
         const title = /<title>([^<]*)<\/title>/.exec(page)?.[1] ?? '';
         for (const w of titleDrift(f, title)) firmPageWarnings.push(`${file} <title>: ${w}`);
@@ -1071,6 +1082,25 @@ write('script.js', js);
 
 let blogHtml = read('blog.html');
 blogHtml = inject(blogHtml, 'blog-cards', blogCards());
+blogHtml = inject(blogHtml, 'blog-schema', ldScript({
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    '@id': `${SITE}/blog.html#blog`,
+    name: `${BRAND} Blog`,
+    url: `${SITE}/blog.html`,
+    description: 'Payout safety, profit-split breakdowns, and guides for onchain and Hyperliquid prop trading firms.',
+    publisher: { '@type': 'Organization', '@id': ORG_ID, name: BRAND, url: `${SITE}/` },
+    blogPost: posts.map((p) => ({
+        '@type': 'BlogPosting',
+        headline: p.title,
+        description: p.description,
+        url: `${SITE}/blog/${p.slug}`,
+        datePublished: p.date,
+        dateModified: p.updated,
+        image: `${SITE}/og-image.png`,
+        author: { '@type': 'Organization', '@id': ORG_ID, name: BRAND, url: `${SITE}/` }
+    }))
+}));
 blogHtml = inject(blogHtml, 'newsletter', newsletterForm('blog-index'));
 write('blog.html', blogHtml);
 
