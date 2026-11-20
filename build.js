@@ -922,7 +922,7 @@ const firmStatsBlock = (f) => {
     const items = firmStats(f).map(([k, v]) =>
         `    <span class="firm-meta-item">${k}: <strong>${escHtml(v)}</strong></span>`).join('\n');
     const verified = f.lastVerified
-        ? `Stats last verified <time datetime="${f.lastVerified}">${fmtDate(f.lastVerified)}</time>`
+        ? `Terms last verified <time datetime="${f.lastVerified}">${fmtDate(f.lastVerified)}</time>`
         : 'Stats not yet verified';
     return `<div class="firm-meta">\n${items}\n</div>\n<p class="firm-verified">${verified}</p>${firmPayoutsBlock(f)}`;
 };
