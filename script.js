@@ -895,6 +895,37 @@ const loadProprRevenue = async () => {
 };
 
 /**
+ * Populate the Vanta reserve balance from /balance.json, which a daily GitHub Action
+ * (balance.js + Taostats API) regenerates. No-op on pages without `#vanta-reserve-value`.
+ * On failure the card shows "Unavailable" rather than a wrong number.
+ * @returns {Promise<void>}
+ */
+const loadVantaReserve = async () => {
+    const valueEl = document.getElementById('vanta-reserve-value');
+    if (!valueEl) return;
+    const detailEl = document.getElementById('vanta-reserve-detail');
+    const updatedEl = document.getElementById('vanta-reserve-updated');
+    try {
+        const res = await fetch('/balance.json', { cache: 'no-cache' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const d = await res.json();
+        const usd = Number(d?.totalUsd);
+        const updated = new Date(d?.updatedAt);
+        if (!Number.isFinite(usd) || Number.isNaN(updated.getTime())) throw new Error('bad balance.json');
+        valueEl.textContent = usd.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+        const tao = (s) => Number(s).toLocaleString('en-US', { maximumFractionDigits: 2 });
+        detailEl.textContent = `${tao(d.totalTao)} TAO total: ${tao(d.liquidTao)} liquid, ${tao(d.stakedAlphaTao)} staked as subnet alpha, at $${Number(d.taoUsd).toLocaleString('en-US')} per TAO`;
+        updatedEl.textContent = updated.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }) + ' UTC';
+        updatedEl.dateTime = updated.toISOString();
+    } catch (e) {
+        valueEl.textContent = 'Unavailable';
+        detailEl.textContent = 'The reserve balance could not be loaded. Check the wallet on Taostats.';
+        updatedEl.textContent = '—';
+        console.error('Vanta reserve fetch failed:', e);
+    }
+};
+
+/**
  * Blog category filter — client-side toggle over the blog listing grid.
  * No-ops on any page that doesn't have #blog-grid (e.g. everything but blog.html).
  */
@@ -944,6 +975,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setupMobileNav();
         setupEventDelegation();
         loadProprRevenue();
+        loadVantaReserve();
         setupBlogFilters();
     } catch (e) {
         console.error("App initialization failure:", e);

@@ -1,0 +1,51 @@
+# Daily: fetch the Vanta reserve wallet's Bittensor balance (balance.js → balance.json)
+# with the TAOSTATS_API_KEY repo secret, and commit the result.
+# Triggers are schedule + manual only: never pull_request, so fork PRs can
+# never run with the secret.
+name: Refresh Vanta reserve balance
+
+on:
+  schedule:
+    - cron: '15 6 * * *'  # Daily at 06:15 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: balance
+  cancel-in-progress: false
+
+jobs:
+  balance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Fetch balance from Taostats
+        env:
+          TAOSTATS_API_KEY: ${{ secrets.TAOSTATS_API_KEY }}
+        run: node balance.js
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp balance.json "$RUNNER_TEMP/balance.json"
+          # main may move during the run: take the latest main, put this run's
+          # balance.json on top, and push. Retry if main moves again.
+          for i in 1 2 3; do
+            git fetch -q origin main
+            git reset -q --hard origin/main
+            cp "$RUNNER_TEMP/balance.json" balance.json
+            git add balance.json
+            if git diff --cached --quiet; then echo "Nothing changed."; exit 0; fi
+            git commit -q -m "chore: refresh Vanta reserve balance [skip ci]"
+            git push -q origin HEAD:main && exit 0
+            sleep $((i * 10))
+          done
+          exit 1
