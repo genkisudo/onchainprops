@@ -6,6 +6,93 @@
    components (FAQ accordion, feedback box) inherit the theme.
    ============================================================ */
 
+/* Fallback faces for the Google Fonts stylesheet (font-display: swap).
+   The first frame uses the next family in the stack. Unadjusted
+   Arial/Arimo is narrower than Inter, so the hero subtitle wraps an
+   extra line when Inter arrives and the comparison table reflows in
+   the same paint. size-adjust / ascent-override make that fallback
+   occupy the same space; the web fonts still replace it. */
+@font-face {
+    font-family: 'Inter Fallback';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Arial'), local('Arimo'), local('Liberation Sans');
+    size-adjust: 110%;
+    ascent-override: 88.07%;
+    descent-override: 21.93%;
+    line-gap-override: 0%;
+}
+@font-face {
+    font-family: 'Inter Fallback';
+    font-style: italic;
+    font-weight: 400;
+    src: local('Arial Italic'), local('Arimo Italic'), local('Liberation Sans Italic');
+    size-adjust: 110%;
+    ascent-override: 88.07%;
+    descent-override: 21.93%;
+    line-gap-override: 0%;
+}
+@font-face {
+    font-family: 'Inter Fallback';
+    font-style: normal;
+    font-weight: 500;
+    src: local('Arial'), local('Arimo'), local('Liberation Sans');
+    size-adjust: 110%;
+    ascent-override: 88.07%;
+    descent-override: 21.93%;
+    line-gap-override: 0%;
+}
+@font-face {
+    font-family: 'Inter Fallback';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Arial Bold'), local('Arimo Bold'), local('Arimo-Bold'), local('Liberation Sans Bold');
+    size-adjust: 112%;
+    ascent-override: 86.5%;
+    descent-override: 21.54%;
+    line-gap-override: 0%;
+}
+@font-face {
+    font-family: 'Inter Fallback';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Arial Bold'), local('Arimo Bold'), local('Arimo-Bold'), local('Liberation Sans Bold');
+    size-adjust: 112%;
+    ascent-override: 86.5%;
+    descent-override: 21.54%;
+    line-gap-override: 0%;
+}
+@font-face {
+    font-family: 'Space Grotesk Fallback';
+    font-style: normal;
+    font-weight: 500;
+    src: local('Arial'), local('Arimo'), local('Liberation Sans');
+    size-adjust: 97.4%;
+    ascent-override: 101.03%;
+    descent-override: 29.98%;
+    line-gap-override: 0%;
+}
+@font-face {
+    font-family: 'Space Grotesk Fallback';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Arial Bold'), local('Arimo Bold'), local('Arimo-Bold'), local('Liberation Sans Bold');
+    size-adjust: 97.4%;
+    ascent-override: 101.03%;
+    descent-override: 29.98%;
+    line-gap-override: 0%;
+}
+@font-face {
+    font-family: 'Space Grotesk Fallback';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Arial Bold'), local('Arimo Bold'), local('Arimo-Bold'), local('Liberation Sans Bold');
+    size-adjust: 97.4%;
+    ascent-override: 101.03%;
+    descent-override: 29.98%;
+    line-gap-override: 0%;
+}
+
 :root {
     /* Surfaces */
     --bg-primary: #14161b;
@@ -54,7 +141,7 @@ html {
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', 'Inter Fallback', sans-serif;
     background: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;
@@ -89,7 +176,7 @@ a {
 
 /* Typography */
 h1, h2, h3, h4 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Space Grotesk', 'Space Grotesk Fallback', sans-serif;
     font-weight: 600;
     line-height: 1.1;
     letter-spacing: -0.025em;
@@ -231,7 +318,7 @@ h1, h2, h3, h4 {
 }
 
 .logo {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Space Grotesk', 'Space Grotesk Fallback', sans-serif;
     font-size: 1.2rem;
     font-weight: 600;
     letter-spacing: -0.03em;
@@ -531,7 +618,7 @@ h1, h2, h3, h4 {
 }
 
 .firm-name {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Space Grotesk', 'Space Grotesk Fallback', sans-serif;
     font-weight: 600;
     font-size: 1.1rem;
     letter-spacing: -0.01em;
@@ -768,7 +855,7 @@ h1, h2, h3, h4 {
 }
 
 .firm-detail-content .firm-verdict-score {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Space Grotesk', 'Space Grotesk Fallback', sans-serif;
     font-size: 1.2rem;
     font-weight: 600;
     letter-spacing: -0.02em;
@@ -1038,7 +1125,7 @@ h1, h2, h3, h4 {
 }
 
 .resource-title {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Space Grotesk', 'Space Grotesk Fallback', sans-serif;
     font-weight: 600;
     font-size: 1rem;
     display: block;
@@ -1140,14 +1227,14 @@ footer {
 }
 
 .footer-brand {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Space Grotesk', 'Space Grotesk Fallback', sans-serif;
     font-weight: 600;
     font-size: 1.15rem;
     letter-spacing: -0.03em;
 }
 
 .footer-brand p {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', 'Inter Fallback', sans-serif;
     font-weight: 400;
     color: var(--text-secondary);
     margin-top: 0.6rem;
@@ -1393,7 +1480,7 @@ footer {
     border: 1px solid var(--border-color);
     border-radius: var(--radius-pill);
     color: var(--text-secondary);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', 'Inter Fallback', sans-serif;
     font-size: 0.86rem;
     font-weight: 600;
     cursor: pointer;
@@ -1620,7 +1707,7 @@ footer {
     gap: 0.55rem;
     margin-bottom: 0.9rem;
     padding: 0.3rem 0.75rem 0.3rem 0.6rem;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Space Grotesk', 'Space Grotesk Fallback', sans-serif;
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.14em;
@@ -1655,7 +1742,7 @@ footer {
 
 .newsletter-title {
     margin-bottom: 0.75rem;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Space Grotesk', 'Space Grotesk Fallback', sans-serif;
     font-size: clamp(1.35rem, 2.6vw, 1.8rem);
     line-height: 1.2;
     letter-spacing: -0.02em;
@@ -1811,7 +1898,7 @@ footer {
 .newsletter:hover .feed-item:nth-child(3) { transition-delay: 80ms; }
 
 .feed-tag {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Space Grotesk', 'Space Grotesk Fallback', sans-serif;
     font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.12em;
