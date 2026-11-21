@@ -14,7 +14,7 @@
  *   - sitemap.xml — fully regenerated (lastmod = firms.json lastUpdated)
  *   - blog.html   — article cards (from posts/*.md)
  *   - blog/*.html — one article page per posts/*.md, with BlogPosting/FAQPage/Breadcrumb JSON-LD
- *   - firms/*.html — stats header + "last verified" line, meta/og descriptions
+ *   - firms/*.html — stats header + "Data from <explorer>" source line, meta/og descriptions
  *                   (title, review prose and FAQ JSON-LD stay hand-written)
  *
  * Generated regions are delimited by marker comments:

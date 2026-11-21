@@ -35,7 +35,7 @@ CI (`.github/workflows/build.yml`) also runs this on every push to `main` and co
 - **Key rule**: NEVER hand-edit content inside GEN markers or any of llms.txt — edit `firms.json`/`faq.json` and run `node build.js`
 - **Blog**: write `posts/<slug>.md` (copy `posts/_template.md`), run `node build.js`. It generates `blog/<slug>.html` (BlogPosting + Breadcrumb + FAQPage JSON-LD), the cards and Blog/BlogPosting schema in `blog.html` (`blog-cards`, `blog-schema` GEN blocks), and the sitemap/llms.txt entries. Never hand-edit `blog/*.html`.
 - **Firm pages** (`firms/<slug>.html`): four GEN blocks are generated from the firm's `firms.json` entry:
-  - `firm-stats`: the stats pills (trust signals first: payouts verified, rules onchain, payout speed, then split, account, chain, leverage, token, country) plus a "Terms last verified" line from `lastVerified`
+  - `firm-stats`: the stats pills (trust signals first: payouts verified, rules onchain, payout speed, then split, account, chain, leverage, token, country) plus, for firms with payout data in payouts.json, a "Data from Etherscan" (or chain explorer) line. `lastVerified` is kept in firms.json but no longer shown
   - `firm-breadcrumb`: BreadcrumbList JSON-LD (Home › Compare › Firm)
   - `firm-description` / `firm-og-description`: `"<Name> review: <pageHook> <generated facts>"`. Keep `pageHook` free of splits and account sizes; the facts sentence adds those
   - Everything else on the page (`<title>`, review prose, FAQ JSON-LD) is hand-written. `node build.js` warns when a % or $ figure in a `<title>` no longer matches the data
