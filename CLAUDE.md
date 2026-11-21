@@ -39,7 +39,7 @@ CI (`.github/workflows/build.yml`) also runs this on every push to `main` and co
   - `firm-breadcrumb`: BreadcrumbList JSON-LD (Home › Compare › Firm)
   - `firm-description` / `firm-og-description`: `"<Name> review: <pageHook> <generated facts>"`. Keep `pageHook` free of splits and account sizes; the facts sentence adds those
   - Everything else on the page (`<title>`, review prose, FAQ JSON-LD) is hand-written. `node build.js` warns when a % or $ figure in a `<title>` no longer matches the data
-  - **When you re-check a firm's terms, update its `lastVerified` (YYYY-MM-DD) in firms.json.** That date is shown publicly on the page
+  - **When you re-check a firm's terms, update its `lastVerified` (YYYY-MM-DD) in firms.json.** (internal record; not displayed)
   - A new firm page must contain all four marker pairs (copy them from `firms/hypernova.html`), or the build fails
 - Not generated (hand-maintained): `compare.html` article prose, the review prose in `firms/` pages, `README.md` — keep these consistent with `firms.json` when data changes
 
