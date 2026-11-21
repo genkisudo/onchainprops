@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T15:40:53.504Z",
+  "generatedAt": "2026-11-21T14:51:17.939Z",
   "firms": {
     "Propr": [
       {
@@ -8,19 +8,19 @@
         "address": "0x0353f53BD55b8011BAD3dE1D939FF4D8335cbB1d",
         "token": "USDC",
         "windowDays": 30,
-        "paidOut": 1073908.49,
-        "payoutCount": 1473,
-        "uniqueRecipients": 355,
-        "medianPayout": 259.61,
+        "paidOut": 1050139.16,
+        "payoutCount": 1451,
+        "uniqueRecipients": 345,
+        "medianPayout": 266.08,
         "largestPayout": {
           "amount": 22657.07,
           "hash": "0x129e67d721ecb87b885a8382d4ee0ce9909cdf434086bc4acb1c6a066ef710ac",
           "date": "2026-10-27"
         },
-        "lastPayout": "2026-11-20",
-        "fundedIn": 1147642.47,
+        "lastPayout": "2026-11-21",
+        "fundedIn": 1110432.47,
         "excludedTransfers": 3,
-        "balance": 4643.94
+        "balance": 49546.25
       }
     ]
   }
