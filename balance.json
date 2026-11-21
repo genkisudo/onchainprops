@@ -1,47 +1,47 @@
 {
   "address": "5EBzTWPQxHR1f4fYMTvz1ohtworfFJvYgd5YXZofiQrEmuYn",
-  "updatedAt": "2026-11-21T14:14:54.772Z",
-  "block": 9555553,
-  "taoUsd": "186.92",
-  "taoUsdAt": "2026-11-21T14:14:49.928Z",
+  "updatedAt": "2026-11-21T14:53:48.921Z",
+  "block": 9555747,
+  "taoUsd": "187.31",
+  "taoUsdAt": "2026-11-21T14:53:33.966Z",
   "liquidTao": "3.6898",
-  "liquidUsd": "689.71",
+  "liquidUsd": "691.15",
   "reservedTao": "0.0000",
-  "stakedAlphaTao": "1090.9500",
-  "stakedAlphaUsd": "203920.37",
-  "totalTao": "1094.6398",
-  "totalUsd": "204610.08",
+  "stakedAlphaTao": "1094.5264",
+  "stakedAlphaUsd": "205015.74",
+  "totalTao": "1098.2163",
+  "totalUsd": "205706.89",
   "positions": [
     {
       "netuid": 8,
       "hotkey": "5FeNwZ5oAqcJMitNqGx71vxGRWJhsdTqxFGVwPRfg8h2UZmo",
-      "alpha": "24459.0711",
-      "priceTao": "0.037810",
-      "tao": "924.8057",
-      "usd": "172864.68"
+      "alpha": "24460.5321",
+      "priceTao": "0.037743",
+      "tao": "923.2121",
+      "usd": "172926.85"
     },
     {
       "netuid": 8,
       "hotkey": "5EPeU7Y8bqokEVf31ZWPZkP3F7Kv1v3ALuhnpp5T5Fvfjp85",
-      "alpha": "4353.1975",
-      "priceTao": "0.037810",
-      "tao": "164.5959",
-      "usd": "30766.26"
+      "alpha": "4498.0151",
+      "priceTao": "0.037743",
+      "tao": "169.7683",
+      "usd": "31799.29"
     },
     {
       "netuid": 8,
       "hotkey": "5ChvVnkWEcRhaW5pFNt3w5gq1KnJbTMseHwxba5JD3oGwRaw",
-      "alpha": "40.1633",
-      "priceTao": "0.037810",
-      "tao": "1.5186",
-      "usd": "283.85"
+      "alpha": "40.1744",
+      "priceTao": "0.037743",
+      "tao": "1.5163",
+      "usd": "284.02"
     },
     {
       "netuid": 8,
       "hotkey": "5DkVUF5APWRLLwLYJtZ48g71E4KyksaS2h6YC8LzrRSUR4s8",
       "alpha": "0.7896",
-      "priceTao": "0.037810",
-      "tao": "0.0299",
+      "priceTao": "0.037743",
+      "tao": "0.0298",
       "usd": "5.58"
     }
   ]
