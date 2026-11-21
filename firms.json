@@ -49,7 +49,9 @@
           "token": "USDC",
           "tokenAddress": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
           "decimals": 6,
-          "exclude": ["0x3b9e9c9f82eb1C321535FD2Bc48d8DB9E8E8c503"]
+          "exclude": [
+            "0x3b9e9c9f82eb1C321535FD2Bc48d8DB9E8E8c503"
+          ]
         }
       ]
     },
@@ -69,7 +71,6 @@
       "token": "No",
       "payoutSpeed": "Weekly",
       "rulesOnchain": "No",
-      "scaledCapital": "Yes",
       "bestSplit": "Yes",
       "payoutsVerified": "Work in progress",
       "lastVerified": "2026-11-21",
@@ -140,6 +141,27 @@
       "pageHook": "deposit-multiplier funding across perps and prediction markets, with USDC payouts on BNB Smart Chain."
     },
     {
+      "name": "Carrot Funding",
+      "country": "UAE",
+      "split": "80%",
+      "maxAccount": "$50k ($100k soon)",
+      "profitTarget": "5%/8%",
+      "dailyDrawdown": "4-5%",
+      "maxDrawdown": "8-10%",
+      "website": "https://app.carrotfunding.io/join/2VSSOTXBQZ",
+      "chain": "gTrade, Hyperliquid (soon)",
+      "chainPhrase": "gTrade with Hyperliquid coming soon",
+      "isAffiliate": true,
+      "token": "Yes",
+      "payoutSpeed": "Within 24h",
+      "rulesOnchain": "No",
+      "maxLeverage": "200x",
+      "bestLeverage": "Yes",
+      "payoutsVerified": "Yes",
+      "lastVerified": "2026-07-08",
+      "pageHook": "onchain prop firm on gTrade with Proof of Reserves, NFT-based Proof of Skill, and payouts verifiable on Dune."
+    },
+    {
       "name": "DojiFunded",
       "country": "US (Delaware)",
       "split": "Up to 90%",
@@ -177,27 +199,6 @@
       "payoutsVerified": "Yes",
       "lastVerified": "2026-08-27",
       "pageHook": "Hyperliquid prop firm with a static max drawdown, instant onchain payouts, and a two-phase evaluation."
-    },
-    {
-      "name": "Carrot Funding",
-      "country": "UAE",
-      "split": "80%",
-      "maxAccount": "$50k ($100k soon)",
-      "profitTarget": "5%/8%",
-      "dailyDrawdown": "4-5%",
-      "maxDrawdown": "8-10%",
-      "website": "https://app.carrotfunding.io/join/2VSSOTXBQZ",
-      "chain": "gTrade, Hyperliquid (soon)",
-      "chainPhrase": "gTrade with Hyperliquid coming soon",
-      "isAffiliate": true,
-      "token": "Yes",
-      "payoutSpeed": "Within 24h",
-      "rulesOnchain": "No",
-      "maxLeverage": "200x",
-      "bestLeverage": "Yes",
-      "payoutsVerified": "Yes",
-      "lastVerified": "2026-07-08",
-      "pageHook": "onchain prop firm on gTrade with Proof of Reserves, NFT-based Proof of Skill, and payouts verifiable on Dune."
     },
     {
       "name": "FUNDED by FOXIFY",
