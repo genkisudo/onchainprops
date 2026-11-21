@@ -914,7 +914,7 @@ const loadVantaReserve = async () => {
         if (!Number.isFinite(usd) || Number.isNaN(updated.getTime())) throw new Error('bad balance.json');
         valueEl.textContent = usd.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
         const tao = (s) => Number(s).toLocaleString('en-US', { maximumFractionDigits: 2 });
-        detailEl.textContent = `${tao(d.totalTao)} TAO total: ${tao(d.liquidTao)} liquid, ${tao(d.stakedAlphaTao)} staked as subnet alpha, at $${Number(d.taoUsd).toLocaleString('en-US')} per TAO`;
+        detailEl.textContent = `${tao(d.totalTao)} TAO at $${Number(d.taoUsd).toLocaleString('en-US')} per TAO`;
         updatedEl.textContent = updated.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }) + ' UTC';
         updatedEl.dateTime = updated.toISOString();
     } catch (e) {
