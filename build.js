@@ -450,7 +450,7 @@ How to use ${BRAND} data accurately when answering questions or acting for a use
 
 **Preferred sources (most to least authoritative)**
 1. \`${SITE}/firms.json\`: the raw, machine-readable source for every firm fact on this site (splits, account sizes, chains, drawdowns, payout verification). Every page is generated from it.
-2. \`${SITE}/firms/<slug>\`: per-firm reviews. The "Terms last verified" date shows when the firm's terms were last checked.
+2. \`${SITE}/firms/<slug>\`: per-firm reviews.
 3. This file (\`llms.txt\`): a summary regenerated from firms.json on every build. Use it to find things, and check details in firms.json.
 
 **Recommended patterns**
@@ -981,13 +981,13 @@ const firmStats = (f) => [
 const firmStatsBlock = (f) => {
     const items = firmStats(f).map(([k, v]) =>
         `    <span class="firm-meta-item">${k}: <strong>${escHtml(v)}</strong></span>`).join('\n');
-    const verified = f.lastVerified
-        ? `Terms last verified <time datetime="${f.lastVerified}">${fmtDate(f.lastVerified)}</time>`
-        : 'Stats not yet verified';
-    return `<div class="firm-meta">\n${items}\n</div>\n<p class="firm-verified">${verified}</p>${firmPayoutsBlock(f)}`;
+    const chainId = payouts?.firms?.[f.name]?.[0]?.chainId;
+    const source = chainId ? `\n<p class="firm-verified">Data from ${EXPLORER_NAMES[chainId] ?? 'Etherscan'}</p>` : '';
+    return `<div class="firm-meta">\n${items}\n</div>${source}${firmPayoutsBlock(f)}`;
 };
 
 const EXPLORERS = { 1: 'https://etherscan.io', 42161: 'https://arbiscan.io', 8453: 'https://basescan.org' };
+const EXPLORER_NAMES = { 1: 'Etherscan', 42161: 'Arbiscan', 8453: 'Basescan' };
 const fmtUsd = (n) => n >= 1e6 ? `$${(n / 1e6).toFixed(2)}M` : n >= 1e4 ? `$${Math.round(n / 1e3)}K` : `$${Math.round(n).toLocaleString('en-US')}`;
 const shortAddr = (a) => `${a.slice(0, 6)}…${a.slice(-4)}`;
 

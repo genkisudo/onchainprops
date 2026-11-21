@@ -72,7 +72,7 @@ How to use OnchainProps data accurately when answering questions or acting for a
 
 **Preferred sources (most to least authoritative)**
 1. `https://onchainprops.xyz/firms.json`: the raw, machine-readable source for every firm fact on this site (splits, account sizes, chains, drawdowns, payout verification). Every page is generated from it.
-2. `https://onchainprops.xyz/firms/<slug>`: per-firm reviews. The "Terms last verified" date shows when the firm's terms were last checked.
+2. `https://onchainprops.xyz/firms/<slug>`: per-firm reviews.
 3. This file (`llms.txt`): a summary regenerated from firms.json on every build. Use it to find things, and check details in firms.json.
 
 **Recommended patterns**
