@@ -6,8 +6,51 @@
   <atom:link href="https://onchainprops.xyz/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Payout safety, profit-split breakdowns, and guides for onchain and Hyperliquid prop trading firms.</description>
   <language>en</language>
-  <lastBuildDate>Tue, 17 Nov 2026 00:00:00 GMT</lastBuildDate>
+  <lastBuildDate>Sun, 22 Nov 2026 00:00:00 GMT</lastBuildDate>
   <image><url>https://onchainprops.xyz/og-image.png</url><title>OnchainProps Blog</title><link>https://onchainprops.xyz/blog.html</link></image>
+  <item>
+    <title>How to Check If an Onchain Prop Firm Is Still Paying Out (Red-Flag Checklist)</title>
+    <link>https://onchainprops.xyz/blog/how-to-check-onchain-prop-firm-payouts</link>
+    <guid isPermaLink="true">https://onchainprops.xyz/blog/how-to-check-onchain-prop-firm-payouts</guid>
+    <pubDate>Sun, 22 Nov 2026 00:00:00 GMT</pubDate>
+    <dc:creator>OnchainProps</dc:creator>
+    <category>Payout Safety</category>
+    <description>Onchain prop firms pay on public blockchains. Use this 30-second red-flag check, an AI agent, Grok, Dune and Discord to verify payouts before you buy a challenge.</description>
+    <content:encoded><![CDATA[<p>Onchain firms pay out on public blockchains, so you can check the real transfers instead of trusting screenshots or Trustpilot. Here is a fast way to do it before you pay for a challenge.</p>
+<h2 id="30-second-red-flag-check">30-Second Red-Flag Check</h2>
+<p>If any of these apply, slow down:</p>
+<ul><li><strong>No public payout wallet</strong>, or the firm won't share one when you ask</li><li><strong>Payouts slowed or stopped</strong> in the last 2 weeks</li><li><strong>Payouts go to only a few wallets</strong> instead of many different traders</li><li><strong>Treasury is undisclosed</strong> or looks too small to cover what is owed to traders</li><li><strong>A wave of complaints on X</strong> about delays, denials or bans in the last 7 days</li><li><strong>Anonymous team, inactive Discord, no audit</strong></li></ul>
+<h2 id="1-have-an-ai-agent-check-the-payout-wallet">1. Have an AI Agent Check the Payout Wallet</h2>
+<p>Find a payout wallet address. Connect your AI agent (Claude, Cursor, or any other client that supports MCP) to a blockchain data MCP server like Etherscan. Then ask in plain English:</p>
+<blockquote><p>Check the outgoing USDC transfers from 0x… over the last 30 days. How many unique wallets got paid, what's the total, and what were the biggest payouts?</p></blockquote>
+<p>The agent pulls the transactions and gives you a summary. Another option is to give the agent a free public RPC endpoint and let it query the wallet. Most chains offer free public RPCs, and the agent can find and use one itself.</p>
+<h2 id="2-ask-grok-what-traders-are-saying-on-x">2. Ask Grok What Traders Are Saying on X</h2>
+<p>Many traders are on X. When a firm blocks payouts, there is a high chance people post about it there first. Paste this into Grok:</p>
+<blockquote><p>Compile all X posts from the last 30 days about [firm name and X handle] and its payouts. Include posts mentioning payout delays, denials, account bans, rule changes, or successful payouts.</p></blockquote>
+<p>To check only the latest week, change "30 days" to "7 days."</p>
+<h2 id="3-check-dune-dashboards">3. Check Dune Dashboards</h2>
+<p>Search <a href="https://dune.com" target="_blank" rel="noopener noreferrer">dune.com</a> for the firm's name. Some of the top firms have dashboards that track payouts, volume and treasury flows over time.</p>
+<h2 id="4-check-onchain-props">4. Check Onchain Props</h2>
+<p>This is what we do. <a href="https://onchainprops.xyz/">Onchain Props</a> tracks onchain prop firms and checks the payout data for you. The <a href="https://onchainprops.xyz/#firms">comparison table</a> shows whether each firm's payouts are verified, whether its rules live onchain and how fast it pays. Firm pages with payout data link to the real transfers on Etherscan or the chain explorer, so you can confirm them yourself. Follow <a href="https://x.com/onchain_props" target="_blank" rel="noopener noreferrer">@onchain_props</a> for updates.</p>
+<h2 id="5-check-their-discord">5. Check Their Discord</h2>
+<p>The team should actively reply to users' questions. An empty Discord is a red flag.</p>
+<h2 id="use-common-sense-and-start-small">Use Common Sense, and Start Small</h2>
+<p>Test the payout process with a small account before buying a larger evaluation. For a fuller verification routine, see <a href="https://onchainprops.xyz/blog/are-onchain-prop-firms-legit">are onchain prop firms legit</a>, and compare firms in the <a href="https://onchainprops.xyz/#firms">live table</a>.</p>
+<p>Not financial advice. Always do your own research.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="how-can-i-check-if-an-onchain-prop-firm-is-paying-traders">How can I check if an onchain prop firm is paying traders?</h3>
+<p>Find its payout wallet and look at the outgoing transfers on a block explorer, or ask an AI agent connected to a blockchain data MCP server to summarize them. Check how many unique wallets were paid, the total, and the biggest payouts.</p>
+<h3 id="what-are-the-red-flags-that-a-prop-firm-has-stopped-paying">What are the red flags that a prop firm has stopped paying?</h3>
+<p>No public payout wallet, payouts that slowed or stopped in the last 2 weeks, payouts going to only a few wallets, an undisclosed or tiny treasury, and a wave of X complaints about delays, denials or bans.</p>
+<h3 id="can-an-ai-agent-verify-prop-firm-payouts">Can an AI agent verify prop firm payouts?</h3>
+<p>Yes. Connect Claude, Cursor or another MCP client to a blockchain data server such as Etherscan, or give it a public RPC endpoint, and ask it to summarize a wallet's outgoing transfers over the last 30 days.</p>
+<h3 id="how-do-i-find-out-what-traders-are-saying-about-a-prop-firm">How do I find out what traders are saying about a prop firm?</h3>
+<p>Ask Grok to compile X posts from the last 30 days (or 7 days) about the firm and its payouts, covering delays, denials, bans, rule changes and successful payouts.</p>
+<h3 id="where-can-i-see-which-onchain-prop-firms-have-verified-payouts">Where can I see which onchain prop firms have verified payouts?</h3>
+<p>On <a href="https://onchainprops.xyz/">Onchain Props</a>. The comparison table marks each firm's payout verification and onchain rules, and firm pages link to the underlying onchain payout data.</p>
+<h3 id="should-i-buy-a-large-challenge-right-away">Should I buy a large challenge right away?</h3>
+<p>No. Test the payout process with a small account first.</p>]]></content:encoded>
+  </item>
   <item>
     <title>Hyperliquid Trading Tips: 11 Rules From Founder Jeff Yan</title>
     <link>https://onchainprops.xyz/blog/hyperliquid-trading-tips-jeff-yan</link>

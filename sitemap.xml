@@ -137,6 +137,13 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- How to Check If an Onchain Prop Firm Is Still Paying Out (Red-Flag Checklist) -->
+  <url>
+    <loc>https://onchainprops.xyz/blog/how-to-check-onchain-prop-firm-payouts</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
   <!-- Hyperliquid Trading Tips: 11 Rules From Founder Jeff Yan -->
   <url>
     <loc>https://onchainprops.xyz/blog/hyperliquid-trading-tips-jeff-yan</loc>
