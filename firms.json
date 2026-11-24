@@ -22,6 +22,27 @@
       "pageHook": "onchain prop trading protocol priced from Hyperliquid market data, with every account rule and payout recorded in public smart contracts on Arbitrum."
     },
     {
+      "name": "Vanta Trading",
+      "country": "Cayman Islands",
+      "split": "Up to 100%",
+      "maxAccount": "$100,000",
+      "profitTarget": "10%",
+      "dailyDrawdown": "3% or 5%",
+      "maxDrawdown": "5%",
+      "website": "https://vantatrading.io/?ref=kamil",
+      "publicUrl": "https://vantatrading.io/",
+      "chain": "Bittensor / Hyperliquid",
+      "chainPhrase": "Bittensor Subnet 8 (Vanta Network), with prices from Hyperliquid",
+      "isAffiliate": true,
+      "token": "No",
+      "payoutSpeed": "Weekly",
+      "rulesOnchain": "No",
+      "bestSplit": "Yes",
+      "payoutsVerified": "Work in progress",
+      "lastVerified": "2026-11-21",
+      "pageHook": "prop firm from Taoshi, the team behind Bittensor Subnet 8, with a trader-selectable reward split and automatic promotion to larger Pro accounts."
+    },
+    {
       "name": "Propr",
       "country": "BVI",
       "split": "80%",
@@ -54,27 +75,6 @@
           ]
         }
       ]
-    },
-    {
-      "name": "Vanta Trading",
-      "country": "Cayman Islands",
-      "split": "Up to 100%",
-      "maxAccount": "$100,000",
-      "profitTarget": "10%",
-      "dailyDrawdown": "3% or 5%",
-      "maxDrawdown": "5%",
-      "website": "https://vantatrading.io/?ref=kamil",
-      "publicUrl": "https://vantatrading.io/",
-      "chain": "Bittensor / Hyperliquid",
-      "chainPhrase": "Bittensor Subnet 8 (Vanta Network), with prices from Hyperliquid",
-      "isAffiliate": true,
-      "token": "No",
-      "payoutSpeed": "Weekly",
-      "rulesOnchain": "No",
-      "bestSplit": "Yes",
-      "payoutsVerified": "Work in progress",
-      "lastVerified": "2026-11-21",
-      "pageHook": "prop firm from Taoshi, the team behind Bittensor Subnet 8, with a trader-selectable reward split and automatic promotion to larger Pro accounts."
     },
     {
       "name": "Iceberg",

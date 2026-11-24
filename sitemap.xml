@@ -23,16 +23,16 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Propr — firm review & evaluation details -->
+  <!-- Vanta Trading — firm review & evaluation details -->
   <url>
-    <loc>https://onchainprops.xyz/firms/propr</loc>
+    <loc>https://onchainprops.xyz/firms/vanta-trading</loc>
     <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Vanta Trading — firm review & evaluation details -->
+  <!-- Propr — firm review & evaluation details -->
   <url>
-    <loc>https://onchainprops.xyz/firms/vanta-trading</loc>
+    <loc>https://onchainprops.xyz/firms/propr</loc>
     <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
