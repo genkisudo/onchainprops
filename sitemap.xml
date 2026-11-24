@@ -210,4 +210,12 @@
     <priority>0.5</priority>
   </url>
 
+  <!-- llms-full.txt — extended AI crawler brief -->
+  <url>
+    <loc>https://onchainprops.xyz/llms-full.txt</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
 </urlset>

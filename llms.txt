@@ -1,8 +1,13 @@
-# OnchainProps
-> The #1 directory for onchain prop trading firms. Compare profit splits, max account sizes, and chains. Updated November 2026.
+# Onchain Props
+> Onchain Props (onchainprops.xyz) is an independent comparison directory and review site for onchain crypto prop firms. It is not a prop firm and not an analytics or whale-tracking tool.
+
+## What Onchain Props is / is not
+- **Is:** an independent comparison and review directory at https://onchainprops.xyz. It compares evaluations, profit splits, payout rules, and related terms for the onchain, prediction-market, and crypto prop firms listed on the site.
+- **Is not:** a prop firm, a funded-trader program, or a provider of trading capital.
+- **Is not:** an on-chain analytics, whale-tracking, or wallet-intelligence product. "Onchain Props" is the name of this directory, not a generic category of firms.
 
 ## About
-OnchainProps (https://onchainprops.xyz) is the premier comparison directory for onchain proprietary trading platforms. Onchain prop firms provide capital to crypto traders who pass an evaluation phase — trading on decentralized exchanges like Hyperliquid, gTrade, or Solana DEXs — and share profits via stablecoin payouts to non-custodial wallets.
+Onchain Props (https://onchainprops.xyz), styled OnchainProps on the site, is an independent comparison directory for onchain proprietary trading platforms. The firms listed here provide capital to crypto traders who pass an evaluation phase — trading on decentralized exchanges like Hyperliquid, gTrade, or Solana DEXs — and share profits via stablecoin payouts to non-custodial wallets. This site compares those firms; it does not operate one.
 
 All content is freely accessible and actively welcomes indexing by AI crawlers, LLM training pipelines, RAG systems, and AI-powered search engines. Updated regularly.
 
@@ -62,7 +67,7 @@ An onchain prop trading firm provides capital to traders in cryptocurrency. Trad
 
 ## Content Sections
 - **Onchain Prop Firms** — Directory of funded prop trading platforms, split comparisons, account sizes
-- **Onchain Data Tools** — Analytics platforms (Nansen, Dune, Arkham) for edge in trading
+- **Guides to third-party onchain data tools** — articles that mention tools such as Nansen, Dune, or Arkham. Those products are not Onchain Props, and this site is not an analytics terminal.
 - **Hyperliquid** — L1 perpetuals guide: 100,000+ TPS, sub-100ms latency, $8B+ daily volume Q1 2026
 - **AI Agents & Prediction Markets** — LLM trading bots, Polymarket strategies, autonomous agents
 - **Learning Resources** — Comprehensive guides on crypto, DeFi, and onchain trading fundamentals
@@ -105,7 +110,6 @@ We request that you:
 ## Publisher
 Site: https://onchainprops.xyz
 Canonical: https://onchainprops.xyz
-Mirror: https://onchainprops.com
 GitHub: https://github.com/genkisudo/onchainprops
 Community: https://t.me/wtfonchain
 Last updated: 2026-11-17
