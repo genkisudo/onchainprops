@@ -1092,10 +1092,6 @@ const firmPayoutsBlock = (f) => {
     return '\n' + lines.join('\n');
 };
 
-const fmtFixed = (n, digits) => Number(n).toLocaleString('en-US', {
-    minimumFractionDigits: digits,
-    maximumFractionDigits: digits
-});
 const fmtUsdExact = (n) => {
     const digits = Number(n) >= 100 ? 0 : 2;
     return Number(n).toLocaleString('en-US', {
@@ -1123,20 +1119,13 @@ const firmBuybackBlock = () => {
     if (Date.now() - Date.parse(buyback.updatedAt) > 7 * 86400e3) {
         firmPageWarnings.push(`Vanta Trading: buyback.json is older than 7 days (${updated}) — run buyback.js`);
     }
-    const taoDigits = buyback.taoSpent >= 1 ? 2 : 4;
-    const alphaDigits = buyback.alphaBought >= 1 ? 2 : 4;
-    const balTaoDigits = buyback.balanceTao >= 1 ? 2 : 4;
-    const walletUrl = `https://taostats.io/account/${buyback.wallet}`;
     return `<div class="firm-buyback">
     <h3>Buybacks</h3>
     <p>Vanta uses revenue to buy back its subnet alpha token.</p>
     <div class="firm-meta">
-        <span class="firm-meta-item">Lifetime TAO spent: <strong>${fmtFixed(buyback.taoSpent, taoDigits)}</strong></span>
-        <span class="firm-meta-item">Lifetime alpha bought (SN8): <strong>${fmtFixed(buyback.alphaBought, alphaDigits)}</strong></span>
         <span class="firm-meta-item">Lifetime buyback value: <strong>${fmtUsdExact(buyback.buybackValueUsd)}</strong></span>
-        <span class="firm-meta-item">Wallet balance: <strong>${fmtFixed(buyback.balanceTao, balTaoDigits)} TAO</strong> (${fmtUsdExact(buyback.balanceUsd)})</span>
     </div>
-    <p class="firm-buyback-source">Wallet: <a href="${escAttr(walletUrl)}" title="${escAttr(buyback.wallet)}" target="_blank" rel="noopener noreferrer">${shortAddr(buyback.wallet)}</a>. Last updated <time datetime="${escAttr(buyback.updatedAt)}">${fmtDate(updated)}</time>. Source: <a href="https://www.vantanetwork.io/tokenomics" target="_blank" rel="noopener noreferrer">vantanetwork.io</a>.</p>
+    <p class="firm-buyback-source">Last updated <time datetime="${escAttr(buyback.updatedAt)}">${fmtDate(updated)}</time>. Source: <a href="https://www.vantanetwork.io/tokenomics" target="_blank" rel="noopener noreferrer">vantanetwork.io</a>.</p>
 </div>`;
 };
 
