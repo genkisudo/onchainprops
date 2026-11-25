@@ -4,7 +4,7 @@
   <!-- Main page — single-page app, all content lives here -->
   <url>
     <loc>https://onchainprops.xyz/</loc>
-    <lastmod>2026-11-17</lastmod>
+    <lastmod>2026-11-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -200,6 +200,14 @@
     <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+
+  <!-- Privacy policy -->
+  <url>
+    <loc>https://onchainprops.xyz/privacy.html</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 
   <!-- llms.txt — for AI crawler discovery -->

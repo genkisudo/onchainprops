@@ -1,5 +1,11 @@
 [
   {
+    "question": "What is Onchain Props?",
+    "answerHtml": [
+      "Onchain Props (onchainprops.xyz) is an independent comparison directory for onchain crypto prop firms. It compares evaluations, profit splits and payout rules. It is not a prop firm and not an analytics or whale-tracking tool."
+    ]
+  },
+  {
     "question": "What is an onchain prop firm?",
     "answerHtml": [
       "An onchain prop trading firm provides capital to traders, typically in cryptocurrency, requiring them to pass an evaluation phase by trading on decentralized exchanges (DEXs) or specific onchain protocols rather than legacy brokers."
