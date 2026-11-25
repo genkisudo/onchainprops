@@ -10,6 +10,7 @@
  *                   noscript fallback tables, visible FAQ accordions
  *   - script.js   — AppState.propFirms / predictionMarketFirms / cryptoPropFirms arrays
  *   - llms.txt    — fully regenerated
+ *   - llms-full.txt — extended crawler file; same generated document as llms.txt
  *   - feed.xml    — RSS 2.0 feed of blog posts (full content), fully regenerated
  *   - sitemap.xml — fully regenerated (lastmod = firms.json lastUpdated)
  *   - blog.html   — article cards (from posts/*.md)
@@ -44,11 +45,26 @@ const BRAND = 'OnchainProps';
 const SITE = 'https://onchainprops.xyz';
 const ORG_ID = `${SITE}/#organization`;
 const WEBSITE_ID = `${SITE}/#website`;
+/** Spaced name used only in Organization/WebSite JSON-LD. Visible logo copy stays BRAND. */
+const SCHEMA_NAME = 'Onchain Props';
+const SCHEMA_ALTERNATE_NAMES = ['OnchainProps', 'onchainprops.xyz'];
+/** Identity line for Organization and WebSite descriptions. */
+const SCHEMA_DESCRIPTION = 'Onchain Props (onchainprops.xyz) is an independent comparison directory and review site for onchain crypto prop firms. It is not a prop firm and not an analytics tool.';
+/**
+ * Homepage meta, Open Graph, and Twitter descriptions.
+ * Kept to 160 characters so the identity line is what crawlers and previews show.
+ */
+const DIRECTORY_DESCRIPTION = 'Onchain Props is an independent comparison directory for onchain crypto prop firms, not a prop firm. Compare evaluations, profit splits and payout rules.';
+if (DIRECTORY_DESCRIPTION.length > 160) {
+    throw new Error(`Directory description is ${DIRECTORY_DESCRIPTION.length} characters (max 160)`);
+}
+const TWITTER_SITE = '@onchain_props';
 const SAME_AS = [
-    'https://github.com/genkisudo/onchainprops',
     'https://x.com/onchain_props',
-    'https://t.me/wtfonchain',
-    'https://onchainprops.com'
+    'https://dev.to/pankratovtoly',
+    'https://github.com/genkisudo/onchainprops',
+    'https://www.hypurr.co/ecosystem-projects/onchain-props',
+    'https://t.me/wtfonchain'
 ];
 
 // -----------------------------------------
@@ -87,7 +103,6 @@ const parseMoney = (s) => {
     return n * mult;
 };
 const fmtMoney = (n) => '$' + n.toLocaleString('en-US');
-const shortMoney = (n) => (n >= 1000 ? `$${n / 1000}K` : `$${n}`);
 const lcFirst = (s) => s.charAt(0).toLowerCase() + s.slice(1);
 const an = (n) => (String(n).startsWith('8') ? 'an' : 'a');
 const stripTags = (s) => s.replace(/<[^>]+>/g, '');
@@ -200,40 +215,14 @@ const resolvedFaqs = faqs.map((item) => ({
 // -----------------------------------------
 // index.html blocks
 // -----------------------------------------
-/** Compact split for summaries: "80% (90% add-on)" → "up to 90%"; "Up to 95%" → "up to 95%" */
-const splitShort = (f) => {
-    const p = parseSplit(f.split);
-    return p.upTo ? `up to ${p.max}%` : `${p.max}%`;
-};
-
-const metaDescription = () => {
-    const list = propFirms.slice(0, 5).map((f) =>
-        parseSplit(f.split) ? `${f.name} (${splitShort(f)})` : f.name);
-    return `Get funded with crypto capital. Compare evaluations, profit splits, and payout rules across the top decentralized and onchain proprietary trading platforms. Platforms include ${joinNames(list)}. Get funded trading crypto onchain.`;
-};
+const metaDescription = () => DIRECTORY_DESCRIPTION;
 
 const metaKeywords = () =>
     `onchain prop trading, crypto prop firms, decentralized prop trading, Hyperliquid prop firm, Solana prop firm, funded crypto trader, ${propFirms.map((f) => f.name).join(', ')}, profit split`;
 
-const ogDescription = () => {
-    const sentences = propFirms.slice(0, 4).map((f) => {
-        const split = parseSplit(f.split) ? `${splitShort(f)} split` : 'split TBC';
-        const money = parseMoney(f.maxAccount);
-        const size = money !== null ? `up to ${shortMoney(money)}` : 'with scaled accounts';
-        return `${f.name} offers ${split} ${size}.`;
-    });
-    return `Compare the best onchain prop trading firms. ${sentences.join(' ')} Find your next funded trading opportunity.`;
-};
+const ogDescription = () => DIRECTORY_DESCRIPTION;
 
-const twitterDescription = () => {
-    const items = propFirms.slice(0, 5).map((f) => {
-        const split = parseSplit(f.split) ? splitShort(f) : 'TBC';
-        const money = parseMoney(f.maxAccount);
-        const size = money !== null ? `up to ${shortMoney(money)}` : '(scaled accounts)';
-        return `${f.name} ${split} ${size}`;
-    });
-    return `Compare onchain prop firms: ${items.join(' · ')}.`;
-};
+const twitterDescription = () => DIRECTORY_DESCRIPTION;
 
 const itemDescription = (f) => {
     const split = parseSplit(f.split);
@@ -258,13 +247,14 @@ const organizationSchema = () => jsonLd({
     '@context': 'https://schema.org',
     '@type': 'Organization',
     '@id': ORG_ID,
-    name: BRAND,
+    name: SCHEMA_NAME,
+    alternateName: SCHEMA_ALTERNATE_NAMES,
     url: SITE,
     logo: {
         '@type': 'ImageObject',
         url: `${SITE}/og-image.png`
     },
-    description: 'Premier directory for onchain proprietary trading firms and DeFi trading tools',
+    description: SCHEMA_DESCRIPTION,
     sameAs: SAME_AS
 });
 
@@ -273,8 +263,9 @@ const websiteSchema = () => jsonLd({
     '@type': 'WebSite',
     '@id': WEBSITE_ID,
     url: SITE,
-    name: BRAND,
-    description: 'Compare top onchain prop trading firms and DeFi tools for crypto traders',
+    name: SCHEMA_NAME,
+    alternateName: SCHEMA_ALTERNATE_NAMES,
+    description: SCHEMA_DESCRIPTION,
     publisher: { '@id': ORG_ID },
     inLanguage: 'en'
 });
@@ -403,11 +394,16 @@ const llmsTxt = () => {
     const chainFact = `Hyperliquid (${hlLive.length} of ${propFirms.length} firms live` +
         (hlSoon.length ? `, with ${joinNames(hlSoon.map((f) => f.name))} adding support soon)` : ')');
 
-    return `# ${BRAND}
-> The #1 directory for onchain prop trading firms. Compare profit splits, max account sizes, and chains. Updated ${monthYear}.
+    return `# Onchain Props
+> Onchain Props (onchainprops.xyz) is an independent comparison directory and review site for onchain crypto prop firms. It is not a prop firm and not an analytics or whale-tracking tool.
+
+## What Onchain Props is / is not
+- **Is:** an independent comparison and review directory at https://onchainprops.xyz. It compares evaluations, profit splits, payout rules, and related terms for the onchain, prediction-market, and crypto prop firms listed on the site.
+- **Is not:** a prop firm, a funded-trader program, or a provider of trading capital.
+- **Is not:** an on-chain analytics, whale-tracking, or wallet-intelligence product. "Onchain Props" is the name of this directory, not a generic category of firms.
 
 ## About
-${BRAND} (${SITE}) is the premier comparison directory for onchain proprietary trading platforms. Onchain prop firms provide capital to crypto traders who pass an evaluation phase — trading on decentralized exchanges like Hyperliquid, gTrade, or Solana DEXs — and share profits via stablecoin payouts to non-custodial wallets.
+Onchain Props (${SITE}), styled OnchainProps on the site, is an independent comparison directory for onchain proprietary trading platforms. The firms listed here provide capital to crypto traders who pass an evaluation phase — trading on decentralized exchanges like Hyperliquid, gTrade, or Solana DEXs — and share profits via stablecoin payouts to non-custodial wallets. This site compares those firms; it does not operate one.
 
 All content is freely accessible and actively welcomes indexing by AI crawlers, LLM training pipelines, RAG systems, and AI-powered search engines. Updated regularly.
 
@@ -439,7 +435,7 @@ An onchain prop trading firm provides capital to traders in cryptocurrency. Trad
 
 ${postsLlmsSection()}## Content Sections
 - **Onchain Prop Firms** — Directory of funded prop trading platforms, split comparisons, account sizes
-- **Onchain Data Tools** — Analytics platforms (Nansen, Dune, Arkham) for edge in trading
+- **Guides to third-party onchain data tools** — articles that mention tools such as Nansen, Dune, or Arkham. Those products are not Onchain Props, and this site is not an analytics terminal.
 - **Hyperliquid** — L1 perpetuals guide: 100,000+ TPS, sub-100ms latency, $8B+ daily volume Q1 2026
 - **AI Agents & Prediction Markets** — LLM trading bots, Polymarket strategies, autonomous agents
 - **Learning Resources** — Comprehensive guides on crypto, DeFi, and onchain trading fundamentals
@@ -482,12 +478,18 @@ We request that you:
 ## Publisher
 Site: https://onchainprops.xyz
 Canonical: https://onchainprops.xyz
-Mirror: https://onchainprops.com
 GitHub: https://github.com/genkisudo/onchainprops
 Community: https://t.me/wtfonchain
 Last updated: ${lastUpdated}
 `;
 };
+
+/**
+ * /llms-full.txt. The draft's extended file is the identity opening plus
+ * the generated llms.txt body (tables and agent instructions), so this
+ * reuses llmsTxt() and cannot drift from it.
+ */
+const llmsFullTxt = () => llmsTxt();
 
 // -----------------------------------------
 // Blog (posts/*.md → blog/<slug>.html + blog.html cards)
@@ -646,7 +648,7 @@ const postPage = (p) => {
     <meta property="article:published_time" content="${p.date}">
     <meta property="article:modified_time" content="${p.updated}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@wtfonchain">
+    <meta name="twitter:site" content="${TWITTER_SITE}">
     <meta name="twitter:title" content="${escAttr(title)}">
     <meta name="twitter:description" content="${escAttr(p.description)}">
     <meta name="twitter:image" content="${SITE}/og-image.png">
@@ -879,6 +881,7 @@ ${url(`${SITE}/tools/glitch`, 'monthly', '0.7', 'Glitch — trading tool review'
 ${url('https://onchainprops.xyz/blog.html', 'weekly', '0.7', 'Blog — payout safety and onchain prop trading guides')}${postSitemapUrls()}
 ${url('https://onchainprops.xyz/resources', 'monthly', '0.6', 'Resources — tools & guides for onchain traders')}
 ${url('https://onchainprops.xyz/llms.txt', 'monthly', '0.5', 'llms.txt — for AI crawler discovery')}
+${url('https://onchainprops.xyz/llms-full.txt', 'monthly', '0.5', 'llms-full.txt — extended AI crawler brief')}
 
 </urlset>
 `;
@@ -1146,10 +1149,11 @@ for (const p of posts) write(`blog/${p.slug}.html`, postPage(p));
 if (!posts.length) fs.rmdirSync(path.join(ROOT, 'blog'));
 
 write('llms.txt', llmsTxt());
+write('llms-full.txt', llmsFullTxt());
 write('sitemap.xml', sitemapXml());
 write('feed.xml', feedXml());
 const firmPageCount = buildFirmPages();
 
 if (!/^\d+$/.test(KIT_FORM_ID)) console.warn('⚠ KIT_FORM_ID is not set in build.js — newsletter forms will not work until it is.');
 for (const w of firmPageWarnings) console.warn(`⚠ ${w}`);
-console.log(`Regenerated index.html, script.js, llms.txt, sitemap.xml, feed.xml, ${firmPageCount} firm pages from firms.json (${propFirms.length} firms, ${posts.length} posts, updated ${lastUpdated}).`);
+console.log(`Regenerated index.html, script.js, llms.txt, llms-full.txt, sitemap.xml, feed.xml, ${firmPageCount} firm pages from firms.json (${propFirms.length} firms, ${posts.length} posts, updated ${lastUpdated}).`);
