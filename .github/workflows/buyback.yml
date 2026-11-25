@@ -1,0 +1,56 @@
+# Daily: fetch Vanta Network buyback stats (buyback.js → buyback.json) and
+# regenerate the firm page that shows them. No API key: the endpoint is public,
+# but it sends no CORS header, so the browser cannot read it directly.
+# Triggers are schedule + manual only: never pull_request.
+name: Refresh Vanta buyback stats
+
+on:
+  schedule:
+    - cron: '45 6 * * *'  # Daily at 06:45 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: buyback
+  cancel-in-progress: false
+
+jobs:
+  buyback:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Fetch buyback stats
+        run: node buyback.js
+
+      - name: Regenerate site content
+        run: node build.js
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp buyback.json "$RUNNER_TEMP/buyback.json"
+          # main may move during the run (another workflow or push). Everything committed
+          # here is generated, so instead of merging: take the latest main, put this run's
+          # buyback.json on top, rebuild, and push. Retry if main moves again.
+          # buyback.js keeps the previous file when the API is down, so a failed fetch
+          # leaves this copy unchanged and the commit step finds nothing to push.
+          for i in 1 2 3; do
+            git fetch -q origin main
+            git reset -q --hard origin/main
+            cp "$RUNNER_TEMP/buyback.json" buyback.json
+            node build.js
+            if git diff --quiet; then echo "Nothing changed."; exit 0; fi
+            git add buyback.json index.html script.js llms.txt llms-full.txt sitemap.xml feed.xml firms blog.html blog
+            git commit -q -m "chore: refresh Vanta buyback stats [skip ci]"
+            git push -q origin HEAD:main && exit 0
+            sleep $((i * 10))
+          done
+          exit 1
