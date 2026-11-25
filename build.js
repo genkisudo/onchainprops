@@ -21,6 +21,8 @@
  *                   (how-to-check-onchain-prop-firm-payouts also gets HowTo JSON-LD)
  *   - firms/*.html — stats header + "Data from <explorer>" source line, meta/og descriptions
  *                   (title, review prose and FAQ JSON-LD stay hand-written)
+ *   - {key}.txt — IndexNow key file, copied from _indexnow/key.txt. The key is
+ *                 public. This script does not notify IndexNow.
  *
  * Generated regions are delimited by marker comments:
  *   HTML:  <!-- GEN:BEGIN key --> ... <!-- GEN:END key -->
@@ -1114,6 +1116,22 @@ const titleDrift = (f, title) => {
     return out;
 };
 
+/**
+ * Copy the public IndexNow key to the site root as `{key}.txt` containing
+ * only the key. `_indexnow/` is not published: GitHub Pages runs Jekyll for
+ * this repo and skips underscore paths (and dot paths such as `.well-known`).
+ * Does not call IndexNow — that happens after Pages is live, in indexnow.js.
+ */
+const publishIndexNowKey = () => {
+    const source = path.join(ROOT, '_indexnow', 'key.txt');
+    if (!fs.existsSync(source)) throw new Error('_indexnow/key.txt is missing');
+    const key = fs.readFileSync(source, 'utf8').trim();
+    if (!/^[A-Za-z0-9-]{8,128}$/.test(key)) {
+        throw new Error('IndexNow key in _indexnow/key.txt must be 8–128 characters from [A-Za-z0-9-]');
+    }
+    write(`${key}.txt`, key);
+};
+
 const firmPageWarnings = [];
 const buildFirmPages = () => {
     let n = 0;
@@ -1218,6 +1236,7 @@ write('llms-full.txt', llmsFullTxt());
 write('sitemap.xml', sitemapXml());
 write('feed.xml', feedXml());
 const firmPageCount = buildFirmPages();
+publishIndexNowKey();
 
 if (!/^\d+$/.test(KIT_FORM_ID)) console.warn('⚠ KIT_FORM_ID is not set in build.js — newsletter forms will not work until it is.');
 for (const w of firmPageWarnings) console.warn(`⚠ ${w}`);

@@ -1,0 +1,47 @@
+# Notify IndexNow after GitHub Pages is serving this deploy.
+#
+# This repo publishes main with the built-in Pages workflow (build_type
+# legacy). That workflow creates a github-pages deployment and marks it
+# success only after the deploy job finishes. `page_build` is not used:
+# GitHub runs that event when the publishing branch is pushed, which is
+# before the new files are being served, and its GITHUB_SHA is just the
+# default-branch tip.
+#
+# This file does not run in the jobs that commit generated files to main
+# (build.yml, payouts.yml, balance.yml). Those pushes are what cause Pages
+# to deploy; the ping happens on the deployment_status that follows.
+#
+# The key is the public file at /{key}.txt. It is not a GitHub secret.
+name: Ping IndexNow
+
+on:
+  deployment_status:
+
+permissions:
+  contents: read
+  deployments: read
+
+concurrency:
+  group: indexnow-${{ github.event.deployment.sha }}
+  cancel-in-progress: false
+
+jobs:
+  ping:
+    if: github.event.deployment.environment == 'github-pages' && github.event.deployment_status.state == 'success' && github.event.deployment.ref == 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.deployment.sha }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Submit changed URLs once they are live
+        env:
+          DEPLOY_SHA: ${{ github.event.deployment.sha }}
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node indexnow.js

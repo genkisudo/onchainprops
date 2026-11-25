@@ -47,8 +47,11 @@ jobs:
             git reset -q --hard origin/main
             cp "$RUNNER_TEMP/payouts.json" payouts.json
             node build.js
-            if git diff --quiet; then echo "Nothing changed."; exit 0; fi
-            git add payouts.json index.html script.js llms.txt sitemap.xml firms blog.html blog
+            # Stage before the quiet check so a new untracked {key}.txt is committed.
+            # This job does not ping IndexNow.
+            key=$(tr -d '[:space:]' < _indexnow/key.txt)
+            git add payouts.json index.html script.js llms.txt sitemap.xml firms blog.html blog "${key}.txt"
+            if git diff --cached --quiet; then echo "Nothing changed."; exit 0; fi
             git commit -q -m "chore: refresh onchain payout stats [skip ci]"
             git push -q origin HEAD:main && exit 0
             sleep $((i * 10))
