@@ -12,9 +12,13 @@
  *   - llms.txt    — fully regenerated
  *   - llms-full.txt — extended crawler file; same generated document as llms.txt
  *   - feed.xml    — RSS 2.0 feed of blog posts (full content), fully regenerated
- *   - sitemap.xml — fully regenerated (lastmod = firms.json lastUpdated)
+ *   - sitemap.xml — fully regenerated. Shared lastmod and the homepage
+ *                   CollectionPage dateModified use the latest content date
+ *                   (firms.json lastUpdated, firm lastVerified, post dates,
+ *                   payouts.json generatedAt). Each post keeps its own lastmod.
  *   - blog.html   — article cards (from posts/*.md)
  *   - blog/*.html — one article page per posts/*.md, with BlogPosting/FAQPage/Breadcrumb JSON-LD
+ *                   (how-to-check-onchain-prop-firm-payouts also gets HowTo JSON-LD)
  *   - firms/*.html — stats header + "Data from <explorer>" source line, meta/og descriptions
  *                   (title, review prose and FAQ JSON-LD stay hand-written)
  *
@@ -278,7 +282,7 @@ const collectionSchema = () => jsonLd({
     description: `Complete comparison of the best onchain proprietary trading platforms. Ranked by profit split percentage and maximum account size. Includes ${joinNames(propFirms.map((f) => f.name))}.`,
     url: SITE,
     datePublished: '2025-06-15',
-    dateModified: lastUpdated,
+    dateModified: siteContentDate,
     isPartOf: { '@id': WEBSITE_ID },
     author: { '@id': ORG_ID },
     publisher: { '@id': ORG_ID },
@@ -555,6 +559,27 @@ const mdBlocks = (body) => {
     return out.join('\n');
 };
 
+/**
+ * Numbered "## 1. Title" sections, in document order. Name is the heading
+ * as written. Text is the section body with markup removed, so it matches
+ * the rendered step and is not rewritten.
+ * @param {string} body
+ * @returns {{position: number, name: string, text: string}[]}
+ */
+const howToSteps = (body) => {
+    const steps = [];
+    for (const block of body.split(/\n(?=## )/)) {
+        const h = /^## (\d+)\.\s+(.+)\n([\s\S]*)$/.exec(block);
+        if (!h) continue;
+        steps.push({
+            position: Number(h[1]),
+            name: `${h[1]}. ${h[2].trim()}`,
+            text: stripTags(mdBlocks(h[3].trim())).replace(/\s+/g, ' ').trim()
+        });
+    }
+    return steps;
+};
+
 /** Reads posts/*.md (frontmatter + markdown), newest first. */
 const loadPosts = () => {
     const dir = path.join(ROOT, 'posts');
@@ -582,12 +607,30 @@ const loadPosts = () => {
         }
         return {
             ...meta, slug, faq, html: mdBlocks(body),
+            steps: howToSteps(body),
             updated: meta.updated ?? meta.date,
             minutes: Math.max(1, Math.round(body.split(/\s+/).length / 200))
         };
     }).sort((a, b) => b.date.localeCompare(a.date));
 };
 const posts = loadPosts();
+
+const isoDay = (value) => {
+    const day = String(value ?? '').slice(0, 10);
+    return /^\d{4}-\d{2}-\d{2}$/.test(day) ? day : null;
+};
+/**
+ * Newest YYYY-MM-DD the build already has: directory lastUpdated, each
+ * firm's lastVerified, each post's published/updated date, and the payout
+ * snapshot date. Homepage CollectionPage dateModified and the matching
+ * sitemap lastmod use this instead of the stale firms.json lastUpdated.
+ */
+const siteContentDate = [
+    lastUpdated,
+    payouts?.generatedAt,
+    ...[...propFirms, ...predictionMarketFirms, ...cryptoPropFirms].map((f) => f.lastVerified),
+    ...posts.flatMap((p) => [p.date, p.updated])
+].map(isoDay).filter(Boolean).sort().pop();
 
 const blogCards = () => posts.map((p) => `<a href="blog/${p.slug}" class="article-card blog-card" data-category="${p.category}">
     <span class="card-tag">${CATEGORIES[p.category]}</span>
@@ -626,6 +669,23 @@ const postPage = (p) => {
         '@type': 'FAQPage',
         mainEntity: p.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }))
     });
+    // Numbered checklist in this post. Steps are read from the markdown headings,
+    // so the HowTo stays identical to the article.
+    if (p.slug === 'how-to-check-onchain-prop-firm-payouts') {
+        if (!p.steps.length) throw new Error(`${p.slug}: numbered steps required for HowTo JSON-LD`);
+        schemas.push({
+            '@context': 'https://schema.org',
+            '@type': 'HowTo',
+            name: p.title,
+            description: p.description,
+            step: p.steps.map((s) => ({
+                '@type': 'HowToStep',
+                position: s.position,
+                name: s.name,
+                text: s.text
+            }))
+        });
+    }
     const ld = schemas.map((s) => `    <script type="application/ld+json">\n${jsonLd(s).replace(/^/gm, '    ')}\n    </script>`).join('\n');
     const more = posts.filter((o) => o.slug !== p.slug).slice(0, 2);
     return `<!DOCTYPE html>
@@ -772,7 +832,7 @@ ${more.map((o) => `                    <a href="${o.slug}" class="article-card b
                 <a href="../blog.html">Blog</a>
                 <a href="../resources.html">Resources</a>
                 <a href="../#faq">FAQ</a>
-                <a href="#">Privacy Policy</a>
+                <a href="../privacy.html">Privacy Policy</a>
             </div>
             <div class="footer-socials">
                 <a href="https://github.com/genkisudo/onchainprops" target="_blank" rel="noopener noreferrer"
@@ -860,11 +920,15 @@ ${posts.map((p) => `  <item>
 // sitemap.xml (fully generated)
 // -----------------------------------------
 const sitemapXml = () => {
-    const url = (loc, changefreq, priority, comment) => `
+    // Default lastmod stays firms.json lastUpdated. Pass siteContentDate only
+    // where JSON-LD dateModified uses that same date (the homepage), and for
+    // privacy.html which has no separate content date. Post <lastmod> stays
+    // p.updated so it matches each BlogPosting dateModified.
+    const url = (loc, changefreq, priority, comment, lastmod = lastUpdated) => `
   <!-- ${comment} -->
   <url>
     <loc>${loc}</loc>
-    <lastmod>${lastUpdated}</lastmod>
+    <lastmod>${lastmod}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
   </url>`;
@@ -875,11 +939,12 @@ const sitemapXml = () => {
         .join('');
     return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${url('https://onchainprops.xyz/', 'weekly', '1.0', 'Main page — single-page app, all content lives here')}
+${url('https://onchainprops.xyz/', 'weekly', '1.0', 'Main page — single-page app, all content lives here', siteContentDate)}
 ${url('https://onchainprops.xyz/compare.html', 'weekly', '0.8', 'Compare Firms — long-form comparison article')}${firmUrls}
 ${url(`${SITE}/tools/glitch`, 'monthly', '0.7', 'Glitch — trading tool review')}
 ${url('https://onchainprops.xyz/blog.html', 'weekly', '0.7', 'Blog — payout safety and onchain prop trading guides')}${postSitemapUrls()}
 ${url('https://onchainprops.xyz/resources', 'monthly', '0.6', 'Resources — tools & guides for onchain traders')}
+${url('https://onchainprops.xyz/privacy.html', 'yearly', '0.3', 'Privacy policy', siteContentDate)}
 ${url('https://onchainprops.xyz/llms.txt', 'monthly', '0.5', 'llms.txt — for AI crawler discovery')}
 ${url('https://onchainprops.xyz/llms-full.txt', 'monthly', '0.5', 'llms-full.txt — extended AI crawler brief')}
 
