@@ -19,7 +19,8 @@
  *   - blog.html   — article cards (from posts/*.md)
  *   - blog/*.html — one article page per posts/*.md, with BlogPosting/FAQPage/Breadcrumb JSON-LD
  *                   (how-to-check-onchain-prop-firm-payouts also gets HowTo JSON-LD)
- *   - firms/*.html — stats header + "Data from <explorer>" source line, meta/og descriptions
+ *   - firms/*.html — stats header + "Data from <explorer>" source line, meta/og descriptions,
+ *                   and (Vanta Trading) the buyback block from buyback.json
  *                   (title, review prose and FAQ JSON-LD stay hand-written)
  *
  * Generated regions are delimited by marker comments:
@@ -40,6 +41,18 @@ const write = (f, s) => fs.writeFileSync(path.join(ROOT, f), s);
 const { lastUpdated, propFirms, predictionMarketFirms, cryptoPropFirms } = JSON.parse(read('firms.json'));
 // Onchain payout stats fetched by payouts.js (optional: the build works without it)
 const payouts = fs.existsSync(path.join(ROOT, 'payouts.json')) ? JSON.parse(read('payouts.json')) : null;
+// Vanta buyback stats fetched by buyback.js (optional: the section is hidden without it)
+const { isValidBuyback } = require('./buyback');
+const loadBuyback = () => {
+    if (!fs.existsSync(path.join(ROOT, 'buyback.json'))) return null;
+    try {
+        const data = JSON.parse(read('buyback.json'));
+        return isValidBuyback(data) ? data : { invalid: true };
+    } catch (e) {
+        return { invalid: true, error: e.message };
+    }
+};
+const buyback = loadBuyback();
 const faqs = JSON.parse(read('faq.json'));
 
 // -----------------------------------------
@@ -1077,6 +1090,54 @@ const firmPayoutsBlock = (f) => {
     return '\n' + lines.join('\n');
 };
 
+const fmtFixed = (n, digits) => Number(n).toLocaleString('en-US', {
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits
+});
+const fmtUsdExact = (n) => {
+    const digits = Number(n) >= 100 ? 0 : 2;
+    return Number(n).toLocaleString('en-US', {
+        style: 'currency', currency: 'USD',
+        minimumFractionDigits: digits, maximumFractionDigits: digits
+    });
+};
+
+/**
+ * Vanta Trading buyback stats from buyback.json. Empty when the file is
+ * missing or no longer matches the fields the page shows, so the section
+ * is hidden instead of rendering a stale or broken block.
+ * @returns {string}
+ */
+const firmBuybackBlock = () => {
+    if (!buyback) {
+        firmPageWarnings.push('buyback.json not found — Vanta buyback section hidden');
+        return '';
+    }
+    if (buyback.invalid) {
+        firmPageWarnings.push(`buyback.json is invalid${buyback.error ? ` (${buyback.error})` : ''} — Vanta buyback section hidden`);
+        return '';
+    }
+    const updated = buyback.updatedAt.slice(0, 10);
+    if (Date.now() - Date.parse(buyback.updatedAt) > 7 * 86400e3) {
+        firmPageWarnings.push(`Vanta Trading: buyback.json is older than 7 days (${updated}) — run buyback.js`);
+    }
+    const taoDigits = buyback.taoSpent >= 1 ? 2 : 4;
+    const alphaDigits = buyback.alphaBought >= 1 ? 2 : 4;
+    const balTaoDigits = buyback.balanceTao >= 1 ? 2 : 4;
+    const walletUrl = `https://taostats.io/account/${buyback.wallet}`;
+    return `<div class="firm-buyback">
+    <h3>Buybacks</h3>
+    <p>Vanta uses revenue to buy back its subnet alpha token.</p>
+    <div class="firm-meta">
+        <span class="firm-meta-item">Lifetime TAO spent: <strong>${fmtFixed(buyback.taoSpent, taoDigits)}</strong></span>
+        <span class="firm-meta-item">Lifetime alpha bought (SN8): <strong>${fmtFixed(buyback.alphaBought, alphaDigits)}</strong></span>
+        <span class="firm-meta-item">Lifetime buyback value: <strong>${fmtUsdExact(buyback.buybackValueUsd)}</strong></span>
+        <span class="firm-meta-item">Wallet balance: <strong>${fmtFixed(buyback.balanceTao, balTaoDigits)} TAO</strong> (${fmtUsdExact(buyback.balanceUsd)})</span>
+    </div>
+    <p class="firm-buyback-source">Wallet: <a href="${escAttr(walletUrl)}" title="${escAttr(buyback.wallet)}" target="_blank" rel="noopener noreferrer">${shortAddr(buyback.wallet)}</a>. Last updated <time datetime="${escAttr(buyback.updatedAt)}">${fmtDate(updated)}</time>. Source: <a href="https://www.vantanetwork.io/tokenomics" target="_blank" rel="noopener noreferrer">vantanetwork.io</a>.</p>
+</div>`;
+};
+
 /** "<Name> review: <pageHook> <facts from firms.json>" */
 const firmDescription = (f) => {
     const split = /tbc/i.test(f.split) ? 'Profit split TBC'
@@ -1136,8 +1197,11 @@ const buildFirmPages = () => {
                     { '@type': 'ListItem', position: 3, name: `${f.name} Review`, item: `${SITE}/${p}` }
                 ]
             }));
+            if (f.name === 'Vanta Trading') page = inject(page, 'firm-buyback', firmBuybackBlock());
         } catch (e) {
-            throw new Error(`${file}: ${e.message} — add the firm-description, firm-og-description, firm-stats and firm-breadcrumb GEN markers (copy them from firms/hypernova.html)`);
+            const markers = 'firm-description, firm-og-description, firm-stats and firm-breadcrumb'
+                + (f.name === 'Vanta Trading' ? ' and firm-buyback' : '');
+            throw new Error(`${file}: ${e.message} — add the ${markers} GEN markers (copy them from firms/hypernova.html)`);
         }
         const title = /<title>([^<]*)<\/title>/.exec(page)?.[1] ?? '';
         for (const w of titleDrift(f, title)) firmPageWarnings.push(`${file} <title>: ${w}`);
