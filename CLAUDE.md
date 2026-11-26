@@ -41,6 +41,7 @@ CI (`.github/workflows/build.yml`) also runs this on every push to `main` and co
   - Everything else on the page (`<title>`, review prose, FAQ JSON-LD) is hand-written. `node build.js` warns when a % or $ figure in a `<title>` no longer matches the data
   - **When you re-check a firm's terms, update its `lastVerified` (YYYY-MM-DD) in firms.json.** (internal record; not displayed)
   - A new firm page must contain all four marker pairs (copy them from `firms/hypernova.html`), or the build fails
+- **Hypernova live stats** (`firms/hypernova.html`, GEN block `firm-hypernova-stats`): `hypernova.js` fetches Hypernova's public stats history into `hypernova.json` (last 30 complete UTC days + lifetime totals; keeps the last good file if the API fails), and `build.js` renders it as four stat tiles with inline-SVG charts. `.github/workflows/hypernova.yml` refreshes it daily at 06:30 UTC. Styles are `.hn-*` in `style.css`. The Hypernova page's "lifetime payouts" sentence (`firm-hypernova-lifetime`) and the figure in `compare.html` (inline `hypernova-lifetime` marker) come from the same file, so never hand-edit them. Hypernova only
 - Not generated (hand-maintained): `compare.html` article prose, the review prose in `firms/` pages, `README.md` — keep these consistent with `firms.json` when data changes
 
 ### 1. **PubSub Store (Reactive State)**

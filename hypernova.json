@@ -1,0 +1,366 @@
+{
+  "updatedAt": "2026-11-26T17:33:51.811Z",
+  "days": [
+    {
+      "date": "2026-10-27",
+      "payoutUsd": 39196.78,
+      "payoutCount": 26,
+      "fundedAumUsd": 8754505.14,
+      "fundedTraders": 106,
+      "signups": 10025,
+      "paidUsers": 1363,
+      "fundedUsers": 405,
+      "revenueUsd": 15760
+    },
+    {
+      "date": "2026-10-28",
+      "payoutUsd": 29072,
+      "payoutCount": 24,
+      "fundedAumUsd": 8322144.18,
+      "fundedTraders": 110,
+      "signups": 10156,
+      "paidUsers": 1373,
+      "fundedUsers": 411,
+      "revenueUsd": 34021
+    },
+    {
+      "date": "2026-10-29",
+      "payoutUsd": 39982.77,
+      "payoutCount": 50,
+      "fundedAumUsd": 11120060.38,
+      "fundedTraders": 133,
+      "signups": 10226,
+      "paidUsers": 1387,
+      "fundedUsers": 424,
+      "revenueUsd": 44048.5
+    },
+    {
+      "date": "2026-10-30",
+      "payoutUsd": 55954.22,
+      "payoutCount": 35,
+      "fundedAumUsd": 9595005.55,
+      "fundedTraders": 121,
+      "signups": 10301,
+      "paidUsers": 1398,
+      "fundedUsers": 427,
+      "revenueUsd": 52343.5
+    },
+    {
+      "date": "2026-10-31",
+      "payoutUsd": 28964.61,
+      "payoutCount": 14,
+      "fundedAumUsd": 7934918.09,
+      "fundedTraders": 103,
+      "signups": 10364,
+      "paidUsers": 1410,
+      "fundedUsers": 429,
+      "revenueUsd": 22852.5
+    },
+    {
+      "date": "2026-11-01",
+      "payoutUsd": 35687.61,
+      "payoutCount": 20,
+      "fundedAumUsd": 8038003.95,
+      "fundedTraders": 102,
+      "signups": 10429,
+      "paidUsers": 1422,
+      "fundedUsers": 431,
+      "revenueUsd": 21364.25
+    },
+    {
+      "date": "2026-11-02",
+      "payoutUsd": 52646.03,
+      "payoutCount": 32,
+      "fundedAumUsd": 8681170.19,
+      "fundedTraders": 112,
+      "signups": 10526,
+      "paidUsers": 1444,
+      "fundedUsers": 437,
+      "revenueUsd": 61346.75
+    },
+    {
+      "date": "2026-11-03",
+      "payoutUsd": 43995.01,
+      "payoutCount": 48,
+      "fundedAumUsd": 8629293.78,
+      "fundedTraders": 114,
+      "signups": 10596,
+      "paidUsers": 1457,
+      "fundedUsers": 445,
+      "revenueUsd": 43106.75
+    },
+    {
+      "date": "2026-11-04",
+      "payoutUsd": 93874.49,
+      "payoutCount": 62,
+      "fundedAumUsd": 11213423.93,
+      "fundedTraders": 136,
+      "signups": 10726,
+      "paidUsers": 1483,
+      "fundedUsers": 457,
+      "revenueUsd": 67330.03
+    },
+    {
+      "date": "2026-11-05",
+      "payoutUsd": 96409.24,
+      "payoutCount": 75,
+      "fundedAumUsd": 12125077.11,
+      "fundedTraders": 144,
+      "signups": 10872,
+      "paidUsers": 1511,
+      "fundedUsers": 466,
+      "revenueUsd": 94610.5
+    },
+    {
+      "date": "2026-11-06",
+      "payoutUsd": 69966.21,
+      "payoutCount": 46,
+      "fundedAumUsd": 10100414.33,
+      "fundedTraders": 125,
+      "signups": 10989,
+      "paidUsers": 1540,
+      "fundedUsers": 474,
+      "revenueUsd": 48170.25
+    },
+    {
+      "date": "2026-11-07",
+      "payoutUsd": 27692.32,
+      "payoutCount": 20,
+      "fundedAumUsd": 8315500.12,
+      "fundedTraders": 116,
+      "signups": 11077,
+      "paidUsers": 1561,
+      "fundedUsers": 478,
+      "revenueUsd": 18638.63
+    },
+    {
+      "date": "2026-11-08",
+      "payoutUsd": 59795.17,
+      "payoutCount": 29,
+      "fundedAumUsd": 8835849.61,
+      "fundedTraders": 115,
+      "signups": 11167,
+      "paidUsers": 1584,
+      "fundedUsers": 481,
+      "revenueUsd": 31394.75
+    },
+    {
+      "date": "2026-11-09",
+      "payoutUsd": 62625.9,
+      "payoutCount": 62,
+      "fundedAumUsd": 10233645.3,
+      "fundedTraders": 131,
+      "signups": 11245,
+      "paidUsers": 1614,
+      "fundedUsers": 492,
+      "revenueUsd": 79619.75
+    },
+    {
+      "date": "2026-11-10",
+      "payoutUsd": 43579.17,
+      "payoutCount": 63,
+      "fundedAumUsd": 9956851.26,
+      "fundedTraders": 127,
+      "signups": 11350,
+      "paidUsers": 1633,
+      "fundedUsers": 498,
+      "revenueUsd": 61457
+    },
+    {
+      "date": "2026-11-11",
+      "payoutUsd": 33437.54,
+      "payoutCount": 56,
+      "fundedAumUsd": 8569041.4,
+      "fundedTraders": 127,
+      "signups": 11632,
+      "paidUsers": 1652,
+      "fundedUsers": 509,
+      "revenueUsd": 57221.25
+    },
+    {
+      "date": "2026-11-12",
+      "payoutUsd": 82502.52,
+      "payoutCount": 81,
+      "fundedAumUsd": 9864638.97,
+      "fundedTraders": 136,
+      "signups": 11808,
+      "paidUsers": 1675,
+      "fundedUsers": 519,
+      "revenueUsd": 41656.5
+    },
+    {
+      "date": "2026-11-13",
+      "payoutUsd": 63496.7,
+      "payoutCount": 65,
+      "fundedAumUsd": 10972895.22,
+      "fundedTraders": 147,
+      "signups": 11928,
+      "paidUsers": 1686,
+      "fundedUsers": 534,
+      "revenueUsd": 74768
+    },
+    {
+      "date": "2026-11-14",
+      "payoutUsd": 71843.02,
+      "payoutCount": 53,
+      "fundedAumUsd": 8650870.41,
+      "fundedTraders": 134,
+      "signups": 12024,
+      "paidUsers": 1701,
+      "fundedUsers": 539,
+      "revenueUsd": 44506.75
+    },
+    {
+      "date": "2026-11-15",
+      "payoutUsd": 27399.91,
+      "payoutCount": 29,
+      "fundedAumUsd": 8354980.72,
+      "fundedTraders": 134,
+      "signups": 12104,
+      "paidUsers": 1713,
+      "fundedUsers": 543,
+      "revenueUsd": 48445
+    },
+    {
+      "date": "2026-11-16",
+      "payoutUsd": 70051.09,
+      "payoutCount": 59,
+      "fundedAumUsd": 9175148.69,
+      "fundedTraders": 143,
+      "signups": 12249,
+      "paidUsers": 1737,
+      "fundedUsers": 554,
+      "revenueUsd": 64259.25
+    },
+    {
+      "date": "2026-11-17",
+      "payoutUsd": 67377.69,
+      "payoutCount": 63,
+      "fundedAumUsd": 9995186.21,
+      "fundedTraders": 137,
+      "signups": 12385,
+      "paidUsers": 1756,
+      "fundedUsers": 562,
+      "revenueUsd": 79017.25
+    },
+    {
+      "date": "2026-11-18",
+      "payoutUsd": 71070.82,
+      "payoutCount": 67,
+      "fundedAumUsd": 9049587.44,
+      "fundedTraders": 132,
+      "signups": 12483,
+      "paidUsers": 1782,
+      "fundedUsers": 564,
+      "revenueUsd": 53249
+    },
+    {
+      "date": "2026-11-19",
+      "payoutUsd": 68312.16,
+      "payoutCount": 73,
+      "fundedAumUsd": 9676229.16,
+      "fundedTraders": 136,
+      "signups": 12574,
+      "paidUsers": 1803,
+      "fundedUsers": 571,
+      "revenueUsd": 77078.75
+    },
+    {
+      "date": "2026-11-20",
+      "payoutUsd": 119562.5,
+      "payoutCount": 103,
+      "fundedAumUsd": 10273700.45,
+      "fundedTraders": 143,
+      "signups": 12664,
+      "paidUsers": 1823,
+      "fundedUsers": 583,
+      "revenueUsd": 82038.5
+    },
+    {
+      "date": "2026-11-21",
+      "payoutUsd": 56633.2,
+      "payoutCount": 57,
+      "fundedAumUsd": 9193860.38,
+      "fundedTraders": 141,
+      "signups": 12765,
+      "paidUsers": 1835,
+      "fundedUsers": 597,
+      "revenueUsd": 48585.25
+    },
+    {
+      "date": "2026-11-22",
+      "payoutUsd": 42417.84,
+      "payoutCount": 41,
+      "fundedAumUsd": 9880365.1,
+      "fundedTraders": 145,
+      "signups": 12845,
+      "paidUsers": 1846,
+      "fundedUsers": 603,
+      "revenueUsd": 21646.75
+    },
+    {
+      "date": "2026-11-23",
+      "payoutUsd": 83155.37,
+      "payoutCount": 70,
+      "fundedAumUsd": 11945839.94,
+      "fundedTraders": 170,
+      "signups": 12929,
+      "paidUsers": 1863,
+      "fundedUsers": 625,
+      "revenueUsd": 86695.25
+    },
+    {
+      "date": "2026-11-24",
+      "payoutUsd": 39020.17,
+      "payoutCount": 46,
+      "fundedAumUsd": 10632137.35,
+      "fundedTraders": 161,
+      "signups": 13006,
+      "paidUsers": 1886,
+      "fundedUsers": 632,
+      "revenueUsd": 75818.25
+    },
+    {
+      "date": "2026-11-25",
+      "payoutUsd": 62377.06,
+      "payoutCount": 64,
+      "fundedAumUsd": 11353294.26,
+      "fundedTraders": 167,
+      "signups": 13099,
+      "paidUsers": 1903,
+      "fundedUsers": 641,
+      "revenueUsd": 107054.25
+    }
+  ],
+  "lifetime": {
+    "payoutsUsd": 3747618.56,
+    "revenueUsd": 4097934.15,
+    "signups": 13099,
+    "paidUsers": 1903,
+    "fundedUsers": 641,
+    "payoutRecipients": 432
+  },
+  "passRatePct": 20.8,
+  "topMarkets": [
+    {
+      "symbol": "BTC",
+      "sharePct": 29.3
+    },
+    {
+      "symbol": "ETH",
+      "sharePct": 17.9
+    },
+    {
+      "symbol": "XYZ100",
+      "sharePct": 13.7
+    },
+    {
+      "symbol": "CL",
+      "sharePct": 11.3
+    },
+    {
+      "symbol": "GOLD",
+      "sharePct": 10.8
+    }
+  ]
+}

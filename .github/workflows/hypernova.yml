@@ -1,0 +1,56 @@
+# Daily: fetch Hypernova's public stats (hypernova.js → hypernova.json) and
+# regenerate the Hypernova firm page that shows the last 30 days. No API key:
+# the endpoint is public, but the site's CSP stops the browser calling it, so
+# it is fetched here and rendered into static HTML.
+# Triggers are schedule + manual only: never pull_request.
+name: Refresh Hypernova stats
+
+on:
+  schedule:
+    - cron: '30 6 * * *'  # Daily at 06:30 UTC (after the UTC day has closed)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hypernova
+  cancel-in-progress: false
+
+jobs:
+  hypernova:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Fetch Hypernova stats
+        run: node hypernova.js
+
+      - name: Regenerate site content
+        run: node build.js
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp hypernova.json "$RUNNER_TEMP/hypernova.json"
+          # main may move during the run. Everything committed here is generated, so
+          # take the latest main, put this run's hypernova.json on top, rebuild, push.
+          # hypernova.js keeps the previous file when the API is down, so a failed
+          # fetch leaves this copy unchanged and the commit step finds nothing to push.
+          for i in 1 2 3; do
+            git fetch -q origin main
+            git reset -q --hard origin/main
+            cp "$RUNNER_TEMP/hypernova.json" hypernova.json
+            node build.js
+            if git diff --quiet; then echo "Nothing changed."; exit 0; fi
+            git add hypernova.json compare.html index.html script.js llms.txt llms-full.txt sitemap.xml feed.xml firms blog.html blog
+            git commit -q -m "chore: refresh Hypernova stats [skip ci]"
+            git push -q origin HEAD:main && exit 0
+            sleep $((i * 10))
+          done
+          exit 1

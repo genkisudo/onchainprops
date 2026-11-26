@@ -37,7 +37,7 @@ jobs:
           # Stage before the quiet check so a new untracked {key}.txt is committed.
           # This job does not ping IndexNow.
           key=$(tr -d '[:space:]' < _indexnow/key.txt)
-          git add index.html script.js llms.txt llms-full.txt sitemap.xml feed.xml firms blog.html blog "${key}.txt"
+          git add index.html compare.html script.js llms.txt llms-full.txt sitemap.xml feed.xml firms blog.html blog "${key}.txt"
           if git diff --cached --quiet; then
             echo "Generated content already up to date."
           else

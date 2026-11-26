@@ -57,6 +57,18 @@ const loadBuyback = () => {
     }
 };
 const buyback = loadBuyback();
+// Hypernova 30-day stats fetched by hypernova.js (optional: the section is hidden without it)
+const { isValidHypernova } = require('./hypernova');
+const loadHypernova = () => {
+    if (!fs.existsSync(path.join(ROOT, 'hypernova.json'))) return null;
+    try {
+        const data = JSON.parse(read('hypernova.json'));
+        return isValidHypernova(data) ? data : { invalid: true };
+    } catch (e) {
+        return { invalid: true, error: e.message };
+    }
+};
+const hypernova = loadHypernova();
 const faqs = JSON.parse(read('faq.json'));
 
 // -----------------------------------------
@@ -1029,6 +1041,8 @@ const inject = (src, key, inner, style = 'html') => {
     const bi = src.indexOf(begin);
     const ei = src.indexOf(end);
     if (bi === -1 || ei === -1) throw new Error(`Markers for "${key}" not found`);
+    // 'inline' keeps the value on the marker's own line, for use inside running text
+    if (style === 'inline') return src.slice(0, bi + begin.length) + inner + src.slice(ei);
     const lineStart = src.lastIndexOf('\n', bi) + 1;
     const indent = src.slice(lineStart, bi);
     const body = inner.split('\n').map((l) => (l ? indent + l : l)).join('\n');
@@ -1131,6 +1145,111 @@ const firmBuybackBlock = () => {
 </div>`;
 };
 
+/**
+ * Hypernova lifetime payout figure from hypernova.json, for running text. Empty string
+ * when the data is missing or invalid so callers can fall back or hide the sentence.
+ */
+const hypernovaLifetimeUsd = () => (hypernova && !hypernova.invalid ? fmtUsd(hypernova.lifetime.payoutsUsd) : '');
+
+/** The "live stats" sentence on the Hypernova page. Hidden when there is no valid data. */
+const firmHypernovaLifetimeBlock = () => {
+    if (!hypernova || hypernova.invalid) return '';
+    const lt = hypernova.lifetime;
+    const n = (v) => Math.round(v).toLocaleString('en-US');
+    return `<p>Hypernova's public stats page shows ${fmtUsd(lt.payoutsUsd)} in lifetime payouts to ${n(lt.payoutRecipients)} traders and ${n(lt.fundedUsers)} funded accounts (as of ${fmtDate(hypernova.updatedAt.slice(0, 10))}).</p>`;
+};
+
+/**
+ * Hypernova "last 30 days" stat tiles from hypernova.json: four tiles, each with an
+ * inline-SVG chart (no runtime JS, no external requests). Empty when the file is
+ * missing or invalid, so the section is hidden instead of rendering stale or broken data.
+ * @returns {string}
+ */
+const firmHypernovaBlock = () => {
+    if (!hypernova) {
+        firmPageWarnings.push('hypernova.json not found — Hypernova stats section hidden');
+        return '';
+    }
+    if (hypernova.invalid) {
+        firmPageWarnings.push(`hypernova.json is invalid${hypernova.error ? ` (${hypernova.error})` : ''} — Hypernova stats section hidden`);
+        return '';
+    }
+    const updated = hypernova.updatedAt.slice(0, 10);
+    if (Date.now() - Date.parse(hypernova.updatedAt) > 3 * 86400e3) {
+        firmPageWarnings.push(`Hypernova: hypernova.json is older than 3 days (${updated}) — run hypernova.js`);
+    }
+    const days = hypernova.days;
+    const first = days[0], last = days[days.length - 1];
+    const short = (iso) => fmtDate(iso).replace(/, \d{4}$/, '');
+    const int = (n) => Math.round(n).toLocaleString('en-US');
+    const sum = (k) => days.reduce((s, d) => s + d[k], 0);
+    const W = 200, H = 52, GAP = 1.5;
+    const step = W / days.length;
+
+    // 30 daily bars; the biggest day is lit, the rest are dimmed. A <title> per bar gives a hover tooltip.
+    const bars = (key, fmt) => {
+        const max = Math.max(...days.map((d) => d[key]), 1);
+        const peak = days.findIndex((d) => d[key] === max);
+        return days.map((d, i) => {
+            const h = Math.max((d[key] / max) * (H - 4), 1.5);
+            return `<rect class="hn-bar${i === peak ? ' hn-peak' : ''}" style="--i:${i}" x="${(i * step + GAP / 2).toFixed(2)}" y="${(H - h).toFixed(2)}" width="${(step - GAP).toFixed(2)}" height="${h.toFixed(2)}" rx="1"><title>${short(d.date)}: ${fmt(d[key])}</title></rect>`;
+        }).join('');
+    };
+    // Cumulative/level series as a line over a soft area fill, scaled to its own min/max.
+    const line = (key, fmt, id) => {
+        const vals = days.map((d) => d[key]);
+        const lo = Math.min(...vals), hi = Math.max(...vals), span = hi - lo || 1;
+        const pts = vals.map((v, i) => [(i + 0.5) * step, 4 + (1 - (v - lo) / span) * (H - 10)]);
+        const d = pts.map(([x, y], i) => `${i ? 'L' : 'M'}${x.toFixed(2)} ${y.toFixed(2)}`).join('');
+        const hit = days.map((p, i) => `<rect x="${(i * step).toFixed(2)}" y="0" width="${step.toFixed(2)}" height="${H}" fill="transparent"><title>${short(p.date)}: ${fmt(p[key])}</title></rect>`).join('');
+        return `<defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity=".32"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs>`
+            + `<path class="hn-area" d="${d}L${pts[pts.length - 1][0].toFixed(2)} ${H}L${pts[0][0].toFixed(2)} ${H}Z" fill="url(#${id})"/>`
+            + `<path class="hn-line" pathLength="1" d="${d}"/>${hit}`;
+    };
+    const svg = (label, inner) => `<svg class="hn-chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="${escAttr(label)}">${inner}</svg>`;
+
+    const payoutSum = sum('payoutUsd');
+    const payoutN = sum('payoutCount');
+    const aumPct = ((last.fundedAumUsd - first.fundedAumUsd) / first.fundedAumUsd) * 100;
+    const signupGain = last.signups - first.signups;
+    const paidGain = last.paidUsers - first.paidUsers;
+    const fundedGain = last.fundedUsers - first.fundedUsers;
+    const sign = (n) => (n >= 0 ? '+' : '−') + Math.abs(n).toFixed(0);
+
+    const tile = (label, value, sub, chart, delta = '') => `<div class="hn-tile">
+    <div class="hn-tile-top"><span class="hn-label">${label}</span>${delta}</div>
+    <div class="hn-value">${value}</div>
+    <div class="hn-sub">${sub}</div>
+    ${chart}
+</div>`;
+    const chip = (text, down = false) => `<span class="hn-delta${down ? ' hn-down' : ''}">${text}</span>`;
+
+    const tiles = [
+        tile('Paid to traders', fmtUsd(payoutSum), `${int(payoutN)} payouts · avg ${fmtUsd(payoutSum / payoutN)}`,
+            svg(`Daily payouts, ${short(first.date)} to ${short(last.date)}`, bars('payoutUsd', fmtUsd))),
+        tile('Funded AUM', fmtUsd(last.fundedAumUsd), `${int(last.fundedTraders)} funded traders`,
+            svg(`Funded trader AUM, ${short(first.date)} to ${short(last.date)}`, line('fundedAumUsd', fmtUsd, 'hn-g-aum')),
+            chip(`${aumPct >= 0 ? '▲' : '▼'} ${Math.abs(aumPct).toFixed(0)}%`, aumPct < 0)),
+        tile('New signups', `+${int(signupGain)}`, `${int(last.signups)} total · +${int(paidGain)} paid`,
+            svg(`Cumulative signups, ${short(first.date)} to ${short(last.date)}`, line('signups', int, 'hn-g-sign'))),
+        tile('Accounts funded', `+${int(fundedGain)}`, `${int(last.fundedUsers)} all time`,
+            svg(`Cumulative funded accounts, ${short(first.date)} to ${short(last.date)}`, line('fundedUsers', int, 'hn-g-fund')))
+    ].join('\n');
+
+    const markets = hypernova.topMarkets.slice(0, 3).map((m) => `${escHtml(m.symbol)} ${Math.round(m.sharePct)}%`).join(', ');
+    return `<section class="hn-stats" aria-label="Hypernova stats, last 30 days">
+    <header class="hn-head">
+        <h3><span class="hn-pulse" aria-hidden="true"></span>Hypernova, last 30 days</h3>
+        <span class="hn-range">${short(first.date)} – ${short(last.date)}</span>
+    </header>
+    <div class="hn-grid">
+${tiles.split('\n').map((l) => '        ' + l).join('\n')}
+    </div>
+    <p class="hn-foot">Evaluation pass rate <strong>${hypernova.passRatePct}%</strong> · top evaluation markets by volume: ${markets}</p>
+    <p class="hn-source">Source: Hypernova public stats (<a href="https://app.hypernova.xyz" target="_blank" rel="noopener noreferrer">app.hypernova.xyz</a>), refreshed daily. Complete UTC days only. Last updated <time datetime="${escAttr(hypernova.updatedAt)}">${fmtDate(updated)}</time>.</p>
+</section>`;
+};
+
 /** "<Name> review: <pageHook> <facts from firms.json>" */
 const firmDescription = (f) => {
     const split = /tbc/i.test(f.split) ? 'Profit split TBC'
@@ -1207,9 +1326,14 @@ const buildFirmPages = () => {
                 ]
             }));
             if (f.name === 'Vanta Trading') page = inject(page, 'firm-buyback', firmBuybackBlock());
+            if (f.name === 'Hypernova') {
+                page = inject(page, 'firm-hypernova-stats', firmHypernovaBlock());
+                page = inject(page, 'firm-hypernova-lifetime', firmHypernovaLifetimeBlock());
+            }
         } catch (e) {
             const markers = 'firm-description, firm-og-description, firm-stats and firm-breadcrumb'
-                + (f.name === 'Vanta Trading' ? ' and firm-buyback' : '');
+                + (f.name === 'Vanta Trading' ? ' and firm-buyback' : '')
+                + (f.name === 'Hypernova' ? ' and firm-hypernova-stats and firm-hypernova-lifetime' : '');
             throw new Error(`${file}: ${e.message} — add the ${markers} GEN markers (copy them from firms/hypernova.html)`);
         }
         const title = /<title>([^<]*)<\/title>/.exec(page)?.[1] ?? '';
@@ -1291,6 +1415,9 @@ write('llms-full.txt', llmsFullTxt());
 write('sitemap.xml', sitemapXml());
 write('feed.xml', feedXml());
 const firmPageCount = buildFirmPages();
+// compare.html is hand-written except for the Hypernova lifetime-payout figure (kept fresh from hypernova.json).
+// Without valid data the last generated figure stays in place.
+if (hypernovaLifetimeUsd()) write('compare.html', inject(read('compare.html'), 'hypernova-lifetime', hypernovaLifetimeUsd(), 'inline'));
 publishIndexNowKey();
 
 if (!/^\d+$/.test(KIT_FORM_ID)) console.warn('⚠ KIT_FORM_ID is not set in build.js — newsletter forms will not work until it is.');
