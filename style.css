@@ -796,6 +796,7 @@ h1, h2, h3, h4 {
 }
 
 .hn-tile-top {
+    min-height: 1.4rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -839,6 +840,11 @@ h1, h2, h3, h4 {
     margin: 0.2rem 0 0.55rem;
     font-size: 0.76rem;
     color: var(--text-secondary);
+}
+
+.hn-sub strong {
+    font-weight: 600;
+    color: var(--text-primary);
 }
 
 .hn-chart {
