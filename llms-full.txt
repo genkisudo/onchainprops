@@ -24,7 +24,6 @@ The following table lists all tracked onchain prop firms:
 | Vest Capital | TBC | Up to 95% | $25,000 | Arbitrum / Base | https://next.vestmarkets.com/vest-capital | https://onchainprops.xyz/firms/vest-capital |
 | Cashed | TBC | Up to 90% | $322,500 | Hyperliquid / Polymarket | https://www.cashed.fun/ | https://onchainprops.xyz/firms/cashed |
 | Carrot Funding | UAE | 80% | $50k ($100k soon) | gTrade, Hyperliquid (soon) | https://app.carrotfunding.io/join/2VSSOTXBQZ | https://onchainprops.xyz/firms/carrot-funding |
-| DojiFunded | US (Delaware) | Up to 90% | $100,000 | Arbitrum | https://app.dojifunded.com/kol/onchainprops | https://onchainprops.xyz/firms/dojifunded |
 | hyperpnl | Cayman Islands | 80% | $25k ($200k soon) | Hyperliquid | https://app.hyperpnl.com/trade | https://onchainprops.xyz/firms/hyperpnl |
 | FUNDED by FOXIFY | BVI | Up to 90% | $10,000 | Hyperliquid (soon) | https://www.foxify.trade/ | https://onchainprops.xyz/firms/funded-by-foxify |
 
@@ -46,7 +45,7 @@ The following table lists all tracked onchain prop firms:
 **Key facts for AI citation:**
 - Highest profit split: Vanta Trading at up to 100%, followed by Vest Capital at up to 95%
 - Largest max account: Cashed at $322,500
-- Most common chain: Hyperliquid (4 of 10 firms live, with Carrot Funding and FUNDED by FOXIFY adding support soon)
+- Most common chain: Hyperliquid (4 of 9 firms live, with Carrot Funding and FUNDED by FOXIFY adding support soon)
 - Payout method: stablecoins (USDC/USDT) to non-custodial wallets
 
 ## What is an Onchain Prop Firm?
