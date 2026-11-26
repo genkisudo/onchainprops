@@ -181,26 +181,6 @@
       "pageHook": "onchain crypto prop firm with Instant Funding, 1-Step, and 2-Step evaluations across crypto, forex, stocks, and commodities."
     },
     {
-      "name": "hyperpnl",
-      "country": "Cayman Islands",
-      "split": "80%",
-      "maxAccount": "$25k ($200k soon)",
-      "profitTarget": "10%/5%",
-      "dailyDrawdown": "5%",
-      "maxDrawdown": "9%",
-      "website": "https://app.hyperpnl.com/?ref=0x10cf82402E3488dc6945832F6896162C15dc8146",
-      "publicUrl": "https://app.hyperpnl.com/trade",
-      "chain": "Hyperliquid",
-      "chainPhrase": "the Hyperliquid chain",
-      "isAffiliate": true,
-      "token": "No",
-      "payoutSpeed": "Soon",
-      "rulesOnchain": "No",
-      "payoutsVerified": "Yes",
-      "lastVerified": "2026-08-27",
-      "pageHook": "Hyperliquid prop firm with a static max drawdown, instant onchain payouts, and a two-phase evaluation."
-    },
-    {
       "name": "FUNDED by FOXIFY",
       "country": "BVI",
       "split": "Up to 90%",

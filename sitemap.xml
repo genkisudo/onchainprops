@@ -72,13 +72,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- hyperpnl — firm review & evaluation details -->
-  <url>
-    <loc>https://onchainprops.xyz/firms/hyperpnl</loc>
-    <lastmod>2026-11-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- FUNDED by FOXIFY — firm review & evaluation details -->
   <url>
     <loc>https://onchainprops.xyz/firms/funded-by-foxify</loc>

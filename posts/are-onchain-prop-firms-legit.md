@@ -50,7 +50,6 @@ Our [comparison table](https://onchainprops.xyz/#firms) marks each firm's payout
 | [Hypernova](../firms/hypernova) | Yes | Yes |
 | [Propr](../firms/propr) | Yes | No |
 | [DojiFunded](../firms/dojifunded) | Yes | No (evaluation data onchain) |
-| [hyperpnl](../firms/hyperpnl) | Yes | No |
 | [Carrot Funding](../firms/carrot-funding) | Yes | No |
 | [Vanta Trading](../firms/vanta-trading) | Work in progress | No |
 | [Iceberg](../firms/iceberg) | No | No |
