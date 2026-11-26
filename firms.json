@@ -163,6 +163,7 @@
     },
     {
       "name": "DojiFunded",
+      "hidden": true,
       "country": "US (Delaware)",
       "split": "Up to 90%",
       "maxAccount": "$100,000",

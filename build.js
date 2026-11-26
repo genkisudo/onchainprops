@@ -40,7 +40,9 @@ const ROOT = __dirname;
 const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
 const write = (f, s) => fs.writeFileSync(path.join(ROOT, f), s);
 
-const { lastUpdated, propFirms, predictionMarketFirms, cryptoPropFirms } = JSON.parse(read('firms.json'));
+const { lastUpdated, propFirms: allPropFirms, predictionMarketFirms, cryptoPropFirms } = JSON.parse(read('firms.json'));
+// `hidden: true` keeps a firm's data and detail page but drops it from the table, schema, FAQ and llms.txt
+const propFirms = allPropFirms.filter((f) => !f.hidden);
 // Onchain payout stats fetched by payouts.js (optional: the build works without it)
 const payouts = fs.existsSync(path.join(ROOT, 'payouts.json')) ? JSON.parse(read('payouts.json')) : null;
 // Vanta buyback stats fetched by buyback.js (optional: the section is hidden without it)
@@ -948,7 +950,7 @@ const sitemapXml = () => {
     <priority>${priority}</priority>
   </url>`;
     // Extensionless <loc>s match each page's canonical (GitHub Pages resolves them).
-    const firmUrls = [...propFirms, ...predictionMarketFirms, ...cryptoPropFirms]
+    const firmUrls = [...allPropFirms, ...predictionMarketFirms, ...cryptoPropFirms]
         .filter((f) => detailPath(f))
         .map((f) => url(`${SITE}/${detailPath(f)}`, 'monthly', '0.7', `${f.name} — firm review & evaluation details`))
         .join('');
@@ -1185,7 +1187,7 @@ const publishIndexNowKey = () => {
 const firmPageWarnings = [];
 const buildFirmPages = () => {
     let n = 0;
-    for (const f of [...propFirms, ...predictionMarketFirms, ...cryptoPropFirms]) {
+    for (const f of [...allPropFirms, ...predictionMarketFirms, ...cryptoPropFirms]) {
         const p = detailPath(f);
         if (!p) continue;
         const file = `${p}.html`;
