@@ -69,6 +69,18 @@ const loadHypernova = () => {
     }
 };
 const hypernova = loadHypernova();
+// Propr 30-day stats fetched by propr.js (optional: the section is hidden without it)
+const { isValidPropr } = require('./propr');
+const loadPropr = () => {
+    if (!fs.existsSync(path.join(ROOT, 'propr.json'))) return null;
+    try {
+        const data = JSON.parse(read('propr.json'));
+        return isValidPropr(data) ? data : { invalid: true };
+    } catch (e) {
+        return { invalid: true, error: e.message };
+    }
+};
+const propr = loadPropr();
 const faqs = JSON.parse(read('faq.json'));
 
 // -----------------------------------------
@@ -1160,29 +1172,16 @@ const firmHypernovaLifetimeBlock = () => {
 };
 
 /**
- * Hypernova "last 30 days" stat tiles from hypernova.json: four tiles, each with an
- * inline-SVG chart (no runtime JS, no external requests). Empty when the file is
- * missing or invalid, so the section is hidden instead of rendering stale or broken data.
- * @returns {string}
+ * Shared chart/tile helpers for the live-stats panels (Hypernova, Propr): inline SVG
+ * only, no runtime JS and no external requests. `days` is the 30-day array of
+ * `{date, ...}`; callers pass a unique gradient id to `line()` per chart on the page.
+ * @param {Array<{date: string}>} days
+ * @returns {{short: Function, int: Function, bars: Function, line: Function, svg: Function, tile: Function, chip: Function}}
  */
-const firmHypernovaBlock = () => {
-    if (!hypernova) {
-        firmPageWarnings.push('hypernova.json not found — Hypernova stats section hidden');
-        return '';
-    }
-    if (hypernova.invalid) {
-        firmPageWarnings.push(`hypernova.json is invalid${hypernova.error ? ` (${hypernova.error})` : ''} — Hypernova stats section hidden`);
-        return '';
-    }
-    const updated = hypernova.updatedAt.slice(0, 10);
-    if (Date.now() - Date.parse(hypernova.updatedAt) > 3 * 86400e3) {
-        firmPageWarnings.push(`Hypernova: hypernova.json is older than 3 days (${updated}) — run hypernova.js`);
-    }
-    const days = hypernova.days;
+const statsKit = (days) => {
     const first = days[0], last = days[days.length - 1];
     const short = (iso) => fmtDate(iso).replace(/, \d{4}$/, '');
     const int = (n) => Math.round(n).toLocaleString('en-US');
-    const sum = (k) => days.reduce((s, d) => s + d[k], 0);
     const W = 200, H = 52, GAP = 1.5;
     const step = W / days.length;
 
@@ -1208,6 +1207,39 @@ const firmHypernovaBlock = () => {
     };
     const svg = (label, inner) => `<svg class="hn-chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="${escAttr(label)}">${inner}</svg>`;
 
+    const tile = (label, value, sub, chart, delta = '') => `<div class="hn-tile">
+    <div class="hn-tile-top"><span class="hn-label">${label}</span>${delta}</div>
+    <div class="hn-value">${value}</div>
+    <div class="hn-sub">${sub}</div>
+    ${chart}
+</div>`;
+    const chip = (text, down = false) => `<span class="hn-delta${down ? ' hn-down' : ''}">${text}</span>`;
+    return { short, int, bars, line, svg, tile, chip, first, last };
+};
+
+/**
+ * Hypernova "last 30 days" stat tiles from hypernova.json: four tiles, each with an
+ * inline-SVG chart (no runtime JS, no external requests). Empty when the file is
+ * missing or invalid, so the section is hidden instead of rendering stale or broken data.
+ * @returns {string}
+ */
+const firmHypernovaBlock = () => {
+    if (!hypernova) {
+        firmPageWarnings.push('hypernova.json not found — Hypernova stats section hidden');
+        return '';
+    }
+    if (hypernova.invalid) {
+        firmPageWarnings.push(`hypernova.json is invalid${hypernova.error ? ` (${hypernova.error})` : ''} — Hypernova stats section hidden`);
+        return '';
+    }
+    const updated = hypernova.updatedAt.slice(0, 10);
+    if (Date.now() - Date.parse(hypernova.updatedAt) > 3 * 86400e3) {
+        firmPageWarnings.push(`Hypernova: hypernova.json is older than 3 days (${updated}) — run hypernova.js`);
+    }
+    const days = hypernova.days;
+    const { short, int, bars, line, svg, tile, chip } = statsKit(days);
+    const first = days[0], last = days[days.length - 1];
+    const sum = (k) => days.reduce((s, d) => s + d[k], 0);
     const payoutSum = sum('payoutUsd');
     const payoutN = sum('payoutCount');
     const aumPct = ((last.fundedAumUsd - first.fundedAumUsd) / first.fundedAumUsd) * 100;
@@ -1216,13 +1248,6 @@ const firmHypernovaBlock = () => {
     const fundedGain = last.fundedUsers - first.fundedUsers;
     const sign = (n) => (n >= 0 ? '+' : '−') + Math.abs(n).toFixed(0);
 
-    const tile = (label, value, sub, chart, delta = '') => `<div class="hn-tile">
-    <div class="hn-tile-top"><span class="hn-label">${label}</span>${delta}</div>
-    <div class="hn-value">${value}</div>
-    <div class="hn-sub">${sub}</div>
-    ${chart}
-</div>`;
-    const chip = (text, down = false) => `<span class="hn-delta${down ? ' hn-down' : ''}">${text}</span>`;
 
     const tiles = [
         tile('Paid to traders', fmtUsd(payoutSum), `${int(payoutN)} payouts · avg ${fmtUsd(payoutSum / payoutN)}`,
@@ -1248,6 +1273,64 @@ ${tiles.split('\n').map((l) => '        ' + l).join('\n')}
     <p class="hn-foot">Evaluation pass rate <strong>${hypernova.passRatePct}%</strong> · top evaluation markets by volume: ${markets}</p>
     <p class="hn-source">Source: Hypernova public stats (<a href="https://app.hypernova.xyz" target="_blank" rel="noopener noreferrer">app.hypernova.xyz</a>), refreshed daily. Complete UTC days only. Last updated <time datetime="${escAttr(hypernova.updatedAt)}">${fmtDate(updated)}</time>.</p>
 </section>`;
+};
+
+/**
+ * Propr "last 30 days" panel from propr.json: paid to traders (with the average per
+ * unique trader paid) and funded traders, plus revenue in the footer. Empty when the file
+ * is missing or invalid, so the section is hidden instead of rendering stale or broken data.
+ * @returns {string}
+ */
+const firmProprBlock = () => {
+    if (!propr) {
+        firmPageWarnings.push('propr.json not found — Propr stats section hidden');
+        return '';
+    }
+    if (propr.invalid) {
+        firmPageWarnings.push(`propr.json is invalid${propr.error ? ` (${propr.error})` : ''} — Propr stats section hidden`);
+        return '';
+    }
+    const updated = propr.updatedAt.slice(0, 10);
+    if (Date.now() - Date.parse(propr.updatedAt) > 3 * 86400e3) {
+        firmPageWarnings.push(`Propr: propr.json is older than 3 days (${updated}) — run propr.js`);
+    }
+    const days = propr.days;
+    const { short, int, bars, line, svg, tile, chip, first, last } = statsKit(days);
+    const sum = (k) => days.reduce((s, d) => s + d[k], 0);
+    const paid = sum('payoutUsd'), count = sum('payoutCount'), revenue = sum('revenueUsd');
+    const fundedPct = ((last.fundedTraders - first.fundedTraders) / first.fundedTraders) * 100;
+
+    const tiles = [
+        tile('Paid to traders', fmtUsd(paid),
+            `${int(count)} payouts · ${int(propr.uniqueTraders)} traders · <strong>${fmtUsd(paid / propr.uniqueTraders)}</strong> per trader`,
+            svg(`Daily payouts to traders, ${short(first.date)} to ${short(last.date)}`, bars('payoutUsd', fmtUsd))),
+        tile('Funded traders', int(last.fundedTraders), `+${int(last.fundedTraders - first.fundedTraders)} in 30 days`,
+            svg(`Funded traders, ${short(first.date)} to ${short(last.date)}`, line('fundedTraders', int, 'pr-g-fund')),
+            chip(`${fundedPct >= 0 ? '▲' : '▼'} ${Math.abs(fundedPct).toFixed(0)}%`, fundedPct < 0))
+    ].join('\n');
+
+    return `<section class="hn-stats" aria-label="Propr stats, last 30 days">
+    <header class="hn-head">
+        <h3><span class="hn-pulse" aria-hidden="true"></span>Propr, last 30 days</h3>
+        <span class="hn-range">${short(first.date)} – ${short(last.date)}</span>
+    </header>
+    <div class="hn-grid">
+${tiles.split('\n').map((l) => '        ' + l).join('\n')}
+    </div>
+    <p class="hn-foot">Challenge revenue <strong>${fmtUsd(revenue)}</strong> · average payout <strong>${fmtUsd(paid / count)}</strong> · lifetime paid to traders <strong>${fmtUsd(propr.lifetime.payoutsUsd)}</strong></p>
+    <p class="hn-source">Source: Propr public stats (<a href="https://www.propr.xyz/transparency" target="_blank" rel="noopener noreferrer">propr.xyz/transparency</a>), refreshed daily. Complete UTC days only. Paid to traders is the trader share (80%) of processed payouts; traders are counted by anonymised payout-feed username. Last updated <time datetime="${escAttr(propr.updatedAt)}">${fmtDate(updated)}</time>.</p>
+</section>`;
+};
+
+/**
+ * Running-text sentence with Propr's lifetime payouts from propr.json. Without valid data it
+ * falls back to a sentence with no figures, so the page never shows stale numbers.
+ * @returns {string}
+ */
+const firmProprLifetimeText = () => {
+    if (!propr || propr.invalid) return "Propr publishes its live payout totals on its transparency page.";
+    const lt = propr.lifetime;
+    return `As of ${fmtDate(propr.updatedAt.slice(0, 10))}, Propr's public stats show ${fmtUsd(lt.payoutsUsd)} paid to traders across ${Math.round(lt.payoutCount).toLocaleString('en-US')} payouts.`;
 };
 
 /** "<Name> review: <pageHook> <facts from firms.json>" */
@@ -1326,6 +1409,10 @@ const buildFirmPages = () => {
                 ]
             }));
             if (f.name === 'Vanta Trading') page = inject(page, 'firm-buyback', firmBuybackBlock());
+            if (f.name === 'Propr') {
+                page = inject(page, 'firm-propr-stats', firmProprBlock());
+                page = inject(page, 'firm-propr-lifetime', firmProprLifetimeText(), 'inline');
+            }
             if (f.name === 'Hypernova') {
                 page = inject(page, 'firm-hypernova-stats', firmHypernovaBlock());
                 page = inject(page, 'firm-hypernova-lifetime', firmHypernovaLifetimeBlock());
@@ -1333,6 +1420,7 @@ const buildFirmPages = () => {
         } catch (e) {
             const markers = 'firm-description, firm-og-description, firm-stats and firm-breadcrumb'
                 + (f.name === 'Vanta Trading' ? ' and firm-buyback' : '')
+                + (f.name === 'Propr' ? ' and firm-propr-stats and firm-propr-lifetime' : '')
                 + (f.name === 'Hypernova' ? ' and firm-hypernova-stats and firm-hypernova-lifetime' : '');
             throw new Error(`${file}: ${e.message} — add the ${markers} GEN markers (copy them from firms/hypernova.html)`);
         }

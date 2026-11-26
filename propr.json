@@ -1,0 +1,222 @@
+{
+  "updatedAt": "2026-11-26T18:02:58.294Z",
+  "days": [
+    {
+      "date": "2026-10-27",
+      "payoutUsd": 48018.08,
+      "payoutCount": 38,
+      "revenueUsd": 31108.65,
+      "fundedTraders": 1768
+    },
+    {
+      "date": "2026-10-28",
+      "payoutUsd": 25643.79,
+      "payoutCount": 58,
+      "revenueUsd": 40617.65,
+      "fundedTraders": 1777
+    },
+    {
+      "date": "2026-10-29",
+      "payoutUsd": 59900.67,
+      "payoutCount": 86,
+      "revenueUsd": 44117.1,
+      "fundedTraders": 1786
+    },
+    {
+      "date": "2026-10-30",
+      "payoutUsd": 22181.11,
+      "payoutCount": 77,
+      "revenueUsd": 68859.4,
+      "fundedTraders": 1821
+    },
+    {
+      "date": "2026-10-31",
+      "payoutUsd": 12924.66,
+      "payoutCount": 30,
+      "revenueUsd": 37064,
+      "fundedTraders": 1826
+    },
+    {
+      "date": "2026-11-01",
+      "payoutUsd": 22885.41,
+      "payoutCount": 45,
+      "revenueUsd": 15978,
+      "fundedTraders": 1826
+    },
+    {
+      "date": "2026-11-02",
+      "payoutUsd": 34098.48,
+      "payoutCount": 62,
+      "revenueUsd": 31009.3,
+      "fundedTraders": 1836
+    },
+    {
+      "date": "2026-11-03",
+      "payoutUsd": 15299.74,
+      "payoutCount": 47,
+      "revenueUsd": 26468.1,
+      "fundedTraders": 1846
+    },
+    {
+      "date": "2026-11-04",
+      "payoutUsd": 48034.59,
+      "payoutCount": 115,
+      "revenueUsd": 53898.75,
+      "fundedTraders": 1871
+    },
+    {
+      "date": "2026-11-05",
+      "payoutUsd": 63858.91,
+      "payoutCount": 136,
+      "revenueUsd": 68160.45,
+      "fundedTraders": 1895
+    },
+    {
+      "date": "2026-11-06",
+      "payoutUsd": 47721.05,
+      "payoutCount": 79,
+      "revenueUsd": 49725.25,
+      "fundedTraders": 1900
+    },
+    {
+      "date": "2026-11-07",
+      "payoutUsd": 5529.25,
+      "payoutCount": 22,
+      "revenueUsd": 22643.25,
+      "fundedTraders": 1901
+    },
+    {
+      "date": "2026-11-08",
+      "payoutUsd": 13405.61,
+      "payoutCount": 21,
+      "revenueUsd": 31019.5,
+      "fundedTraders": 1902
+    },
+    {
+      "date": "2026-11-09",
+      "payoutUsd": 77955.72,
+      "payoutCount": 84,
+      "revenueUsd": 47185,
+      "fundedTraders": 1913
+    },
+    {
+      "date": "2026-11-10",
+      "payoutUsd": 45537.59,
+      "payoutCount": 74,
+      "revenueUsd": 53097.25,
+      "fundedTraders": 1917
+    },
+    {
+      "date": "2026-11-11",
+      "payoutUsd": 50428.58,
+      "payoutCount": 89,
+      "revenueUsd": 40829.9,
+      "fundedTraders": 1930
+    },
+    {
+      "date": "2026-11-12",
+      "payoutUsd": 27550.8,
+      "payoutCount": 63,
+      "revenueUsd": 37061.7,
+      "fundedTraders": 1941
+    },
+    {
+      "date": "2026-11-13",
+      "payoutUsd": 46604.24,
+      "payoutCount": 53,
+      "revenueUsd": 39271.65,
+      "fundedTraders": 1959
+    },
+    {
+      "date": "2026-11-14",
+      "payoutUsd": 25002.18,
+      "payoutCount": 52,
+      "revenueUsd": 30358.45,
+      "fundedTraders": 1969
+    },
+    {
+      "date": "2026-11-15",
+      "payoutUsd": 29822.71,
+      "payoutCount": 48,
+      "revenueUsd": 26297.55,
+      "fundedTraders": 1987
+    },
+    {
+      "date": "2026-11-16",
+      "payoutUsd": 16482.71,
+      "payoutCount": 31,
+      "revenueUsd": 40245.05,
+      "fundedTraders": 1989
+    },
+    {
+      "date": "2026-11-17",
+      "payoutUsd": 32713.49,
+      "payoutCount": 58,
+      "revenueUsd": 54579.95,
+      "fundedTraders": 2000
+    },
+    {
+      "date": "2026-11-18",
+      "payoutUsd": 38089.19,
+      "payoutCount": 40,
+      "revenueUsd": 51030.9,
+      "fundedTraders": 2012
+    },
+    {
+      "date": "2026-11-19",
+      "payoutUsd": 30874.98,
+      "payoutCount": 60,
+      "revenueUsd": 30967.5,
+      "fundedTraders": 2030
+    },
+    {
+      "date": "2026-11-20",
+      "payoutUsd": 45105.48,
+      "payoutCount": 56,
+      "revenueUsd": 51623.55,
+      "fundedTraders": 2046
+    },
+    {
+      "date": "2026-11-21",
+      "payoutUsd": 45211.41,
+      "payoutCount": 51,
+      "revenueUsd": 38002.55,
+      "fundedTraders": 2066
+    },
+    {
+      "date": "2026-11-22",
+      "payoutUsd": 18684.42,
+      "payoutCount": 23,
+      "revenueUsd": 24369.85,
+      "fundedTraders": 2072
+    },
+    {
+      "date": "2026-11-23",
+      "payoutUsd": 26506.65,
+      "payoutCount": 27,
+      "revenueUsd": 38966.05,
+      "fundedTraders": 2081
+    },
+    {
+      "date": "2026-11-24",
+      "payoutUsd": 29187.98,
+      "payoutCount": 43,
+      "revenueUsd": 32834.05,
+      "fundedTraders": 2087
+    },
+    {
+      "date": "2026-11-25",
+      "payoutUsd": 36445.4,
+      "payoutCount": 79,
+      "revenueUsd": 51093.15,
+      "fundedTraders": 2105
+    }
+  ],
+  "uniqueTraders": 407,
+  "lifetime": {
+    "payoutsUsd": 4823798.84,
+    "payoutCount": 10367,
+    "revenueUsd": 6715756.8,
+    "fundedTraders": 2122
+  }
+}

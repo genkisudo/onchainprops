@@ -56,7 +56,6 @@
       "chainPhrase": "the Hyperliquid chain",
       "isAffiliate": true,
       "token": "Planned",
-      "payoutSpeed": "~20 min",
       "rulesOnchain": "No",
       "aiAgents": "Yes",
       "payoutsVerified": "Yes",
