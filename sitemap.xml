@@ -4,7 +4,7 @@
   <!-- Main page — single-page app, all content lives here -->
   <url>
     <loc>https://onchainprops.xyz/</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -137,6 +137,13 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- Glitch AI Trading Review: Can It Turn Your Idea Into a Tested Strategy? -->
+  <url>
+    <loc>https://onchainprops.xyz/blog/glitch-ai-trading-review</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
   <!-- How to Check If an Onchain Prop Firm Is Still Paying Out (Red-Flag Checklist) -->
   <url>
     <loc>https://onchainprops.xyz/blog/how-to-check-onchain-prop-firm-payouts</loc>
@@ -205,7 +212,7 @@
   <!-- Privacy policy -->
   <url>
     <loc>https://onchainprops.xyz/privacy.html</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

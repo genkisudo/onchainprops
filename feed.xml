@@ -6,8 +6,66 @@
   <atom:link href="https://onchainprops.xyz/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Payout safety, profit-split breakdowns, and guides for onchain and Hyperliquid prop trading firms.</description>
   <language>en</language>
-  <lastBuildDate>Sun, 22 Nov 2026 00:00:00 GMT</lastBuildDate>
+  <lastBuildDate>Thu, 26 Nov 2026 00:00:00 GMT</lastBuildDate>
   <image><url>https://onchainprops.xyz/og-image.png</url><title>OnchainProps Blog</title><link>https://onchainprops.xyz/blog.html</link></image>
+  <item>
+    <title>Glitch AI Trading Review: Can It Turn Your Idea Into a Tested Strategy?</title>
+    <link>https://onchainprops.xyz/blog/glitch-ai-trading-review</link>
+    <guid isPermaLink="true">https://onchainprops.xyz/blog/glitch-ai-trading-review</guid>
+    <pubDate>Thu, 26 Nov 2026 00:00:00 GMT</pubDate>
+    <dc:creator>OnchainProps</dc:creator>
+    <category>Guides</category>
+    <description>Glitch AI trading review: plain-English strategy builder with backtests, a $1M Vanta Pro evaluation on the Builder plan, pricing, risks and alternatives.</description>
+    <content:encoded><![CDATA[<p>Glitch is an AI strategy builder that takes a trading idea written in plain English, then codes and backtests it. We haven't tested it hands-on, and we found no published large-scale live or forward-test results for the current product.</p>
+<p>Details were checked on November 26, 2026.</p>
+<h2 id="quick-verdict">Quick verdict</h2>
+<ul><li><strong>May suit you if:</strong> you want to test ideas without writing code and you're interested in <a href="https://onchainprops.xyz/blog/what-is-vanta-trading">Vanta Trading</a>.</li><li><strong>Wait if:</strong> you need to see live results or a list of supported exchanges first. Glitch's homepage names no exchanges.</li><li><strong>Price:</strong> the beta is free by invitation. At launch, backtests start on the $39 Operator plan. The agent swarm and out-of-sample checks need the $79 Builder plan.</li><li><strong>Connection to know about:</strong> Glitch and Vanta are linked. Taoshi announced Glitch as its subsidiary in 2024, and Vanta says it was built by the team behind Taoshi.</li></ul>
+<p><a href="https://tradewithglitch.com/?ref=onchainprops" target="_blank" rel="sponsored noopener noreferrer">Try Glitch</a></p>
+<h2 id="what-is-glitch">What is Glitch?</h2>
+<p>Glitch is subscription software that uses AI agents to build, test and run trading strategies (see also our <a href="https://onchainprops.xyz/tools/glitch">Glitch tool page</a>). For now it's a free beta, with invites sent in waves.</p>
+<h2 id="how-does-the-glitch-ai-strategy-builder-work">How does the Glitch AI strategy builder work?</h2>
+<ol><li><strong>Describe your idea in plain English.</strong> Operator and Builder users can also import Pine Script, the coding language used on TradingView.</li><li><strong>Build versions.</strong> On Builder, a group of AI agents (a "swarm") writes and codes several versions of your idea.</li><li><strong>Backtest them</strong> on past data with fees and slippage included. Slippage is the gap between the price you expect and the price you get.</li><li><strong>Stress-test them.</strong> Builder adds out-of-sample checks on data held back from development. A separate "Skeptic" agent looks for overfitting and look-ahead bias. Look-ahead bias means a test used information you wouldn't have had at the time.</li><li><strong>Choose a version.</strong> Nothing trades until you deploy it.</li></ol>
+<p>Every plan includes Lead Quant, a chat agent that can turn plain English into alerts. You can receive them in the app, by email or on Telegram. During the beta, users can also try the agent swarm.</p>
+<h2 id="glitch-pricing">Glitch pricing</h2>
+<div class="table-scroll"><table class="prop-table"><thead><tr><th>Plan</th><th>Monthly launch price</th><th>Main features</th></tr></thead><tbody><tr><td>Explore</td><td>Free</td><td>Lead Quant, 3 live alerts</td></tr><tr><td>Signals</td><td>$19</td><td>25 alerts, 1-minute bars, TradingView webhooks</td></tr><tr><td>Operator</td><td>$39</td><td>Backtests, Pine Script import, automated strategies</td></tr><tr><td>Builder</td><td>$79</td><td>Agent swarm, out-of-sample checks, automation, $1M Vanta Pro account evaluation</td></tr></tbody></table></div>
+<p>Glitch's FAQ also lists Builder at $59 a month when billed annually, plus a 7-day trial. Plans include 50 to 450 credits a week for agent work. Live alerts and running strategies don't use credits. Check how many credits your plan includes and how quickly testing uses them.</p>
+<p>Full plans and 1-minute data are due at launch. So are connections to your own CryptoQuant, Coinglass and Glassnode accounts. Check the <a href="https://tradewithglitch.com/?ref=onchainprops" target="_blank" rel="sponsored noopener noreferrer">Glitch website</a> for current terms.</p>
+<h2 id="how-does-glitch-connect-to-vanta-trading">How does Glitch connect to Vanta Trading?</h2>
+<p>What sets Glitch apart in this comparison is the route from testing a strategy to having it evaluated. Builder includes a $1M Pro account evaluation on Vanta Trading. The team also says you can buy Vanta accounts inside Glitch and run strategies in them without exporting code.</p>
+<p>Vanta Trading is a simulated prop trading platform linked to Bittensor Subnet 8, known as Vanta Network. Bittensor is a blockchain made up of specialized networks called subnets. The team says Glitch subscription revenue goes back to the network. Because the two products are connected, don't read the Vanta integration as an outside endorsement of Glitch.</p>
+<h2 id="what-does-1m-mean">What does "$1M" mean?</h2>
+<p>It isn't $1 million in cash. Vanta's accounts are simulated, although its rewards are real. Pro accounts go up to $1 million in demo capital.</p>
+<p>Vanta's rules page lists these main Pro conditions:</p>
+<ul><li><strong>Daily loss limit:</strong> equity can't fall more than 5% below where it started the day.</li><li><strong>Trailing loss limit:</strong> equity can't fall more than 8% below its highest end-of-day level.</li><li><strong>Calmar ratio:</strong> you must maintain at least 1.75. This compares your return with your largest drawdown. If you fall below it, rewards are deferred until you resolve it.</li><li><strong>Martingale detection:</strong> Vanta flags repeated increases to a losing position. A first flag is a warning. A later second flag can lead to review and account closure.</li></ul>
+<p>Breaking either loss limit ends the account. The rules table applies the daily-return consistency limit to Grow, the stage before Pro, and lists none for Pro. Vanta's FAQ also mentions consistency rules in connection with Pro, so confirm this with Vanta.</p>
+<p>Vanta's standard route starts with a one-step Classic evaluation, followed by promotion to Grow and then Pro. Grow lasts at least 90 days and has a 6% return target. Instant Funded accounts have a separate Pro challenge.</p>
+<p>Glitch's homepage doesn't say where the Builder evaluation begins on this route. Before you subscribe, ask which stage you enter, what you need to pass, what reward split you get and what happens if you cancel Builder. For the full rule set, see <a href="https://onchainprops.xyz/blog/what-is-vanta-trading">what is Vanta Trading</a>.</p>
+<h2 id="glitch-vs-other-ai-trading-tools">Glitch vs. other AI trading tools</h2>
+<p>Here are four AI tools compared on the same points. This is based on published information, not hands-on testing. "Not confirmed" means we couldn't verify the detail in the pages we checked. It doesn't mean the feature is missing.</p>
+<div class="table-scroll"><table class="prop-table"><thead><tr><th>Tool</th><th>Markets or venues</th><th>No-code input</th><th>Testing details found</th><th>Price</th></tr></thead><tbody><tr><td>Glitch</td><td>No exchanges named on homepage</td><td>Plain English</td><td>Fees and slippage; Builder adds out-of-sample and Skeptic checks</td><td>Free beta; at launch, backtests from $39/month</td></tr><tr><td>Keel</td><td>Hyperliquid perpetual futures</td><td>Plain words or blocks</td><td>Fees, slippage and funding; walk-forward and Monte Carlo tools</td><td>Limited free plan; paid from $49/month</td></tr><tr><td>CoinQuant</td><td>Crypto exchanges; Interactive Brokers also reported</td><td>Plain English</td><td>Fees and slippage; tick-level testing on top plan</td><td>Pro $39.99/month; top plan $220/month</td></tr><tr><td>3Commas QuantPilot</td><td>Hyperliquid, according to a third-party review</td><td>Plain English</td><td>Backtesting and optimization; cost treatment not confirmed</td><td>Free plan and paid AI token top-ups, according to the same review</td></tr></tbody></table></div>
+<p>Notes on the table:</p>
+<ul><li>Keel says it can't withdraw your funds and uses the same compiled strategy for backtests and live trading. Its Python package is labeled alpha. Its materials list walk-forward tools, but its walk-forward guide says there is no built-in scheduler for those runs. Its free plan limits how many backtests you can run.</li><li>CoinQuant uses credits. Its top plan appears as both Elite and Max Power. A 2026 third-party comparison described its live automation as an invite-only beta.</li><li>QuantPilot opened to the public in June 2026.</li></ul>
+<p>If you'd rather work in code, look at Freqtrade, Hummingbot or QuantConnect. You'll have more control, but you'll need to write or maintain the code.</p>
+<h2 id="how-to-test-the-testing">How to test the testing</h2>
+<p>A good-looking backtest is easy to trust too early. Costs, unseen data and changing markets can all erase an apparent edge. When you try Glitch, start with one or two ideas you already understand and check the following:</p>
+<ul><li>Are fees, slippage and any funding costs shown clearly?</li><li>How many trades support the result?</li><li>Did the final test data stay untouched while you made changes?</li><li>How large was the worst drawdown, or fall from a peak?</li><li>Do small rule changes break the strategy?</li><li>Does paper or forward testing look like the backtest?</li></ul>
+<p>If an idea fails these checks, you've learned that before putting money behind it.</p>
+<h2 id="key-risks">Key risks</h2>
+<ul><li><strong>Overfitting:</strong> the more versions you create, the more likely one looks good by luck.</li><li><strong>Limited evidence:</strong> we found no published large-scale live or forward-test results for the current product, and we didn't test it ourselves.</li><li><strong>Live trading:</strong> data errors, outages and poor fills can change results.</li><li><strong>Vanta dependence:</strong> if the evaluation is your reason to subscribe, changes to Vanta's rules or operations could affect you.</li></ul>
+<h2 id="the-bottom-line">The bottom line</h2>
+<p>Glitch is worth watching if you want to test ideas without code, especially if you also plan to use Vanta. Before paying for Builder, get the evaluation terms in writing and check that the testing reports answer the questions above. Live results are still the main missing evidence.</p>
+<p><a href="https://tradewithglitch.com/?ref=onchainprops" target="_blank" rel="sponsored noopener noreferrer">Get started with Glitch</a></p>
+<p><em>This article is for information only and isn't financial advice. Trading involves risk. The Glitch links on this page are referral links.</em></p>
+<h2 id="faq">FAQ</h2>
+<h3 id="can-ai-build-a-trading-strategy-without-coding">Can AI build a trading strategy without coding?</h3>
+<p>Glitch says its Builder agents can turn a plain-English idea into coded versions and backtest them. You still need to check the rules, results and risks.</p>
+<h3 id="is-glitch-free">Is Glitch free?</h3>
+<p>The current beta is free by invitation. Launch plans include a free Explore tier. Monthly paid plans run from $19 to $79.</p>
+<h3 id="does-the-1m-vanta-evaluation-give-me-1m-in-cash">Does the $1M Vanta evaluation give me $1M in cash?</h3>
+<p>No. Vanta accounts use simulated capital. Rewards are real, but you need to meet the rules to earn and keep access to them.</p>
+<h3 id="will-a-good-backtest-pass-the-vanta-evaluation-or-make-money">Will a good backtest pass the Vanta evaluation or make money?</h3>
+<p>Neither is guaranteed. Past and simulated results can't tell you how a strategy will perform in the future.</p>]]></content:encoded>
+  </item>
   <item>
     <title>How to Check If an Onchain Prop Firm Is Still Paying Out (Red-Flag Checklist)</title>
     <link>https://onchainprops.xyz/blog/how-to-check-onchain-prop-firm-payouts</link>
