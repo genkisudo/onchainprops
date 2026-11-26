@@ -29,7 +29,7 @@
         img-src 'self' data: https://agents.dante-ai.com;
         manifest-src 'self';
         connect-src https://api.amplitude.com https://api2.amplitude.com https://analytics.eu.amplitude.com https://agents.dante-ai.com https://api.llama.fi https://app.kit.com;
-        frame-src https://agents.dante-ai.com https://dune.com;
+        frame-src https://agents.dante-ai.com;
         object-src 'none';
         base-uri 'self';
         form-action https://app.kit.com;
@@ -77,7 +77,7 @@
                 "name": "How do Propr payouts work?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Payouts are on demand in USDC onchain, from a $20 minimum, with no cap on amount or number of requests and no payout fees. Each payout sweeps all available profit and resets the balance to the starting amount; all positions must be closed first. The rulebook promises processing within 24 hours, and Propr's live stats show a median of roughly 17 to 23 minutes. Every payout is listed with its transaction hash at propr.xyz/transparency."
+                    "text": "Payouts are on demand in USDC onchain, from a $20 minimum, with no cap on amount or number of requests and no payout fees. Each payout sweeps all available profit and resets the balance to the starting amount; all positions must be closed first. The rulebook promises processing within 24 hours, and Propr publishes live payout times on its transparency page. Every payout is listed with its transaction hash at propr.xyz/transparency."
                 }
             },
             {
@@ -223,15 +223,7 @@
                     <h2>What Is Propr?</h2>
                     <p>Propr is a perps prop firm built on Hyperliquid, a decentralized perpetual futures exchange. It is run by Propr Limited (British Virgin Islands, Reg. No. 2211330), backed by SwissBorg, and launched on 14 April 2026. Trader accounts are simulated: your trades are signals, and Propr decides whether to copy them to Hyperliquid. What Propr makes public is the firm side: every payout, its reserve wallets, its hedging account, revenue and pass rates are on its <a href="https://www.propr.xyz/transparency" target="_blank" rel="noopener noreferrer">transparency page</a>.</p>
 
-                    <p>Propr lists 140+ crypto, stock, index, commodity and forex perps (Hyperliquid markets with more than $1M of open interest), all tradable 24/7 in one terminal. As of Nov 17, 2026, Propr reports $4.11M in total rewards paid across 7,390 payouts and a $658K public reserve.</p>
-
-                    <h2>Propr Dune Analytics Dashboard</h2>
-                    <p>We independently track Propr's financials on a public <a href="https://dune.com/genkisudo123/propr-prop" target="_blank" rel="noopener noreferrer">Dune Analytics dashboard</a>. The dashboard monitors revenue data from Propr's API and tracks payout data for traders and referrals from onchain wallets — giving anyone an independent, verifiable view of how the firm is performing.</p>
-                    <div style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin-top:1rem;">
-                        <div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary);">Propr All-Time Revenue</div>
-                        <div id="propr-revenue-value" style="font-size:2rem;font-weight:700;color:var(--accent);margin:0.25rem 0;line-height:1.1;">Loading…</div>
-                        <div style="font-size:0.8rem;color:var(--text-secondary);">Source: <a href="https://defillama.com/protocol/propr" target="_blank" rel="noopener noreferrer">DeFiLlama</a></div>
-                    </div>
+                    <p>Propr lists 140+ crypto, stock, index, commodity and forex perps (Hyperliquid markets with more than $1M of open interest), all tradable 24/7 in one terminal. <!-- GEN:BEGIN firm-propr-lifetime -->As of Nov 26, 2026, Propr's public stats show $4.82M paid to traders across 10,367 payouts.<!-- GEN:END firm-propr-lifetime --></p>
 
                     <h2>Propr Challenges and Fees</h2>
                     <p>Propr sells four challenge types, each from $5,000 to $200,000. Fees are one-time and non-refundable once the account is activated.</p>
@@ -259,7 +251,7 @@
 
                     <h2>Propr Payout Structure</h2>
                     <p>Payouts are on demand, in USDC onchain, from a <strong>$20 minimum</strong>. There is no maximum, no limit on how many you request and no payout fee. Each payout sweeps all available profit (no partial withdrawals), you must close all open positions first, and the balance then resets to the starting amount.</p>
-                    <p>The rulebook promises processing within 24 hours. In practice Propr's live stats show a median payout time of roughly 17 to 23 minutes, and every payout is listed with its transaction hash on the transparency page.</p>
+                    <p>The rulebook promises processing within 24 hours. In practice payout times vary day to day. Propr publishes them live, and every payout is listed with its transaction hash, on the transparency page.</p>
 
                     <h2>Propr Trading Rules and Leverage</h2>
                     <p><strong>Risk limits:</strong> a max daily loss and a max drawdown apply at all times on both challenge and funded accounts, measured on equity (open positions count).</p>

@@ -1322,6 +1322,17 @@ ${tiles.split('\n').map((l) => '        ' + l).join('\n')}
 </section>`;
 };
 
+/**
+ * Running-text sentence with Propr's lifetime payouts from propr.json. Without valid data it
+ * falls back to a sentence with no figures, so the page never shows stale numbers.
+ * @returns {string}
+ */
+const firmProprLifetimeText = () => {
+    if (!propr || propr.invalid) return "Propr publishes its live payout totals on its transparency page.";
+    const lt = propr.lifetime;
+    return `As of ${fmtDate(propr.updatedAt.slice(0, 10))}, Propr's public stats show ${fmtUsd(lt.payoutsUsd)} paid to traders across ${Math.round(lt.payoutCount).toLocaleString('en-US')} payouts.`;
+};
+
 /** "<Name> review: <pageHook> <facts from firms.json>" */
 const firmDescription = (f) => {
     const split = /tbc/i.test(f.split) ? 'Profit split TBC'
@@ -1398,7 +1409,10 @@ const buildFirmPages = () => {
                 ]
             }));
             if (f.name === 'Vanta Trading') page = inject(page, 'firm-buyback', firmBuybackBlock());
-            if (f.name === 'Propr') page = inject(page, 'firm-propr-stats', firmProprBlock());
+            if (f.name === 'Propr') {
+                page = inject(page, 'firm-propr-stats', firmProprBlock());
+                page = inject(page, 'firm-propr-lifetime', firmProprLifetimeText(), 'inline');
+            }
             if (f.name === 'Hypernova') {
                 page = inject(page, 'firm-hypernova-stats', firmHypernovaBlock());
                 page = inject(page, 'firm-hypernova-lifetime', firmHypernovaLifetimeBlock());
@@ -1406,7 +1420,7 @@ const buildFirmPages = () => {
         } catch (e) {
             const markers = 'firm-description, firm-og-description, firm-stats and firm-breadcrumb'
                 + (f.name === 'Vanta Trading' ? ' and firm-buyback' : '')
-                + (f.name === 'Propr' ? ' and firm-propr-stats' : '')
+                + (f.name === 'Propr' ? ' and firm-propr-stats and firm-propr-lifetime' : '')
                 + (f.name === 'Hypernova' ? ' and firm-hypernova-stats and firm-hypernova-lifetime' : '');
             throw new Error(`${file}: ${e.message} — add the ${markers} GEN markers (copy them from firms/hypernova.html)`);
         }
