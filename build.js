@@ -1511,7 +1511,11 @@ const capAtWord = (s, max) => {
     return text.slice(0, end).replace(/[\s,;:]+$/g, '').trim();
 };
 
-/** "<Name> review: <pageHook> <facts from firms.json>", capped at 160 characters. */
+/**
+ * "<Name> review: <split>, max account <size>. <verification>. <PageHook> <market, speed>",
+ * capped at 160 characters. Facts and the payout-verification caveat come first so the
+ * cap trims the hook and market detail, never the trust signal.
+ */
 const firmDescription = (f) => {
     const split = /tbc/i.test(f.split) ? 'Profit split TBC'
         : parseSplit(f.split) ? `${f.split} profit split` : f.split;
@@ -1522,12 +1526,24 @@ const firmDescription = (f) => {
         No: ' Payouts not yet independently verified.',
         'Work in progress': ' Payout verification in progress.'
     }[f.payoutsVerified] ?? '';
-    const hook = f.pageHook ? ` ${f.pageHook}` : '';
+    const ucFirst = (t) => t.charAt(0).toUpperCase() + t.slice(1);
     const maxAccount = /^up to/i.test(f.maxAccount) ? lcFirst(f.maxAccount) : f.maxAccount;
-    return capAtWord(
-        `${f.name} review:${hook} ${split}, max account ${maxAccount}, ${market}.${speed}${verified}`,
-        FIRM_DESC_MAX
-    );
+    // Add whole sentences while they fit, so the description never ends mid-phrase.
+    let out = capAtWord(`${f.name} review: ${split}, max account ${maxAccount}.${verified}`, FIRM_DESC_MAX);
+    const fits = (t) => out.length + t.length <= FIRM_DESC_MAX;
+    if (f.pageHook) {
+        // A hook that is too long is cut back before its last ", with …" clause, else dropped
+        // (cutting at any comma would truncate lists and make them read as complete).
+        let hook = ` ${ucFirst(f.pageHook.trim().replace(/\.$/, ''))}.`;
+        while (!fits(hook)) {
+            const comma = hook.lastIndexOf(', with ');
+            if (comma < 0) { hook = ''; break; }
+            hook = `${hook.slice(0, comma)}.`;
+        }
+        out += hook;
+    }
+    for (const extra of [` ${ucFirst(market)}.`, speed]) if (extra && fits(extra)) out += extra;
+    return out;
 };
 
 /**
