@@ -86,6 +86,13 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- Northbook — firm review & evaluation details -->
+  <url>
+    <loc>https://onchainprops.xyz/firms/northbook</loc>
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- Funding Predicts — firm review & evaluation details -->
   <url>
     <loc>https://onchainprops.xyz/firms/funding-predicts</loc>

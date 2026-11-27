@@ -28,7 +28,7 @@ Individual firm reviews are linked in the tables below.
 
 ## Firms covered
 
-The directory currently reviews **16 firms**, grouped the way the site groups them. Figures below are from [`firms.json`](https://onchainprops.xyz/firms.json), last updated **27 November 2026**. Terms change often — check the live review page and the `lastVerified` date before relying on a number. Quote splits exactly as written; do not round a conditional split to its maximum. “TBC”, “soon”, and blank fields mean the value is unknown.
+The directory currently reviews **17 firms**, grouped the way the site groups them. Figures below are from [`firms.json`](https://onchainprops.xyz/firms.json), last updated **27 November 2026**. Terms change often — check the live review page and the `lastVerified` date before relying on a number. Quote splits exactly as written; do not round a conditional split to its maximum. “TBC”, “soon”, and blank fields mean the value is unknown.
 
 ### Onchain prop firms
 
@@ -46,6 +46,7 @@ These are the core onchain funding firms in the directory. Most that are live to
 | Carrot Funding | [Review](https://onchainprops.xyz/firms/carrot-funding) | gTrade, Hyperliquid (soon) | 80% | $50k ($100k soon) | Yes | No | 2026-07-08 |
 | DojiFunded | [Review](https://onchainprops.xyz/firms/dojifunded) | Arbitrum | Up to 90% | $100,000 | Yes | No | 2026-08-27 |
 | FUNDED by FOXIFY | [Review](https://onchainprops.xyz/firms/funded-by-foxify) | Hyperliquid (soon) | Up to 90% | $10,000 | No | No | 2026-06-26 |
+| Northbook | [Review](https://onchainprops.xyz/firms/northbook) | Hyperliquid (prices only) | 80% (90% add-on) | $50,000 | No | No | 2026-11-27 |
 
 As of November 2026, the directory’s own FAQ states that Vanta Trading offers the highest listed profit split (up to 100%), Vest Capital offers up to 95%, and Cashed has the largest listed max account ($322,500). Those are snapshot figures from the comparison table, not a recommendation.
 
