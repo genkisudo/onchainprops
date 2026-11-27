@@ -18,6 +18,8 @@
  *                   payouts.json generatedAt). Each post keeps its own lastmod.
  *                   Hypernova, Propr and Vanta Trading use their panel content
  *                   date, which matches the WebPage dateModified on those pages.
+ *   - compare.html — Review/Visit links under each firm card (compare-cta-<slug>)
+ *   - discount-codes.html — table of live discount codes (firms.json discount/discountCode)
  *   - blog.html   — article cards (from posts/*.md)
  *   - blog/*.html — one article page per posts/*.md, with BlogPosting/FAQPage/Breadcrumb JSON-LD
  *                   (how-to-check-onchain-prop-firm-payouts also gets HowTo JSON-LD)
@@ -413,7 +415,7 @@ ${rows}
 // script.js block
 // -----------------------------------------
 const firmLiteral = (f) => {
-    const keys = ['name', 'country', 'split', 'maxAccount', 'profitTarget', 'dailyDrawdown', 'maxDrawdown', 'website', 'chain', 'isAffiliate', 'token', 'payoutSpeed', 'rulesOnchain', 'aiAgents', 'scaledCapital', 'evalDataOnchain', 'bestSplit', 'bestTargetToRisk', 'maxLeverage', 'bestLeverage', 'lowestFinalTarget', 'payoutsVerified'];
+    const keys = ['name', 'country', 'split', 'maxAccount', 'profitTarget', 'dailyDrawdown', 'maxDrawdown', 'website', 'chain', 'isAffiliate', 'token', 'payoutSpeed', 'rulesOnchain', 'aiAgents', 'scaledCapital', 'evalDataOnchain', 'bestSplit', 'bestTargetToRisk', 'maxLeverage', 'bestLeverage', 'lowestFinalTarget', 'payoutsVerified', 'discount', 'discountCode'];
     return '    { ' + keys.map((k) => `${k}: ${JSON.stringify(f[k])}`).join(', ') + ' }';
 };
 
@@ -483,7 +485,11 @@ ${table(cryptoPropFirms)}
 - Largest max account: ${joinNames(maxLeaders.names)} at ${fmtMoney(maxLeaders.amount)}${scaledNote}
 - Most common chain: ${chainFact}
 - Payout method: stablecoins (USDC/USDT) to non-custodial wallets
-
+${discountFirms().length ? `
+## Discount Codes
+Current discount codes for listed firms (full list: ${SITE}/discount-codes):
+${discountFirms().map((f) => `- ${f.name}: ${offerText(f)}`).join('\n')}
+` : ''}
 ## What is an Onchain Prop Firm?
 An onchain prop trading firm provides capital to traders in cryptocurrency. Traders must pass an evaluation phase — demonstrating consistent profitability within drawdown rules — then receive a funded account. Profits are split between the trader and the firm, with the trader's share paid directly to their non-custodial crypto wallet via stablecoins. This differs from traditional prop firms in that execution is transparent, on-chain, and verifiable by smart contract.
 
@@ -885,6 +891,7 @@ ${more.map((o) => `                    <a href="${o.slug}" class="article-card b
                 <a href="../blog.html">Blog</a>
                 <a href="../resources.html">Resources</a>
                 <a href="../#faq">FAQ</a>
+                <a href="../discount-codes">Discount Codes</a>
                 <a href="../privacy.html">Privacy Policy</a>
             </div>
             <div class="footer-socials">
@@ -1052,6 +1059,7 @@ const sitemapXml = () => {
 ${url('https://onchainprops.xyz/', 'weekly', '1.0', 'Main page — single-page app, all content lives here', siteContentDate)}
 ${url('https://onchainprops.xyz/compare.html', 'weekly', '0.8', 'Compare Firms — long-form comparison article')}${firmUrls}
 ${url(`${SITE}/tools/glitch`, 'monthly', '0.7', 'Glitch — trading tool review')}
+${url(`${SITE}/discount-codes`, 'weekly', '0.7', 'Discount codes — current prop firm discount codes')}
 ${url('https://onchainprops.xyz/blog.html', 'weekly', '0.7', 'Blog — payout safety and onchain prop trading guides')}${postSitemapUrls()}
 ${url('https://onchainprops.xyz/resources', 'monthly', '0.6', 'Resources — tools & guides for onchain traders')}
 ${url('https://onchainprops.xyz/privacy.html', 'yearly', '0.3', 'Privacy policy', siteContentDate)}
@@ -1158,12 +1166,90 @@ const firmStats = (f) => [
     ['Country', /^tbc$/i.test(f.country ?? '') ? '' : f.country]
 ].filter(([, v]) => v);
 
-const firmStatsBlock = (f) => {
+/**
+ * @param {object} f - firm entry from firms.json
+ * @param {{ button?: boolean }} [opts] - button: render the top "Visit" CTA
+ *   (only for pages without a .firm-aside, which already has its own CTA)
+ */
+const firmStatsBlock = (f, { button = false } = {}) => {
     const items = firmStats(f).map(([k, v]) =>
         `    <span class="firm-meta-item">${k}: <strong>${escHtml(v)}</strong></span>`).join('\n');
     const chainId = payouts?.firms?.[f.name]?.[0]?.chainId;
     const source = chainId ? `\n<p class="firm-verified">Data from ${EXPLORER_NAMES[chainId] ?? 'Etherscan'}</p>` : '';
-    return `<div class="firm-meta">\n${items}\n</div>${source}${firmPayoutsBlock(f)}`;
+    return `<div class="firm-meta">\n${items}\n</div>${source}${firmPayoutsBlock(f)}${firmCtaBlock(f, { button })}`;
+};
+
+// -----------------------------------------
+// Outbound CTAs and discount offers
+// -----------------------------------------
+// Every generated outbound firm link carries data-firm / data-placement, which
+// script.js reports as "Firm Link Opened" so clicks can be counted per firm.
+
+/** "20% off with code <strong>X</strong>" or "10% off through our link". */
+const offerHtml = (f) => f.discountCode
+    ? `${escHtml(f.discount)} with code <strong>${escHtml(f.discountCode)}</strong>`
+    : `${escHtml(f.discount)} through our link`;
+const offerText = (f) => stripTags(offerHtml(f));
+
+/** Outbound link to the firm's (affiliate) website. */
+const ctaLink = (f, placement, cls = 'btn btn-primary') =>
+    `<a href="${escAttr(f.website)}" class="${cls}" target="_blank" rel="${relFor(f, f.website)}" data-firm="${escAttr(f.name)}" data-placement="${placement}">Visit ${escHtml(f.name)} ↗</a>`;
+
+/** Above-the-fold CTA row on firm pages: Visit button and/or discount offer. */
+const firmCtaBlock = (f, { button }) => {
+    const parts = [];
+    if (button) parts.push(ctaLink(f, 'top_cta'));
+    if (f.discount) parts.push(`<span class="firm-offer">Discount: ${offerHtml(f)} · <a href="../discount-codes">All codes</a></span>`);
+    if (!parts.length) return '';
+    if (button && relFor(f, f.website).includes('sponsored')) parts.push('<span class="firm-cta-note">Affiliate link</span>');
+    return `\n<div class="firm-cta">\n    ${parts.join('\n    ')}\n</div>`;
+};
+
+/** Review + Visit links under each firm card in compare.html (GEN block `compare-cta-<slug>`). */
+const compareCtaBlock = (f) => {
+    const review = detailPath(f);
+    const links = [];
+    if (review) links.push(`<a href="${review}" class="ca-firm-link">Read the ${escHtml(f.name)} review →</a>`);
+    links.push(ctaLink(f, 'compare_card', 'ca-firm-link ca-firm-link--out'));
+    if (f.discount) links.push(`<span class="ca-firm-offer">${offerHtml(f)}</span>`);
+    return `<div class="ca-firm-actions">\n    ${links.join('\n    ')}\n</div>`;
+};
+
+/** Firms with a live discount, in table order (hidden firms excluded). */
+const discountFirms = () => [...propFirms, ...predictionMarketFirms, ...cryptoPropFirms].filter((f) => f.discount);
+
+/** discount-codes.html table (GEN block `discount-codes`). */
+const discountCodesBlock = () => {
+    const firms = discountFirms();
+    if (!firms.length) return '<p>No discount codes are live right now. Check back soon.</p>';
+    const rows = firms.map((f) => {
+        const review = detailPath(f);
+        const name = review ? `<a href="${review}">${escHtml(f.name)}</a>` : escHtml(f.name);
+        const code = f.discountCode ? `<code class="discount-code">${escHtml(f.discountCode)}</code>` : 'Applied through our link';
+        return `        <tr>
+            <td class="firm-name">${name}</td>
+            <td class="val-highlight" data-label="Discount">${escHtml(f.discount)}</td>
+            <td data-label="Code">${code}</td>
+            <td data-label="Last checked">${f.lastVerified ? `<time datetime="${f.lastVerified}">${fmtDate(f.lastVerified)}</time>` : '—'}</td>
+            <td data-label="Firm">${ctaLink(f, 'discount_page', 'btn btn-secondary')}</td>
+        </tr>`;
+    }).join('\n');
+    return `<div class="table-container">
+<table class="prop-table" aria-label="Prop firm discount codes">
+    <thead>
+        <tr>
+            <th scope="col">Firm</th>
+            <th scope="col">Discount</th>
+            <th scope="col">Code</th>
+            <th scope="col">Last checked</th>
+            <th scope="col"><span class="visually-hidden">Link</span></th>
+        </tr>
+    </thead>
+    <tbody>
+${rows}
+    </tbody>
+</table>
+</div>`;
 };
 
 const EXPLORERS = { 1: 'https://etherscan.io', 42161: 'https://arbiscan.io', 8453: 'https://basescan.org' };
@@ -1557,7 +1643,7 @@ const buildFirmPages = () => {
             page = inject(page, 'firm-description', `<meta name="description"\n    content="${desc}">`);
             page = inject(page, 'firm-og-description', `<meta property="og:description"\n    content="${desc}">`);
             page = inject(page, 'firm-twitter', firmTwitterBlock(title, desc));
-            page = inject(page, 'firm-stats', firmStatsBlock(f));
+            page = inject(page, 'firm-stats', firmStatsBlock(f, { button: !page.includes('class="firm-aside"') }));
             page = inject(page, 'firm-breadcrumb', ldScript({
                 '@context': 'https://schema.org',
                 '@type': 'BreadcrumbList',
@@ -1668,9 +1754,17 @@ write('llms-full.txt', llmsFullTxt());
 write('sitemap.xml', sitemapXml());
 write('feed.xml', feedXml());
 const firmPageCount = buildFirmPages();
-// compare.html is hand-written except for the Hypernova lifetime-payout figure (kept fresh from hypernova.json).
-// Without valid data the last generated figure stays in place.
-if (hypernovaLifetimeUsd()) write('compare.html', inject(read('compare.html'), 'hypernova-lifetime', hypernovaLifetimeUsd(), 'inline'));
+// compare.html is hand-written except for the Hypernova lifetime-payout figure (kept fresh from hypernova.json)
+// and the Review/Visit links under each firm card. Without valid Hypernova data the last generated figure stays in place.
+let compareHtml = read('compare.html');
+if (hypernovaLifetimeUsd()) compareHtml = inject(compareHtml, 'hypernova-lifetime', hypernovaLifetimeUsd(), 'inline');
+for (const f of [...allPropFirms, ...predictionMarketFirms, ...cryptoPropFirms]) {
+    const key = `compare-cta-${firmSlug(f)}`;
+    if (compareHtml.includes(`<!-- GEN:BEGIN ${key} -->`)) compareHtml = inject(compareHtml, key, compareCtaBlock(f));
+    else if (!f.hidden) firmPageWarnings.push(`compare.html: no firm card with ${key} markers for ${f.name}`);
+}
+write('compare.html', compareHtml);
+write('discount-codes.html', inject(read('discount-codes.html'), 'discount-codes', discountCodesBlock()));
 publishIndexNowKey();
 
 if (!/^\d+$/.test(KIT_FORM_ID)) console.warn('⚠ KIT_FORM_ID is not set in build.js — newsletter forms will not work until it is.');

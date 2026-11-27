@@ -113,32 +113,34 @@ const analytics = {
  * @property {string} [bestLeverage]
  * @property {string} [lowestFinalTarget]
  * @property {string} [payoutsVerified]
+ * @property {string} [discount]      e.g. "20% off"
+ * @property {string} [discountCode]  checkout code; unset when the discount applies through the link
  */
 
 const AppState = {
     // GEN:BEGIN firm-data
     /** @type {PropFirm[]} */
     propFirms: [
-        { name: "Hypernova", country: "Cayman Islands", split: "80% (90% add-on)", maxAccount: "$300,000", profitTarget: "9-10%", dailyDrawdown: "3-5%", maxDrawdown: "3-8%", website: "https://hn.xyz/r/rcvmoy", chain: "Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "~6s", rulesOnchain: "Yes", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "Yes" },
-        { name: "Vanta Trading", country: "Cayman Islands", split: "Up to 100%", maxAccount: "$100,000", profitTarget: "10%", dailyDrawdown: "3% or 5%", maxDrawdown: "5%", website: "https://vantatrading.io/?ref=kamil", chain: "Bittensor / Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "Weekly", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: "Yes", bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "Work in progress" },
-        { name: "Propr", country: "BVI", split: "80%", maxAccount: "Up to $300k", profitTarget: "9-12%", dailyDrawdown: "3-5%", maxDrawdown: "3-8%", website: "https://app.propr.xyz/r/nCnJ5uZ9", chain: "Hyperliquid", isAffiliate: true, token: "Planned", payoutSpeed: undefined, rulesOnchain: "No", aiAgents: "Yes", scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "Yes" },
-        { name: "Bungee Funded Perps", country: "TBC", split: "80%", maxAccount: "$100,000", profitTarget: "9-12%", dailyDrawdown: "3%", maxDrawdown: "3-6%", website: "https://bungee.exchange/r/ONCHAINPROPS", chain: "Base / Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "~1 business day", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: "20x", bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No" },
-        { name: "Iceberg", country: "TBC", split: "80%", maxAccount: "$100,000", profitTarget: "None / 10%", dailyDrawdown: "3%", maxDrawdown: "6%", website: "https://www.iceberg.cash/?ref=3665E15AECCD7D44", chain: "Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "~seconds", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: "25x", bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No" },
-        { name: "Vest Capital", country: "TBC", split: "Up to 95%", maxAccount: "$25,000", profitTarget: "None / 10-20%", dailyDrawdown: "None / 3-4%", maxDrawdown: "2-6%", website: "https://next.vestmarkets.com/r/6ionchainprops", chain: "Arbitrum / Base", isAffiliate: true, token: "No", payoutSpeed: "24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: "75x", bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No" },
-        { name: "Cashed", country: "TBC", split: "Up to 90%", maxAccount: "$322,500", profitTarget: "None / 8-12%", dailyDrawdown: "2-5%", maxDrawdown: "3-8%", website: "https://cashed.fun/join?ref=GENKISUD-209C78", chain: "Hyperliquid / Polymarket", isAffiliate: true, token: "No", payoutSpeed: "24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: "Yes", evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: "10x", bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No" },
-        { name: "Carrot Funding", country: "UAE", split: "80%", maxAccount: "$50k ($100k soon)", profitTarget: "5%/8%", dailyDrawdown: "4-5%", maxDrawdown: "8-10%", website: "https://app.carrotfunding.io/join/2VSSOTXBQZ", chain: "gTrade, Hyperliquid (soon)", isAffiliate: true, token: "Yes", payoutSpeed: "Within 24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: "200x", bestLeverage: "Yes", lowestFinalTarget: undefined, payoutsVerified: "Yes" },
-        { name: "FUNDED by FOXIFY", country: "BVI", split: "Up to 90%", maxAccount: "$10,000", profitTarget: "15%", dailyDrawdown: "N/A", maxDrawdown: "10-20%", website: "https://www.foxify.trade/", chain: "Hyperliquid (soon)", isAffiliate: false, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No" }
+        { name: "Hypernova", country: "Cayman Islands", split: "80% (90% add-on)", maxAccount: "$300,000", profitTarget: "9-10%", dailyDrawdown: "3-5%", maxDrawdown: "3-8%", website: "https://hn.xyz/r/rcvmoy", chain: "Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "~6s", rulesOnchain: "Yes", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "Yes", discount: undefined, discountCode: undefined },
+        { name: "Vanta Trading", country: "Cayman Islands", split: "Up to 100%", maxAccount: "$100,000", profitTarget: "10%", dailyDrawdown: "3% or 5%", maxDrawdown: "5%", website: "https://vantatrading.io/?ref=kamil", chain: "Bittensor / Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "Weekly", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: "Yes", bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "Work in progress", discount: undefined, discountCode: undefined },
+        { name: "Propr", country: "BVI", split: "80%", maxAccount: "Up to $300k", profitTarget: "9-12%", dailyDrawdown: "3-5%", maxDrawdown: "3-8%", website: "https://app.propr.xyz/r/nCnJ5uZ9", chain: "Hyperliquid", isAffiliate: true, token: "Planned", payoutSpeed: undefined, rulesOnchain: "No", aiAgents: "Yes", scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "Yes", discount: undefined, discountCode: undefined },
+        { name: "Bungee Funded Perps", country: "TBC", split: "80%", maxAccount: "$100,000", profitTarget: "9-12%", dailyDrawdown: "3%", maxDrawdown: "3-6%", website: "https://bungee.exchange/r/ONCHAINPROPS", chain: "Base / Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "~1 business day", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: "20x", bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No", discount: undefined, discountCode: undefined },
+        { name: "Iceberg", country: "TBC", split: "80%", maxAccount: "$100,000", profitTarget: "None / 10%", dailyDrawdown: "3%", maxDrawdown: "6%", website: "https://www.iceberg.cash/?ref=3665E15AECCD7D44", chain: "Hyperliquid", isAffiliate: true, token: "No", payoutSpeed: "~seconds", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: "25x", bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No", discount: undefined, discountCode: undefined },
+        { name: "Vest Capital", country: "TBC", split: "Up to 95%", maxAccount: "$25,000", profitTarget: "None / 10-20%", dailyDrawdown: "None / 3-4%", maxDrawdown: "2-6%", website: "https://next.vestmarkets.com/r/6ionchainprops", chain: "Arbitrum / Base", isAffiliate: true, token: "No", payoutSpeed: "24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: "75x", bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No", discount: undefined, discountCode: undefined },
+        { name: "Cashed", country: "TBC", split: "Up to 90%", maxAccount: "$322,500", profitTarget: "None / 8-12%", dailyDrawdown: "2-5%", maxDrawdown: "3-8%", website: "https://cashed.fun/join?ref=GENKISUD-209C78", chain: "Hyperliquid / Polymarket", isAffiliate: true, token: "No", payoutSpeed: "24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: "Yes", evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: "10x", bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No", discount: undefined, discountCode: undefined },
+        { name: "Carrot Funding", country: "UAE", split: "80%", maxAccount: "$50k ($100k soon)", profitTarget: "5%/8%", dailyDrawdown: "4-5%", maxDrawdown: "8-10%", website: "https://app.carrotfunding.io/join/2VSSOTXBQZ", chain: "gTrade, Hyperliquid (soon)", isAffiliate: true, token: "Yes", payoutSpeed: "Within 24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: "200x", bestLeverage: "Yes", lowestFinalTarget: undefined, payoutsVerified: "Yes", discount: undefined, discountCode: undefined },
+        { name: "FUNDED by FOXIFY", country: "BVI", split: "Up to 90%", maxAccount: "$10,000", profitTarget: "15%", dailyDrawdown: "N/A", maxDrawdown: "10-20%", website: "https://www.foxify.trade/", chain: "Hyperliquid (soon)", isAffiliate: false, token: "Yes", payoutSpeed: "Soon", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No", discount: undefined, discountCode: undefined }
     ],
     /** @type {PropFirm[]} */
     predictionMarketFirms: [
-        { name: "Funding Predicts", country: "USA", split: "Up to 90%", maxAccount: "$150,000", profitTarget: undefined, dailyDrawdown: undefined, maxDrawdown: undefined, website: "https://fundingpredicts.com/purchase?ref=ONCHAINPROPS", chain: "Polymarket", isAffiliate: true, token: "No", payoutSpeed: "Weekly", rulesOnchain: "TBC", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: undefined },
-        { name: "Catalyst", country: "TBC", split: "Fixed payout", maxAccount: "$50,000", profitTarget: "12-15%", dailyDrawdown: "None", maxDrawdown: "4-5% trailing", website: "https://www.tradecatalyst.com/", chain: "Polymarket", isAffiliate: false, token: "No", payoutSpeed: "Instant on pass", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No" }
+        { name: "Funding Predicts", country: "USA", split: "Up to 90%", maxAccount: "$150,000", profitTarget: undefined, dailyDrawdown: undefined, maxDrawdown: undefined, website: "https://fundingpredicts.com/purchase?ref=ONCHAINPROPS", chain: "Polymarket", isAffiliate: true, token: "No", payoutSpeed: "Weekly", rulesOnchain: "TBC", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: undefined, discount: "20% off", discountCode: "ONCHAINPROPS" },
+        { name: "Catalyst", country: "TBC", split: "Fixed payout", maxAccount: "$50,000", profitTarget: "12-15%", dailyDrawdown: "None", maxDrawdown: "4-5% trailing", website: "https://www.tradecatalyst.com/", chain: "Polymarket", isAffiliate: false, token: "No", payoutSpeed: "Instant on pass", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No", discount: undefined, discountCode: undefined }
     ],
     /** @type {PropFirm[]} */
     cryptoPropFirms: [
-        { name: "Breakout", country: "TBC", split: "80% (90% add-on)", maxAccount: "$200,000", profitTarget: "9-12%", dailyDrawdown: "3%", maxDrawdown: "3-6%", website: "https://www.breakoutprop.com/", chain: "", isAffiliate: false, token: "No", payoutSpeed: "12-24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: "40x", bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No" },
-        { name: "SizeProp", country: "TBC", split: "Up to 95%", maxAccount: "$100,000", profitTarget: undefined, dailyDrawdown: undefined, maxDrawdown: undefined, website: "https://sizeprop.com/referral?ref=ONCHAINPROPS", chain: "", isAffiliate: true, token: "No", payoutSpeed: "~24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No" },
-        { name: "HyroTrader", country: "UAE / BVI", split: "Up to 90%", maxAccount: "$200,000", profitTarget: "10%", dailyDrawdown: "3-5%", maxDrawdown: "5-10%", website: "https://www.hyrotrader.com/", chain: "", isAffiliate: false, token: "No", payoutSpeed: "~24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No" }
+        { name: "Breakout", country: "TBC", split: "80% (90% add-on)", maxAccount: "$200,000", profitTarget: "9-12%", dailyDrawdown: "3%", maxDrawdown: "3-6%", website: "https://www.breakoutprop.com/", chain: "", isAffiliate: false, token: "No", payoutSpeed: "12-24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: "40x", bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No", discount: undefined, discountCode: undefined },
+        { name: "SizeProp", country: "TBC", split: "Up to 95%", maxAccount: "$100,000", profitTarget: undefined, dailyDrawdown: undefined, maxDrawdown: undefined, website: "https://sizeprop.com/referral?ref=ONCHAINPROPS", chain: "", isAffiliate: true, token: "No", payoutSpeed: "~24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No", discount: "10% off", discountCode: "ONCHAINPROPS" },
+        { name: "HyroTrader", country: "UAE / BVI", split: "Up to 90%", maxAccount: "$200,000", profitTarget: "10%", dailyDrawdown: "3-5%", maxDrawdown: "5-10%", website: "https://www.hyrotrader.com/", chain: "", isAffiliate: false, token: "No", payoutSpeed: "~24h", rulesOnchain: "No", aiAgents: undefined, scaledCapital: undefined, evalDataOnchain: undefined, bestSplit: undefined, bestTargetToRisk: undefined, maxLeverage: undefined, bestLeverage: undefined, lowestFinalTarget: undefined, payoutsVerified: "No", discount: "5% off", discountCode: "DED5IJB" }
     ],
     // GEN:END firm-data
     /** @type {string|null} */
@@ -507,6 +509,17 @@ const buildFirmRow = (firm, rank, { showProfitTarget = false } = {}) => {
         appendChip(finalTargetChip);
     }
 
+    // Offer signal: an active discount for readers (firms.json discount/discountCode)
+    if (firm.discount) {
+        const offerChip = document.createElement('span');
+        offerChip.className = 'trust-chip trust-chip--offer';
+        offerChip.textContent = firm.discount;
+        offerChip.title = firm.discountCode
+            ? `${firm.discount} with code ${firm.discountCode}`
+            : `${firm.discount} through our link`;
+        appendChip(offerChip);
+    }
+
     const splitCell = document.createElement('td');
     splitCell.className = 'val-highlight';
     splitCell.dataset.label = 'Profit Split';
@@ -853,19 +866,87 @@ const setupEventDelegation = () => {
             const section = anchor.closest('section');
             const card = anchor.closest('.resource-item');
             if (section && card && RESOURCE_SECTION_IDS.has(section.id)) {
-                const title = card.querySelector('.resource-title')?.textContent?.trim() ?? '';
-                const type = card.querySelector('.resource-tag')?.textContent?.trim()?.toLowerCase() ?? '';
-                let hostname = '';
-                try { hostname = new URL(anchor.href).hostname; } catch (_) {}
-
-                analytics.track('Resource Link Opened', {
-                    'resource title': title,
-                    'resource type': type,
-                    'destination domain': hostname,
-                    'section name': SECTION_META[section.id]?.name ?? section.id
-                });
+                trackResourceLink(anchor, section, card);
+                return;
             }
+            trackFirmLink(anchor);
         }
+    });
+};
+
+/** Resource Link Opened — outbound links inside the resources section. */
+const trackResourceLink = (anchor, section, card) => {
+    const title = card.querySelector('.resource-title')?.textContent?.trim() ?? '';
+    const type = card.querySelector('.resource-tag')?.textContent?.trim()?.toLowerCase() ?? '';
+    let hostname = '';
+    try { hostname = new URL(anchor.href).hostname; } catch (_) {}
+
+    analytics.track('Resource Link Opened', {
+        'resource title': title,
+        'resource type': type,
+        'destination domain': hostname,
+        'section name': SECTION_META[section.id]?.name ?? section.id
+    });
+};
+
+/** "app.carrotfunding.io" → "carrotfunding.io", so docs/app subdomains map to the same firm. */
+const baseHost = (host) => host.replace(/^www\./, '').split('.').slice(-2).join('.');
+
+/** @type {Map<string, PropFirm> | null} firm website base host → firm, built on first use */
+let firmsByHost = null;
+const firmForHost = (host) => {
+    if (!firmsByHost) {
+        firmsByHost = new Map();
+        for (const f of [...AppState.propFirms, ...AppState.predictionMarketFirms, ...AppState.cryptoPropFirms]) {
+            try { firmsByHost.set(baseHost(new URL(f.website).hostname), f); } catch (_) {}
+        }
+    }
+    return firmsByHost.get(baseHost(host)) ?? null;
+};
+
+/** Where on the page an outbound firm link sits. Generated CTAs set data-placement explicitly. */
+const linkPlacement = (anchor) => {
+    if (anchor.dataset.placement) return anchor.dataset.placement;
+    if (anchor.closest('.firm-facts-card')) return 'key_facts';
+    if (anchor.closest('.firm-verdict') || anchor.classList.contains('firm-verdict-cta')) return 'verdict';
+    if (anchor.closest('.ca-firm-card')) return 'compare_card';
+    if (anchor.closest('.firm-detail-content')) return 'review_body';
+    if (anchor.closest('.firm-detail')) return 'bottom_cta';
+    if (anchor.closest('.article-body, article')) return 'article_body';
+    return 'other';
+};
+
+/**
+ * Firm Link Opened: any click that leaves the site for a listed firm's website,
+ * or any affiliate (rel="sponsored") link. This is the per-firm outbound click
+ * count that affiliate and sponsorship conversations are based on.
+ * @param {HTMLAnchorElement} anchor
+ */
+const trackFirmLink = (anchor) => {
+    let url;
+    try { url = new URL(anchor.href); } catch (_) { return; }
+    if (!/^https?:$/.test(url.protocol) || url.origin === location.origin) return;
+
+    const isAffiliate = (anchor.getAttribute('rel') ?? '').split(/\s+/).includes('sponsored');
+    // Firm pages: a sponsored link with an unrecognized host still belongs to the page's firm.
+    // Match the URL slug (same rule as buildFirmRow); hidden firms aren't in AppState, so fall
+    // back to the generated top CTA's data-firm.
+    const pageSlug = /\/firms\/([^/.]+)/.exec(location.pathname)?.[1];
+    const pageFirm = pageSlug
+        ? [...AppState.propFirms, ...AppState.predictionMarketFirms, ...AppState.cryptoPropFirms]
+            .find((f) => f.name.toLowerCase().replace(/[\s/]+/g, '-').replace(/[^a-z0-9-]/g, '') === pageSlug)?.name
+            ?? document.querySelector('.firm-cta [data-firm]')?.getAttribute('data-firm') ?? null
+        : null;
+    const firmName = anchor.dataset.firm ?? firmForHost(url.hostname)?.name ?? (isAffiliate ? pageFirm : null);
+    if (!firmName && !isAffiliate) return;
+
+    analytics.track('Firm Link Opened', {
+        'firm id': firmName ? toFirmId(firmName) : null,
+        'firm name': firmName,
+        'affiliate link': isAffiliate,
+        'placement': linkPlacement(anchor),
+        'page path': location.pathname,
+        'destination domain': url.hostname
     });
 };
 

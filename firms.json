@@ -199,7 +199,8 @@
       "rulesOnchain": "No",
       "payoutsVerified": "Yes",
       "lastVerified": "2026-08-27",
-      "pageHook": "onchain crypto prop firm with Instant Funding, 1-Step, and 2-Step evaluations across crypto, forex, stocks, and commodities."
+      "pageHook": "onchain crypto prop firm with Instant Funding, 1-Step, and 2-Step evaluations across crypto, forex, stocks, and commodities.",
+      "discount": "10% off"
     },
     {
       "name": "FUNDED by FOXIFY",
@@ -236,7 +237,9 @@
       "payoutSpeed": "Weekly",
       "rulesOnchain": "TBC",
       "lastVerified": "2026-08-27",
-      "pageHook": "prediction markets prop firm on Polymarket, backed by MyFundedFutures."
+      "pageHook": "prediction markets prop firm on Polymarket, backed by MyFundedFutures.",
+      "discountCode": "ONCHAINPROPS",
+      "discount": "20% off"
     },
     {
       "name": "Catalyst",
@@ -294,7 +297,9 @@
       "rulesOnchain": "No",
       "payoutsVerified": "No",
       "lastVerified": "2026-08-21",
-      "pageHook": "multi-asset crypto prop firm backed by Igloo Inc (Pudgy Penguins)."
+      "pageHook": "multi-asset crypto prop firm backed by Igloo Inc (Pudgy Penguins).",
+      "discountCode": "ONCHAINPROPS",
+      "discount": "10% off"
     },
     {
       "name": "HyroTrader",
@@ -313,7 +318,9 @@
       "rulesOnchain": "No",
       "payoutsVerified": "No",
       "lastVerified": "2026-11-04",
-      "pageHook": "crypto futures prop firm with Zero-Step, One-Step, and Two-Step challenges."
+      "pageHook": "crypto futures prop firm with Zero-Step, One-Step, and Two-Step challenges.",
+      "discountCode": "DED5IJB",
+      "discount": "5% off"
     }
   ]
 }

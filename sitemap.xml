@@ -130,6 +130,14 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Discount codes — current prop firm discount codes -->
+  <url>
+    <loc>https://onchainprops.xyz/discount-codes</loc>
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Blog — payout safety and onchain prop trading guides -->
   <url>
     <loc>https://onchainprops.xyz/blog.html</loc>
