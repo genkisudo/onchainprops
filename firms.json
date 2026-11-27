@@ -219,6 +219,25 @@
       "payoutsVerified": "No",
       "lastVerified": "2026-06-26",
       "pageHook": "Challenge Funding and Flash Funding paths, with Hyperliquid support coming soon."
+    },
+    {
+      "name": "Northbook",
+      "country": "TBC",
+      "split": "80% (90% add-on)",
+      "maxAccount": "$50,000",
+      "profitTarget": "9-10%",
+      "dailyDrawdown": "3%",
+      "maxDrawdown": "3-8%",
+      "website": "https://northbook.xyz/",
+      "chain": "Hyperliquid",
+      "chainPhrase": "Hyperliquid, with USDC payouts settled onchain",
+      "isAffiliate": false,
+      "token": "No",
+      "payoutSpeed": "On demand",
+      "rulesOnchain": "No",
+      "payoutsVerified": "No",
+      "lastVerified": "2026-11-27",
+      "pageHook": "invite-only one-step perps challenges priced from Hyperliquid, with a static drawdown, a fully published rulebook and on-demand USDC payouts, but no payout wallet or vault address published yet."
     }
   ],
   "predictionMarketFirms": [
