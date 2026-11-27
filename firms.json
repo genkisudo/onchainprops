@@ -253,7 +253,7 @@
       "token": "No",
       "payoutSpeed": "Within hours",
       "rulesOnchain": "No",
-      "maxLeverage": "40x",
+      "maxLeverage": "10x",
       "payoutsVerified": "No",
       "lastVerified": "2026-11-27",
       "pageHook": "crypto prop firm with 1-Step Classic, Pro, Turbo, and Spark evaluations and static drawdowns."
