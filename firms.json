@@ -77,7 +77,7 @@
     },
     {
       "name": "Bungee Funded Perps",
-      "country": "BVI",
+      "country": "TBC",
       "split": "80%",
       "maxAccount": "$100,000",
       "profitTarget": "9-12%",
@@ -92,7 +92,7 @@
       "payoutSpeed": "~1 business day",
       "rulesOnchain": "No",
       "maxLeverage": "20x",
-      "payoutsVerified": "Yes",
+      "payoutsVerified": "No",
       "lastVerified": "2026-11-27",
       "pageHook": "one-step perps funding program from the team behind Socket, with a public USDC payout ledger on Base, fixed per-market leverage and 1.5 bps fees."
     },
