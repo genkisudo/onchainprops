@@ -38,7 +38,7 @@ CI (`.github/workflows/build.yml`) also runs this on every push to `main` and co
   - `firm-stats`: the stats pills (trust signals first: payouts verified, rules onchain, payout speed, then split, account, chain, leverage, token, country) plus, for firms with payout data in payouts.json, a "Data from Etherscan" (or chain explorer) line. `lastVerified` is kept in firms.json but no longer shown
   - `firm-breadcrumb`: BreadcrumbList JSON-LD (Home › Compare › Firm)
   - `firm-stats` also ends with a CTA row: a "Visit <Firm> ↗" button (affiliate `website` URL) on pages without a `.firm-aside` Key Facts card (those already have their own CTA), plus a discount pill when the firm has `discount` set
-  - `firm-description` / `firm-og-description`: `"<Name> review: <pageHook> <generated facts>"`. Keep `pageHook` free of splits and account sizes; the facts sentence adds those
+  - `firm-description` / `firm-og-description`: `"<Name> review: <split>, max account <size>. <payout verification>. <PageHook> <market, speed>"`, capped at 160 chars, so the cap trims the hook, never the facts or the verification caveat. Keep `pageHook` free of splits and account sizes; the facts sentence adds those
   - Everything else on the page (`<title>`, review prose, FAQ JSON-LD) is hand-written. `node build.js` warns when a % or $ figure in a `<title>` no longer matches the data
   - **When you re-check a firm's terms, update its `lastVerified` (YYYY-MM-DD) in firms.json.** (internal record; not displayed)
   - A new firm page must contain all four marker pairs (copy them from `firms/hypernova.html`), or the build fails

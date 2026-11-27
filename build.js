@@ -1511,7 +1511,11 @@ const capAtWord = (s, max) => {
     return text.slice(0, end).replace(/[\s,;:]+$/g, '').trim();
 };
 
-/** "<Name> review: <pageHook> <facts from firms.json>", capped at 160 characters. */
+/**
+ * "<Name> review: <split>, max account <size>. <verification>. <PageHook> <market, speed>",
+ * capped at 160 characters. Facts and the payout-verification caveat come first so the
+ * cap trims the hook and market detail, never the trust signal.
+ */
 const firmDescription = (f) => {
     const split = /tbc/i.test(f.split) ? 'Profit split TBC'
         : parseSplit(f.split) ? `${f.split} profit split` : f.split;
@@ -1522,10 +1526,11 @@ const firmDescription = (f) => {
         No: ' Payouts not yet independently verified.',
         'Work in progress': ' Payout verification in progress.'
     }[f.payoutsVerified] ?? '';
-    const hook = f.pageHook ? ` ${f.pageHook}` : '';
+    const hook = f.pageHook ? ` ${f.pageHook.charAt(0).toUpperCase()}${f.pageHook.slice(1)}` : '';
     const maxAccount = /^up to/i.test(f.maxAccount) ? lcFirst(f.maxAccount) : f.maxAccount;
+    const marketSentence = ` ${market.charAt(0).toUpperCase()}${market.slice(1)}.`;
     return capAtWord(
-        `${f.name} review:${hook} ${split}, max account ${maxAccount}, ${market}.${speed}${verified}`,
+        `${f.name} review: ${split}, max account ${maxAccount}.${verified}${hook}${marketSentence}${speed}`,
         FIRM_DESC_MAX
     );
 };
