@@ -155,9 +155,9 @@
       "payoutSpeed": "Usually <24h",
       "rulesOnchain": "No",
       "maxLeverage": "5x",
-      "payoutsVerified": "Yes",
+      "payoutsVerified": "No",
       "lastVerified": "2026-11-27",
-      "pageHook": "prop firm on Hyperliquid with 1-Phase and 2-Phase challenges, a build-your-own challenge builder, and USDC payouts verifiable onchain."
+      "pageHook": "prop firm on Hyperliquid with 1-Phase and 2-Phase challenges, a build-your-own challenge builder, and USDC payouts with block explorer links."
     },
     {
       "name": "DojiFunded",
@@ -219,22 +219,22 @@
     },
     {
       "name": "Catalyst",
-      "country": "TBC",
+      "country": "USA",
       "split": "Fixed payout",
       "maxAccount": "$50,000",
       "profitTarget": "12-15%",
       "dailyDrawdown": "None",
       "maxDrawdown": "4-5% trailing",
       "website": "https://www.tradecatalyst.com/",
-      "chain": "Polymarket",
-      "chainPhrase": "Polymarket",
+      "chain": "Polymarket / Kalshi",
+      "chainPhrase": "Polymarket and Kalshi markets",
       "isAffiliate": false,
       "token": "No",
-      "payoutSpeed": "Instant on pass",
+      "payoutSpeed": "Credited on pass (KYC to withdraw)",
       "rulesOnchain": "No",
       "payoutsVerified": "No",
       "lastVerified": "2026-11-27",
-      "pageHook": "Polymarket prop firm with low one-time fees, simulated accounts, and a fixed payout instead of a profit split."
+      "pageHook": "prediction markets challenge on Polymarket and Kalshi with low one-time fees, simulated accounts, and a fixed payout instead of a profit split."
     }
   ],
   "cryptoPropFirms": [

@@ -42,7 +42,7 @@ These are the core onchain funding firms in the directory. Most that are live to
 | Iceberg | [Review](https://onchainprops.xyz/firms/iceberg) | Hyperliquid | 80% | $100,000 | No | No | 2026-11-27 |
 | Vest Capital | [Review](https://onchainprops.xyz/firms/vest-capital) | Arbitrum / Base | Up to 95% | $50,000 | No | No | 2026-11-27 |
 | Cashed | [Review](https://onchainprops.xyz/firms/cashed) | Hyperliquid / Polymarket | Up to 90% | $322,500 | No | No | 2026-11-27 |
-| Carrot Funding | [Review](https://onchainprops.xyz/firms/carrot-funding) | Hyperliquid | 80% (90% option) | $100k ($200k soon) | Yes | No | 2026-11-27 |
+| Carrot Funding | [Review](https://onchainprops.xyz/firms/carrot-funding) | Hyperliquid | 80% (90% option) | $100k ($200k soon) | No | No | 2026-11-27 |
 | DojiFunded | [Review](https://onchainprops.xyz/firms/dojifunded) | Arbitrum | Up to 90% | $100,000 | Yes | No | 2026-08-27 |
 | FUNDED by FOXIFY | [Review](https://onchainprops.xyz/firms/funded-by-foxify) | Hyperliquid / Arbitrum / Berachain | 80% (70% automation) | $20,000 | No | No | 2026-11-27 |
 
@@ -54,8 +54,8 @@ Funded firms focused on prediction markets (Polymarket).
 
 | Firm | Review | Chain | Profit split | Max account | Payouts verified | Rules onchain | Last verified |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Funding Predicts | [Review](https://onchainprops.xyz/firms/funding-predicts) | Polymarket | Up to 90% | $150,000 | — | TBC | 2026-08-27 |
-| Catalyst | [Review](https://onchainprops.xyz/firms/catalyst) | Polymarket | Fixed payout | $50,000 | No | No | 2026-11-03 |
+| Funding Predicts | [Review](https://onchainprops.xyz/firms/funding-predicts) | Polymarket | Up to 90% | $150,000 | — | TBC | 2026-11-27 |
+| Catalyst | [Review](https://onchainprops.xyz/firms/catalyst) | Polymarket / Kalshi | Fixed payout | $50,000 | No | No | 2026-11-27 |
 
 A longer comparison of Polymarket prop firms is in [Polymarket Prop Firms](https://onchainprops.xyz/blog/polymarket-prop-firms).
 
@@ -65,9 +65,9 @@ Funded trading firms focused on crypto, not limited to onchain execution. These 
 
 | Firm | Review | Profit split | Max account | Payouts verified | Rules onchain | Last verified |
 | --- | --- | --- | --- | --- | --- | --- |
-| Breakout | [Review](https://onchainprops.xyz/firms/breakout) | 80% (90% add-on) | $200,000 | No | No | 2026-11-17 |
-| SizeProp | [Review](https://onchainprops.xyz/firms/sizeprop) | Up to 95% | $100,000 | No | No | 2026-08-21 |
-| HyroTrader | [Review](https://onchainprops.xyz/firms/hyrotrader) | Up to 90% | $200,000 | No | No | 2026-11-04 |
+| Breakout | [Review](https://onchainprops.xyz/firms/breakout) | 80% (90% add-on) | $200,000 | No | No | 2026-11-27 |
+| SizeProp | [Review](https://onchainprops.xyz/firms/sizeprop) | Up to 95% | $100,000 | No | No | 2026-11-27 |
+| HyroTrader | [Review](https://onchainprops.xyz/firms/hyrotrader) | Up to 90% | $200,000 | No | No | 2026-11-27 |
 
 ## How reviews and payout verification work
 
