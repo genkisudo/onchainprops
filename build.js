@@ -157,6 +157,13 @@ const lcFirst = (s) => s.charAt(0).toLowerCase() + s.slice(1);
 const an = (n) => (String(n).startsWith('8') ? 'an' : 'a');
 const stripTags = (s) => s.replace(/<[^>]+>/g, '');
 const escAttr = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+/** One level of character references, so a `<title>` can be escaped again. `&amp;` is last. */
+const decodeEntities = (s) => s
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;|&apos;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&');
 const publicUrl = (f) => f.publicUrl ?? f.website;
 /** Same slug logic as buildFirmRow() in script.js — keep in sync. */
 const firmSlug = (f) => f.name.toLowerCase().replace(/[\s/]+/g, '-').replace(/[^a-z0-9-]/g, '');
@@ -1537,7 +1544,9 @@ const buildFirmPages = () => {
                 throw new Error(`description is ${descText.length} characters (max ${FIRM_DESC_MAX})`);
             }
             const desc = escAttr(descText);
-            const title = /<title>([^<]*)<\/title>/.exec(page)?.[1] ?? '';
+            // The title element stores character references (&amp;). Decode once, then
+            // escAttr / JSON.stringify encode for the twitter attribute and WebPage name.
+            const title = decodeEntities(/<title>([^<]*)<\/title>/.exec(page)?.[1] ?? '');
             if (!title) throw new Error('missing <title>');
             // Date is read from the page on disk before markers are inserted, so it
             // matches the lastmod sitemapXml() already wrote from the same file.
@@ -1580,7 +1589,7 @@ const buildFirmPages = () => {
                 + (f.name === 'Hypernova' ? ' and firm-hypernova-stats and firm-hypernova-lifetime' : '');
             throw new Error(`${file}: ${e.message} — add the ${markers} GEN markers (copy them from firms/hypernova.html)`);
         }
-        const title = /<title>([^<]*)<\/title>/.exec(page)?.[1] ?? '';
+        const title = decodeEntities(/<title>([^<]*)<\/title>/.exec(page)?.[1] ?? '');
         for (const w of titleDrift(f, title)) firmPageWarnings.push(`${file} <title>: ${w}`);
         if (!f.lastVerified) firmPageWarnings.push(`${f.name}: no lastVerified date in firms.json`);
         write(file, page);
