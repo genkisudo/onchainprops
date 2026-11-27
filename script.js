@@ -928,9 +928,14 @@ const trackFirmLink = (anchor) => {
     if (!/^https?:$/.test(url.protocol) || url.origin === location.origin) return;
 
     const isAffiliate = (anchor.getAttribute('rel') ?? '').split(/\s+/).includes('sponsored');
-    // Firm pages: a sponsored link with an unrecognized host still belongs to the page's firm
-    const pageFirm = location.pathname.includes('/firms/')
-        ? document.querySelector('main h1')?.textContent?.trim() ?? null
+    // Firm pages: a sponsored link with an unrecognized host still belongs to the page's firm.
+    // Match the URL slug (same rule as buildFirmRow); hidden firms aren't in AppState, so fall
+    // back to the generated top CTA's data-firm.
+    const pageSlug = /\/firms\/([^/.]+)/.exec(location.pathname)?.[1];
+    const pageFirm = pageSlug
+        ? [...AppState.propFirms, ...AppState.predictionMarketFirms, ...AppState.cryptoPropFirms]
+            .find((f) => f.name.toLowerCase().replace(/[\s/]+/g, '-').replace(/[^a-z0-9-]/g, '') === pageSlug)?.name
+            ?? document.querySelector('.firm-cta [data-firm]')?.getAttribute('data-firm') ?? null
         : null;
     const firmName = anchor.dataset.firm ?? firmForHost(url.hostname)?.name ?? (isAffiliate ? pageFirm : null);
     if (!firmName && !isAffiliate) return;

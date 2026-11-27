@@ -1,5 +1,6 @@
 # Regenerates derived site content (index.html blocks, script.js firm data,
-# llms.txt, llms-full.txt, sitemap, blog, firm page stats/descriptions) from firms.json +
+# llms.txt, llms-full.txt, sitemap, blog, firm page stats/descriptions, compare-card links,
+# discount-codes.html) from firms.json +
 # faq.json + posts/*.md on every push to main, and commits
 # the result back. GitHub Pages then redeploys from the updated branch.
 #
@@ -37,7 +38,7 @@ jobs:
           # Stage before the quiet check so a new untracked {key}.txt is committed.
           # This job does not ping IndexNow.
           key=$(tr -d '[:space:]' < _indexnow/key.txt)
-          git add index.html compare.html script.js llms.txt llms-full.txt sitemap.xml feed.xml firms blog.html blog "${key}.txt"
+          git add index.html compare.html discount-codes.html script.js llms.txt llms-full.txt sitemap.xml feed.xml firms blog.html blog "${key}.txt"
           if git diff --cached --quiet; then
             echo "Generated content already up to date."
           else
