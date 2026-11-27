@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-17",
+  "lastUpdated": "2026-11-27",
   "propFirms": [
     {
       "name": "Hypernova",
@@ -74,6 +74,27 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Bungee Funded Perps",
+      "country": "BVI",
+      "split": "80%",
+      "maxAccount": "$100,000",
+      "profitTarget": "9-12%",
+      "dailyDrawdown": "3%",
+      "maxDrawdown": "3-6%",
+      "website": "https://bungee.exchange/r/ONCHAINPROPS",
+      "publicUrl": "https://www.bungee.exchange/funded-perps",
+      "chain": "Base / Hyperliquid",
+      "chainPhrase": "Base (USDC payouts), with prices from Hyperliquid",
+      "isAffiliate": true,
+      "token": "No",
+      "payoutSpeed": "1 business day",
+      "rulesOnchain": "No",
+      "maxLeverage": "20x",
+      "payoutsVerified": "Yes",
+      "lastVerified": "2026-11-27",
+      "pageHook": "one-step perps funding program from the team behind Socket, with a public USDC payout ledger on Base, fixed per-market leverage and 1.5 bps fees."
     },
     {
       "name": "Iceberg",

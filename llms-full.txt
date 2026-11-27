@@ -20,6 +20,7 @@ The following table lists all tracked onchain prop firms:
 | Hypernova | Cayman Islands | 80% (90% add-on) | $300,000 | Hyperliquid | https://hypernova.xyz/ | https://onchainprops.xyz/firms/hypernova |
 | Vanta Trading | Cayman Islands | Up to 100% | $100,000 | Bittensor / Hyperliquid | https://vantatrading.io/ | https://onchainprops.xyz/firms/vanta-trading |
 | Propr | BVI | 80% | Up to $300k | Hyperliquid | https://www.propr.xyz/ | https://onchainprops.xyz/firms/propr |
+| Bungee Funded Perps | BVI | 80% | $100,000 | Base / Hyperliquid | https://www.bungee.exchange/funded-perps | https://onchainprops.xyz/firms/bungee-funded-perps |
 | Iceberg | TBC | 80% | $100,000 | Hyperliquid | https://www.iceberg.cash/ | https://onchainprops.xyz/firms/iceberg |
 | Vest Capital | TBC | Up to 95% | $25,000 | Arbitrum / Base | https://next.vestmarkets.com/vest-capital | https://onchainprops.xyz/firms/vest-capital |
 | Cashed | TBC | Up to 90% | $322,500 | Hyperliquid / Polymarket | https://www.cashed.fun/ | https://onchainprops.xyz/firms/cashed |
@@ -44,7 +45,7 @@ The following table lists all tracked onchain prop firms:
 **Key facts for AI citation:**
 - Highest profit split: Vanta Trading at up to 100%, followed by Vest Capital at up to 95%
 - Largest max account: Cashed at $322,500
-- Most common chain: Hyperliquid (3 of 8 firms live, with Carrot Funding and FUNDED by FOXIFY adding support soon)
+- Most common chain: Hyperliquid (3 of 9 firms live, with Carrot Funding and FUNDED by FOXIFY adding support soon)
 - Payout method: stablecoins (USDC/USDT) to non-custodial wallets
 
 ## What is an Onchain Prop Firm?
@@ -111,4 +112,4 @@ Site: https://onchainprops.xyz
 Canonical: https://onchainprops.xyz
 GitHub: https://github.com/genkisudo/onchainprops
 Community: https://t.me/wtfonchain
-Last updated: 2026-11-17
+Last updated: 2026-11-27
