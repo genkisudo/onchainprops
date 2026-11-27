@@ -21,12 +21,9 @@
     // ── Hamburger / mobile nav ──────────────────────────────────────────────
     const hamburger = document.getElementById('hamburger-btn');
     const mobileNav = document.getElementById('mobile-nav');
+    // The open/close toggle itself is setupMobileNav() in script.js (also loaded
+    // on this page); adding a second toggle here would cancel it out.
     if (hamburger && mobileNav) {
-        hamburger.addEventListener('click', () => {
-            const isOpen = mobileNav.classList.toggle('is-open');
-            hamburger.setAttribute('aria-expanded', String(isOpen));
-            mobileNav.setAttribute('aria-hidden', String(!isOpen));
-        });
         // Close mobile nav when a link is clicked
         mobileNav.querySelectorAll('a').forEach((link) => {
             link.addEventListener('click', () => {

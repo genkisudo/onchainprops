@@ -16,11 +16,17 @@
  *                   CollectionPage dateModified use the latest content date
  *                   (firms.json lastUpdated, firm lastVerified, post dates,
  *                   payouts.json generatedAt). Each post keeps its own lastmod.
+ *                   Hypernova, Propr and Vanta Trading use their panel content
+ *                   date, which matches the WebPage dateModified on those pages.
+ *   - compare.html — Review/Visit links under each firm card (compare-cta-<slug>)
+ *   - discount-codes.html — table of live discount codes (firms.json discount/discountCode)
  *   - blog.html   — article cards (from posts/*.md)
  *   - blog/*.html — one article page per posts/*.md, with BlogPosting/FAQPage/Breadcrumb JSON-LD
  *                   (how-to-check-onchain-prop-firm-payouts also gets HowTo JSON-LD)
- *   - firms/*.html — stats header + "Data from <explorer>" source line, meta/og descriptions,
- *                   and (Vanta Trading) the buyback block from buyback.json
+ *   - firms/*.html — stats header + "Data from <explorer>" source line, meta/og/twitter
+ *                   descriptions, breadcrumb, and (Vanta Trading) the buyback block
+ *                   from buyback.json. Hypernova, Propr and Vanta also get a WebPage
+ *                   dateModified that matches their sitemap lastmod.
  *                   (title, review prose and FAQ JSON-LD stay hand-written)
  *   - {key}.txt — IndexNow key file, copied from _indexnow/key.txt. The key is
  *                 public. This script does not notify IndexNow.
@@ -33,6 +39,7 @@
  */
 'use strict';
 
+const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
@@ -152,6 +159,13 @@ const lcFirst = (s) => s.charAt(0).toLowerCase() + s.slice(1);
 const an = (n) => (String(n).startsWith('8') ? 'an' : 'a');
 const stripTags = (s) => s.replace(/<[^>]+>/g, '');
 const escAttr = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+/** One level of character references, so a `<title>` can be escaped again. `&amp;` is last. */
+const decodeEntities = (s) => s
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;|&apos;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&');
 const publicUrl = (f) => f.publicUrl ?? f.website;
 /** Same slug logic as buildFirmRow() in script.js — keep in sync. */
 const firmSlug = (f) => f.name.toLowerCase().replace(/[\s/]+/g, '-').replace(/[^a-z0-9-]/g, '');
@@ -401,7 +415,7 @@ ${rows}
 // script.js block
 // -----------------------------------------
 const firmLiteral = (f) => {
-    const keys = ['name', 'country', 'split', 'maxAccount', 'profitTarget', 'dailyDrawdown', 'maxDrawdown', 'website', 'chain', 'isAffiliate', 'token', 'payoutSpeed', 'rulesOnchain', 'aiAgents', 'scaledCapital', 'evalDataOnchain', 'bestSplit', 'bestTargetToRisk', 'maxLeverage', 'bestLeverage', 'lowestFinalTarget', 'payoutsVerified'];
+    const keys = ['name', 'country', 'split', 'maxAccount', 'profitTarget', 'dailyDrawdown', 'maxDrawdown', 'website', 'chain', 'isAffiliate', 'token', 'payoutSpeed', 'rulesOnchain', 'aiAgents', 'scaledCapital', 'evalDataOnchain', 'bestSplit', 'bestTargetToRisk', 'maxLeverage', 'bestLeverage', 'lowestFinalTarget', 'payoutsVerified', 'discount', 'discountCode'];
     return '    { ' + keys.map((k) => `${k}: ${JSON.stringify(f[k])}`).join(', ') + ' }';
 };
 
@@ -471,7 +485,11 @@ ${table(cryptoPropFirms)}
 - Largest max account: ${joinNames(maxLeaders.names)} at ${fmtMoney(maxLeaders.amount)}${scaledNote}
 - Most common chain: ${chainFact}
 - Payout method: stablecoins (USDC/USDT) to non-custodial wallets
-
+${discountFirms().length ? `
+## Discount Codes
+Current discount codes for listed firms (full list: ${SITE}/discount-codes):
+${discountFirms().map((f) => `- ${f.name}: ${offerText(f)}`).join('\n')}
+` : ''}
 ## What is an Onchain Prop Firm?
 An onchain prop trading firm provides capital to traders in cryptocurrency. Traders must pass an evaluation phase — demonstrating consistent profitability within drawdown rules — then receive a funded account. Profits are split between the trader and the firm, with the trader's share paid directly to their non-custodial crypto wallet via stablecoins. This differs from traditional prop firms in that execution is transparent, on-chain, and verifiable by smart contract.
 
@@ -873,6 +891,7 @@ ${more.map((o) => `                    <a href="${o.slug}" class="article-card b
                 <a href="../blog.html">Blog</a>
                 <a href="../resources.html">Resources</a>
                 <a href="../#faq">FAQ</a>
+                <a href="../discount-codes">Discount Codes</a>
                 <a href="../privacy.html">Privacy Policy</a>
             </div>
             <div class="footer-socials">
@@ -960,11 +979,62 @@ ${posts.map((p) => `  <item>
 // -----------------------------------------
 // sitemap.xml (fully generated)
 // -----------------------------------------
+/** Firms whose pages embed a daily-refreshed stats panel. */
+const DAILY_PANEL_FIRMS = new Set(['Hypernova', 'Propr', 'Vanta Trading']);
+
+/** Stable hash of the figures a panel shows. Timestamps are not included. */
+const panelHash = (value) => crypto.createHash('sha256').update(JSON.stringify(value)).digest('hex');
+
+const vantaBuybackHash = () => (buyback && !buyback.invalid
+    ? panelHash({ buybackValueUsd: buyback.buybackValueUsd })
+    : null);
+
+/**
+ * Content date for a daily panel, or null when that panel's data is missing.
+ * Hypernova and Propr: the latest complete UTC day in the chart. `updatedAt`
+ * is the fetch time, so a cron rewrite with the same days does not move this.
+ * Vanta has no day series. The UTC day of `updatedAt` is kept only when the
+ * buyback figure changes; the same figure reuses the date already on the page.
+ * @param {object} f
+ * @param {string} pageSrc
+ * @returns {string|null}
+ */
+const firmPanelDate = (f, pageSrc) => {
+    if (f.name === 'Hypernova' && hypernova && !hypernova.invalid && hypernova.days?.length) {
+        return isoDay(hypernova.days[hypernova.days.length - 1].date);
+    }
+    if (f.name === 'Propr' && propr && !propr.invalid && propr.days?.length) {
+        return isoDay(propr.days[propr.days.length - 1].date);
+    }
+    if (f.name === 'Vanta Trading' && buyback && !buyback.invalid) {
+        const hash = vantaBuybackHash();
+        const priorHash = /<!-- panel-hash:([a-f0-9]{64}) -->/.exec(pageSrc)?.[1];
+        const priorDate = /<!-- panel-date:(\d{4}-\d{2}-\d{2}) -->/.exec(pageSrc)?.[1];
+        if (priorHash === hash && priorDate) return priorDate;
+        return isoDay(buyback.updatedAt);
+    }
+    return null;
+};
+
+/**
+ * Sitemap lastmod for a firm URL. Daily panels use {@link firmPanelDate}
+ * (falling back to firms.json lastUpdated). Every other firm stays on lastUpdated.
+ * @param {object} f
+ * @returns {string}
+ */
+const firmSitemapLastmod = (f) => {
+    if (!DAILY_PANEL_FIRMS.has(f.name)) return lastUpdated;
+    const rel = detailPath(f);
+    return firmPanelDate(f, rel ? read(`${rel}.html`) : '') ?? lastUpdated;
+};
+
 const sitemapXml = () => {
     // Default lastmod stays firms.json lastUpdated. Pass siteContentDate only
     // where JSON-LD dateModified uses that same date (the homepage), and for
     // privacy.html which has no separate content date. Post <lastmod> stays
     // p.updated so it matches each BlogPosting dateModified.
+    // A fresher firm lastmod is passed only for Hypernova, Propr and Vanta,
+    // and only alongside a WebPage dateModified of that same day (firmPanelDate).
     const url = (loc, changefreq, priority, comment, lastmod = lastUpdated) => `
   <!-- ${comment} -->
   <url>
@@ -976,13 +1046,20 @@ const sitemapXml = () => {
     // Extensionless <loc>s match each page's canonical (GitHub Pages resolves them).
     const firmUrls = [...allPropFirms, ...predictionMarketFirms, ...cryptoPropFirms]
         .filter((f) => detailPath(f))
-        .map((f) => url(`${SITE}/${detailPath(f)}`, 'monthly', '0.7', `${f.name} — firm review & evaluation details`))
+        .map((f) => url(
+            `${SITE}/${detailPath(f)}`,
+            'monthly',
+            '0.7',
+            `${f.name} — firm review & evaluation details`,
+            firmSitemapLastmod(f)
+        ))
         .join('');
     return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${url('https://onchainprops.xyz/', 'weekly', '1.0', 'Main page — single-page app, all content lives here', siteContentDate)}
 ${url('https://onchainprops.xyz/compare.html', 'weekly', '0.8', 'Compare Firms — long-form comparison article')}${firmUrls}
 ${url(`${SITE}/tools/glitch`, 'monthly', '0.7', 'Glitch — trading tool review')}
+${url(`${SITE}/discount-codes`, 'weekly', '0.7', 'Discount codes — current prop firm discount codes')}
 ${url('https://onchainprops.xyz/blog.html', 'weekly', '0.7', 'Blog — payout safety and onchain prop trading guides')}${postSitemapUrls()}
 ${url('https://onchainprops.xyz/resources', 'monthly', '0.6', 'Resources — tools & guides for onchain traders')}
 ${url('https://onchainprops.xyz/privacy.html', 'yearly', '0.3', 'Privacy policy', siteContentDate)}
@@ -1089,12 +1166,90 @@ const firmStats = (f) => [
     ['Country', /^tbc$/i.test(f.country ?? '') ? '' : f.country]
 ].filter(([, v]) => v);
 
-const firmStatsBlock = (f) => {
+/**
+ * @param {object} f - firm entry from firms.json
+ * @param {{ button?: boolean }} [opts] - button: render the top "Visit" CTA
+ *   (only for pages without a .firm-aside, which already has its own CTA)
+ */
+const firmStatsBlock = (f, { button = false } = {}) => {
     const items = firmStats(f).map(([k, v]) =>
         `    <span class="firm-meta-item">${k}: <strong>${escHtml(v)}</strong></span>`).join('\n');
     const chainId = payouts?.firms?.[f.name]?.[0]?.chainId;
     const source = chainId ? `\n<p class="firm-verified">Data from ${EXPLORER_NAMES[chainId] ?? 'Etherscan'}</p>` : '';
-    return `<div class="firm-meta">\n${items}\n</div>${source}${firmPayoutsBlock(f)}`;
+    return `<div class="firm-meta">\n${items}\n</div>${source}${firmPayoutsBlock(f)}${firmCtaBlock(f, { button })}`;
+};
+
+// -----------------------------------------
+// Outbound CTAs and discount offers
+// -----------------------------------------
+// Every generated outbound firm link carries data-firm / data-placement, which
+// script.js reports as "Firm Link Opened" so clicks can be counted per firm.
+
+/** "20% off with code <strong>X</strong>" or "10% off through our link". */
+const offerHtml = (f) => f.discountCode
+    ? `${escHtml(f.discount)} with code <strong>${escHtml(f.discountCode)}</strong>`
+    : `${escHtml(f.discount)} through our link`;
+const offerText = (f) => stripTags(offerHtml(f));
+
+/** Outbound link to the firm's (affiliate) website. */
+const ctaLink = (f, placement, cls = 'btn btn-primary') =>
+    `<a href="${escAttr(f.website)}" class="${cls}" target="_blank" rel="${relFor(f, f.website)}" data-firm="${escAttr(f.name)}" data-placement="${placement}">Visit ${escHtml(f.name)} ↗</a>`;
+
+/** Above-the-fold CTA row on firm pages: Visit button and/or discount offer. */
+const firmCtaBlock = (f, { button }) => {
+    const parts = [];
+    if (button) parts.push(ctaLink(f, 'top_cta'));
+    if (f.discount) parts.push(`<span class="firm-offer">Discount: ${offerHtml(f)} · <a href="../discount-codes">All codes</a></span>`);
+    if (!parts.length) return '';
+    if (button && relFor(f, f.website).includes('sponsored')) parts.push('<span class="firm-cta-note">Affiliate link</span>');
+    return `\n<div class="firm-cta">\n    ${parts.join('\n    ')}\n</div>`;
+};
+
+/** Review + Visit links under each firm card in compare.html (GEN block `compare-cta-<slug>`). */
+const compareCtaBlock = (f) => {
+    const review = detailPath(f);
+    const links = [];
+    if (review) links.push(`<a href="${review}" class="ca-firm-link">Read the ${escHtml(f.name)} review →</a>`);
+    links.push(ctaLink(f, 'compare_card', 'ca-firm-link ca-firm-link--out'));
+    if (f.discount) links.push(`<span class="ca-firm-offer">${offerHtml(f)}</span>`);
+    return `<div class="ca-firm-actions">\n    ${links.join('\n    ')}\n</div>`;
+};
+
+/** Firms with a live discount, in table order (hidden firms excluded). */
+const discountFirms = () => [...propFirms, ...predictionMarketFirms, ...cryptoPropFirms].filter((f) => f.discount);
+
+/** discount-codes.html table (GEN block `discount-codes`). */
+const discountCodesBlock = () => {
+    const firms = discountFirms();
+    if (!firms.length) return '<p>No discount codes are live right now. Check back soon.</p>';
+    const rows = firms.map((f) => {
+        const review = detailPath(f);
+        const name = review ? `<a href="${review}">${escHtml(f.name)}</a>` : escHtml(f.name);
+        const code = f.discountCode ? `<code class="discount-code">${escHtml(f.discountCode)}</code>` : 'Applied through our link';
+        return `        <tr>
+            <td class="firm-name">${name}</td>
+            <td class="val-highlight" data-label="Discount">${escHtml(f.discount)}</td>
+            <td data-label="Code">${code}</td>
+            <td data-label="Last checked">${f.lastVerified ? `<time datetime="${f.lastVerified}">${fmtDate(f.lastVerified)}</time>` : '—'}</td>
+            <td data-label="Firm">${ctaLink(f, 'discount_page', 'btn btn-secondary')}</td>
+        </tr>`;
+    }).join('\n');
+    return `<div class="table-container">
+<table class="prop-table" aria-label="Prop firm discount codes">
+    <thead>
+        <tr>
+            <th scope="col">Firm</th>
+            <th scope="col">Discount</th>
+            <th scope="col">Code</th>
+            <th scope="col">Last checked</th>
+            <th scope="col"><span class="visually-hidden">Link</span></th>
+        </tr>
+    </thead>
+    <tbody>
+${rows}
+    </tbody>
+</table>
+</div>`;
 };
 
 const EXPLORERS = { 1: 'https://etherscan.io', 42161: 'https://arbiscan.io', 8453: 'https://basescan.org' };
@@ -1333,7 +1488,30 @@ const firmProprLifetimeText = () => {
     return `As of ${fmtDate(propr.updatedAt.slice(0, 10))}, Propr's public stats show ${fmtUsd(lt.payoutsUsd)} paid to traders across ${Math.round(lt.payoutCount).toLocaleString('en-US')} payouts.`;
 };
 
-/** "<Name> review: <pageHook> <facts from firms.json>" */
+/** Meta/OG/Twitter description cap. Same limit as the homepage directory line. */
+const FIRM_DESC_MAX = 160;
+
+/**
+ * Cut `s` at `max` characters on a word boundary. A string that already fits
+ * is returned unchanged aside from collapsed whitespace.
+ * @param {string} s
+ * @param {number} max
+ * @returns {string}
+ */
+const capAtWord = (s, max) => {
+    const text = s.replace(/\s+/g, ' ').trim();
+    if (text.length <= max) return text;
+    // text[max] is the first character past the cap. Whitespace there means
+    // the first `max` characters already end on a word boundary.
+    let end = max;
+    if (text[max] && !/\s/.test(text[max])) {
+        const space = text.lastIndexOf(' ', max);
+        end = space > 0 ? space : max;
+    }
+    return text.slice(0, end).replace(/[\s,;:]+$/g, '').trim();
+};
+
+/** "<Name> review: <pageHook> <facts from firms.json>", capped at 160 characters. */
 const firmDescription = (f) => {
     const split = /tbc/i.test(f.split) ? 'Profit split TBC'
         : parseSplit(f.split) ? `${f.split} profit split` : f.split;
@@ -1346,7 +1524,10 @@ const firmDescription = (f) => {
     }[f.payoutsVerified] ?? '';
     const hook = f.pageHook ? ` ${f.pageHook}` : '';
     const maxAccount = /^up to/i.test(f.maxAccount) ? lcFirst(f.maxAccount) : f.maxAccount;
-    return `${f.name} review:${hook} ${split}, max account ${maxAccount}, ${market}.${speed}${verified}`;
+    return capAtWord(
+        `${f.name} review:${hook} ${split}, max account ${maxAccount}, ${market}.${speed}${verified}`,
+        FIRM_DESC_MAX
+    );
 };
 
 /**
@@ -1386,6 +1567,55 @@ const publishIndexNowKey = () => {
     write(`${key}.txt`, key);
 };
 
+/**
+ * Insert an empty GEN marker pair after `anchor` when the page doesn't have it yet.
+ * build.js owns the pair so firm HTML doesn't need a hand-added region.
+ * @param {string} src
+ * @param {string} key
+ * @param {string} anchor
+ * @returns {string}
+ */
+const ensureGenMarker = (src, key, anchor) => {
+    const begin = `<!-- GEN:BEGIN ${key} -->`;
+    if (src.includes(begin)) return src;
+    const i = src.indexOf(anchor);
+    if (i === -1) throw new Error(`Cannot add ${key} markers: anchor not found`);
+    const at = i + anchor.length;
+    return src.slice(0, at) + `\n    ${begin}\n    <!-- GEN:END ${key} -->` + src.slice(at);
+};
+
+/** Twitter card for a firm page. `desc` is already attribute-escaped. */
+const firmTwitterBlock = (title, desc) => `<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="${TWITTER_SITE}">
+<meta name="twitter:title" content="${escAttr(title)}">
+<meta name="twitter:description"
+    content="${desc}">
+<meta name="twitter:image" content="${SITE}/og-image.png">`;
+
+/**
+ * WebPage JSON-LD whose dateModified is the sitemap lastmod for this URL.
+ * Vanta also stores the buyback-figure hash so a later timestamp-only refresh
+ * can keep this date.
+ * @param {string} urlPath
+ * @param {string} title
+ * @param {string} date
+ * @param {string|null} hash
+ * @returns {string}
+ */
+const firmWebPageBlock = (urlPath, title, date, hash) => {
+    const script = ldScript({
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        '@id': `${SITE}/${urlPath}#webpage`,
+        url: `${SITE}/${urlPath}`,
+        name: title,
+        dateModified: date,
+        isPartOf: { '@id': WEBSITE_ID },
+        publisher: { '@id': ORG_ID }
+    });
+    return hash ? `${script}\n<!-- panel-hash:${hash} -->\n<!-- panel-date:${date} -->` : script;
+};
+
 const firmPageWarnings = [];
 const buildFirmPages = () => {
     let n = 0;
@@ -1395,19 +1625,39 @@ const buildFirmPages = () => {
         const file = `${p}.html`;
         let page = read(file);
         try {
-            const desc = escAttr(firmDescription(f));
+            const descText = firmDescription(f);
+            if (descText.length > FIRM_DESC_MAX) {
+                throw new Error(`description is ${descText.length} characters (max ${FIRM_DESC_MAX})`);
+            }
+            const desc = escAttr(descText);
+            // The title element stores character references (&amp;). Decode once, then
+            // escAttr / JSON.stringify encode for the twitter attribute and WebPage name.
+            const title = decodeEntities(/<title>([^<]*)<\/title>/.exec(page)?.[1] ?? '');
+            if (!title) throw new Error('missing <title>');
+            // Date is read from the page on disk before markers are inserted, so it
+            // matches the lastmod sitemapXml() already wrote from the same file.
+            const panelDate = DAILY_PANEL_FIRMS.has(f.name) ? firmSitemapLastmod(f) : null;
+            page = ensureGenMarker(page, 'firm-twitter',
+                '<meta property="og:image" content="https://onchainprops.xyz/og-image.png">');
+            if (panelDate) page = ensureGenMarker(page, 'firm-webpage', '<!-- GEN:END firm-breadcrumb -->');
             page = inject(page, 'firm-description', `<meta name="description"\n    content="${desc}">`);
             page = inject(page, 'firm-og-description', `<meta property="og:description"\n    content="${desc}">`);
-            page = inject(page, 'firm-stats', firmStatsBlock(f));
+            page = inject(page, 'firm-twitter', firmTwitterBlock(title, desc));
+            page = inject(page, 'firm-stats', firmStatsBlock(f, { button: !page.includes('class="firm-aside"') }));
             page = inject(page, 'firm-breadcrumb', ldScript({
                 '@context': 'https://schema.org',
                 '@type': 'BreadcrumbList',
                 itemListElement: [
                     { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
-                    { '@type': 'ListItem', position: 2, name: 'Compare', item: `${SITE}/compare` },
+                    { '@type': 'ListItem', position: 2, name: 'Compare', item: `${SITE}/compare.html` },
                     { '@type': 'ListItem', position: 3, name: `${f.name} Review`, item: `${SITE}/${p}` }
                 ]
             }));
+            if (panelDate) {
+                page = inject(page, 'firm-webpage', firmWebPageBlock(
+                    p, title, panelDate, f.name === 'Vanta Trading' ? vantaBuybackHash() : null
+                ));
+            }
             if (f.name === 'Vanta Trading') page = inject(page, 'firm-buyback', firmBuybackBlock());
             if (f.name === 'Propr') {
                 page = inject(page, 'firm-propr-stats', firmProprBlock());
@@ -1418,13 +1668,14 @@ const buildFirmPages = () => {
                 page = inject(page, 'firm-hypernova-lifetime', firmHypernovaLifetimeBlock());
             }
         } catch (e) {
-            const markers = 'firm-description, firm-og-description, firm-stats and firm-breadcrumb'
+            const markers = 'firm-description, firm-og-description, firm-twitter, firm-stats and firm-breadcrumb'
+                + (DAILY_PANEL_FIRMS.has(f.name) ? ' and firm-webpage' : '')
                 + (f.name === 'Vanta Trading' ? ' and firm-buyback' : '')
                 + (f.name === 'Propr' ? ' and firm-propr-stats and firm-propr-lifetime' : '')
                 + (f.name === 'Hypernova' ? ' and firm-hypernova-stats and firm-hypernova-lifetime' : '');
             throw new Error(`${file}: ${e.message} — add the ${markers} GEN markers (copy them from firms/hypernova.html)`);
         }
-        const title = /<title>([^<]*)<\/title>/.exec(page)?.[1] ?? '';
+        const title = decodeEntities(/<title>([^<]*)<\/title>/.exec(page)?.[1] ?? '');
         for (const w of titleDrift(f, title)) firmPageWarnings.push(`${file} <title>: ${w}`);
         if (!f.lastVerified) firmPageWarnings.push(`${f.name}: no lastVerified date in firms.json`);
         write(file, page);
@@ -1503,9 +1754,17 @@ write('llms-full.txt', llmsFullTxt());
 write('sitemap.xml', sitemapXml());
 write('feed.xml', feedXml());
 const firmPageCount = buildFirmPages();
-// compare.html is hand-written except for the Hypernova lifetime-payout figure (kept fresh from hypernova.json).
-// Without valid data the last generated figure stays in place.
-if (hypernovaLifetimeUsd()) write('compare.html', inject(read('compare.html'), 'hypernova-lifetime', hypernovaLifetimeUsd(), 'inline'));
+// compare.html is hand-written except for the Hypernova lifetime-payout figure (kept fresh from hypernova.json)
+// and the Review/Visit links under each firm card. Without valid Hypernova data the last generated figure stays in place.
+let compareHtml = read('compare.html');
+if (hypernovaLifetimeUsd()) compareHtml = inject(compareHtml, 'hypernova-lifetime', hypernovaLifetimeUsd(), 'inline');
+for (const f of [...allPropFirms, ...predictionMarketFirms, ...cryptoPropFirms]) {
+    const key = `compare-cta-${firmSlug(f)}`;
+    if (compareHtml.includes(`<!-- GEN:BEGIN ${key} -->`)) compareHtml = inject(compareHtml, key, compareCtaBlock(f));
+    else if (!f.hidden) firmPageWarnings.push(`compare.html: no firm card with ${key} markers for ${f.name}`);
+}
+write('compare.html', compareHtml);
+write('discount-codes.html', inject(read('discount-codes.html'), 'discount-codes', discountCodesBlock()));
 publishIndexNowKey();
 
 if (!/^\d+$/.test(KIT_FORM_ID)) console.warn('⚠ KIT_FORM_ID is not set in build.js — newsletter forms will not work until it is.');

@@ -695,6 +695,38 @@ h1, h2, h3, h4 {
     color: var(--accent);
 }
 
+/* Above-the-fold CTA row (generated in the firm-stats block) */
+.firm-detail .firm-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem 1rem;
+    margin: -0.5rem 0 1.75rem;
+}
+
+.firm-detail .firm-offer {
+    padding: 0.4rem 0.85rem;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-line);
+    border-radius: var(--radius-pill);
+    font-size: 0.85rem;
+    color: var(--text-primary);
+}
+
+.firm-detail .firm-offer strong {
+    color: var(--accent);
+    letter-spacing: 0.03em;
+}
+
+.firm-detail .firm-offer a {
+    color: var(--text-secondary);
+}
+
+.firm-detail .firm-cta-note {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
 .firm-detail .firm-buyback {
     margin: 1.5rem 0 1.75rem;
 }
@@ -1681,6 +1713,24 @@ footer {
 .trust-chip--final-target::before {
     content: '🎯';
     font-size: 0.8rem;
+}
+
+/* Offer chip (reader discount) — ticket glyph */
+.trust-chip--offer::before {
+    content: '🎟';
+    font-size: 0.8rem;
+}
+
+/* discount-codes.html */
+.discount-code {
+    padding: 0.2em 0.5em;
+    background: var(--accent-soft);
+    border: 1px dashed var(--accent-line);
+    border-radius: 6px;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    user-select: all;
 }
 
 @media (max-width: 640px) {
