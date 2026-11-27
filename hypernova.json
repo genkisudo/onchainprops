@@ -1,17 +1,6 @@
 {
-  "updatedAt": "2026-11-26T17:48:58.413Z",
+  "updatedAt": "2026-11-27T16:49:06.759Z",
   "days": [
-    {
-      "date": "2026-10-27",
-      "payoutUsd": 39196.78,
-      "payoutCount": 26,
-      "fundedAumUsd": 8754505.14,
-      "fundedTraders": 106,
-      "signups": 10025,
-      "paidUsers": 1363,
-      "fundedUsers": 405,
-      "revenueUsd": 15760
-    },
     {
       "date": "2026-10-28",
       "payoutUsd": 29072,
@@ -330,21 +319,32 @@
       "paidUsers": 1903,
       "fundedUsers": 641,
       "revenueUsd": 107054.25
+    },
+    {
+      "date": "2026-11-26",
+      "payoutUsd": 28660.42,
+      "payoutCount": 28,
+      "fundedAumUsd": 9220818.19,
+      "fundedTraders": 156,
+      "signups": 13169,
+      "paidUsers": 1908,
+      "fundedUsers": 647,
+      "revenueUsd": 38333.75
     }
   ],
   "lifetime": {
-    "payoutsUsd": 3747618.56,
-    "revenueUsd": 4097934.15,
-    "signups": 13099,
-    "paidUsers": 1903,
-    "fundedUsers": 641,
-    "payoutRecipients": 432
+    "payoutsUsd": 3776278.98,
+    "revenueUsd": 4136267.9,
+    "signups": 13169,
+    "paidUsers": 1908,
+    "fundedUsers": 647,
+    "payoutRecipients": 434
   },
-  "passRatePct": 20.8,
+  "passRatePct": 21,
   "topMarkets": [
     {
       "symbol": "BTC",
-      "sharePct": 29.3
+      "sharePct": 29.5
     },
     {
       "symbol": "ETH",
@@ -352,15 +352,15 @@
     },
     {
       "symbol": "XYZ100",
-      "sharePct": 13.7
+      "sharePct": 14
     },
     {
       "symbol": "CL",
-      "sharePct": 11.3
+      "sharePct": 11.2
     },
     {
       "symbol": "GOLD",
-      "sharePct": 10.8
+      "sharePct": 10.7
     }
   ]
 }
