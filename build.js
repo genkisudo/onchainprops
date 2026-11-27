@@ -16,11 +16,15 @@
  *                   CollectionPage dateModified use the latest content date
  *                   (firms.json lastUpdated, firm lastVerified, post dates,
  *                   payouts.json generatedAt). Each post keeps its own lastmod.
+ *                   Hypernova, Propr and Vanta Trading use their panel content
+ *                   date, which matches the WebPage dateModified on those pages.
  *   - blog.html   — article cards (from posts/*.md)
  *   - blog/*.html — one article page per posts/*.md, with BlogPosting/FAQPage/Breadcrumb JSON-LD
  *                   (how-to-check-onchain-prop-firm-payouts also gets HowTo JSON-LD)
- *   - firms/*.html — stats header + "Data from <explorer>" source line, meta/og descriptions,
- *                   and (Vanta Trading) the buyback block from buyback.json
+ *   - firms/*.html — stats header + "Data from <explorer>" source line, meta/og/twitter
+ *                   descriptions, breadcrumb, and (Vanta Trading) the buyback block
+ *                   from buyback.json. Hypernova, Propr and Vanta also get a WebPage
+ *                   dateModified that matches their sitemap lastmod.
  *                   (title, review prose and FAQ JSON-LD stay hand-written)
  *   - {key}.txt — IndexNow key file, copied from _indexnow/key.txt. The key is
  *                 public. This script does not notify IndexNow.
@@ -33,6 +37,7 @@
  */
 'use strict';
 
+const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
@@ -960,11 +965,62 @@ ${posts.map((p) => `  <item>
 // -----------------------------------------
 // sitemap.xml (fully generated)
 // -----------------------------------------
+/** Firms whose pages embed a daily-refreshed stats panel. */
+const DAILY_PANEL_FIRMS = new Set(['Hypernova', 'Propr', 'Vanta Trading']);
+
+/** Stable hash of the figures a panel shows. Timestamps are not included. */
+const panelHash = (value) => crypto.createHash('sha256').update(JSON.stringify(value)).digest('hex');
+
+const vantaBuybackHash = () => (buyback && !buyback.invalid
+    ? panelHash({ buybackValueUsd: buyback.buybackValueUsd })
+    : null);
+
+/**
+ * Content date for a daily panel, or null when that panel's data is missing.
+ * Hypernova and Propr: the latest complete UTC day in the chart. `updatedAt`
+ * is the fetch time, so a cron rewrite with the same days does not move this.
+ * Vanta has no day series. The UTC day of `updatedAt` is kept only when the
+ * buyback figure changes; the same figure reuses the date already on the page.
+ * @param {object} f
+ * @param {string} pageSrc
+ * @returns {string|null}
+ */
+const firmPanelDate = (f, pageSrc) => {
+    if (f.name === 'Hypernova' && hypernova && !hypernova.invalid && hypernova.days?.length) {
+        return isoDay(hypernova.days[hypernova.days.length - 1].date);
+    }
+    if (f.name === 'Propr' && propr && !propr.invalid && propr.days?.length) {
+        return isoDay(propr.days[propr.days.length - 1].date);
+    }
+    if (f.name === 'Vanta Trading' && buyback && !buyback.invalid) {
+        const hash = vantaBuybackHash();
+        const priorHash = /<!-- panel-hash:([a-f0-9]{64}) -->/.exec(pageSrc)?.[1];
+        const priorDate = /<!-- panel-date:(\d{4}-\d{2}-\d{2}) -->/.exec(pageSrc)?.[1];
+        if (priorHash === hash && priorDate) return priorDate;
+        return isoDay(buyback.updatedAt);
+    }
+    return null;
+};
+
+/**
+ * Sitemap lastmod for a firm URL. Daily panels use {@link firmPanelDate}
+ * (falling back to firms.json lastUpdated). Every other firm stays on lastUpdated.
+ * @param {object} f
+ * @returns {string}
+ */
+const firmSitemapLastmod = (f) => {
+    if (!DAILY_PANEL_FIRMS.has(f.name)) return lastUpdated;
+    const rel = detailPath(f);
+    return firmPanelDate(f, rel ? read(`${rel}.html`) : '') ?? lastUpdated;
+};
+
 const sitemapXml = () => {
     // Default lastmod stays firms.json lastUpdated. Pass siteContentDate only
     // where JSON-LD dateModified uses that same date (the homepage), and for
     // privacy.html which has no separate content date. Post <lastmod> stays
     // p.updated so it matches each BlogPosting dateModified.
+    // A fresher firm lastmod is passed only for Hypernova, Propr and Vanta,
+    // and only alongside a WebPage dateModified of that same day (firmPanelDate).
     const url = (loc, changefreq, priority, comment, lastmod = lastUpdated) => `
   <!-- ${comment} -->
   <url>
@@ -976,7 +1032,13 @@ const sitemapXml = () => {
     // Extensionless <loc>s match each page's canonical (GitHub Pages resolves them).
     const firmUrls = [...allPropFirms, ...predictionMarketFirms, ...cryptoPropFirms]
         .filter((f) => detailPath(f))
-        .map((f) => url(`${SITE}/${detailPath(f)}`, 'monthly', '0.7', `${f.name} — firm review & evaluation details`))
+        .map((f) => url(
+            `${SITE}/${detailPath(f)}`,
+            'monthly',
+            '0.7',
+            `${f.name} — firm review & evaluation details`,
+            firmSitemapLastmod(f)
+        ))
         .join('');
     return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -1333,7 +1395,30 @@ const firmProprLifetimeText = () => {
     return `As of ${fmtDate(propr.updatedAt.slice(0, 10))}, Propr's public stats show ${fmtUsd(lt.payoutsUsd)} paid to traders across ${Math.round(lt.payoutCount).toLocaleString('en-US')} payouts.`;
 };
 
-/** "<Name> review: <pageHook> <facts from firms.json>" */
+/** Meta/OG/Twitter description cap. Same limit as the homepage directory line. */
+const FIRM_DESC_MAX = 160;
+
+/**
+ * Cut `s` at `max` characters on a word boundary. A string that already fits
+ * is returned unchanged aside from collapsed whitespace.
+ * @param {string} s
+ * @param {number} max
+ * @returns {string}
+ */
+const capAtWord = (s, max) => {
+    const text = s.replace(/\s+/g, ' ').trim();
+    if (text.length <= max) return text;
+    // text[max] is the first character past the cap. Whitespace there means
+    // the first `max` characters already end on a word boundary.
+    let end = max;
+    if (text[max] && !/\s/.test(text[max])) {
+        const space = text.lastIndexOf(' ', max);
+        end = space > 0 ? space : max;
+    }
+    return text.slice(0, end).replace(/[\s,;:]+$/g, '').trim();
+};
+
+/** "<Name> review: <pageHook> <facts from firms.json>", capped at 160 characters. */
 const firmDescription = (f) => {
     const split = /tbc/i.test(f.split) ? 'Profit split TBC'
         : parseSplit(f.split) ? `${f.split} profit split` : f.split;
@@ -1346,7 +1431,10 @@ const firmDescription = (f) => {
     }[f.payoutsVerified] ?? '';
     const hook = f.pageHook ? ` ${f.pageHook}` : '';
     const maxAccount = /^up to/i.test(f.maxAccount) ? lcFirst(f.maxAccount) : f.maxAccount;
-    return `${f.name} review:${hook} ${split}, max account ${maxAccount}, ${market}.${speed}${verified}`;
+    return capAtWord(
+        `${f.name} review:${hook} ${split}, max account ${maxAccount}, ${market}.${speed}${verified}`,
+        FIRM_DESC_MAX
+    );
 };
 
 /**
@@ -1386,6 +1474,55 @@ const publishIndexNowKey = () => {
     write(`${key}.txt`, key);
 };
 
+/**
+ * Insert an empty GEN marker pair after `anchor` when the page doesn't have it yet.
+ * build.js owns the pair so firm HTML doesn't need a hand-added region.
+ * @param {string} src
+ * @param {string} key
+ * @param {string} anchor
+ * @returns {string}
+ */
+const ensureGenMarker = (src, key, anchor) => {
+    const begin = `<!-- GEN:BEGIN ${key} -->`;
+    if (src.includes(begin)) return src;
+    const i = src.indexOf(anchor);
+    if (i === -1) throw new Error(`Cannot add ${key} markers: anchor not found`);
+    const at = i + anchor.length;
+    return src.slice(0, at) + `\n    ${begin}\n    <!-- GEN:END ${key} -->` + src.slice(at);
+};
+
+/** Twitter card for a firm page. `desc` is already attribute-escaped. */
+const firmTwitterBlock = (title, desc) => `<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="${TWITTER_SITE}">
+<meta name="twitter:title" content="${escAttr(title)}">
+<meta name="twitter:description"
+    content="${desc}">
+<meta name="twitter:image" content="${SITE}/og-image.png">`;
+
+/**
+ * WebPage JSON-LD whose dateModified is the sitemap lastmod for this URL.
+ * Vanta also stores the buyback-figure hash so a later timestamp-only refresh
+ * can keep this date.
+ * @param {string} urlPath
+ * @param {string} title
+ * @param {string} date
+ * @param {string|null} hash
+ * @returns {string}
+ */
+const firmWebPageBlock = (urlPath, title, date, hash) => {
+    const script = ldScript({
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        '@id': `${SITE}/${urlPath}#webpage`,
+        url: `${SITE}/${urlPath}`,
+        name: title,
+        dateModified: date,
+        isPartOf: { '@id': WEBSITE_ID },
+        publisher: { '@id': ORG_ID }
+    });
+    return hash ? `${script}\n<!-- panel-hash:${hash} -->\n<!-- panel-date:${date} -->` : script;
+};
+
 const firmPageWarnings = [];
 const buildFirmPages = () => {
     let n = 0;
@@ -1395,19 +1532,37 @@ const buildFirmPages = () => {
         const file = `${p}.html`;
         let page = read(file);
         try {
-            const desc = escAttr(firmDescription(f));
+            const descText = firmDescription(f);
+            if (descText.length > FIRM_DESC_MAX) {
+                throw new Error(`description is ${descText.length} characters (max ${FIRM_DESC_MAX})`);
+            }
+            const desc = escAttr(descText);
+            const title = /<title>([^<]*)<\/title>/.exec(page)?.[1] ?? '';
+            if (!title) throw new Error('missing <title>');
+            // Date is read from the page on disk before markers are inserted, so it
+            // matches the lastmod sitemapXml() already wrote from the same file.
+            const panelDate = DAILY_PANEL_FIRMS.has(f.name) ? firmSitemapLastmod(f) : null;
+            page = ensureGenMarker(page, 'firm-twitter',
+                '<meta property="og:image" content="https://onchainprops.xyz/og-image.png">');
+            if (panelDate) page = ensureGenMarker(page, 'firm-webpage', '<!-- GEN:END firm-breadcrumb -->');
             page = inject(page, 'firm-description', `<meta name="description"\n    content="${desc}">`);
             page = inject(page, 'firm-og-description', `<meta property="og:description"\n    content="${desc}">`);
+            page = inject(page, 'firm-twitter', firmTwitterBlock(title, desc));
             page = inject(page, 'firm-stats', firmStatsBlock(f));
             page = inject(page, 'firm-breadcrumb', ldScript({
                 '@context': 'https://schema.org',
                 '@type': 'BreadcrumbList',
                 itemListElement: [
                     { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
-                    { '@type': 'ListItem', position: 2, name: 'Compare', item: `${SITE}/compare` },
+                    { '@type': 'ListItem', position: 2, name: 'Compare', item: `${SITE}/compare.html` },
                     { '@type': 'ListItem', position: 3, name: `${f.name} Review`, item: `${SITE}/${p}` }
                 ]
             }));
+            if (panelDate) {
+                page = inject(page, 'firm-webpage', firmWebPageBlock(
+                    p, title, panelDate, f.name === 'Vanta Trading' ? vantaBuybackHash() : null
+                ));
+            }
             if (f.name === 'Vanta Trading') page = inject(page, 'firm-buyback', firmBuybackBlock());
             if (f.name === 'Propr') {
                 page = inject(page, 'firm-propr-stats', firmProprBlock());
@@ -1418,7 +1573,8 @@ const buildFirmPages = () => {
                 page = inject(page, 'firm-hypernova-lifetime', firmHypernovaLifetimeBlock());
             }
         } catch (e) {
-            const markers = 'firm-description, firm-og-description, firm-stats and firm-breadcrumb'
+            const markers = 'firm-description, firm-og-description, firm-twitter, firm-stats and firm-breadcrumb'
+                + (DAILY_PANEL_FIRMS.has(f.name) ? ' and firm-webpage' : '')
                 + (f.name === 'Vanta Trading' ? ' and firm-buyback' : '')
                 + (f.name === 'Propr' ? ' and firm-propr-stats and firm-propr-lifetime' : '')
                 + (f.name === 'Hypernova' ? ' and firm-hypernova-stats and firm-hypernova-lifetime' : '');
