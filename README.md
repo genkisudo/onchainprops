@@ -28,7 +28,7 @@ Individual firm reviews are linked in the tables below.
 
 ## Firms covered
 
-The directory currently reviews **15 firms**, grouped the way the site groups them. Figures below are from [`firms.json`](https://onchainprops.xyz/firms.json), last updated **17 November 2026**. Terms change often — check the live review page and the `lastVerified` date before relying on a number. Quote splits exactly as written; do not round a conditional split to its maximum. “TBC”, “soon”, and blank fields mean the value is unknown.
+The directory currently reviews **16 firms**, grouped the way the site groups them. Figures below are from [`firms.json`](https://onchainprops.xyz/firms.json), last updated **27 November 2026**. Terms change often — check the live review page and the `lastVerified` date before relying on a number. Quote splits exactly as written; do not round a conditional split to its maximum. “TBC”, “soon”, and blank fields mean the value is unknown.
 
 ### Onchain prop firms
 
@@ -38,6 +38,7 @@ These are the core onchain funding firms in the directory. Most that are live to
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Hypernova | [Review](https://onchainprops.xyz/firms/hypernova) | Hyperliquid | 80% (90% add-on) | $300,000 | Yes | Yes | 2026-11-17 |
 | Propr | [Review](https://onchainprops.xyz/firms/propr) | Hyperliquid | 80% | Up to $300k | Yes | No | 2026-11-17 |
+| Bungee Funded Perps | [Review](https://onchainprops.xyz/firms/bungee-funded-perps) | Base / Hyperliquid | 80% | $100,000 | No | No | 2026-11-27 |
 | Vanta Trading | [Review](https://onchainprops.xyz/firms/vanta-trading) | Bittensor / Hyperliquid | Up to 100% | $100,000 | Work in progress | No | 2026-11-21 |
 | Iceberg | [Review](https://onchainprops.xyz/firms/iceberg) | Hyperliquid | 80% | $100,000 | No | No | 2026-10-16 |
 | Vest Capital | [Review](https://onchainprops.xyz/firms/vest-capital) | Arbitrum / Base | Up to 95% | $25,000 | No | No | 2026-11-06 |
