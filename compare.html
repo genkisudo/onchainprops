@@ -21,6 +21,7 @@
         font-src https://fonts.gstatic.com;
         img-src 'self' data:;
         manifest-src 'self';
+        connect-src https://api.amplitude.com https://api2.amplitude.com https://analytics.eu.amplitude.com;
         base-uri 'self';
         upgrade-insecure-requests;
     ">
@@ -575,6 +576,20 @@
             color: var(--accent);
         }
         .ca-firm-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
+        .ca-firm-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem 1.25rem;
+            margin-top: 0.9rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .ca-firm-link { color: var(--text-primary); text-decoration: none; }
+        .ca-firm-link:hover { color: var(--accent); }
+        .ca-firm-link--out { color: var(--accent); }
+        .ca-firm-offer { color: var(--text-secondary); font-weight: 500; }
+        .ca-firm-offer strong { color: var(--accent); }
 
         /* ── CTA card ────────────────────────────── */
         .ca-cta-card {
@@ -840,6 +855,12 @@
                                     <p class="ca-firm-desc">
                                         Hypernova is the headline act of onchain prop trading right now. Founded by Anar Bayramov (former DeFi investor at RockawayX) and Nijat Bakhshaliyev (ex-senior engineer at Coinbase and Citi), the firm closed a $3M pre-seed round led by Lemniscap with backing from CMS Holdings, Very Early Ventures, and a roster of Hyperliquid ecosystem angels. Accounts, rules and payouts live in smart contracts on Arbitrum, and payouts are released from a public onchain reserve in seconds with no manual approval; Hypernova reports <!-- GEN:BEGIN hypernova-lifetime -->$3.78M<!-- GEN:END hypernova-lifetime --> in lifetime payouts. The standard split is 80%, and a 90% profit split add-on costs 20% more at checkout. Assessments are 1-step, from $5K to $200K per account and up to $300K in total, across Tight, Low, Medium and High risk tiers (9–10% target, 3–8% static drawdown), with fees from $25. It is still an invite-only beta, and payouts are capped at $10,000 of profit per day for now. <strong>Best for:</strong> experienced traders who want smart-contract-enforced rules and instant onchain payouts.
                                     </p>
+                                    <!-- GEN:BEGIN compare-cta-hypernova -->
+                                    <div class="ca-firm-actions">
+                                        <a href="firms/hypernova" class="ca-firm-link">Read the Hypernova review →</a>
+                                        <a href="https://hn.xyz/r/rcvmoy" class="ca-firm-link ca-firm-link--out" target="_blank" rel="sponsored noopener noreferrer" data-firm="Hypernova" data-placement="compare_card">Visit Hypernova ↗</a>
+                                    </div>
+                                    <!-- GEN:END compare-cta-hypernova -->
                                 </div>
 
                                 <!-- Firm card: Propr -->
@@ -856,6 +877,12 @@
                                     <p class="ca-firm-desc">
                                         Propr is the perps prop firm built on Hyperliquid, backed by SwissBorg. It lists 140+ crypto, stock, index, commodity and forex perps, with four challenge types (Classic, Turbo and Pro 1-Step, plus Classic 2-Step) from $5K to $200K, fees from $25, and up to $300K in funded accounts per trader. There are no time limits, minimum days or consistency rules. Payouts are on demand in USDC onchain from $20, and every payout, reserve wallet and its hedging account are public on its transparency page; Propr reports over $4M paid out. Trader accounts are simulated, and each trade is labelled A-booked or B-booked. Bots and AI agents are fully supported through its API and SDKs, and traders in the US and UK can now join. A $PROPR points program targeted a token launch in August 2026, but the token's status is unconfirmed. <strong>Best for:</strong> traders who need scale, want asset diversity, and value radical transparency.
                                     </p>
+                                    <!-- GEN:BEGIN compare-cta-propr -->
+                                    <div class="ca-firm-actions">
+                                        <a href="firms/propr" class="ca-firm-link">Read the Propr review →</a>
+                                        <a href="https://app.propr.xyz/r/nCnJ5uZ9" class="ca-firm-link ca-firm-link--out" target="_blank" rel="sponsored noopener noreferrer" data-firm="Propr" data-placement="compare_card">Visit Propr ↗</a>
+                                    </div>
+                                    <!-- GEN:END compare-cta-propr -->
                                 </div>
 
                                 <!-- Firm card: Bungee Funded Perps -->
@@ -871,6 +898,12 @@
                                     <p class="ca-firm-desc">
                                         Bungee Funded Perps is the prop program of Bungee, built by the team behind Socket. It offers one-step Classic (10% target, 6% drawdown), Pro (12%, 5%) and Turbo (9%, 3%) challenges from $10K to $100K, priced from $45 to $900, with a 3% daily loss limit, a static drawdown, no time limit and no consistency rule. A new One Shot Black account has no daily limit and a trailing $200 drawdown. It lists 31 isolated-margin perps with fixed leverage from 2x to 20x and charges 1.5 bps on every fill. The split is 80%, with a $50 minimum and a $20,000 gross daily allowance. Payouts are USDC on Base, and Bungee says it publishes a public ledger with transaction hashes. We have not independently verified payouts, and no reserve is published. Accounts are simulated and rules are not onchain. Bots, APIs, HFT and scalping are banned, and the rulebook is still a v0.10 draft. <strong>Best for:</strong> discretionary traders who want cheap one-step entry, very low fees.
                                     </p>
+                                    <!-- GEN:BEGIN compare-cta-bungee-funded-perps -->
+                                    <div class="ca-firm-actions">
+                                        <a href="firms/bungee-funded-perps" class="ca-firm-link">Read the Bungee Funded Perps review →</a>
+                                        <a href="https://bungee.exchange/r/ONCHAINPROPS" class="ca-firm-link ca-firm-link--out" target="_blank" rel="sponsored noopener noreferrer" data-firm="Bungee Funded Perps" data-placement="compare_card">Visit Bungee Funded Perps ↗</a>
+                                    </div>
+                                    <!-- GEN:END compare-cta-bungee-funded-perps -->
                                 </div>
 
                                 <!-- Firm card: Iceberg -->
@@ -886,6 +919,12 @@
                                     <p class="ca-firm-desc">
                                         Iceberg offers simulated capital priced off live Hyperliquid markets, with eligible payouts paid in USDC from a public fee pool on Arbitrum. Instant Funding skips the evaluation (currently $5K–$25K, 90-day lifetime, first payout five days after the first fill, then a five-day cooldown, and a 1–5% claim cap). 1-Step Unlimited starts with a 10% target and runs up to $100K with no expiration and on-demand funded payouts once eligible gross profit reaches $25. Both products use a 3% daily loss limit and a 6% static max loss, and the trader keeps 80%. There is no KYC. Trading itself is simulated, so the rules are not smart-contract enforced; the pool balance and transfers are public. We have not independently verified payouts yet. <strong>Best for:</strong> traders who want a Hyperliquid-priced account, a published payout pool, and a choice between instant funding and a one-step evaluation.
                                     </p>
+                                    <!-- GEN:BEGIN compare-cta-iceberg -->
+                                    <div class="ca-firm-actions">
+                                        <a href="firms/iceberg" class="ca-firm-link">Read the Iceberg review →</a>
+                                        <a href="https://www.iceberg.cash/?ref=3665E15AECCD7D44" class="ca-firm-link ca-firm-link--out" target="_blank" rel="sponsored noopener noreferrer" data-firm="Iceberg" data-placement="compare_card">Visit Iceberg ↗</a>
+                                    </div>
+                                    <!-- GEN:END compare-cta-iceberg -->
                                 </div>
 
                                 <!-- Firm card: Cashed -->
@@ -901,6 +940,12 @@
                                     <p class="ca-firm-desc">
                                         Cashed sells Trading Power instead of a fixed account size. A deposit from $5 to $1,500 is multiplied into simulated capital: 115× on Standard, 75× on Flex, 35× on Instant, and 35–215× on Build Your Own, so the largest starting account is $322,500. One account covers Hyperliquid-priced perps and Polymarket-priced prediction markets, with no order routed to either venue. Standard is a 10% target with 3% daily and 6% static drawdown at an 80% split. Build Your Own and the scaling plan can reach a 90% split. Payouts are USDC on BNB Smart Chain, at least $20, once per account every 24 hours and capped at $10,000 per trader per rolling 24 hours. There is no KYC. Active funded capital is capped at $500,000 per trader. We have not independently verified payouts yet. <strong>Best for:</strong> traders who want one simulated book for perps and prediction markets, and who would rather size an account from a deposit than pick a preset balance.
                                     </p>
+                                    <!-- GEN:BEGIN compare-cta-cashed -->
+                                    <div class="ca-firm-actions">
+                                        <a href="firms/cashed" class="ca-firm-link">Read the Cashed review →</a>
+                                        <a href="https://cashed.fun/join?ref=GENKISUD-209C78" class="ca-firm-link ca-firm-link--out" target="_blank" rel="sponsored noopener noreferrer" data-firm="Cashed" data-placement="compare_card">Visit Cashed ↗</a>
+                                    </div>
+                                    <!-- GEN:END compare-cta-cashed -->
                                 </div>
 
                                 <!-- Firm card: Vest Capital -->
@@ -916,6 +961,12 @@
                                     <p class="ca-firm-desc">
                                         Vest Capital is the funded-account program of the Vest Markets perp exchange, covering crypto, stocks, indices, FX and commodities. It offers 1-Step (10% or 20% target), 2-Step (10% then 5%) and Instant accounts, with a static 6% max drawdown on evaluations and 2–4% on Instant. A 3% or 4% daily loss limit is optional on 1-Step. The split is 80% or 90% on evaluations and a flat 95% on Instant, with no consistency rule and no time limit. Fees run from $10 for a $500 Instant account to $1,000 for $25K. Profit claims credit within 24 hours, then you withdraw USDC. Rules are enforced by Vest, not onchain, API trading is not allowed, and we have not independently verified payouts. <strong>Best for:</strong> traders who want simple rules, a high split and very cheap entry on a real perp exchange.
                                     </p>
+                                    <!-- GEN:BEGIN compare-cta-vest-capital -->
+                                    <div class="ca-firm-actions">
+                                        <a href="firms/vest-capital" class="ca-firm-link">Read the Vest Capital review →</a>
+                                        <a href="https://next.vestmarkets.com/r/6ionchainprops" class="ca-firm-link ca-firm-link--out" target="_blank" rel="sponsored noopener noreferrer" data-firm="Vest Capital" data-placement="compare_card">Visit Vest Capital ↗</a>
+                                    </div>
+                                    <!-- GEN:END compare-cta-vest-capital -->
                                 </div>
 
                                 <!-- Firm card: Carrot Funding -->
@@ -932,6 +983,12 @@
                                     <p class="ca-firm-desc">
                                         Carrot Funding is the main non-Hyperliquid option on this list, built on Gains Network's gTrade protocol (with Hyperliquid support coming soon). It stands out for its verification infrastructure: Carrot uses Rethink Finance vaults for capital safety, gTrade for execution, and recently integrated the Oasis ROFL framework to cryptographically verify its risk engine — meaning evaluation metrics, payout calculations, and trading rules can be independently verified onchain. The two-phase challenge requires a 5% profit target in evaluation and 8% in verification, with 5% max daily loss and 8–10% max total drawdown. The platform supports 165+ assets across crypto, forex, and commodities through a custom trading terminal. Payouts are on-demand in USDC. <strong>Best for:</strong> traders who want verifiable infrastructure beyond just Hyperliquid, or who are already active in the gTrade ecosystem.
                                     </p>
+                                    <!-- GEN:BEGIN compare-cta-carrot-funding -->
+                                    <div class="ca-firm-actions">
+                                        <a href="firms/carrot-funding" class="ca-firm-link">Read the Carrot Funding review →</a>
+                                        <a href="https://app.carrotfunding.io/join/2VSSOTXBQZ" class="ca-firm-link ca-firm-link--out" target="_blank" rel="sponsored noopener noreferrer" data-firm="Carrot Funding" data-placement="compare_card">Visit Carrot Funding ↗</a>
+                                    </div>
+                                    <!-- GEN:END compare-cta-carrot-funding -->
                                 </div>
 
                                 <!-- Firm card: Vanta Trading -->
@@ -947,6 +1004,12 @@
                                     <p class="ca-firm-desc">
                                         Vanta Trading takes a different approach from every other firm here. Built by Taoshi, it runs on Bittensor Subnet 8 (Vanta Network), where performance records are scored by network validators, and prices its simulated accounts from Hyperliquid and other market data feeds. It launched in February 2026 and offers up to 100% profit splits — the highest in the directory — with a one-step 10% evaluation from $5K to $100K, a selectable 60/40 to 100/0 split, weekly rewards in USDC on Base or Vanta Network alpha, and automatic promotion to Pro accounts of up to $1M in demo capital. Instant Funded accounts ($25K to $100K at 80/20) skip the evaluation. Vanta says it makes money by copy trading its best traders with live capital. The Bittensor angle is novel but adds complexity, and the economics involve alpha tokens locked in smart contracts. <strong>Best for:</strong> traders interested in the Bittensor ecosystem and a 100% split, who are comfortable with a newer and more experimental platform.
                                     </p>
+                                    <!-- GEN:BEGIN compare-cta-vanta-trading -->
+                                    <div class="ca-firm-actions">
+                                        <a href="firms/vanta-trading" class="ca-firm-link">Read the Vanta Trading review →</a>
+                                        <a href="https://vantatrading.io/?ref=kamil" class="ca-firm-link ca-firm-link--out" target="_blank" rel="sponsored noopener noreferrer" data-firm="Vanta Trading" data-placement="compare_card">Visit Vanta Trading ↗</a>
+                                    </div>
+                                    <!-- GEN:END compare-cta-vanta-trading -->
                                 </div>
 
                                 <!-- Firm card: FUNDED by FOXIFY -->
@@ -963,6 +1026,12 @@
                                     <p class="ca-firm-desc">
                                         FUNDED by FOXIFY takes the lowest-barrier approach in the space. With instant funding up to 10,000 USDC and no multi-phase evaluation process, it's designed for traders who want to start immediately. A minimum deposit of just 100 USDC gets you a funded account with access to 220+ markets including crypto, gold, silver, and indices, with leverage up to 100x. The profit split is 80% on Challenge Funding and 90% on Flash Funding, and the token program adds an extra earnings layer. The $10K account ceiling is the lowest on this list, which limits scalability for larger traders but makes it the most accessible entry point. Hyperliquid integration is in the works but not yet live. <strong>Best for:</strong> newer traders who want instant access without evaluation hurdles, or experienced traders looking for a low-risk way to test a new platform.
                                     </p>
+                                    <!-- GEN:BEGIN compare-cta-funded-by-foxify -->
+                                    <div class="ca-firm-actions">
+                                        <a href="firms/funded-by-foxify" class="ca-firm-link">Read the FUNDED by FOXIFY review →</a>
+                                        <a href="https://www.foxify.trade/" class="ca-firm-link ca-firm-link--out" target="_blank" rel="noopener noreferrer" data-firm="FUNDED by FOXIFY" data-placement="compare_card">Visit FUNDED by FOXIFY ↗</a>
+                                    </div>
+                                    <!-- GEN:END compare-cta-funded-by-foxify -->
                                 </div>
 
                                 <!-- Firm card: DojiFunded -->
@@ -978,6 +1047,13 @@
                                     <p class="ca-firm-desc">
                                         DojiFunded is a decentralized prop firm on Arbitrum offering funded accounts up to $100,000 with up to a 90% profit split — among the highest advertised splits in the directory, behind only Vanta Trading's selectable split of up to 100%. It offers multiple evaluation paths, including Instant Funding alongside 1-Step and 2-Step challenges, across crypto, forex, stocks, and commodities. The firm is currently in a waitlist phase, so terms should be re-verified at launch. <strong>Best for:</strong> traders chasing the highest split who are comfortable with a pre-launch platform on Arbitrum.
                                     </p>
+                                    <!-- GEN:BEGIN compare-cta-dojifunded -->
+                                    <div class="ca-firm-actions">
+                                        <a href="firms/dojifunded" class="ca-firm-link">Read the DojiFunded review →</a>
+                                        <a href="https://app.dojifunded.com/kol/onchainprops" class="ca-firm-link ca-firm-link--out" target="_blank" rel="sponsored noopener noreferrer" data-firm="DojiFunded" data-placement="compare_card">Visit DojiFunded ↗</a>
+                                        <span class="ca-firm-offer">10% off through our link</span>
+                                    </div>
+                                    <!-- GEN:END compare-cta-dojifunded -->
                                 </div>
 
                                 <!-- Firm card: Funding Predicts -->
@@ -993,6 +1069,13 @@
                                     <p class="ca-firm-desc">
                                         Funding Predicts is one of two prediction-market firms on this list — funded trading on Polymarket instead of a perpetuals exchange. Backed by MyFundedFutures and based in Austin, TX, it offers a 1-Step evaluation, accounts up to $150,000, and a profit split of up to 90%. Payouts run weekly rather than on-demand, and rules-onchain status is still marked TBC. <strong>Best for:</strong> traders who want to apply prop-firm capital to prediction-market event trading rather than perpetuals.
                                     </p>
+                                    <!-- GEN:BEGIN compare-cta-funding-predicts -->
+                                    <div class="ca-firm-actions">
+                                        <a href="firms/funding-predicts" class="ca-firm-link">Read the Funding Predicts review →</a>
+                                        <a href="https://fundingpredicts.com/purchase?ref=ONCHAINPROPS" class="ca-firm-link ca-firm-link--out" target="_blank" rel="sponsored noopener noreferrer" data-firm="Funding Predicts" data-placement="compare_card">Visit Funding Predicts ↗</a>
+                                        <span class="ca-firm-offer">20% off with code <strong>ONCHAINPROPS</strong></span>
+                                    </div>
+                                    <!-- GEN:END compare-cta-funding-predicts -->
                                 </div>
 
                                 <!-- Firm card: Catalyst -->
@@ -1008,6 +1091,12 @@
                                     <p class="ca-firm-desc">
                                         Catalyst is the other prediction-market option: a simulated challenge priced off live Polymarket events. You pay a one-time fee ($10–$199) and get a $1,000–$50,000 account. Hit a 12–15% profit target within 50 trades and 60 days, with a 4–5% trailing drawdown and no daily loss limit, and you get a fixed payout of $100–$3,000. There's no profit split. The payout lands in your Catalyst wallet the moment you pass. Everything runs off-chain under Trade Catalyst Inc. (country not disclosed), and payouts aren't independently verified. <strong>Best for:</strong> traders who want a cheap, low-risk way to test a prediction-market edge before committing to a larger evaluation.
                                     </p>
+                                    <!-- GEN:BEGIN compare-cta-catalyst -->
+                                    <div class="ca-firm-actions">
+                                        <a href="firms/catalyst" class="ca-firm-link">Read the Catalyst review →</a>
+                                        <a href="https://www.tradecatalyst.com/" class="ca-firm-link ca-firm-link--out" target="_blank" rel="noopener noreferrer" data-firm="Catalyst" data-placement="compare_card">Visit Catalyst ↗</a>
+                                    </div>
+                                    <!-- GEN:END compare-cta-catalyst -->
                                 </div>
 
                                 <!-- Firm card: Breakout -->
@@ -1023,6 +1112,12 @@
                                     <p class="ca-firm-desc">
                                         Breakout is the Kraken-owned crypto prop firm and the most institutionally backed off-chain option here. Evaluations run in a simulated environment, and no real trades are placed. It offers 1-Step Classic, Pro and Turbo evaluations with a 9–12% target, a 3% daily loss limit, a static 3–6% max drawdown and no time limit, plus a $50K Spark evaluation for indices and commodities with no daily limit. The split is 80%, or 90% as a paid add-on (about 20% more), across up to $200,000 in total allocation, with fees from $20. You can request a payout any time ($50 minimum), and it arrives as USDC on Ethereum after a 12–24h review by Payward Oceanic, Ltd. Payouts are uninsured and not independently verified. <strong>Best for:</strong> traders who want a centralized evaluation from a well-known exchange brand with stablecoin payouts.
                                     </p>
+                                    <!-- GEN:BEGIN compare-cta-breakout -->
+                                    <div class="ca-firm-actions">
+                                        <a href="firms/breakout" class="ca-firm-link">Read the Breakout review →</a>
+                                        <a href="https://www.breakoutprop.com/" class="ca-firm-link ca-firm-link--out" target="_blank" rel="noopener noreferrer" data-firm="Breakout" data-placement="compare_card">Visit Breakout ↗</a>
+                                    </div>
+                                    <!-- GEN:END compare-cta-breakout -->
                                 </div>
 
                                 <!-- Firm card: SizeProp -->
@@ -1038,6 +1133,13 @@
                                     <p class="ca-firm-desc">
                                         SizeProp is also fully off-chain — it trades simulated capital across crypto, stocks, forex, and commodities (150+ instruments) rather than settling on a DEX. It's backed by Igloo Inc, the company behind Pudgy Penguins, offers Degen, 1-Step, and 2-Step evaluations up to $100,000, and lets traders pick an 80%, 90%, or 95% profit split at purchase. Payouts settle in stablecoins with a $50 minimum, but the firm doesn't publicly disclose payout data and independent payout verification isn't available yet. <strong>Best for:</strong> traders who want multi-asset exposure beyond crypto perps and are comfortable trusting a centralized, off-chain rulebook.
                                     </p>
+                                    <!-- GEN:BEGIN compare-cta-sizeprop -->
+                                    <div class="ca-firm-actions">
+                                        <a href="firms/sizeprop" class="ca-firm-link">Read the SizeProp review →</a>
+                                        <a href="https://sizeprop.com/referral?ref=ONCHAINPROPS" class="ca-firm-link ca-firm-link--out" target="_blank" rel="sponsored noopener noreferrer" data-firm="SizeProp" data-placement="compare_card">Visit SizeProp ↗</a>
+                                        <span class="ca-firm-offer">10% off with code <strong>ONCHAINPROPS</strong></span>
+                                    </div>
+                                    <!-- GEN:END compare-cta-sizeprop -->
                                 </div>
 
                                 <!-- Firm card: HyroTrader -->
@@ -1053,6 +1155,13 @@
                                     <p class="ca-firm-desc">
                                         HyroTrader is another off-chain option: all trading happens on simulated accounts running on real exchange data (its own platform, Bybit, or BloFin). It offers Zero-Step, One-Step, and Two-Step challenges from $59, an 80% base split that can reach 90% on One-Step and Two-Step, and USDT/USDC payouts within 24 hours ($100 minimum). Payouts aren't independently verified. Use code <strong>DED5IJB</strong> for 5% off. <strong>Best for:</strong> traders who want a Bybit or BloFin-style futures workflow and are comfortable trusting a centralized rulebook.
                                     </p>
+                                    <!-- GEN:BEGIN compare-cta-hyrotrader -->
+                                    <div class="ca-firm-actions">
+                                        <a href="firms/hyrotrader" class="ca-firm-link">Read the HyroTrader review →</a>
+                                        <a href="https://www.hyrotrader.com/" class="ca-firm-link ca-firm-link--out" target="_blank" rel="noopener noreferrer" data-firm="HyroTrader" data-placement="compare_card">Visit HyroTrader ↗</a>
+                                        <span class="ca-firm-offer">5% off with code <strong>DED5IJB</strong></span>
+                                    </div>
+                                    <!-- GEN:END compare-cta-hyrotrader -->
                                 </div>
 
                             </section>
@@ -1136,6 +1245,7 @@
         </div>
     </footer>
 
+    <script src="script.js"></script>
     <script src="compare.js"></script>
 </body>
 
