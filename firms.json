@@ -89,7 +89,7 @@
       "chainPhrase": "Base (USDC payouts), with prices from Hyperliquid",
       "isAffiliate": true,
       "token": "No",
-      "payoutSpeed": "1 business day",
+      "payoutSpeed": "~1 business day",
       "rulesOnchain": "No",
       "maxLeverage": "20x",
       "payoutsVerified": "Yes",
