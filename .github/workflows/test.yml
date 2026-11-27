@@ -1,0 +1,29 @@
+# Runs the Node test suite (node --test: build.test.js, indexnow.test.js) on
+# every pull request, so a PR can't merge with stale generated files, broken
+# internal links, unparseable JSON-LD, unpaired GEN markers or affiliate links
+# missing rel="sponsored". Read-only: it never commits.
+name: Tests
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Run tests
+        run: node --test
