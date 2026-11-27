@@ -229,15 +229,15 @@
       "dailyDrawdown": "3%",
       "maxDrawdown": "3-8%",
       "website": "https://northbook.xyz/",
-      "chain": "Hyperliquid",
-      "chainPhrase": "Hyperliquid, with USDC payouts settled onchain",
+      "chain": "Hyperliquid (prices only)",
+      "chainPhrase": "an internal simulated book priced from Hyperliquid, with the payout chain not yet published",
       "isAffiliate": false,
       "token": "No",
       "payoutSpeed": "On demand",
       "rulesOnchain": "No",
       "payoutsVerified": "No",
       "lastVerified": "2026-11-27",
-      "pageHook": "invite-only one-step perps challenges priced from Hyperliquid, with a static drawdown, a fully published rulebook and on-demand USDC payouts, but no payout wallet or vault address published yet."
+      "pageHook": "invite-only one-step perps challenges priced from Hyperliquid, with a static drawdown, a published but still-draft rulebook and on-demand USDC payouts, but no payout wallet or vault address published yet."
     }
   ],
   "predictionMarketFirms": [
