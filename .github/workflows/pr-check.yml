@@ -1,0 +1,36 @@
+# Fails a pull request whose generated files don't match firms.json / faq.json /
+# posts/*.md, e.g. a hand-edit inside a GEN:BEGIN/END block or a forgotten
+# `node build.js`. build.yml would silently overwrite either on main, so the
+# problem is caught here instead. Read-only: it never commits.
+name: Check generated content
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Regenerate generated content
+        run: node build.js
+
+      - name: Fail if generated files drifted
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::Generated files are out of date or were hand-edited inside GEN blocks. Run 'node build.js' and commit the result."
+            git status --short
+            git --no-pager diff --stat
+            git --no-pager diff | head -200
+            exit 1
+          fi
+          echo "Generated content matches the data."
