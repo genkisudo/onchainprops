@@ -806,7 +806,7 @@
 
                                 <h3>Chain &amp; Settlement</h3>
                                 <p>
-                                    The underlying chain determines your settlement speed, gas costs, and counterparty risk. Hyperliquid dominates the space for good reason: it offers CEX-like speed with DEX-level self-custody. Payouts on Hyperliquid-based firms typically settle in USDC directly to your wallet, often within hours. Firms on other chains (like gTrade's Arbitrum-based infrastructure) offer different trade-offs worth understanding, especially around available trading pairs and liquidity depth.
+                                    The underlying chain determines your settlement speed, gas costs, and counterparty risk. Hyperliquid dominates the space for good reason: it offers CEX-like speed with DEX-level self-custody. Payouts on Hyperliquid-based firms typically settle in USDC directly to your wallet, often within hours. Firms on other chains and venues (like Vest on its own perp exchange, or Foxify's Arbitrum and Berachain platforms) offer different trade-offs worth understanding, especially around available trading pairs and liquidity depth.
                                 </p>
 
                                 <ul>
@@ -869,7 +869,7 @@
                                         </div>
                                     </div>
                                     <p class="ca-firm-desc">
-                                        Iceberg offers simulated capital priced off live Hyperliquid markets, with eligible payouts paid in USDC from a public fee pool on Arbitrum. Instant Funding skips the evaluation (currently $5K–$25K, 90-day lifetime, first payout five days after the first fill, then a five-day cooldown, and a 1–5% claim cap). 1-Step Unlimited starts with a 10% target and runs up to $100K with no expiration and on-demand funded payouts once eligible gross profit reaches $25. Both products use a 3% daily loss limit and a 6% static max loss, and the trader keeps 80%. There is no KYC. Trading itself is simulated, so the rules are not smart-contract enforced; the pool balance and transfers are public. We have not independently verified payouts yet. <strong>Best for:</strong> traders who want a Hyperliquid-priced account, a published payout pool, and a choice between instant funding and a one-step evaluation.
+                                        Iceberg offers simulated capital priced off live Hyperliquid markets, with eligible payouts paid in USDC from a public fee pool on Arbitrum. Instant Funding skips the evaluation (currently $5K–$25K, 90-day lifetime, first payout five days after the first fill, then a five-day cooldown, and a 1–5% claim cap). 1-Step Unlimited starts with a 10% target and runs up to $100K with no expiration and on-demand funded payouts once eligible gross profit reaches $25. Both use a 3% daily loss limit and a 6% static max loss. A cheaper 1-Step Pro variant has a 12% target and a 5% max loss. The trader keeps 80% on all three. There is no KYC. Trading itself is simulated, so the rules are not smart-contract enforced; the pool balance and transfers are public. We have not independently verified payouts yet. <strong>Best for:</strong> traders who want a Hyperliquid-priced account, a published payout pool, and a choice between instant funding and a one-step evaluation.
                                     </p>
                                 </div>
 
@@ -884,7 +884,7 @@
                                         </div>
                                     </div>
                                     <p class="ca-firm-desc">
-                                        Cashed sells Trading Power instead of a fixed account size. A deposit from $5 to $1,500 is multiplied into simulated capital: 115× on Standard, 75× on Flex, 35× on Instant, and 35–215× on Build Your Own, so the largest starting account is $322,500. One account covers Hyperliquid-priced perps and Polymarket-priced prediction markets, with no order routed to either venue. Standard is a 10% target with 3% daily and 6% static drawdown at an 80% split. Build Your Own and the scaling plan can reach a 90% split. Payouts are USDC on BNB Smart Chain, at least $20, once per account every 24 hours and capped at $10,000 per trader per rolling 24 hours. There is no KYC. Active funded capital is capped at $500,000 per trader. We have not independently verified payouts yet. <strong>Best for:</strong> traders who want one simulated book for perps and prediction markets, and who would rather size an account from a deposit than pick a preset balance.
+                                        Cashed sells Trading Power instead of a fixed account size. A deposit from $5 to $1,500 is multiplied into simulated capital: 115× on Standard, 75× on Flex, 35× on Instant, and 35–215× on Build Your Own, so the largest starting account is $322,500. One account covers Hyperliquid-priced perps and Polymarket-priced prediction markets, with no order routed to either venue. Standard is a 10% target with 3% daily and 6% static drawdown at an 80% split. Build Your Own and the scaling plan can reach a 90% split. Payouts are USDC on Arbitrum One, at least $20, once per account every 24 hours and capped at $10,000 per trader per rolling 24 hours. There is no KYC. Active funded capital is capped at $500,000 per trader. We have not independently verified payouts yet. <strong>Best for:</strong> traders who want one simulated book for perps and prediction markets, and who would rather size an account from a deposit than pick a preset balance.
                                     </p>
                                 </div>
 
@@ -894,12 +894,12 @@
                                         <span class="ca-firm-name">Vest Capital</span>
                                         <div class="ca-firm-stats">
                                             <span class="ca-stat-badge highlight">Up to 95% split</span>
-                                            <span class="ca-stat-badge">Up to $25K</span>
+                                            <span class="ca-stat-badge">Up to $50K</span>
                                             <span class="ca-stat-badge">Arbitrum / Base</span>
                                         </div>
                                     </div>
                                     <p class="ca-firm-desc">
-                                        Vest Capital is the funded-account program of the Vest Markets perp exchange, covering crypto, stocks, indices, FX and commodities. It offers 1-Step (10% or 20% target), 2-Step (10% then 5%) and Instant accounts, with a static 6% max drawdown on evaluations and 2–4% on Instant. A 3% or 4% daily loss limit is optional on 1-Step. The split is 80% or 90% on evaluations and a flat 95% on Instant, with no consistency rule and no time limit. Fees run from $10 for a $500 Instant account to $1,000 for $25K. Profit claims credit within 24 hours, then you withdraw USDC. Rules are enforced by Vest, not onchain, API trading is not allowed, and we have not independently verified payouts. <strong>Best for:</strong> traders who want simple rules, a high split and very cheap entry on a real perp exchange.
+                                        Vest Capital is the funded-account program of the Vest Markets perp exchange, covering crypto, stocks, indices, FX and commodities. It offers 1-Step (5–20% target), 2-Step and Instant accounts, with a static 6–8% max drawdown on evaluations and 2–4% on Instant. Hard daily loss limits are no longer offered on new accounts, only an optional personal limit. The split is 70–95% on evaluations and a flat 95% on Instant, with no consistency rule and no time limit. Sizes run up to $50K, and fees run from $10 for a $500 Instant account to $2,000 for $50K. Profit claims credit within 24 hours, then you withdraw USDC. Rules are enforced by Vest, not onchain, API trading is not allowed, and we have not independently verified payouts. <strong>Best for:</strong> traders who want simple rules, a high split and very cheap entry on a real perp exchange.
                                     </p>
                                 </div>
 
@@ -909,13 +909,13 @@
                                         <span class="ca-firm-name">Carrot Funding</span>
                                         <div class="ca-firm-stats">
                                             <span class="ca-stat-badge highlight">80% split</span>
-                                            <span class="ca-stat-badge">Up to $50K</span>
-                                            <span class="ca-stat-badge">gTrade</span>
+                                            <span class="ca-stat-badge">Up to $100K</span>
+                                            <span class="ca-stat-badge">Hyperliquid</span>
                                             <span class="ca-stat-badge highlight">Token: Yes</span>
                                         </div>
                                     </div>
                                     <p class="ca-firm-desc">
-                                        Carrot Funding is the main non-Hyperliquid option on this list, built on Gains Network's gTrade protocol (with Hyperliquid support coming soon). It stands out for its verification infrastructure: Carrot uses Rethink Finance vaults for capital safety, gTrade for execution, and recently integrated the Oasis ROFL framework to cryptographically verify its risk engine — meaning evaluation metrics, payout calculations, and trading rules can be independently verified onchain. The two-phase challenge requires a 5% profit target in evaluation and 8% in verification, with 5% max daily loss and 8–10% max total drawdown. The platform supports 165+ assets across crypto, forex, and commodities through a custom trading terminal. Payouts are on-demand in USDC. <strong>Best for:</strong> traders who want verifiable infrastructure beyond just Hyperliquid, or who are already active in the gTrade ecosystem.
+                                        Carrot Funding moved its evaluation and funded trading from gTrade to Hyperliquid in August 2026, and rebuilt its challenges in October. You can run a 1-Phase (10% target) or 2-Phase (5% then 10%) challenge from $5K to $100K, with a $200K size listed as coming soon, or build your own: static max loss of 3%, 6% or 8%, a 3% or 4% daily loss, a 60%, 80% or 90% split (80% default), and an optional payout cap for a lower fee. Leverage defaults to 5x, bots and AI tools are allowed, and payouts are USDC on Arbitrum or HyperEVM, usually within 24 hours (up to 30 days if a check is needed), with transaction links to a block explorer. Rules are enforced by Carrot, not onchain. <strong>Best for:</strong> traders who want a configurable challenge with a low entry price and no time limit.
                                     </p>
                                 </div>
 
@@ -940,13 +940,13 @@
                                         <span class="ca-firm-name">FUNDED by FOXIFY</span>
                                         <div class="ca-firm-stats">
                                             <span class="ca-stat-badge highlight">80% split</span>
-                                            <span class="ca-stat-badge">Up to $10K</span>
-                                            <span class="ca-stat-badge">Hyperliquid (soon)</span>
+                                            <span class="ca-stat-badge">Up to $20K</span>
+                                            <span class="ca-stat-badge">Hyperliquid / Arbitrum</span>
                                             <span class="ca-stat-badge highlight">Token: Yes</span>
                                         </div>
                                     </div>
                                     <p class="ca-firm-desc">
-                                        FUNDED by FOXIFY takes the lowest-barrier approach in the space. With instant funding up to 10,000 USDC and no multi-phase evaluation process, it's designed for traders who want to start immediately. A minimum deposit of just 100 USDC gets you a funded account with access to 220+ markets including crypto, gold, silver, and indices, with leverage up to 100x. The profit split is 80% on Challenge Funding and 90% on Flash Funding, and the token program adds an extra earnings layer. The $10K account ceiling is the lowest on this list, which limits scalability for larger traders but makes it the most accessible entry point. Hyperliquid integration is in the works but not yet live. <strong>Best for:</strong> newer traders who want instant access without evaluation hurdles, or experienced traders looking for a low-risk way to test a new platform.
+                                        FUNDED by FOXIFY takes the lowest-barrier approach in the space. There is no evaluation phase: a deposit from $100 gets you an instantly funded $500 account, which scales to $20,000 as you hit points and profit targets (Pro starts at a $500 deposit and $2,500). Foxify says trades run on real DEX orderbooks, with 125+ markets and leverage up to 100x on crypto. Manual accounts keep 80% of profits and Foxify Automation accounts, which follow curated strategies and are in beta, keep 70%, paid as instant on-chain USDC. Automation is live on Hyperliquid, GMX and others, and manual accounts run on Kodiak, what.exchange and PERPTools. Max drawdown is 7–20% by level, there is a FOX token with staking, and your deposit is the first capital at risk. The $20K ceiling is the lowest on this list, which limits scalability for larger traders. <strong>Best for:</strong> newer traders who want instant access without evaluation hurdles, or experienced traders testing a new platform with a small deposit.
                                     </p>
                                 </div>
 
@@ -1050,7 +1050,7 @@
                                     There is no single "best" onchain prop firm — the right choice depends on what you prioritize. Here's how the landscape breaks down by use case:
                                 </p>
                                 <p>
-                                    If you want the <strong>highest profit split</strong>, Vanta Trading offers a selectable split of up to 100% (60/40 to 100/0, higher splits cost more), with DojiFunded, FUNDED by FOXIFY, and Hypernova (via its 90% split add-on) close behind at up to 90% — everyone else sits at the 80% standard. If you need the <strong>most scalable account</strong>, Hypernova and Propr lead with $300K ceilings — and Propr's 140+ market universe makes it the clear choice of the two for serious traders. If you want <strong>verifiable infrastructure</strong> beyond Hyperliquid, Carrot Funding's cryptographic verification layer via Oasis ROFL sets a new standard. If you're drawn to <strong>AI-powered trading infrastructure</strong>, Vanta Trading's Bittensor integration is the most experimental (and potentially rewarding) option. And if you just want to <strong>start trading today</strong> with the lowest barrier to entry, FUNDED by FOXIFY gets you funded instantly with a 100 USDC deposit.
+                                    If you want the <strong>highest profit split</strong>, Vanta Trading offers a selectable split of up to 100% (60/40 to 100/0, higher splits cost more), with Vest Capital next at up to 95%, then DojiFunded, Cashed, and Hypernova (via its 90% split add-on) and Carrot Funding (via a 90% option) at up to 90% — everyone else sits at the 80% standard. If you need the <strong>most scalable account</strong>, Hypernova and Propr lead with $300K ceilings — and Propr's 140+ market universe makes it the clear choice of the two for serious traders. If you want <strong>rules and payouts you can verify onchain</strong>, Hypernova is the only firm here that records account rules and payouts in smart contracts, and Propr publishes its payouts and reserve wallets. If you're drawn to <strong>AI-powered trading infrastructure</strong>, Vanta Trading's Bittensor integration is the most experimental (and potentially rewarding) option. And if you just want to <strong>start trading today</strong> with the lowest barrier to entry, FUNDED by FOXIFY gets you funded instantly with a $100 deposit.
                                 </p>
 
                                 <blockquote>

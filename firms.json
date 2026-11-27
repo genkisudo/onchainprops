@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-17",
+  "lastUpdated": "2026-11-27",
   "propFirms": [
     {
       "name": "Hypernova",
@@ -18,7 +18,7 @@
       "payoutSpeed": "~6s",
       "rulesOnchain": "Yes",
       "payoutsVerified": "Yes",
-      "lastVerified": "2026-11-17",
+      "lastVerified": "2026-11-27",
       "pageHook": "onchain prop trading protocol priced from Hyperliquid market data, with every account rule and payout recorded in public smart contracts on Arbitrum."
     },
     {
@@ -39,7 +39,7 @@
       "rulesOnchain": "No",
       "bestSplit": "Yes",
       "payoutsVerified": "Work in progress",
-      "lastVerified": "2026-11-21",
+      "lastVerified": "2026-11-27",
       "pageHook": "prop firm from Taoshi, the team behind Bittensor Subnet 8, with a trader-selectable reward split and automatic promotion to larger Pro accounts."
     },
     {
@@ -59,7 +59,7 @@
       "rulesOnchain": "No",
       "aiAgents": "Yes",
       "payoutsVerified": "Yes",
-      "lastVerified": "2026-11-17",
+      "lastVerified": "2026-11-27",
       "pageHook": "perps prop firm on Hyperliquid that publishes its payouts, reserve wallets and hedging account, with full support for bots and AI agents.",
       "payoutWallets": [
         {
@@ -80,9 +80,9 @@
       "country": "TBC",
       "split": "80%",
       "maxAccount": "$100,000",
-      "profitTarget": "None / 10%",
+      "profitTarget": "None / 10-12%",
       "dailyDrawdown": "3%",
-      "maxDrawdown": "6%",
+      "maxDrawdown": "5-6%",
       "website": "https://www.iceberg.cash/?ref=3665E15AECCD7D44",
       "publicUrl": "https://www.iceberg.cash/",
       "chain": "Hyperliquid",
@@ -93,17 +93,17 @@
       "rulesOnchain": "No",
       "maxLeverage": "25x",
       "payoutsVerified": "No",
-      "lastVerified": "2026-10-16",
-      "pageHook": "Instant Funding or 1-Step Unlimited accounts, with USDC payouts from a public Arbitrum pool."
+      "lastVerified": "2026-11-27",
+      "pageHook": "Instant Funding, 1-Step Unlimited or 1-Step Pro accounts, with USDC payouts from a public Arbitrum pool."
     },
     {
       "name": "Vest Capital",
       "country": "TBC",
       "split": "Up to 95%",
-      "maxAccount": "$25,000",
-      "profitTarget": "None / 10-20%",
-      "dailyDrawdown": "None / 3-4%",
-      "maxDrawdown": "2-6%",
+      "maxAccount": "$50,000",
+      "profitTarget": "None / 5-20%",
+      "dailyDrawdown": "None (optional)",
+      "maxDrawdown": "2-8%",
       "website": "https://next.vestmarkets.com/r/6ionchainprops",
       "publicUrl": "https://next.vestmarkets.com/vest-capital",
       "chain": "Arbitrum / Base",
@@ -112,9 +112,9 @@
       "token": "No",
       "payoutSpeed": "24h",
       "rulesOnchain": "No",
-      "maxLeverage": "75x",
+      "maxLeverage": "100x",
       "payoutsVerified": "No",
-      "lastVerified": "2026-11-06",
+      "lastVerified": "2026-11-27",
       "pageHook": "funded accounts on the Vest Markets perp exchange across crypto, stocks, indices, FX and commodities, with 1-Step and 2-Step evaluations, instant funding, a static drawdown and no consistency rule."
     },
     {
@@ -136,29 +136,28 @@
       "scaledCapital": "Yes",
       "maxLeverage": "10x",
       "payoutsVerified": "No",
-      "lastVerified": "2026-10-29",
-      "pageHook": "deposit-multiplier funding across perps and prediction markets, with USDC payouts on BNB Smart Chain."
+      "lastVerified": "2026-11-27",
+      "pageHook": "deposit-multiplier funding across perps and prediction markets, with USDC payouts on Arbitrum."
     },
     {
       "name": "Carrot Funding",
       "country": "UAE",
-      "split": "80%",
-      "maxAccount": "$50k ($100k soon)",
-      "profitTarget": "5%/8%",
-      "dailyDrawdown": "4-5%",
-      "maxDrawdown": "8-10%",
+      "split": "80% (90% option)",
+      "maxAccount": "$100k ($200k soon)",
+      "profitTarget": "5-10%",
+      "dailyDrawdown": "3-4%",
+      "maxDrawdown": "3-8%",
       "website": "https://app.carrotfunding.io/join/2VSSOTXBQZ",
-      "chain": "gTrade, Hyperliquid (soon)",
-      "chainPhrase": "gTrade with Hyperliquid coming soon",
+      "chain": "Hyperliquid",
+      "chainPhrase": "the Hyperliquid chain",
       "isAffiliate": true,
       "token": "Yes",
-      "payoutSpeed": "Within 24h",
+      "payoutSpeed": "Usually <24h",
       "rulesOnchain": "No",
-      "maxLeverage": "200x",
-      "bestLeverage": "Yes",
+      "maxLeverage": "5x",
       "payoutsVerified": "Yes",
-      "lastVerified": "2026-07-08",
-      "pageHook": "onchain prop firm on gTrade with Proof of Reserves, NFT-based Proof of Skill, and payouts verifiable on Dune."
+      "lastVerified": "2026-11-27",
+      "pageHook": "prop firm on Hyperliquid with 1-Phase and 2-Phase challenges, a build-your-own challenge builder, and USDC payouts verifiable onchain."
     },
     {
       "name": "DojiFunded",
@@ -183,21 +182,22 @@
     {
       "name": "FUNDED by FOXIFY",
       "country": "BVI",
-      "split": "Up to 90%",
-      "maxAccount": "$10,000",
+      "split": "80% (70% automation)",
+      "maxAccount": "$20,000",
       "profitTarget": "15%",
       "dailyDrawdown": "N/A",
-      "maxDrawdown": "10-20%",
+      "maxDrawdown": "7-20%",
       "website": "https://www.foxify.trade/",
-      "chain": "Hyperliquid (soon)",
-      "chainPhrase": "Hyperliquid (coming soon)",
+      "chain": "Hyperliquid / Arbitrum / Berachain",
+      "chainPhrase": "Hyperliquid, Arbitrum and Berachain venues",
       "isAffiliate": false,
       "token": "Yes",
-      "payoutSpeed": "Soon",
+      "payoutSpeed": "Instant",
       "rulesOnchain": "No",
       "payoutsVerified": "No",
-      "lastVerified": "2026-06-26",
-      "pageHook": "Challenge Funding and Flash Funding paths, with Hyperliquid support coming soon."
+      "lastVerified": "2026-11-27",
+      "pageHook": "deposit-based instant funding from $100 up to $20,000 with no evaluation, an 80% manual or 70% automation split, and instant USDC payouts.",
+      "maxLeverage": "100x"
     }
   ],
   "predictionMarketFirms": [
@@ -214,7 +214,7 @@
       "token": "No",
       "payoutSpeed": "Weekly",
       "rulesOnchain": "TBC",
-      "lastVerified": "2026-08-27",
+      "lastVerified": "2026-11-27",
       "pageHook": "prediction markets prop firm on Polymarket, backed by MyFundedFutures."
     },
     {
@@ -233,7 +233,7 @@
       "payoutSpeed": "Instant on pass",
       "rulesOnchain": "No",
       "payoutsVerified": "No",
-      "lastVerified": "2026-11-03",
+      "lastVerified": "2026-11-27",
       "pageHook": "Polymarket prop firm with low one-time fees, simulated accounts, and a fixed payout instead of a profit split."
     }
   ],
@@ -251,18 +251,18 @@
       "chainPhrase": "simulated crypto perpetuals plus select commodities and indices (Kraken-owned)",
       "isAffiliate": false,
       "token": "No",
-      "payoutSpeed": "12-24h",
+      "payoutSpeed": "Within hours",
       "rulesOnchain": "No",
       "maxLeverage": "40x",
       "payoutsVerified": "No",
-      "lastVerified": "2026-11-17",
+      "lastVerified": "2026-11-27",
       "pageHook": "crypto prop firm with 1-Step Classic, Pro, Turbo, and Spark evaluations and static drawdowns."
     },
     {
       "name": "SizeProp",
       "country": "TBC",
       "split": "Up to 95%",
-      "maxAccount": "$100,000",
+      "maxAccount": "$200,000",
       "website": "https://sizeprop.com/referral?ref=ONCHAINPROPS",
       "publicUrl": "https://www.sizeprop.com/",
       "chain": "",
@@ -272,8 +272,11 @@
       "payoutSpeed": "~24h",
       "rulesOnchain": "No",
       "payoutsVerified": "No",
-      "lastVerified": "2026-08-21",
-      "pageHook": "multi-asset crypto prop firm backed by Igloo Inc (Pudgy Penguins)."
+      "lastVerified": "2026-11-27",
+      "pageHook": "multi-asset crypto prop firm backed by Igloo Inc (Pudgy Penguins).",
+      "profitTarget": "6.5-8%",
+      "dailyDrawdown": "2%",
+      "maxDrawdown": "3-3.5%"
     },
     {
       "name": "HyroTrader",
@@ -291,7 +294,7 @@
       "payoutSpeed": "~24h",
       "rulesOnchain": "No",
       "payoutsVerified": "No",
-      "lastVerified": "2026-11-04",
+      "lastVerified": "2026-11-27",
       "pageHook": "crypto futures prop firm with Zero-Step, One-Step, and Two-Step challenges."
     }
   ]

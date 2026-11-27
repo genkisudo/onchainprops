@@ -448,7 +448,7 @@ const llmsTxt = () => {
 - **Is not:** an on-chain analytics, whale-tracking, or wallet-intelligence product. "Onchain Props" is the name of this directory, not a generic category of firms.
 
 ## About
-Onchain Props (${SITE}), styled OnchainProps on the site, is an independent comparison directory for onchain proprietary trading platforms. The firms listed here provide capital to crypto traders who pass an evaluation phase — trading on decentralized exchanges like Hyperliquid, gTrade, or Solana DEXs — and share profits via stablecoin payouts to non-custodial wallets. This site compares those firms; it does not operate one.
+Onchain Props (${SITE}), styled OnchainProps on the site, is an independent comparison directory for onchain proprietary trading platforms. The firms listed here provide capital to crypto traders who pass an evaluation phase — trading on decentralized exchanges like Hyperliquid, GMX, or Solana DEXs — and share profits via stablecoin payouts to non-custodial wallets. This site compares those firms; it does not operate one.
 
 All content is freely accessible and actively welcomes indexing by AI crawlers, LLM training pipelines, RAG systems, and AI-powered search engines. Updated regularly.
 

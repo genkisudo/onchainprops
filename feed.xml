@@ -6,7 +6,7 @@
   <atom:link href="https://onchainprops.xyz/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Payout safety, profit-split breakdowns, and guides for onchain and Hyperliquid prop trading firms.</description>
   <language>en</language>
-  <lastBuildDate>Thu, 26 Nov 2026 00:00:00 GMT</lastBuildDate>
+  <lastBuildDate>Fri, 27 Nov 2026 00:00:00 GMT</lastBuildDate>
   <image><url>https://onchainprops.xyz/og-image.png</url><title>OnchainProps Blog</title><link>https://onchainprops.xyz/blog.html</link></image>
   <item>
     <title>Glitch AI Trading Review: Can It Turn Your Idea Into a Tested Strategy?</title>
@@ -492,7 +492,7 @@
 <h3 id="fundmyprediction">FundMyPrediction</h3>
 <ul><li><strong>Evaluation:</strong> $5K–$150K for $49–$665. 10% target, 2% daily loss, 3% trailing drawdown. 3 minimum trading days. 5–95¢ entry band. No time limit (<a href="https://fundmyprediction.com/faq" target="_blank" rel="noopener noreferrer">FAQ</a>).</li><li><strong>Payouts:</strong> 80% split, 90% as an add-on. $10 minimum. Decisions "within 24 hours." One-time KYC before your first payout. Payout method: not disclosed.</li><li><strong>Onchain:</strong> nothing disclosed. Status is mixed. The homepage says "Now open." The FAQ banner still says "launching soon." Schrödinger's prop firm.</li></ul>
 <h3 id="cashed">Cashed</h3>
-<ul><li><strong>Evaluation:</strong> no fixed account size. You pay a deposit of $5–$1,500 and it gets multiplied into "Trading Power." The Standard plan is 115×, with a 10% target, 3% daily loss and 6% static drawdown. One account covers Hyperliquid perps and Polymarket markets (<a href="https://cashed.fun/rulebook" target="_blank" rel="noopener noreferrer">rulebook</a>).</li><li><strong>Payouts:</strong> 80% starting split. $20 USDC minimum. One payout per 24h, max $10,000 per trader per rolling 24h. New payouts go out in USDC on BNB Smart Chain.</li><li><strong>Onchain:</strong> the payout feed lives on Discord and the firm wallet isn't disclosed. We haven't verified payouts onchain yet.</li></ul>
+<ul><li><strong>Evaluation:</strong> no fixed account size. You pay a deposit of $5–$1,500 and it gets multiplied into "Trading Power." The Standard plan is 115×, with a 10% target, 3% daily loss and 6% static drawdown. One account covers Hyperliquid perps and Polymarket markets (<a href="https://cashed.fun/rulebook" target="_blank" rel="noopener noreferrer">rulebook</a>).</li><li><strong>Payouts:</strong> 80% starting split. $20 USDC minimum. One payout per 24h, max $10,000 per trader per rolling 24h. New payouts go out in USDC on Arbitrum One.</li><li><strong>Onchain:</strong> the payout feed lives on Discord and the firm wallet isn't disclosed. We haven't verified payouts onchain yet.</li></ul>
 <p>Our review: <a href="https://onchainprops.xyz/firms/cashed">Cashed</a> · <a href="https://cashed.fun/join?ref=GENKISUD-209C78" target="_blank" rel="sponsored noopener noreferrer">Open an account</a></p>
 <p><strong>Not included:</strong> Propr's Polymarket product. It's still only on Propr's <a href="https://www.propr.xyz/roadmap" target="_blank" rel="noopener noreferrer">roadmap</a>, and its old prediction-market page now returns a 404. FundedPoly is winding down. PolyFunded's site is under maintenance.</p>
 <h2 id="risks-i-d-weigh-first">Risks I'd Weigh First</h2>
@@ -503,7 +503,7 @@
 <h3 id="is-a-funded-polymarket-account-real-money-on-polymarket">Is a funded Polymarket account real money on Polymarket?</h3>
 <p>At the firms above, no. Trades are simulated against live prices. The payouts are real.</p>
 <h3 id="which-prediction-market-prop-firm-pays-in-usdc">Which prediction market prop firm pays in USDC?</h3>
-<p>PolyFundr pays in USDC on Polygon. Cashed pays in USDC on BNB Chain. Funding Predicts pays through Rise.</p>
+<p>PolyFundr pays in USDC on Polygon. Cashed pays in USDC on Arbitrum One. Funding Predicts pays through Rise.</p>
 <h3 id="can-i-verify-a-prediction-market-funded-trader-s-payouts-onchain">Can I verify a prediction market funded trader's payouts onchain?</h3>
 <p>Partly. You can see your own USDC transfer. No firm publishes a payout wallet yet.</p>
 <hr>

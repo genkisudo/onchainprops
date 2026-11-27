@@ -52,7 +52,7 @@ Our review: [Funding Predicts](https://onchainprops.xyz/firms/funding-predicts) 
 ### Cashed
 
 - **Evaluation:** no fixed account size. You pay a deposit of $5–$1,500 and it gets multiplied into "Trading Power." The Standard plan is 115×, with a 10% target, 3% daily loss and 6% static drawdown. One account covers Hyperliquid perps and Polymarket markets ([rulebook](https://cashed.fun/rulebook)).
-- **Payouts:** 80% starting split. $20 USDC minimum. One payout per 24h, max $10,000 per trader per rolling 24h. New payouts go out in USDC on BNB Smart Chain.
+- **Payouts:** 80% starting split. $20 USDC minimum. One payout per 24h, max $10,000 per trader per rolling 24h. New payouts go out in USDC on Arbitrum One.
 - **Onchain:** the payout feed lives on Discord and the firm wallet isn't disclosed. We haven't verified payouts onchain yet.
 
 Our review: [Cashed](https://onchainprops.xyz/firms/cashed) · [Open an account](https://cashed.fun/join?ref=GENKISUD-209C78)
@@ -78,7 +78,7 @@ At the firms above, no. Trades are simulated against live prices. The payouts ar
 
 ### Which prediction market prop firm pays in USDC?
 
-PolyFundr pays in USDC on Polygon. Cashed pays in USDC on BNB Chain. Funding Predicts pays through Rise.
+PolyFundr pays in USDC on Polygon. Cashed pays in USDC on Arbitrum One. Funding Predicts pays through Rise.
 
 ### Can I verify a prediction market funded trader's payouts onchain?
 

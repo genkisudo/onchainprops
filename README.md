@@ -32,19 +32,19 @@ The directory currently reviews **15 firms**, grouped the way the site groups th
 
 ### Onchain prop firms
 
-These are the core onchain funding firms in the directory. Most that are live today run on Hyperliquid; others use or plan to use Hyperliquid, or run on venues such as Arbitrum, Base, or gTrade.
+These are the core onchain funding firms in the directory. Most that are live today run on Hyperliquid; others use or plan to use Hyperliquid, or run on venues such as Arbitrum, Base, or Berachain.
 
 | Firm | Review | Chain | Profit split | Max account | Payouts verified | Rules onchain | Last verified |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Hypernova | [Review](https://onchainprops.xyz/firms/hypernova) | Hyperliquid | 80% (90% add-on) | $300,000 | Yes | Yes | 2026-11-17 |
-| Propr | [Review](https://onchainprops.xyz/firms/propr) | Hyperliquid | 80% | Up to $300k | Yes | No | 2026-11-17 |
-| Vanta Trading | [Review](https://onchainprops.xyz/firms/vanta-trading) | Bittensor / Hyperliquid | Up to 100% | $100,000 | Work in progress | No | 2026-11-21 |
-| Iceberg | [Review](https://onchainprops.xyz/firms/iceberg) | Hyperliquid | 80% | $100,000 | No | No | 2026-10-16 |
-| Vest Capital | [Review](https://onchainprops.xyz/firms/vest-capital) | Arbitrum / Base | Up to 95% | $25,000 | No | No | 2026-11-06 |
-| Cashed | [Review](https://onchainprops.xyz/firms/cashed) | Hyperliquid / Polymarket | Up to 90% | $322,500 | No | No | 2026-10-29 |
-| Carrot Funding | [Review](https://onchainprops.xyz/firms/carrot-funding) | gTrade, Hyperliquid (soon) | 80% | $50k ($100k soon) | Yes | No | 2026-07-08 |
+| Hypernova | [Review](https://onchainprops.xyz/firms/hypernova) | Hyperliquid | 80% (90% add-on) | $300,000 | Yes | Yes | 2026-11-27 |
+| Propr | [Review](https://onchainprops.xyz/firms/propr) | Hyperliquid | 80% | Up to $300k | Yes | No | 2026-11-27 |
+| Vanta Trading | [Review](https://onchainprops.xyz/firms/vanta-trading) | Bittensor / Hyperliquid | Up to 100% | $100,000 | Work in progress | No | 2026-11-27 |
+| Iceberg | [Review](https://onchainprops.xyz/firms/iceberg) | Hyperliquid | 80% | $100,000 | No | No | 2026-11-27 |
+| Vest Capital | [Review](https://onchainprops.xyz/firms/vest-capital) | Arbitrum / Base | Up to 95% | $50,000 | No | No | 2026-11-27 |
+| Cashed | [Review](https://onchainprops.xyz/firms/cashed) | Hyperliquid / Polymarket | Up to 90% | $322,500 | No | No | 2026-11-27 |
+| Carrot Funding | [Review](https://onchainprops.xyz/firms/carrot-funding) | Hyperliquid | 80% (90% option) | $100k ($200k soon) | Yes | No | 2026-11-27 |
 | DojiFunded | [Review](https://onchainprops.xyz/firms/dojifunded) | Arbitrum | Up to 90% | $100,000 | Yes | No | 2026-08-27 |
-| FUNDED by FOXIFY | [Review](https://onchainprops.xyz/firms/funded-by-foxify) | Hyperliquid (soon) | Up to 90% | $10,000 | No | No | 2026-06-26 |
+| FUNDED by FOXIFY | [Review](https://onchainprops.xyz/firms/funded-by-foxify) | Hyperliquid / Arbitrum / Berachain | 80% (70% automation) | $20,000 | No | No | 2026-11-27 |
 
 As of November 2026, the directory’s own FAQ states that Vanta Trading offers the highest listed profit split (up to 100%), Vest Capital offers up to 95%, and Cashed has the largest listed max account ($322,500). Those are snapshot figures from the comparison table, not a recommendation.
 
