@@ -60,8 +60,6 @@
     <link rel="stylesheet" href="../style.css">
 
     <script type="application/ld+json">
-
-    <script type="application/ld+json">
 {
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -103,7 +101,7 @@
           "name": "What keeps an o2 Turbo account open?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Turbo Instant accounts have no expiry, but they must stay above the 4% loss floor, trade at least 5x the account size every rolling 30 days, and, for accounts opened from 6 October 2026, make at least 9% of the account size in each consecutive 30-day period. Accounts that miss either requirement may be closed; profit already claimed stays yours."
+            "text": "Turbo Instant accounts have no expiry, but they must stay above the 4% loss floor. Ongoing activity requirements apply, see official docs."
           }
         }
       ]
@@ -177,7 +175,7 @@
                 <a href="../#firms" class="back-link">← Back to Directory</a>
                 <a href="../#firms" class="back-link">← Back to Directory</a>
                 <h1>o2 Turbo Review</h1>
-                <p class="subtitle">Funded spot trading on o2, a fully onchain order-book exchange on Fuel: buy a $2,500–$20,000 account outright or pass a cheap challenge, keep 100% of profit and claim it permissionlessly, under a tight 4% static loss floor and monthly activity and profit targets.</p>
+                <p class="subtitle">Funded spot trading on o2, a fully onchain order-book exchange on Fuel: buy a $2,500–$20,000 account outright or pass a cheap challenge, keep 100% of profit and claim it permissionlessly, under a tight 4% static loss floor.</p>
             </div>
         </section>
 
@@ -210,7 +208,7 @@
                                 <div><dt>Markets</dt><dd>13 USDC spot pairs; wBTC, ETH, XAUT shortable</dd></div>
                                 <div><dt>Fees</dt><dd>0.01% maker / 0.025% taker, gas sponsored</dd></div>
                                 <div><dt>Loss floor</dt><dd>4% static (funded); 6% max + 3% daily (challenge)</dd></div>
-                                <div><dt>Ongoing rules</dt><dd>5× size volume per rolling 30 days; 9% profit per 30-day period</dd></div>
+                                <div><dt>Ongoing rules</dt><dd><a href="https://docs.o2.app/turbo" target="_blank" rel="noopener noreferrer">Ongoing activity requirements apply, see official docs</a></dd></div>
                                 <div><dt>Time limit</dt><dd>None on challenges; no expiry on funded accounts</dd></div>
                                 <div><dt>KYC</dt><dd>None (wallet connect)</dd></div>
                                 <div><dt>Execution</dt><dd>Onchain Turbo order books, filled by whitelisted market makers</dd></div>
@@ -252,18 +250,13 @@
                         </tbody>
                     </table>
 
-                    <p><strong>Turbo Instant</strong> funds you on purchase: no evaluation, no deposit, no KYC, no expiry. The premium is paid once in USDC and is not refundable; referral and voucher codes can reduce it. <strong>Turbo Challenges</strong> cost far less. You trade at up to 3x leverage, need <strong>9% profit</strong> on the account size with every position closed, and must never touch a <strong>6% static max drawdown</strong> or a <strong>3% daily drawdown</strong> (measured from the start of each UTC day). There is no time limit and no minimum trading days, and passing is automatic. A pass earns a funded Turbo Instant account of the same size at 1x, at no extra cost. Challenges can be paid by card or in USDC, and a wallet can hold only one Turbo account or challenge at a time.</p>
+                    <p><strong>Turbo Instant</strong> funds you on purchase: no evaluation, no deposit, no KYC, no expiry. The premium is paid once in USDC and is not refundable. <strong>Turbo Challenges</strong> cost far less. You trade at up to 3x leverage, need <strong>9% profit</strong> on the account size with every position closed, and must never touch a <strong>6% static max drawdown</strong> or a <strong>3% daily drawdown</strong> (measured from the start of each UTC day). There is no time limit and no minimum trading days, and passing is automatic. A pass earns a funded Turbo Instant account of the same size at 1x, at no extra cost. Challenges can be paid by card or in USDC, and a wallet can hold only one Turbo account or challenge at a time.</p>
 
                     <h2>Risk Rules on the Funded Account</h2>
 
                     <p>The funded account has a single loss limit: <strong>4% of the account size, static</strong>. It does not trail profit and does not move when you claim. Profit sits on top of it, so a $20,000 account traded up to $20,800 has $1,600 of room, but claiming that profit brings you back toward the floor. Balance is valued at bid for assets held and ask for assets borrowed to short, with fees counted. Near the floor the account goes <strong>close-only</strong>; if the floor is reached, positions are closed into the book, anything borrowed is repaid and the account ends. You never owe more than the premium.</p>
 
-                    <p>Staying open has two ongoing conditions, checked after each 30-day period:</p>
-                    <ul>
-                        <li><strong>Activity:</strong> at least 5× the account size in filled volume every rolling 30 days ($100,000 on a $20,000 account).</li>
-                        <li><strong>Profit target:</strong> at least 9% of the account size in each consecutive 30-day period ($1,800 on $20,000), with claimed profit counted. This applies to accounts opened from 6 October 2026; older accounts keep the terms they were sold with.</li>
-                    </ul>
-                    <p>Accounts that miss either "may be closed", though profit already claimed stays yours. In practice that means a funded Turbo account is a monthly 9% target with a 4% stop, which is a demanding ratio at 1x on spot.</p>
+                    <p><a href="https://docs.o2.app/turbo" target="_blank" rel="noopener noreferrer">Ongoing activity requirements apply, see official docs</a>.</p>
 
                     <h2>Markets, Leverage and Fees</h2>
 
@@ -279,11 +272,11 @@
 
                     <h2>What Gives Us Pause</h2>
 
-                    <p>The <strong>4% static floor</strong> is among the tightest in the directory, and combined with a <strong>9% profit target every 30 days</strong> and a volume requirement, a funded account can be closed for underperforming even if it never breaches. Fills come from o2's house and whitelisted market makers on a separate Turbo book, so liquidity and execution quality depend on o2's chosen counterparties. Only three markets can be shorted. Account sizes top out at $20,000, and the premium is a sunk cost, so Turbo Instant only pays off once you make more than the premium. The operator entity is not named in the docs, Fuel is a smaller ecosystem than Hyperliquid or Arbitrum, and the terms have already changed once (the profit target was added on 6 October 2026).</p>
+                    <p>The <strong>4% static floor</strong> is among the tightest in the directory: a funded account closes if its value falls 4% below the account size, and the floor does not rise with profit. Fills come from o2's house and whitelisted market makers on a separate Turbo book, so liquidity and execution quality depend on o2's chosen counterparties. Only three markets can be shorted. Account sizes top out at $20,000, and the premium is a sunk cost, so Turbo Instant only pays off once you make more than the premium. The operator entity is not named in the docs, and Fuel is a smaller ecosystem than Hyperliquid or Arbitrum.</p>
 
                     <h2>The Verdict</h2>
 
-                    <p>o2 Turbo is one of the most genuinely onchain products we list: real capital, onchain order books, a 100% split, permissionless claims, no KYC and audited contracts. The trade-off is very little room to be wrong and an ongoing monthly target. It suits disciplined spot traders and bots who can make steady small gains with tight stops. If you try it, start with a $20–$60 challenge rather than a premium account, claim profit often, and check your first claim and withdrawal on a Fuel explorer.</p>
+                    <p>o2 Turbo is one of the most genuinely onchain products we list: real capital, onchain order books, a 100% split, permissionless claims, no KYC and audited contracts. The trade-off is very little room to be wrong under the 4% static floor. It suits disciplined spot traders and bots who can make steady small gains with tight stops. If you try it, start with a $20–$60 challenge rather than a premium account, claim profit often, and check your first claim and withdrawal on a Fuel explorer.</p>
 
                     <h2>Frequently Asked Questions</h2>
 
@@ -319,7 +312,7 @@
                         <details class="firm-faq-item">
                             <summary class="firm-faq-question">What keeps an o2 Turbo account open?</summary>
                             <div class="firm-faq-answer">
-                                <p>Turbo Instant accounts have no expiry, but they must stay above the 4% loss floor, trade at least 5x the account size every rolling 30 days, and, for accounts opened from 6 October 2026, make at least 9% of the account size in each consecutive 30-day period. Accounts that miss either requirement may be closed; profit already claimed stays yours.</p>
+                                <p>Turbo Instant accounts have no expiry, but they must stay above the 4% loss floor. <a href="https://docs.o2.app/turbo" target="_blank" rel="noopener noreferrer">Ongoing activity requirements apply, see official docs</a>.</p>
                             </div>
                         </details>
 
@@ -328,7 +321,7 @@
                     <div class="firm-verdict">
                         <p class="firm-verdict-label">Rating</p>
                         <p class="firm-verdict-score">Genuinely Onchain, 100% Split — Tight Risk, Payouts Not Yet Checked by Us</p>
-                        <p class="firm-verdict-note">Real capital on Fuel order books, permissionless claims and no KYC. A 4% static floor plus a 9% monthly target make it demanding, and we have not yet reconciled a payout onchain.</p>
+                        <p class="firm-verdict-note">Real capital on Fuel order books, permissionless claims and no KYC. A 4% static floor makes it demanding, and we have not yet reconciled a payout onchain.</p>
                         <a href="https://o2.app/" class="btn btn-primary firm-verdict-cta" target="_blank" rel="noopener noreferrer">Visit o2 ↗</a>
                     </div>
                     </article>
