@@ -239,6 +239,26 @@
       "payoutsVerified": "No",
       "lastVerified": "2026-11-27",
       "pageHook": "Invite-only beta; no payout wallet published yet."
+    },
+    {
+      "name": "o2 Turbo",
+      "country": "TBC",
+      "split": "100%",
+      "maxAccount": "$20,000",
+      "profitTarget": "9%",
+      "dailyDrawdown": "3% (challenge only)",
+      "maxDrawdown": "4-6%",
+      "website": "https://o2.app/",
+      "chain": "Fuel",
+      "chainPhrase": "the Fuel blockchain, trading spot markets on o2 Exchange",
+      "isAffiliate": false,
+      "token": "TBC",
+      "payoutSpeed": "Instant",
+      "rulesOnchain": "Yes",
+      "payoutsVerified": "No",
+      "maxLeverage": "3x",
+      "lastVerified": "2026-11-28",
+      "pageHook": "Fuel spot exchange that funds traders from its own pool."
     }
   ],
   "predictionMarketFirms": [
